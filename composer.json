@@ -1,0 +1,39 @@
+{
+    "name": "ngmy/l4-dav",
+    "type": "library",
+    "description": "A simple WebDAV client library for Laravel 4",
+    "keywords": [
+        "laravel 4",
+        "webdav"
+    ],
+    "homepage": "https://github.com/ngmy/l4-dav",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ngmy",
+            "email": "y.nagamiya@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*",
+        "anlutro/curl": "dev-master"
+    },
+    "require-dev": {
+        "orchestra/testbench": "2.1.*",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations",
+            "tests/TestCase.php"
+        ],
+        "psr-0": {
+            "Ngmy\\L4Dav\\": "src/"
+        }
+    },
+    "replace": {
+        "phpseclib/phpseclib": "0.3.*"
+    },
+    "minimum-stability": "stable"
+}
