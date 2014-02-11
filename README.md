@@ -1,7 +1,7 @@
 # L4Dav
 
 [![Build Status](https://travis-ci.org/ngmy/l4-dav.png?branch=master)](https://travis-ci.org/ngmy/l4-dav)
-[![Coverage Status](https://coveralls.io/repos/ngmy/l4-dav/badge.png)](https://coveralls.io/r/ngmy/l4-dav)
+[![Coverage Status](https://coveralls.io/repos/ngmy/l4-dav/badge.png?branch=master)](https://coveralls.io/r/ngmy/l4-dav?branch=master)
 
 A simple WebDAV client library for Laravel 4.
 
@@ -26,7 +26,7 @@ Add the package to your `composer.json` and run `composer update`:
 ```json
 {
     "require": {
-        "ngmy/l4-dav": "*"
+        "ngmy/l4-dav": "dev-master"
     }
 }
 ```
@@ -40,7 +40,7 @@ Add the following to the list of service providers in `app/config/app.php`:
 Add the following to the list of class aliases in `app/config/app.php`:
 
 ```php
-'L4Dav' => 'Ngmy\L4Dav\L4Dav',
+'L4Dav' => 'Ngmy\L4Dav\Facades\L4Dav',
 ```
 
 ## Configuration
