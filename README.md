@@ -92,3 +92,23 @@ L4Dav::move('path/to/source/file', 'path/to/dest/file');
 ```php
 L4Dav::mkdir('path/to/remote/directory/');
 ```
+
+### Get Response
+
+**Get the status code**
+```php
+$response = L4Dav::put('/path/to/local/file', 'path/to/remote/file');
+$response->getStatus();
+```
+
+**Get the status message**
+```php
+$response = L4Dav::put('/path/to/local/file', 'path/to/remote/file');
+$response->getMessage();
+```
+
+**Get the response body**
+```php
+$response = L4Dav::put('/path/to/local/file', 'path/to/remote/file');
+$response->getBody();
+```
