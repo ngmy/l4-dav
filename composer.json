@@ -31,8 +31,5 @@
             "Ngmy\\L4Dav\\": "src/"
         }
     },
-    "replace": {
-        "phpseclib/phpseclib": "0.3.*"
-    },
     "minimum-stability": "stable"
 }
