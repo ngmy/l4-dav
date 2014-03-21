@@ -93,6 +93,12 @@ L4Dav::move('path/to/source/file', 'path/to/dest/file');
 L4Dav::mkdir('path/to/remote/directory/');
 ```
 
+**Check the existence of a directory on the WebDAV server**
+
+```php
+L4Dav::exists('path/to/remote/directory/');
+```
+
 ### Get Response
 
 **Get the status code**

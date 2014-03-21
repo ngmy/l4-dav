@@ -194,6 +194,30 @@ class L4Dav {
 	}
 
 	/**
+	 * Check the existence of an item on the WebDAV server.
+	 *
+	 * @param string $path The path of an item.
+	 * @access public
+	 * @return boolean Returns true if an item exists.
+	 */
+	public function exists($path)
+	{
+		$options = array(
+			CURLOPT_PORT           => $this->port,
+			CURLOPT_NOBODY         => true,
+			CURLOPT_RETURNTRANSFER => true,
+		);
+
+		$response = $this->executeWebRequest('GET', $this->url.$path, array(), $options);
+
+		if ($response->getStatus() < 200 || $response->getStatus() > 300) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	/**
 	 * Execute the request to the WebDAV server.
 	 *
 	 * @param string $method  The HTTP method.

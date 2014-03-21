@@ -162,6 +162,47 @@ class L4DavTest extends TestCase {
 		$this->assertEquals(201, $response->getStatus());
 	}
 
+	public function testCheckExistenceDirectory()
+	{
+		// If exists
+		$responseClass = new \Ngmy\L4Dav\Response('', '');
+		$responseClass->statusText = '201 OK';
+		$responseClass->statusCode = 200;
+
+		$stub = $this->getMock(
+			'\Ngmy\L4Dav\L4Dav',
+			array('executeWebRequest'),
+			array('http://localhost/webdav/')
+		);
+
+		$stub->expects($this->any())
+			->method('executeWebRequest')
+			->will($this->returnValue($responseClass));
+
+		$result = $stub->exists('dir/');
+
+		$this->assertTrue($result);
+
+		// If not exists
+		$responseClass = new \Ngmy\L4Dav\Response('', '');
+		$responseClass->statusText = '404 Not Found';
+		$responseClass->statusCode = 404;
+
+		$stub = $this->getMock(
+			'\Ngmy\L4Dav\L4Dav',
+			array('executeWebRequest'),
+			array('http://localhost/webdav/')
+		);
+
+		$stub->expects($this->any())
+			->method('executeWebRequest')
+			->will($this->returnValue($responseClass));
+
+		$result = $stub->exists('dir/');
+
+		$this->assertFalse($result);
+	}
+
 	/**
 	 * @expectedException \InvalidArgumentException
 	 */
@@ -171,5 +212,3 @@ class L4DavTest extends TestCase {
 	}
 
 }
-
-
