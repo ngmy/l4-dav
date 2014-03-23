@@ -203,6 +203,30 @@ class L4DavTest extends TestCase {
 		$this->assertFalse($result);
 	}
 
+	public function testListDirectoryContents()
+	{
+		$responseClass = new \Ngmy\L4Dav\Response('', '');
+		$responseClass->statusText = '207 Multi-Status';
+		$responseClass->statusCode = 207;
+		$responseClass->body = file_get_contents(__DIR__.'/mock_ls_response.xml');
+
+		$stub = $this->getMock(
+			'\Ngmy\L4Dav\L4Dav',
+			array('executeWebRequest'),
+			array('http://localhost/webdav/')
+		);
+
+		$stub->expects($this->any())
+			->method('executeWebRequest')
+			->will($this->returnValue($responseClass));
+
+		$list = $stub->ls('');
+
+		$this->assertEquals('/webdav/', $list[0]);
+		$this->assertEquals('/webdav/file', $list[1]);
+		$this->assertEquals('/webdav/dir/', $list[2]);
+	}
+
 	/**
 	 * @expectedException \InvalidArgumentException
 	 */

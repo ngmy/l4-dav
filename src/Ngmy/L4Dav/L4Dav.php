@@ -218,6 +218,32 @@ class L4Dav {
 	}
 
 	/**
+	 * List contents of a directory on the WebDAV server.
+	 *
+	 * @param string $path The directory path.
+	 * @access public
+	 * @return array Returns a list of contents of the directory.
+	 */
+	public function ls($path)
+	{
+		$options = array(CURLOPT_PORT => $this->port);
+		$headers = array('Depth' => 1);
+
+		$response = $this->executeWebRequest('PROPFIND', $this->url.$path, $headers, $options);
+
+		if ($response->getStatus() < 200 || $response->getStatus() > 300) {
+			return array();
+		} else {
+			$xml = simplexml_load_string($response->getBody(), 'SimpleXMLElement', 0, 'D', true);
+			$list = array();
+			foreach ($xml->response as $element) {
+				$list[] = (string) $element->href;
+			}
+			return $list;
+		}
+	}
+
+	/**
 	 * Execute the request to the WebDAV server.
 	 *
 	 * @param string $method  The HTTP method.

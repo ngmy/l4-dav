@@ -99,6 +99,12 @@ L4Dav::mkdir('path/to/remote/directory/');
 L4Dav::exists('path/to/remote/directory/');
 ```
 
+**List contents of a directory on the WebDAV server**
+
+```php
+L4Dav::ls('path/to/remote/directory/');
+```
+
 ### Get Response
 
 **Get the status code**

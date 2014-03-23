@@ -25,15 +25,16 @@ class cURL extends \anlutro\cURL\cURL {
 	* @var array
 	*/
 	protected $methods = array(
-		'get'     => false,
-		'post'    => true,
-		'put'     => true,
-		'patch'   => true,
-		'delete'  => false,
-		'options' => false,
-		'mkcol'   => false,
-		'copy'    => false,
-		'move'    => false,
+		'get'      => false,
+		'post'     => true,
+		'put'      => true,
+		'patch'    => true,
+		'delete'   => false,
+		'options'  => false,
+		'mkcol'    => false,
+		'copy'     => false,
+		'move'     => false,
+		'propfind' => false,
 	);
 
 	/**
