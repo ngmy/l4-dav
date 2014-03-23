@@ -5,7 +5,7 @@
  * Licensed under MIT License.
  *
  * @package    L4Dav
- * @version    0.2.0
+ * @version    0.3.0
  * @author     Ngmy <y.nagamiya@gmail.com>
  * @license    http://opensource.org/licenses/MIT MIT License
  * @copyright  (c) 2014, Ngmy <y.nagamiya@gmail.com>
