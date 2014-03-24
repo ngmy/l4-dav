@@ -38,7 +38,7 @@ class Response extends \anlutro\cURL\Response {
 	 */
 	public function getStatus()
 	{
-		return $this->statusCode;
+		return (int) $this->statusCode;
 	}
 
 	/**
