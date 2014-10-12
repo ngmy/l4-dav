@@ -1,11 +1,11 @@
-<?php namespace Ngmy\L4Dav;
+<?php namespace Ngmy\L4Dav\Library;
 /**
  * Part of the L4Dav package.
  *
  * Licensed under MIT License.
  *
  * @package    L4Dav
- * @version    0.4.0
+ * @version    0.5.0
  * @author     Ngmy <y.nagamiya@gmail.com>
  * @license    http://opensource.org/licenses/MIT MIT License
  * @copyright  (c) 2014, Ngmy <y.nagamiya@gmail.com>
@@ -13,7 +13,7 @@
  */
 
 /**
- * A wrapper class for the cURL class.
+ * A wrapper class for the anlutro/curl.
  *
  * @package L4Dav
  */
@@ -42,6 +42,6 @@ class cURL extends \anlutro\cURL\cURL {
 	*
 	* @var string
 	*/
-	protected $responseClass = '\Ngmy\L4Dav\Response';
+	protected $responseClass = '\Ngmy\L4Dav\Service\Http\CurlResponse';
 
 }

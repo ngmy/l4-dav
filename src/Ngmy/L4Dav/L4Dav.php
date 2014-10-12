@@ -5,12 +5,14 @@
  * Licensed under MIT License.
  *
  * @package    L4Dav
- * @version    0.4.0
+ * @version    0.5.0
  * @author     Ngmy <y.nagamiya@gmail.com>
  * @license    http://opensource.org/licenses/MIT MIT License
  * @copyright  (c) 2014, Ngmy <y.nagamiya@gmail.com>
  * @link       https://github.com/ngmy/l4-dav
  */
+
+use Ngmy\L4Dav\Service\Http\RequestInterface;
 
 /**
  * A WebDAV client class.
@@ -59,15 +61,19 @@ class L4Dav {
 	 */
 	protected $url;
 
+	protected $request;
+
 	/**
 	 * Create a new L4Dav class object.
 	 *
-	 * @param string $webDavUrl The URL of the WebDAV server.
+	 * @param Ngmy\L4Dav\Service\Http\RequestInterface $request
+	 * @param string  $webDavUrl  The URL of the WebDAV server.
+	 * @param integer $webDavPort The port of the WebDAV server.
 	 * @access public
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @return void
 	 */
-	public function __construct($webDavUrl)
+	public function __construct(RequestInterface $request, $webDavUrl, $webDavPort = 80)
 	{
 		if (!preg_match('/([a-z]+):\/\/([a-zA-Z0-9\.]+)(:[0-9]+){0,1}(.*)/', $webDavUrl, $m)) {
 			throw new \InvalidArgumentException('Invalid URL format ('.$webDavUrl.')');
@@ -75,10 +81,12 @@ class L4Dav {
 
 		$this->schema = $m[1];
 		$this->host   = $m[2];
-		$this->port   = isset($m[3]) ? (int) ltrim($m[3], ':') : 80;
+		$this->port   = isset($m[3]) ? (int) ltrim($m[3], ':') : $webDavPort;
 		$this->path   = isset($m[4]) ? rtrim($m[4], '/').'/' : '/';
 
 		$this->url = $this->schema.'://'.$this->host.$this->path;
+
+		$this->request = $request;
 	}
 
 	/**
@@ -99,7 +107,10 @@ class L4Dav {
 			CURLOPT_RETURNTRANSFER => true,
 		);
 
-		$result = $this->executeWebRequest('GET', $this->url.$srcPath, array(), $options);
+		$result = $this->request->method('GET')
+			->url($this->url.$srcPath)
+			->options($options)
+			->send();
 
 		fclose($fh);
 
@@ -126,7 +137,10 @@ class L4Dav {
 			CURLOPT_INFILESIZE => $filesize,
 		);
 
-		$result = $this->executeWebRequest('PUT', $this->url.$destPath, array(), $options);
+		$result = $this->request->method('PUT')
+			->url($this->url.$destPath)
+			->options($options)
+			->send();
 
 		fclose($fh);
 
@@ -144,7 +158,10 @@ class L4Dav {
 	{
 		$options = array(CURLOPT_PORT => $this->port);
 
-		return $this->executeWebRequest('DELETE',$this->url.$path, array(), $options);
+		return $this->request->method('DELETE')
+			->url($this->url.$path)
+			->options($options)
+			->send();
 	}
 
 	/**
@@ -160,7 +177,11 @@ class L4Dav {
 		$options = array(CURLOPT_PORT => $this->port);
 		$headers = array('Destination' => $this->url.$destPath);
 
-		return $this->executeWebRequest('COPY', $this->url.$srcPath, $headers, $options);
+		return $this->request->method('COPY')
+			->url($this->url.$srcPath)
+			->headers($headers)
+			->options($options)
+			->send();
 	}
 
 	/**
@@ -176,7 +197,11 @@ class L4Dav {
 		$options = array(CURLOPT_PORT => $this->port);
 		$headers = array('Destination' => $this->url.$destPath);
 
-		return $this->executeWebRequest('MOVE', $this->url.$srcPath, $headers, $options);
+		return $this->request->method('MOVE')
+			->url($this->url.$srcPath)
+			->headers($headers)
+			->options($options)
+			->send();
 	}
 
 	/**
@@ -190,7 +215,10 @@ class L4Dav {
 	{
 		$options = array(CURLOPT_PORT => $this->port);
 
-		return $this->executeWebRequest('MKCOL', $this->url.$path, array(), $options);
+		return $this->request->method('MKCOL')
+			->url($this->url.$path)
+			->options($options)
+			->send();
 	}
 
 	/**
@@ -208,7 +236,10 @@ class L4Dav {
 			CURLOPT_RETURNTRANSFER => true,
 		);
 
-		$response = $this->executeWebRequest('GET', $this->url.$path, array(), $options);
+		$response = $this->request->method('GET')
+			->url($this->url.$path)
+			->options($options)
+			->send();
 
 		if ($response->getStatus() < 200 || $response->getStatus() > 300) {
 			return false;
@@ -229,7 +260,11 @@ class L4Dav {
 		$options = array(CURLOPT_PORT => $this->port);
 		$headers = array('Depth' => 1);
 
-		$response = $this->executeWebRequest('PROPFIND', $this->url.$path, $headers, $options);
+		$response = $this->request->method('PROPFIND')
+			->url($this->url.$path)
+			->headers($headers)
+			->options($options)
+			->send();
 
 		if ($response->getStatus() < 200 || $response->getStatus() > 300) {
 			return array();
@@ -241,28 +276,6 @@ class L4Dav {
 			}
 			return $list;
 		}
-	}
-
-	/**
-	 * Execute the request to the WebDAV server.
-	 *
-	 * @param string $method  The HTTP method.
-	 * @param string $url     The request URL.
-	 * @param array  $headers The HTTP headers.
-	 * @param array  $options The cURL options.
-	 * @access protected
-	 * @return \Ngmy\L4Dav\Response Returns a Response class object.
-	 */
-	protected function executeWebRequest($method, $url, $headers, $options)
-	{
-		$curl = new cURL;
-
-		$result = $curl->newRequest($method, $url)
-			->setHeaders($headers)
-			->setOptions($options)
-			->send();
-
-		return $result;
 	}
 
 }

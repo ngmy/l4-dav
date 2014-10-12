@@ -5,14 +5,17 @@
  * Licensed under MIT License.
  *
  * @package    L4Dav
- * @version    0.4.0
+ * @version    0.5.0
  * @author     Ngmy <y.nagamiya@gmail.com>
  * @license    http://opensource.org/licenses/MIT MIT License
  * @copyright  (c) 2014, Ngmy <y.nagamiya@gmail.com>
  * @link       https://github.com/ngmy/l4-dav
  */
 
-use \Ngmy\L4Dav\L4Dav;
+use Ngmy\L4Dav\Tests\TestCase;
+use Ngmy\L4Dav\L4Dav;
+use Ngmy\L4Dav\Service\Http\RequestInterface;
+use Ngmy\L4Dav\Service\Http\ResponseInterface;
 
 class L4DavTest extends TestCase {
 
@@ -32,21 +35,17 @@ class L4DavTest extends TestCase {
 
 	public function testPutFile()
 	{
-		$responseClass = new \Ngmy\L4Dav\Response('', '');
-		$responseClass->statusText = '201 Created';
-		$responseClass->statusCode = 201;
+		$responseClass = new MockResponse(array(
+			'body'       => '',
+			'statusCode' => 201,
+			'statusText' => '201 Created',
+		));
 
-		$stub = $this->getMock(
-			'\Ngmy\L4Dav\L4Dav',
-			array('executeWebRequest'),
-			array('http://localhost/webdav/')
-		);
+		$requestClass = new MockRequest($responseClass);
 
-		$stub->expects($this->any())
-			->method('executeWebRequest')
-			->will($this->returnValue($responseClass));
+		$l4Dav = new L4Dav($requestClass, 'http://localhost/webdav/');
 
-		$response = $stub->put(__DIR__.'/dummy.txt', 'dummy.txt');
+		$response = $l4Dav->put(__DIR__.'/dummy.txt', 'dummy.txt');
 
 		$this->assertEquals('201 Created', $response->getMessage());
 		$this->assertEquals(201, $response->getStatus());
@@ -54,21 +53,17 @@ class L4DavTest extends TestCase {
 
 	public function testDeleteFile()
 	{
-		$responseClass = new \Ngmy\L4Dav\Response('', '');
-		$responseClass->statusText = '204 No Content';
-		$responseClass->statusCode = 204;
+		$responseClass = new MockResponse(array(
+			'body'       => '',
+			'statusCode' => 204,
+			'statusText' => '204 No Content',
+		));
 
-		$stub = $this->getMock(
-			'\Ngmy\L4Dav\L4Dav',
-			array('executeWebRequest'),
-			array('http://localhost/webdav/')
-		);
+		$requestClass = new MockRequest($responseClass);
 
-		$stub->expects($this->any())
-			->method('executeWebRequest')
-			->will($this->returnValue($responseClass));
+		$l4Dav = new L4Dav($requestClass, 'http://localhost/webdav/');
 
-		$response = $stub->delete('dummy.txt');
+		$response = $l4Dav->delete('dummy.txt');
 
 		$this->assertEquals('204 No Content', $response->getMessage());
 		$this->assertEquals(204, $response->getStatus());
@@ -76,21 +71,17 @@ class L4DavTest extends TestCase {
 
 	public function testGetFile()
 	{
-		$responseClass = new \Ngmy\L4Dav\Response('', '');
-		$responseClass->statusText = '200 OK';
-		$responseClass->statusCode = 200;
+		$responseClass = new MockResponse(array(
+			'body'       => '',
+			'statusCode' => 200,
+			'statusText' => '200 OK',
+		));
 
-		$stub = $this->getMock(
-			'\Ngmy\L4Dav\L4Dav',
-			array('executeWebRequest'),
-			array('http://localhost/webdav/')
-		);
+		$requestClass = new MockRequest($responseClass);
 
-		$stub->expects($this->any())
-			->method('executeWebRequest')
-			->will($this->returnValue($responseClass));
+		$l4Dav = new L4Dav($requestClass, 'http://localhost/webdav/');
 
-		$response = $stub->get('dummy.txt', __DIR__.'/dummy.txt');
+		$response = $l4Dav->get('dummy.txt', __DIR__.'/dummy.txt');
 
 		$this->assertEquals('200 OK', $response->getMessage());
 		$this->assertEquals(200, $response->getStatus());
@@ -98,21 +89,17 @@ class L4DavTest extends TestCase {
 
 	public function testCopyFile()
 	{
-		$responseClass = new \Ngmy\L4Dav\Response('', '');
-		$responseClass->statusText = '201 Created';
-		$responseClass->statusCode = 201;
+		$responseClass = new MockResponse(array(
+			'body'       => '',
+			'statusCode' => 201,
+			'statusText' => '201 Created',
+		));
 
-		$stub = $this->getMock(
-			'\Ngmy\L4Dav\L4Dav',
-			array('executeWebRequest'),
-			array('http://localhost/webdav/')
-		);
+		$requestClass = new MockRequest($responseClass);
 
-		$stub->expects($this->any())
-			->method('executeWebRequest')
-			->will($this->returnValue($responseClass));
+		$l4Dav = new L4Dav($requestClass, 'http://localhost/webdav/');
 
-		$response = $stub->copy('dummy.txt', 'dummy2.txt');
+		$response = $l4Dav->copy('dummy.txt', 'dummy2.txt');
 
 		$this->assertEquals('201 Created', $response->getMessage());
 		$this->assertEquals(201, $response->getStatus());
@@ -120,21 +107,17 @@ class L4DavTest extends TestCase {
 
 	public function testMoveFile()
 	{
-		$responseClass = new \Ngmy\L4Dav\Response('', '');
-		$responseClass->statusText = '201 Created';
-		$responseClass->statusCode = 201;
+		$responseClass = new MockResponse(array(
+			'body'       => '',
+			'statusCode' => 201,
+			'statusText' => '201 Created',
+		));
 
-		$stub = $this->getMock(
-			'\Ngmy\L4Dav\L4Dav',
-			array('executeWebRequest'),
-			array('http://localhost/webdav/')
-		);
+		$requestClass = new MockRequest($responseClass);
 
-		$stub->expects($this->any())
-			->method('executeWebRequest')
-			->will($this->returnValue($responseClass));
+		$l4Dav = new L4Dav($requestClass, 'http://localhost/webdav/');
 
-		$response = $stub->move('dummy.txt', 'dummy2.txt');
+		$response = $l4Dav->move('dummy.txt', 'dummy2.txt');
 
 		$this->assertEquals('201 Created', $response->getMessage());
 		$this->assertEquals(201, $response->getStatus());
@@ -142,21 +125,17 @@ class L4DavTest extends TestCase {
 
 	public function testMakeDirectory()
 	{
-		$responseClass = new \Ngmy\L4Dav\Response('', '');
-		$responseClass->statusText = '201 Created';
-		$responseClass->statusCode = 201;
+		$responseClass = new MockResponse(array(
+			'body'       => '',
+			'statusCode' => 201,
+			'statusText' => '201 Created',
+		));
 
-		$stub = $this->getMock(
-			'\Ngmy\L4Dav\L4Dav',
-			array('executeWebRequest'),
-			array('http://localhost/webdav/')
-		);
+		$requestClass = new MockRequest($responseClass);
 
-		$stub->expects($this->any())
-			->method('executeWebRequest')
-			->will($this->returnValue($responseClass));
+		$l4Dav = new L4Dav($requestClass, 'http://localhost/webdav/');
 
-		$response = $stub->mkdir('dir/');
+		$response = $l4Dav->mkdir('dir/');
 
 		$this->assertEquals('201 Created', $response->getMessage());
 		$this->assertEquals(201, $response->getStatus());
@@ -165,66 +144,69 @@ class L4DavTest extends TestCase {
 	public function testCheckExistenceDirectory()
 	{
 		// If exists
-		$responseClass = new \Ngmy\L4Dav\Response('', '');
-		$responseClass->statusText = '201 OK';
-		$responseClass->statusCode = 200;
+		$responseClass = new MockResponse(array(
+			'body'       => '',
+			'statusCode' => 200,
+			'statusText' => '200 OK',
+		));
 
-		$stub = $this->getMock(
-			'\Ngmy\L4Dav\L4Dav',
-			array('executeWebRequest'),
-			array('http://localhost/webdav/')
-		);
+		$requestClass = new MockRequest($responseClass);
 
-		$stub->expects($this->any())
-			->method('executeWebRequest')
-			->will($this->returnValue($responseClass));
+		$l4Dav = new L4Dav($requestClass, 'http://localhost/webdav/');
 
-		$result = $stub->exists('dir/');
+		$result = $l4Dav->exists('dir/');
 
 		$this->assertTrue($result);
 
 		// If not exists
-		$responseClass = new \Ngmy\L4Dav\Response('', '');
-		$responseClass->statusText = '404 Not Found';
-		$responseClass->statusCode = 404;
+		$responseClass = new MockResponse(array(
+			'body'       => '',
+			'statusCode' => 404,
+			'statusText' => '404 Not Found',
+		));
 
-		$stub = $this->getMock(
-			'\Ngmy\L4Dav\L4Dav',
-			array('executeWebRequest'),
-			array('http://localhost/webdav/')
-		);
+		$requestClass = new MockRequest($responseClass);
 
-		$stub->expects($this->any())
-			->method('executeWebRequest')
-			->will($this->returnValue($responseClass));
+		$l4Dav = new L4Dav($requestClass, 'http://localhost/webdav/');
 
-		$result = $stub->exists('dir/');
+		$result = $l4Dav->exists('dir/');
 
 		$this->assertFalse($result);
 	}
 
 	public function testListDirectoryContents()
 	{
-		$responseClass = new \Ngmy\L4Dav\Response('', '');
-		$responseClass->statusText = '207 Multi-Status';
-		$responseClass->statusCode = 207;
-		$responseClass->body = file_get_contents(__DIR__.'/mock_ls_response.xml');
+		// If the directory is found
+		$responseClass = new MockResponse(array(
+			'body'       => file_get_contents(__DIR__.'/mock_ls_response.xml'),
+			'statusCode' => 207,
+			'statusText' => '207 Multi-Status',
+		));
 
-		$stub = $this->getMock(
-			'\Ngmy\L4Dav\L4Dav',
-			array('executeWebRequest'),
-			array('http://localhost/webdav/')
-		);
+		$requestClass = new MockRequest($responseClass);
 
-		$stub->expects($this->any())
-			->method('executeWebRequest')
-			->will($this->returnValue($responseClass));
+		$l4Dav = new L4Dav($requestClass, 'http://localhost/webdav/');
 
-		$list = $stub->ls('');
+		$list = $l4Dav->ls('');
 
 		$this->assertEquals('/webdav/', $list[0]);
 		$this->assertEquals('/webdav/file', $list[1]);
 		$this->assertEquals('/webdav/dir/', $list[2]);
+
+		// If the directory is not found
+		$responseClass = new MockResponse(array(
+			'body'       => '',
+			'statusCode' => 404,
+			'statusText' => '404 Not Found',
+		));
+
+		$requestClass = new MockRequest($responseClass);
+
+		$l4Dav = new L4Dav($requestClass, 'http://localhost/webdav/');
+
+		$list = $l4Dav->ls('');
+
+		$this->assertEmpty($list);
 	}
 
 	/**
@@ -232,7 +214,77 @@ class L4DavTest extends TestCase {
 	 */
 	public function testInvalidURL()
 	{
-		$l4Dav = new L4Dav('invalidurl');
+		$responseClass = new MockResponse(array(
+			'body'       => null,
+			'statusCode' => null,
+			'statusText' => null,
+		));
+
+		$requestClass = new MockRequest($responseClass);
+
+		$l4Dav = new L4Dav($requestClass, 'invalidurl');
+	}
+
+}
+
+class MockRequest implements RequestInterface {
+
+	protected $response;
+
+	public function __construct(ResponseInterface $response)
+	{
+		$this->response = $response;
+	}
+
+	public function method($method)
+	{
+		return $this;
+	}
+
+	public function url($url)
+	{
+		return $this;
+	}
+
+	public function headers(array $headers)
+	{
+		return $this;
+	}
+
+	public function options(array $options)
+	{
+		return $this;
+	}
+
+	public function send()
+	{
+		return $this->response;
+	}
+
+}
+
+class MockResponse implements ResponseInterface {
+
+	public function __construct(array $data)
+	{
+		$this->body       = $data['body'];
+		$this->statusCode = $data['statusCode'];
+		$this->statusText = $data['statusText'];
+	}
+
+	public function getBody()
+	{
+		return $this->body;
+	}
+
+	public function getStatus()
+	{
+		return (int) $this->statusCode;
+	}
+
+	public function getMessage()
+	{
+		return $this->statusText;
 	}
 
 }
