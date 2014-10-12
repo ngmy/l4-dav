@@ -16,8 +16,8 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "illuminate/support": "4.1.*",
-        "anlutro/curl": "dev-master"
+        "illuminate/support": "~4.0",
+        "anlutro/curl": "0.6.1"
     },
     "require-dev": {
         "orchestra/testbench": "2.1.*",

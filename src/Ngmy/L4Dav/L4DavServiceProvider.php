@@ -5,7 +5,7 @@
  * Licensed under MIT License.
  *
  * @package    L4Dav
- * @version    0.4.0
+ * @version    0.5.0
  * @author     Ngmy <y.nagamiya@gmail.com>
  * @license    http://opensource.org/licenses/MIT MIT License
  * @copyright  (c) 2014, Ngmy <y.nagamiya@gmail.com>
@@ -13,6 +13,8 @@
  */
 
 use Illuminate\Support\ServiceProvider;
+use Ngmy\L4Dav\Library\cURL;
+use Ngmy\L4Dav\Service\Http\CurlRequest;
 
 /**
  * A service provider class to bootstrap the L4Dav class in Laravel 4.
@@ -47,8 +49,16 @@ class L4DavServiceProvider extends ServiceProvider {
 	{
 		$this->app['l4-dav'] = $this->app->share(function($app)
 		{
-			$webDavUrl = $app['config']['ngmy/l4-dav::url'];
-			return new L4Dav($webDavUrl);
+			$config = $app['config'];
+
+			$curl = new cURL;
+
+			$request = new CurlRequest($curl);
+
+			$webDavUrl  = $config['ngmy/l4-dav::url'];
+			$webDavPort = $config['ngmy/l4-dav::port'];
+
+			return new L4Dav($request, $webDavUrl, $webDavPort);
 		});
 	}
 

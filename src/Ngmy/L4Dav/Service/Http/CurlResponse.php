@@ -1,23 +1,25 @@
-<?php namespace Ngmy\L4Dav;
+<?php namespace Ngmy\L4Dav\Service\Http;
 /**
  * Part of the L4Dav package.
  *
  * Licensed under MIT License.
  *
  * @package    L4Dav
- * @version    0.4.0
+ * @version    0.5.0
  * @author     Ngmy <y.nagamiya@gmail.com>
  * @license    http://opensource.org/licenses/MIT MIT License
  * @copyright  (c) 2014, Ngmy <y.nagamiya@gmail.com>
  * @link       https://github.com/ngmy/l4-dav
  */
 
+use Ngmy\L4Dav\Service\Http\ResponseInterface;
+
 /**
- * A wrapper class for the cURL response representation class.
+ * A cURL response class.
  *
  * @package L4Dav
  */
-class Response extends \anlutro\cURL\Response {
+class CurlResponse extends \anlutro\cURL\Response implements ResponseInterface {
 
 	/**
 	 * Get the response body.
@@ -53,4 +55,3 @@ class Response extends \anlutro\cURL\Response {
 	}
 
 }
-
