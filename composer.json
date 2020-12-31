@@ -31,5 +31,16 @@
             "Ngmy\\L4Dav\\": "src/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "scripts": {
+        "test": [
+            "@php vendor/bin/phpunit --colors=always"
+        ],
+        "lint": [
+            "@php vendor/bin/phpcs --colors"
+        ],
+        "findbugs": [
+            "@php vendor/bin/phpstan analyse --ansi"
+        ]
+    }
 }
