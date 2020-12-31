@@ -1,3 +1,4 @@
+/.laradock/data
 /vendor
 composer.phar
 composer.lock
