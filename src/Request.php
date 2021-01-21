@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use anlutro\cURL\cURL;
-use Ngmy\L4Dav\Curl\Request as CurlRequest;
+use anlutro\cURL\{
+    cURL as Curl,
+    Request as CurlRequest,
+};
 
-class Request implements RequestInterface
+class Request
 {
     /** @var string The HTTP method. */
     protected $method;
@@ -17,7 +19,7 @@ class Request implements RequestInterface
     protected $port;
     /** @var array<string, string> The HTTP headers. */
     protected $headers = [];
-    /** @var cURL The cURL class. */
+    /** @var Curl The cURL class. */
     protected $curl;
     /** @var array<int, mixed> The cURL options. */
     protected $options = [];
@@ -25,12 +27,23 @@ class Request implements RequestInterface
     /**
      * Create a new CurlRequest class object.
      *
-     * @param cURL $curl The cURL client library.
+     * @param Curl $curl The cURL client library.
      * @return void
      */
-    public function __construct(cURL $curl)
+    public function __construct(Curl $curl)
     {
-        $curl->setRequestClass(CurlRequest::class);
+        CurlRequest::$methods = [
+            'get'      => false,
+            'post'     => true,
+            'put'      => true,
+            'patch'    => true,
+            'delete'   => false,
+            'options'  => false,
+            'mkcol'    => false,
+            'copy'     => false,
+            'move'     => false,
+            'propfind' => false,
+        ];
         $this->curl = $curl;
     }
 
@@ -89,9 +102,9 @@ class Request implements RequestInterface
     /**
      * Send the request by cURL.
      *
-     * @return ResponseInterface Returns a CurlResponse class object.
+     * @return Response Returns a CurlResponse class object.
      */
-    public function send(): ResponseInterface
+    public function send(): Response
     {
         $response = $this->curl->newRequest($this->method, $this->url)
             ->setHeaders($this->headers)

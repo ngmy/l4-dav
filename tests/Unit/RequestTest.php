@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav\Tests\Unit;
 
-use anlutro\cURL\cURL;
-use anlutro\cURL\Response as CurlResponse;
+use anlutro\cURL\{
+    cURL as Curl,
+    Response as CurlResponse,
+};
 use Mockery;
-use Ngmy\L4Dav\Request;
-use Ngmy\L4Dav\ResponseInterface;
+use Ngmy\L4Dav\{
+    Request,
+    Response,
+};
 use Ngmy\L4Dav\Tests\TestCase;
 
 class RequestTest extends TestCase
 {
     public function testMethod(): void
     {
-        $request = new Request(new cURL());
+        $request = new Request(new Curl());
 
         $retVal = $request->method('POST');
 
@@ -24,7 +28,7 @@ class RequestTest extends TestCase
 
     public function testUrl(): void
     {
-        $request = new Request(new cURL());
+        $request = new Request(new Curl());
 
         $retVal = $request->url('http://localhost/webdav/dir/');
 
@@ -33,7 +37,7 @@ class RequestTest extends TestCase
 
     public function testHeaders(): void
     {
-        $request = new Request(new cURL());
+        $request = new Request(new Curl());
 
         $retVal = $request->headers(['Depth' => '1']);
 
@@ -42,7 +46,7 @@ class RequestTest extends TestCase
 
     public function testOptions(): void
     {
-        $request = new Request(new cURL());
+        $request = new Request(new Curl());
 
         $retVal = $request->options([CURLOPT_NOBODY => true]);
 
@@ -53,7 +57,7 @@ class RequestTest extends TestCase
     {
         $response = Mockery::mock(CurlResponse::class);
 
-        $curl = Mockery::mock(cURL::class);
+        $curl = Mockery::mock(Curl::class);
         $curl->shouldReceive('setRequestClass');
         $curl->shouldReceive('newRequest->setHeaders->setOptions->send')
              ->andReturn($response);
@@ -66,6 +70,6 @@ class RequestTest extends TestCase
             ->options([CURLOPT_PORT => 80])
             ->send();
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertInstanceOf(Response::class, $response);
     }
 }

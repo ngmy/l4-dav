@@ -6,12 +6,16 @@ namespace Ngmy\L4Dav\Tests\Unit;
 
 use InvalidArgumentException;
 use Mockery;
-use Ngmy\L4Dav\L4Dav;
-use Ngmy\L4Dav\RequestInterface;
-use Ngmy\L4Dav\ResponseInterface;
+use Ngmy\L4Dav\{
+    L4Dav,
+    Request,
+    Response,
+};
 use Ngmy\L4Dav\Tests\TestCase;
-use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\{
+    vfsStream,
+    vfsStreamDirectory,
+};
 
 class L4DavTest extends TestCase
 {
@@ -27,8 +31,8 @@ class L4DavTest extends TestCase
 
     public function testPutFile(): void
     {
-        $request = Mockery::mock(RequestInterface::class);
-        $response = Mockery::mock(ResponseInterface::class);
+        $request = Mockery::mock(Request::class);
+        $response = Mockery::mock(Response::class);
 
         $l4Dav = new L4Dav($request, 'http://localhost/webdav/');
 
@@ -38,13 +42,13 @@ class L4DavTest extends TestCase
         $file = vfsStream::newFile('dummy_file')->at($this->root);
         $response = $l4Dav->put($file->url(), 'dummy_file');
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertInstanceOf(Response::class, $response);
     }
 
     public function testDeleteFile(): void
     {
-        $request = Mockery::mock(RequestInterface::class);
-        $response = Mockery::mock(ResponseInterface::class);
+        $request = Mockery::mock(Request::class);
+        $response = Mockery::mock(Response::class);
 
         $l4Dav = new L4Dav($request, 'http://localhost/webdav/');
 
@@ -53,13 +57,13 @@ class L4DavTest extends TestCase
 
         $response = $l4Dav->delete('dummy_file');
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertInstanceOf(Response::class, $response);
     }
 
     public function testGetFile(): void
     {
-        $request = Mockery::mock(RequestInterface::class);
-        $response = Mockery::mock(ResponseInterface::class);
+        $request = Mockery::mock(Request::class);
+        $response = Mockery::mock(Response::class);
 
         $l4Dav = new L4Dav($request, 'http://localhost/webdav/');
 
@@ -68,13 +72,13 @@ class L4DavTest extends TestCase
 
         $response = $l4Dav->get('dummy_file', $this->root->url() . '/dummy_file');
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertInstanceOf(Response::class, $response);
     }
 
     public function testCopyFile(): void
     {
-        $request = Mockery::mock(RequestInterface::class);
-        $response = Mockery::mock(ResponseInterface::class);
+        $request = Mockery::mock(Request::class);
+        $response = Mockery::mock(Response::class);
 
         $l4Dav = new L4Dav($request, 'http://localhost/webdav/');
 
@@ -83,13 +87,13 @@ class L4DavTest extends TestCase
 
         $response = $l4Dav->copy('dummy_file', 'dummy_file2');
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertInstanceOf(Response::class, $response);
     }
 
     public function testMoveFile(): void
     {
-        $request = Mockery::mock(RequestInterface::class);
-        $response = Mockery::mock(ResponseInterface::class);
+        $request = Mockery::mock(Request::class);
+        $response = Mockery::mock(Response::class);
 
         $l4Dav = new L4Dav($request, 'http://localhost/webdav/');
 
@@ -98,13 +102,13 @@ class L4DavTest extends TestCase
 
         $response = $l4Dav->move('dummy_file', 'dummy_file2');
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertInstanceOf(Response::class, $response);
     }
 
     public function testMakeDirectory(): void
     {
-        $request = Mockery::mock(RequestInterface::class);
-        $response = Mockery::mock(ResponseInterface::class);
+        $request = Mockery::mock(Request::class);
+        $response = Mockery::mock(Response::class);
 
         $l4Dav = new L4Dav($request, 'http://localhost/webdav/');
 
@@ -113,13 +117,13 @@ class L4DavTest extends TestCase
 
         $response = $l4Dav->mkdir('dir/');
 
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertInstanceOf(Response::class, $response);
     }
 
     public function testCheckExistenceDirectoryIfExists(): void
     {
-        $request = Mockery::mock(RequestInterface::class);
-        $response = Mockery::mock(ResponseInterface::class);
+        $request = Mockery::mock(Request::class);
+        $response = Mockery::mock(Response::class);
 
         $l4Dav = new L4Dav($request, 'http://localhost/webdav/');
 
@@ -135,8 +139,8 @@ class L4DavTest extends TestCase
 
     public function testCheckExistenceDirectoryIfNotExists(): void
     {
-        $request = Mockery::mock(RequestInterface::class);
-        $response = Mockery::mock(ResponseInterface::class);
+        $request = Mockery::mock(Request::class);
+        $response = Mockery::mock(Response::class);
 
         $l4Dav = new L4Dav($request, 'http://localhost/webdav/');
 
@@ -152,8 +156,8 @@ class L4DavTest extends TestCase
 
     public function testListDirectoryContentsIfDirectoryIsFound(): void
     {
-        $request = Mockery::mock(RequestInterface::class);
-        $response = Mockery::mock(ResponseInterface::class);
+        $request = Mockery::mock(Request::class);
+        $response = Mockery::mock(Response::class);
 
         $l4Dav = new L4Dav($request, 'http://localhost/webdav/');
 
@@ -172,8 +176,8 @@ class L4DavTest extends TestCase
 
     public function testListDirectoryContentsIfDirectoryIsNotFound(): void
     {
-        $request = Mockery::mock(RequestInterface::class);
-        $response = Mockery::mock(ResponseInterface::class);
+        $request = Mockery::mock(Request::class);
+        $response = Mockery::mock(Response::class);
 
         $l4Dav = new L4Dav($request, 'http://localhost/webdav/');
 
@@ -191,7 +195,7 @@ class L4DavTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $request = Mockery::mock(RequestInterface::class);
+        $request = Mockery::mock(Request::class);
 
         new L4Dav($request, 'invalidurl');
     }

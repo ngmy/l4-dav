@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Ngmy\L4Dav\Tests\Unit;
 
 use anlutro\cURL\Response as CurlResponse;
-use Ngmy\L4Dav\Tests\TestCase;
 use Ngmy\L4Dav\Response;
+use Ngmy\L4Dav\Tests\TestCase;
 
 class ResponseTest extends TestCase
 {

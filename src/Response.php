@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav;
 
 use anlutro\cURL\Response as CurlResponse;
 
-class Response implements ResponseInterface
+class Response
 {
     /** @var CurlResponse */
     private $response;

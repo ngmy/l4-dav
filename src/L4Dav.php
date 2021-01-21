@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Ngmy\L4Dav;
 
 use InvalidArgumentException;
-use Ngmy\L4Dav\RequestInterface;
-use Ngmy\L4Dav\ResponseInterface;
 use RuntimeException;
 
 class L4Dav
@@ -21,19 +19,19 @@ class L4Dav
     protected $path;
     /** @var string The URL of the WebDAV server. */
     protected $url;
-    /** @var RequestInterface */
+    /** @var Request */
     protected $request;
 
     /**
      * Create a new L4Dav class object.
      *
-     * @param RequestInterface $request
-     * @param string           $webDavUrl  The URL of the WebDAV server.
-     * @param int              $webDavPort The port of the WebDAV server.
+     * @param Request $request
+     * @param string  $webDavUrl  The URL of the WebDAV server.
+     * @param int     $webDavPort The port of the WebDAV server.
      * @throws InvalidArgumentException
      * @return void
      */
-    public function __construct(RequestInterface $request, string $webDavUrl, int $webDavPort = 80)
+    public function __construct(Request $request, string $webDavUrl, int $webDavPort = 80)
     {
         if (!preg_match('/([a-z]+):\/\/([a-zA-Z0-9\.]+)(:[0-9]+){0,1}(.*)/', $webDavUrl, $m)) {
             throw new InvalidArgumentException('Invalid URL format (' . $webDavUrl . ')');
@@ -55,9 +53,9 @@ class L4Dav
      * @param string $srcPath  The source path of a file.
      * @param string $destPath The destination path of a file.
      * @throws RuntimeException
-     * @return ResponseInterface Returns a Response class object.
+     * @return Response Returns a Response class object.
      */
-    public function get(string $srcPath, string $destPath): ResponseInterface
+    public function get(string $srcPath, string $destPath): Response
     {
         $fh = fopen($destPath, 'w');
 
@@ -87,9 +85,9 @@ class L4Dav
      * @param string $srcPath  The source path of a file.
      * @param string $destPath The destination path of a file.
      * @throws RuntimeException
-     * @return ResponseInterface Returns a Response class object.
+     * @return Response Returns a Response class object.
      */
-    public function put(string $srcPath, string $destPath): ResponseInterface
+    public function put(string $srcPath, string $destPath): Response
     {
         $filesize = filesize($srcPath);
         $fh = fopen($srcPath, 'r');
@@ -119,9 +117,9 @@ class L4Dav
      * Delete an item on the WebDAV server.
      *
      * @param string $path The path of an item.
-     * @return ResponseInterface Returns a Response class object.
+     * @return Response Returns a Response class object.
      */
-    public function delete(string $path): ResponseInterface
+    public function delete(string $path): Response
     {
         $options = [CURLOPT_PORT => $this->port];
 
@@ -136,9 +134,9 @@ class L4Dav
      *
      * @param string $srcPath  The source path of an item.
      * @param string $destPath The destination path of an item.
-     * @return ResponseInterface Returns a Response class object.
+     * @return Response Returns a Response class object.
      */
-    public function copy(string $srcPath, string $destPath): ResponseInterface
+    public function copy(string $srcPath, string $destPath): Response
     {
         $options = [CURLOPT_PORT => $this->port];
         $headers = ['Destination' => $this->url . $destPath];
@@ -155,9 +153,9 @@ class L4Dav
      *
      * @param string $srcPath  The source path of an item.
      * @param string $destPath The destination path of an item.
-     * @return ResponseInterface Returns a Response class object.
+     * @return Response Returns a Response class object.
      */
-    public function move(string $srcPath, string $destPath): ResponseInterface
+    public function move(string $srcPath, string $destPath): Response
     {
         $options = [CURLOPT_PORT => $this->port];
         $headers = ['Destination' => $this->url . $destPath];
@@ -173,9 +171,9 @@ class L4Dav
      * Make a directory on the WebDAV server.
      *
      * @param string $path The directory path.
-     * @return ResponseInterface Returns a Response class object.
+     * @return Response Returns a Response class object.
      */
-    public function mkdir(string $path): ResponseInterface
+    public function mkdir(string $path): Response
     {
         $options = [CURLOPT_PORT => $this->port];
 

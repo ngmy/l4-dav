@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav\Tests\Feature;
 
-use anlutro\cURL\cURL;
-use Ngmy\L4Dav\L4Dav;
-use Ngmy\L4Dav\Request;
+use anlutro\cURL\cURL as Curl;
+use Ngmy\L4Dav\{
+    L4Dav,
+    Request,
+};
 use Ngmy\L4Dav\Tests\TestCase;
 use RuntimeException;
 
@@ -14,14 +16,14 @@ class L4DavTest extends TestCase
 {
     public function tearDown(): void
     {
-        $curl = new cURL();
+        $curl = new Curl();
         $request = new Request($curl);
 
         $l4Dav = new L4Dav($request, 'http://apache2/');
 
         foreach ($l4Dav->ls('') as $path) {
             if ($path != '/') {
-                $curl = new cURL();
+                $curl = new Curl();
                 $request = new Request($curl);
 
                 $l4Dav = new L4Dav($request, 'http://apache2/');
@@ -34,7 +36,7 @@ class L4DavTest extends TestCase
 
     public function testPutFile(): void
     {
-        $curl = new cURL();
+        $curl = new Curl();
         $request = new Request($curl);
 
         $l4Dav = new L4Dav($request, 'http://apache2/');
@@ -49,7 +51,7 @@ class L4DavTest extends TestCase
 
     public function testDeleteFile(): void
     {
-        $curl = new cURL();
+        $curl = new Curl();
         $request = new Request($curl);
 
         $l4Dav = new L4Dav($request, 'http://apache2/');
@@ -65,7 +67,7 @@ class L4DavTest extends TestCase
 
     public function testGetFile(): void
     {
-        $curl = new cURL();
+        $curl = new Curl();
         $request = new Request($curl);
 
         $l4Dav = new L4Dav($request, 'http://apache2/');
@@ -84,7 +86,7 @@ class L4DavTest extends TestCase
 
     public function testCopyFile(): void
     {
-        $curl = new cURL();
+        $curl = new Curl();
         $request = new Request($curl);
 
         $l4Dav = new L4Dav($request, 'http://apache2/');
@@ -101,7 +103,7 @@ class L4DavTest extends TestCase
 
     public function testMoveFile(): void
     {
-        $curl = new cURL();
+        $curl = new Curl();
         $request = new Request($curl);
 
         $l4Dav = new L4Dav($request, 'http://apache2/');
@@ -118,7 +120,7 @@ class L4DavTest extends TestCase
 
     public function testMakeDirectory(): void
     {
-        $curl = new cURL();
+        $curl = new Curl();
         $request = new Request($curl);
 
         $l4Dav = new L4Dav($request, 'http://apache2/');
@@ -131,7 +133,7 @@ class L4DavTest extends TestCase
 
     public function testCheckExistenceDirectoryIfExists(): void
     {
-        $curl = new cURL();
+        $curl = new Curl();
         $request = new Request($curl);
 
         $l4Dav = new L4Dav($request, 'http://apache2/');
@@ -147,7 +149,7 @@ class L4DavTest extends TestCase
 
     public function testCheckExistenceDirectoryIfNotExists(): void
     {
-        $curl = new cURL();
+        $curl = new Curl();
         $request = new Request($curl);
 
         $l4Dav = new L4Dav($request, 'http://apache2/');
@@ -159,7 +161,7 @@ class L4DavTest extends TestCase
 
     public function testListDirectoryContentsIfDirectoryIsFound(): void
     {
-        $curl = new cURL();
+        $curl = new Curl();
         $request = new Request($curl);
 
         $l4Dav = new L4Dav($request, 'http://apache2/');
@@ -184,7 +186,7 @@ class L4DavTest extends TestCase
 
     public function testListDirectoryContentsIfDirectoryIsNotFound(): void
     {
-        $curl = new cURL();
+        $curl = new Curl();
         $request = new Request($curl);
 
         $l4Dav = new L4Dav($request, 'http://apache2/');
