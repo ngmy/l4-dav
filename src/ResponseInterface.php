@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Service\Http;
+namespace Ngmy\L4Dav;
 
 interface ResponseInterface
 {

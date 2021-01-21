@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Tests\Unit\Service\Http;
+namespace Ngmy\L4Dav\Tests\Unit;
 
-use Hamcrest\Text\IsEmptyString;
-use Ngmy\L4Dav\Service\Http\CurlResponse;
+use anlutro\cURL\Response as CurlResponse;
 use Ngmy\L4Dav\Tests\TestCase;
+use Ngmy\L4Dav\Response;
 
-class CurlResponseTest extends TestCase
+class ResponseTest extends TestCase
 {
     /** @var string */
     private $body = <<<EOF
@@ -28,21 +28,27 @@ EOF;
 
     public function testGetBody(): void
     {
-        $response = new CurlResponse($this->body, $this->buildHttpHeader($this->headers));
+        $response = new Response(
+            new CurlResponse($this->body, $this->buildHttpHeader($this->headers))
+        );
 
         $this->assertEquals($this->body, $response->getBody());
     }
 
     public function testGetStatus(): void
     {
-        $response = new CurlResponse($this->body, $this->buildHttpHeader($this->headers));
+        $response = new Response(
+            new CurlResponse($this->body, $this->buildHttpHeader($this->headers))
+        );
 
         $this->assertEquals(201, $response->getStatus());
     }
 
     public function testGetMessage(): void
     {
-        $response = new CurlResponse($this->body, $this->buildHttpHeader($this->headers));
+        $response = new Response(
+            new CurlResponse($this->body, $this->buildHttpHeader($this->headers))
+        );
 
         $this->assertEquals('201 Created', $response->getMessage());
     }

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Library;
+namespace Ngmy\L4Dav\Curl;
 
-use anlutro\cURL\Request as AnlutroRequest;
+use anlutro\cURL\Request as CurlRequest;
 
-class Request extends AnlutroRequest
+class Request extends CurlRequest
 {
     /** @var array<string, bool> Allowed methods => allows postdata */
     public static $methods = [

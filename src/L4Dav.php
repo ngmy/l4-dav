@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Ngmy\L4Dav;
 
 use InvalidArgumentException;
-use Ngmy\L4Dav\Service\Http\RequestInterface;
-use Ngmy\L4Dav\Service\Http\ResponseInterface;
+use Ngmy\L4Dav\RequestInterface;
+use Ngmy\L4Dav\ResponseInterface;
 use RuntimeException;
 
 class L4Dav

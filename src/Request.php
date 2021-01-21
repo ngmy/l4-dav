@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Service\Http;
+namespace Ngmy\L4Dav;
 
-use Ngmy\L4Dav\Library\Curl;
+use anlutro\cURL\cURL;
+use Ngmy\L4Dav\Curl\Request as CurlRequest;
 
-class CurlRequest implements RequestInterface
+class Request implements RequestInterface
 {
     /** @var string The HTTP method. */
     protected $method;
@@ -16,7 +17,7 @@ class CurlRequest implements RequestInterface
     protected $port;
     /** @var array<string, string> The HTTP headers. */
     protected $headers = [];
-    /** @var Curl The cURL class. */
+    /** @var cURL The cURL class. */
     protected $curl;
     /** @var array<int, mixed> The cURL options. */
     protected $options = [];
@@ -24,11 +25,12 @@ class CurlRequest implements RequestInterface
     /**
      * Create a new CurlRequest class object.
      *
-     * @param Curl $curl The cURL client library.
+     * @param cURL $curl The cURL client library.
      * @return void
      */
-    public function __construct(Curl $curl)
+    public function __construct(cURL $curl)
     {
+        $curl->setRequestClass(CurlRequest::class);
         $this->curl = $curl;
     }
 
@@ -96,6 +98,6 @@ class CurlRequest implements RequestInterface
             ->setOptions($this->options)
             ->send();
 
-        return $response;
+        return new Response($response);
     }
 }

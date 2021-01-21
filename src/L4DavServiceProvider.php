@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
+use anlutro\cURL\cURL;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Ngmy\L4Dav\Library\Curl;
-use Ngmy\L4Dav\Service\Http\CurlRequest;
 
 class L4DavServiceProvider extends ServiceProvider implements DeferrableProvider
 {
@@ -34,9 +33,8 @@ class L4DavServiceProvider extends ServiceProvider implements DeferrableProvider
         $this->app->singleton(L4Dav::class, function (Application $app) {
             $config = $app->make('config');
 
-            $curl = new Curl();
-
-            $request = new CurlRequest($curl);
+            $curl = new cURL();
+            $request = new Request($curl);
 
             $webDavUrl  = $config->get('ngmy-l4-dav.url');
             $webDavPort = $config->get('ngmy-l4-dav.port');

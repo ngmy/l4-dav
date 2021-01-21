@@ -2,60 +2,63 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Tests\Unit\Service\Http;
+namespace Ngmy\L4Dav\Tests\Unit;
 
+use anlutro\cURL\cURL;
+use anlutro\cURL\Response as CurlResponse;
 use Mockery;
-use Ngmy\L4Dav\Library\Curl;
-use Ngmy\L4Dav\Service\Http\CurlRequest;
-use Ngmy\L4Dav\Service\Http\ResponseInterface;
+use Ngmy\L4Dav\Request;
+use Ngmy\L4Dav\ResponseInterface;
 use Ngmy\L4Dav\Tests\TestCase;
 
-class CurlRequestTest extends TestCase
+class RequestTest extends TestCase
 {
     public function testMethod(): void
     {
-        $request = new CurlRequest(new Curl());
+        $request = new Request(new cURL());
 
         $retVal = $request->method('POST');
 
-        $this->assertInstanceOf(CurlRequest::class, $retVal);
+        $this->assertInstanceOf(Request::class, $retVal);
     }
 
     public function testUrl(): void
     {
-        $request = new CurlRequest(new Curl());
+        $request = new Request(new cURL());
 
         $retVal = $request->url('http://localhost/webdav/dir/');
 
-        $this->assertInstanceOf(CurlRequest::class, $retVal);
+        $this->assertInstanceOf(Request::class, $retVal);
     }
 
     public function testHeaders(): void
     {
-        $request = new CurlRequest(new Curl());
+        $request = new Request(new cURL());
 
         $retVal = $request->headers(['Depth' => '1']);
 
-        $this->assertInstanceOf(CurlRequest::class, $retVal);
+        $this->assertInstanceOf(Request::class, $retVal);
     }
 
     public function testOptions(): void
     {
-        $request = new CurlRequest(new Curl());
+        $request = new Request(new cURL());
 
         $retVal = $request->options([CURLOPT_NOBODY => true]);
 
-        $this->assertInstanceOf(CurlRequest::class, $retVal);
+        $this->assertInstanceOf(Request::class, $retVal);
     }
 
     public function testSend(): void
     {
-        $curl = Mockery::mock(Curl::class);
-        $request = new CurlRequest($curl);
+        $response = Mockery::mock(CurlResponse::class);
 
-        $response = Mockery::mock(ResponseInterface::class);
+        $curl = Mockery::mock(cURL::class);
+        $curl->shouldReceive('setRequestClass');
         $curl->shouldReceive('newRequest->setHeaders->setOptions->send')
              ->andReturn($response);
+
+        $request = new Request($curl);
 
         $response = $request->method('PROPFIND')
             ->url('http://localhost/webdav/')

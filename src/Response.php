@@ -2,12 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Service\Http;
+namespace Ngmy\L4Dav;
 
-use anlutro\cURL\Response;
+use anlutro\cURL\Response as CurlResponse;
 
-class CurlResponse extends Response implements ResponseInterface
+class Response implements ResponseInterface
 {
+    /** @var CurlResponse */
+    private $response;
+
+    public function __construct(CurlResponse $response)
+    {
+        $this->response = $response;
+    }
+
     /**
      * Get the response body.
      *
@@ -15,7 +23,7 @@ class CurlResponse extends Response implements ResponseInterface
      */
     public function getBody(): string
     {
-        return $this->body;
+        return $this->response->body;
     }
 
     /**
@@ -25,7 +33,7 @@ class CurlResponse extends Response implements ResponseInterface
      */
     public function getStatus(): int
     {
-        return (int) $this->statusCode;
+        return (int) $this->response->statusCode;
     }
 
     /**
@@ -35,6 +43,6 @@ class CurlResponse extends Response implements ResponseInterface
      */
     public function getMessage(): string
     {
-        return $this->statusText;
+        return $this->response->statusText;
     }
 }
