@@ -4,27 +4,28 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0712d74f6e7b3e9f55bc693882a261aa",
+    "content-hash": "f01bd14e9416ff369e22f5af28dcdab0",
     "packages": [
         {
             "name": "anlutro/curl",
-            "version": "0.6.1",
+            "version": "1.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/anlutro/php-curl.git",
-                "reference": "7404828efd18fe233d48bce5995c4bed42a82783"
+                "reference": "a2809a2a64cacf83fa7b9e5365b7613635049ef6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/anlutro/php-curl/zipball/7404828efd18fe233d48bce5995c4bed42a82783",
-                "reference": "7404828efd18fe233d48bce5995c4bed42a82783",
+                "url": "https://api.github.com/repos/anlutro/php-curl/zipball/a2809a2a64cacf83fa7b9e5365b7613635049ef6",
+                "reference": "a2809a2a64cacf83fa7b9e5365b7613635049ef6",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "mockery/mockery": "0.9.*"
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.*"
             },
             "type": "library",
             "autoload": {
@@ -43,7 +44,7 @@
                 }
             ],
             "description": "Simple OOP cURL wrapper.",
-            "time": "2014-07-28T05:58:44+00:00"
+            "time": "2018-12-14T08:59:18+00:00"
         },
         {
             "name": "brick/math",

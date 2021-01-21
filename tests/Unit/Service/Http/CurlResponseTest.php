@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Tests\Service\Http;
+namespace Ngmy\L4Dav\Tests\Unit\Service\Http;
 
+use Hamcrest\Text\IsEmptyString;
 use Ngmy\L4Dav\Service\Http\CurlResponse;
 use Ngmy\L4Dav\Tests\TestCase;
 
@@ -17,7 +18,7 @@ class CurlResponseTest extends TestCase
 EOF;
     /** @var array<string, string> */
     private $headers = [
-        'HTTP/1.1'       => '201 Created',
+        ''               => 'HTTP/1.1 201 Created',
         'Date'           => 'Sun, 12 Oct 2014 18:21:23 GMT',
         'Server'         => 'Apache/2.4.9 (Amazon) PHP/5.4.26',
         'Location'       => 'http://localhost/webdav/dir/',
@@ -27,22 +28,40 @@ EOF;
 
     public function testGetBody(): void
     {
-        $response = new CurlResponse($this->body, $this->headers);
+        $response = new CurlResponse($this->body, $this->buildHttpHeader($this->headers));
 
         $this->assertEquals($this->body, $response->getBody());
     }
 
     public function testGetStatus(): void
     {
-        $response = new CurlResponse($this->body, $this->headers);
+        $response = new CurlResponse($this->body, $this->buildHttpHeader($this->headers));
 
         $this->assertEquals(201, $response->getStatus());
     }
 
     public function testGetMessage(): void
     {
-        $response = new CurlResponse($this->body, $this->headers);
+        $response = new CurlResponse($this->body, $this->buildHttpHeader($this->headers));
 
-        $this->assertEquals($this->headers['HTTP/1.1'], $response->getMessage());
+        $this->assertEquals('201 Created', $response->getMessage());
+    }
+
+    /**
+     * @param array<string, string> $headers
+     * @return string
+     */
+    private function buildHttpHeader(array $headers): string
+    {
+        $header = '';
+        $firstKey = array_key_first($headers);
+        foreach ($headers as $name => $value) {
+            if ($name == $firstKey) {
+                $header .= $value . "\r\n";
+                continue;
+            }
+            $header .= $name . ': ' . $value . "\r\n";
+        }
+        return $header;
     }
 }

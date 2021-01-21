@@ -9,19 +9,8 @@ use anlutro\cURL\cURL as AnlutroCurl;
 
 class Curl extends AnlutroCurl
 {
-    /** @var array<string, bool> Allowed methods => allows postdata */
-    protected $methods = [
-        'get'      => false,
-        'post'     => true,
-        'put'      => true,
-        'patch'    => true,
-        'delete'   => false,
-        'options'  => false,
-        'mkcol'    => false,
-        'copy'     => false,
-        'move'     => false,
-        'propfind' => false,
-    ];
+    /** @var string The request class to use. */
+    protected $requestClass = Request::class;
     /** @var string The response class to use. */
     protected $responseClass = CurlResponse::class;
 }

@@ -15,8 +15,8 @@
     ],
     "require": {
         "php": "^7.3|^8.0",
-        "illuminate/support": "^6.0|^7.0|^8.0",
-        "anlutro/curl": "0.6.1"
+        "anlutro/curl": "^1.4.7",
+        "illuminate/support": "^6.0|^7.0|^8.0"
     },
     "require-dev": {
         "mikey179/vfsstream": "1.6.8",
