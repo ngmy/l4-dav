@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phive xmlns="https://phar.io/phive">
+  <phar name="php-coveralls" version="^2.4.3" installed="2.4.3" location="./tools/php-coveralls" copy="false"/>
+  <phar name="phpcs" version="^3.5.8" installed="3.5.8" location="./tools/phpcs" copy="false"/>
+  <phar name="phpstan" version="^0.12.64" installed="0.12.64" location="./tools/phpstan" copy="false"/>
+  <phar name="phpunit" version="^9.5.0" installed="9.5.0" location="./tools/phpunit" copy="false"/>
+</phive>

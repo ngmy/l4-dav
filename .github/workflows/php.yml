@@ -1,0 +1,133 @@
+name: PHP CI
+
+on: [push, pull_request]
+
+jobs:
+  install_tools:
+
+    runs-on: ubuntu-latest
+
+    name: Install tools
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Install PHIVE
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            wget -O phive.phar https://phar.io/releases/phive.phar
+            wget -O phive.phar.asc https://phar.io/releases/phive.phar.asc
+            gpg --keyserver pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79
+            gpg --verify phive.phar.asc phive.phar
+
+      - name: Install tools
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            php phive.phar --no-progress install \
+              --copy \
+              --trust-gpg-keys E82B2FB314E9906E,31C7E470E2138192,CF1A108D0E7AE720,4AA394086372C20A
+
+      - name: Upload tools to artifact store
+        uses: actions/upload-artifact@master
+        with:
+          name: tools
+          path: tools
+
+  test:
+
+    needs: install_tools
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.3', '7.4', '8.0']
+        laravel: ['6', '7', '8']
+        deps: [highest, lowest]
+        include:
+          - php: '7.4'
+            laravel: '8'
+            deps: current
+
+    name: Test (PHP ${{ matrix.php }}, Laravel ${{ matrix.laravel }}, ${{ matrix.deps }} dependencies)
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up PHP ${{ matrix.php }}
+        run: sudo update-alternatives --set php /usr/bin/php${{ matrix.php }}
+
+      - name: Update Composer to latest version
+        run: composer self-update
+
+      - name: Specify composer.json to use
+        run: |
+          if [[ "${{ matrix.laravel }}" == '6' ]]; then
+            export COMPOSER=composer-ci-laravel6.json
+          fi
+          if [[ "${{ matrix.laravel }}" == '7' ]]; then
+            export COMPOSER=composer-ci-laravel7.json
+          fi
+          if [[ "${{ matrix.laravel }}" == '8' ]]; then
+            export COMPOSER=composer-ci-laravel8.json
+          fi
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Cache Composer packages
+        if: matrix.deps == 'current'
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: |
+          if [[ "${{ matrix.deps }}" == 'current' && "${{ steps.composer-cache.outputs.cache-hit }}" != 'true' ]]; then
+            composer install --no-interaction
+          fi
+          if [[ "${{ matrix.deps }}" == 'highest' ]]; then
+            composer update --no-interaction
+          fi
+          if [[ "${{ matrix.deps }}" == 'lowest' ]]; then
+            composer update --no-interaction --prefer-lowest --prefer-stable
+          fi
+
+      - name: Download tools from artifact store
+        uses: actions/download-artifact@master
+        with:
+          name: tools
+          path: tools
+
+      - name: Run lint
+        run: composer lint
+
+      - name: Run bug analysis
+        run: composer findbugs
+
+      - name: Run unit tests
+        env:
+          XDEBUG_MODE: coverage
+        run: composer test -- --testsuite Unit
+
+      - name: Upload coverage results to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: php tools/php-coveralls --coverage_clover=build/logs/clover.xml -v

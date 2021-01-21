@@ -1,0 +1,12 @@
+includes:
+  - vendor/nunomaduro/larastan/extension.neon
+  - vendor/phpstan/phpstan-mockery/extension.neon
+
+parameters:
+  level: max
+  paths:
+    - src
+    - tests
+  reportUnmatchedIgnoredErrors: false
+
+# vim: set ft=yaml:

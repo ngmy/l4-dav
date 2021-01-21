@@ -3,21 +3,20 @@
 [![Build Status](https://travis-ci.org/ngmy/l4-dav.png?branch=master)](https://travis-ci.org/ngmy/l4-dav)
 [![Coverage Status](https://coveralls.io/repos/ngmy/l4-dav/badge.png?branch=master)](https://coveralls.io/r/ngmy/l4-dav?branch=master)
 
-A simple WebDAV client library for Laravel 4.
+A simple WebDAV client library for Laravel.
 
 ## Requirements
 
 The L4Dav has the following requirements:
 
-  * PHP 5.3+
-
-  * Laravel 4.0+
+* PHP >= 7.3
+* Laravel >= 6.0
 
 ## Dependencies
 
 The L4Dav has the following dependencies:
 
-  * [anlutro/php-curl](https://github.com/anlutro/php-curl)
+* [anlutro/php-curl](https://github.com/anlutro/php-curl)
 
 ## Installation
 

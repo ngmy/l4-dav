@@ -1,5 +1,12 @@
-/.laradock/data
+/.laradock/data/*
+!/.laradock/data/.gitkeep
+/build/
+/tools/
 /vendor
-composer.phar
-composer.lock
-.DS_Store
+.envrc.local
+.php_cs
+.php_cs.cache
+.phpunit.result.cache
+phpcs.xml
+phpstan.neon
+phpunit.xml

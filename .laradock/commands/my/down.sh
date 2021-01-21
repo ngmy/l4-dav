@@ -5,5 +5,5 @@ local NAME='my:down'
 local DESCRIPTION='Shut down my development environment'
 
 handle() {
-  docker-compose down
+  docker-compose stop
 }

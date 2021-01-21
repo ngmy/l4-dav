@@ -33,7 +33,7 @@ COMPOSE_FILE=docker-compose.yml
 COMPOSE_PATH_SEPARATOR=:
 
 # Define the prefix of container names. This is useful if you have multiple projects that use laradock to have separate containers per project.
-COMPOSE_PROJECT_NAME=laradock-l4dav
+COMPOSE_PROJECT_NAME=laradock-l4-dav
 
 ### PHP Version ###########################################
 
@@ -122,7 +122,7 @@ WORKSPACE_INSTALL_WORKSPACE_SSH=false
 WORKSPACE_INSTALL_SUBVERSION=false
 WORKSPACE_INSTALL_BZ2=false
 WORKSPACE_INSTALL_GMP=false
-WORKSPACE_INSTALL_XDEBUG=false
+WORKSPACE_INSTALL_XDEBUG=true
 WORKSPACE_INSTALL_PCOV=false
 WORKSPACE_INSTALL_PHPDBG=false
 WORKSPACE_INSTALL_SSH2=false
@@ -324,7 +324,7 @@ LARAVEL_HORIZON_PUID=1000
 APACHE_HOST_HTTP_PORT=80
 APACHE_HOST_HTTPS_PORT=443
 APACHE_HOST_LOG_PATH=./logs/apache2
-APACHE_SITES_PATH=./apache2/sites
+APACHE_SITES_PATH=../.laradock/apache2/sites
 APACHE_PHP_UPSTREAM_CONTAINER=php-fpm
 APACHE_PHP_UPSTREAM_PORT=9000
 APACHE_PHP_UPSTREAM_TIMEOUT=60

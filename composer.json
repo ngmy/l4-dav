@@ -1,46 +1,64 @@
 {
     "name": "ngmy/l4-dav",
     "type": "library",
-    "description": "A simple WebDAV client library for Laravel 4",
+    "description": "A simple WebDAV client library for Laravel",
     "keywords": [
-        "laravel 4",
+        "laravel",
         "webdav"
     ],
-    "homepage": "https://github.com/ngmy/l4-dav",
     "license": "MIT",
     "authors": [
         {
-            "name": "ngmy",
+            "name": "Yuta Nagamiya",
             "email": "y.nagamiya@gmail.com"
         }
     ],
     "require": {
-        "php": ">=5.3.0",
-        "illuminate/support": "~4.0",
+        "php": "^7.3|^8.0",
+        "illuminate/support": "^6.0|^7.0|^8.0",
         "anlutro/curl": "0.6.1"
     },
     "require-dev": {
-        "orchestra/testbench": "2.1.*",
-        "satooshi/php-coveralls": "dev-master"
+        "mikey179/vfsstream": "1.6.8",
+        "mockery/mockery": "1.4.2",
+        "nunomaduro/larastan": "0.6.11",
+        "orchestra/testbench": "4.13.0|5.12.1|6.7.2",
+        "phpstan/phpstan-mockery": "0.12.11"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ngmy\\L4Dav\\L4DavServiceProvider"
+            ],
+            "aliases": {
+                "L4Dav": "Ngmy\\L4Dav\\L4DavFacade"
+            }
+        }
     },
     "autoload": {
-        "classmap": [
-            "tests/TestCase.php"
-        ],
-        "psr-0": {
+        "psr-4": {
             "Ngmy\\L4Dav\\": "src/"
         }
     },
-    "minimum-stability": "stable",
+    "autoload-dev": {
+        "psr-4": {
+            "Ngmy\\L4Dav\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "test": [
-            "@php vendor/bin/phpunit --colors=always"
+            "@php tools/phpunit --colors=always"
         ],
         "lint": [
-            "@php vendor/bin/phpcs --colors"
+            "@php tools/phpcs --colors"
         ],
         "findbugs": [
-            "@php vendor/bin/phpstan analyse --ansi"
+            "@php tools/phpstan analyse --ansi"
         ]
     }
 }

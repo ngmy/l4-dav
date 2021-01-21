@@ -1,0 +1,2 @@
+export PATH=$PWD/laradockctl/bin:$PATH
+export LARADOCKCTL_COMMAND_PATH=$PWD/.laradock/commands:$PWD/laradockctl/src/commands
