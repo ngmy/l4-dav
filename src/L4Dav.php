@@ -6,21 +6,22 @@ namespace Ngmy\L4Dav;
 
 use InvalidArgumentException;
 use RuntimeException;
+use SimpleXMLElement;
 
 class L4Dav
 {
     /** @var string The schema of the WebDAV server. */
-    protected $schema;
+    private $schema;
     /** @var string The hostname of the WebDAV server. */
-    protected $host;
+    private $host;
     /** @var int The port of the WebDAV server. */
-    protected $port;
+    private $port;
     /** @var string The path of the WebDAV server. */
-    protected $path;
+    private $path;
     /** @var string The URL of the WebDAV server. */
-    protected $url;
+    private $url;
     /** @var Request */
-    protected $request;
+    private $request;
 
     /**
      * Create a new L4Dav class object.
@@ -229,7 +230,7 @@ class L4Dav
         if ($response->getStatus() < 200 || $response->getStatus() > 300) {
             return [];
         } else {
-            $xml = simplexml_load_string($response->getBody(), 'SimpleXMLElement', 0, 'D', true);
+            $xml = simplexml_load_string($response->getBody(), SimpleXMLElement::class, 0, 'D', true);
             if ($xml === false) {
                 return [];
             }

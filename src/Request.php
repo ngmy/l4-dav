@@ -12,17 +12,15 @@ use anlutro\cURL\{
 class Request
 {
     /** @var string The HTTP method. */
-    protected $method;
+    private $method;
     /** @var string The request URL. */
-    protected $url;
-    /** @var int The port number. */
-    protected $port;
+    private $url;
     /** @var array<string, string> The HTTP headers. */
-    protected $headers = [];
+    private $headers = [];
     /** @var Curl The cURL class. */
-    protected $curl;
+    private $curl;
     /** @var array<int, mixed> The cURL options. */
-    protected $options = [];
+    private $options = [];
 
     /**
      * Create a new CurlRequest class object.
@@ -32,18 +30,12 @@ class Request
      */
     public function __construct(Curl $curl)
     {
-        CurlRequest::$methods = [
-            'get'      => false,
-            'post'     => true,
-            'put'      => true,
-            'patch'    => true,
-            'delete'   => false,
-            'options'  => false,
-            'mkcol'    => false,
+        CurlRequest::$methods = array_merge(CurlRequest::$methods, [
             'copy'     => false,
+            'mkcol'    => false,
             'move'     => false,
             'propfind' => false,
-        ];
+        ]);
         $this->curl = $curl;
     }
 
