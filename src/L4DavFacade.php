@@ -15,6 +15,6 @@ class L4DavFacade extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return L4Dav::class;
+        return Client::class;
     }
 }

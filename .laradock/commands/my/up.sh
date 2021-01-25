@@ -7,8 +7,13 @@ local DESCRIPTION='Start up my development environment'
 handle() {
   cp -f ../.laradock/env-development .env
   docker-compose up -d --build apache2 workspace
-  docker-compose exec apache2 mkdir -p .laradock/data/apache2/var .laradock/data/apache2/webdav
+  docker-compose exec apache2 mkdir -p .laradock/data/apache2/var \
+    .laradock/data/apache2/webdav_no_auth \
+    .laradock/data/apache2/webdav_basic_auth \
+    .laradock/data/apache2/webdav_digest_auth
   docker-compose exec apache2 chown -R www-data:www-data .laradock/data/apache2
+  docker-compose exec apache2 htpasswd -b -c /etc/apache2/.htpasswd basic basic
+  docker-compose exec apache2 htdigest -c /etc/apache2/.htdigest 'Digest Auth' digest
   docker-compose exec -u laradock workspace composer install
   docker-compose exec -u laradock workspace cp phpunit.xml.dist phpunit.xml
   docker-compose exec -u laradock workspace sed -i -z 's/<!--\(<testsuite name="Feature".*\)-->/\1/g' phpunit.xml

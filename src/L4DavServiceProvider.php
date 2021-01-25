@@ -30,14 +30,13 @@ class L4DavServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function register(): void
     {
-        $this->app->singleton(L4Dav::class, function (Application $app) {
-            $request = new Request(new Curl());
-
-            $config = $app->make('config');
-            $webDavUrl  = $config->get('ngmy-l4-dav.url');
-            $webDavPort = $config->get('ngmy-l4-dav.port');
-
-            return new L4Dav($request, $webDavUrl, $webDavPort);
+        $this->app->singleton(Client::class, function (Application $app) {
+            $httpClient = new HttpClient(new Curl());
+            $server = Server::of(
+                $app->make('config')->get('ngmy-l4-dav.url'),
+                $app->make('config')->get('ngmy-l4-dav.port')
+            );
+            return new Client($httpClient, $server);
         });
     }
 
@@ -48,6 +47,6 @@ class L4DavServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function provides(): array
     {
-        return [L4Dav::class];
+        return [Client::class];
     }
 }

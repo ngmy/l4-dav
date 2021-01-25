@@ -33,7 +33,7 @@ class Response
      */
     public function getStatus(): int
     {
-        return (int) $this->response->statusCode;
+        return $this->response->statusCode;
     }
 
     /**

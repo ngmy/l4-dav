@@ -55,71 +55,69 @@ This will publish the config file to `app/config/packages/ngmy/l4-dav/config.php
 ## Examples
 
 ### Basic Usage
-
-**Download a file from the WebDAV server**
-
-```php
-L4Dav::get('path/to/remote/file', '/path/to/local/file');
-```
-
-**Upload a file to the WebDAV server**
+#### Download a file from the WebDAV server
 
 ```php
-L4Dav::put('/path/to/local/file', 'path/to/remote/file');
+L4Dav::download('path/to/remote/file', '/path/to/local/file');
 ```
 
-**Delete a file on the WebDAV server**
+#### Upload a file to the WebDAV server
+
+```php
+L4Dav::upload('/path/to/local/file', 'path/to/remote/file');
+```
+
+#### Delete a file on the WebDAV server
 
 ```php
 L4Dav::delete('path/to/remote/file');
 ```
 
-**Copy a file on the WebDAV server**
+#### Copy a file on the WebDAV server
 
 ```php
 L4Dav::copy('path/to/source/file', 'path/to/dest/file');
 ```
 
-**Rename a file on the WebDAV server**
+#### Rename a file on the WebDAV server
 
 ```php
 L4Dav::move('path/to/source/file', 'path/to/dest/file');
 ```
 
-**Make a directory on the WebDAV server**
+#### Make a directory on the WebDAV server
 
 ```php
-L4Dav::mkdir('path/to/remote/directory/');
+L4Dav::makeDirectory('path/to/remote/directory/');
 ```
 
-**Check the existence of a directory on the WebDAV server**
+#### Check the existence of a directory on the WebDAV server
 
 ```php
 L4Dav::exists('path/to/remote/directory/');
 ```
 
-**List contents of a directory on the WebDAV server**
+#### List contents of a directory on the WebDAV server
 
 ```php
-L4Dav::ls('path/to/remote/directory/');
+L4Dav::list('path/to/remote/directory/');
 ```
 
 ### Get Response
-
-**Get the status code**
+#### Get the status code
 ```php
-$response = L4Dav::put('/path/to/local/file', 'path/to/remote/file');
+$response = L4Dav::upload('/path/to/local/file', 'path/to/remote/file');
 $response->getStatus();
 ```
 
-**Get the status message**
+#### Get the status message
 ```php
-$response = L4Dav::put('/path/to/local/file', 'path/to/remote/file');
+$response = L4Dav::upload('/path/to/local/file', 'path/to/remote/file');
 $response->getMessage();
 ```
 
-**Get the response body**
+#### Get the response body
 ```php
-$response = L4Dav::put('/path/to/local/file', 'path/to/remote/file');
+$response = L4Dav::upload('/path/to/local/file', 'path/to/remote/file');
 $response->getBody();
 ```
