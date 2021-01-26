@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav\Tests\Feature;
 
-use anlutro\cURL\cURL as Curl;
+use GuzzleHttp\Psr7\Uri;
 use Ngmy\L4Dav\{
-    Client,
     Credential,
-    HttpClient,
-    Server,
+    WebDavClient,
+    WebDavClientParameters,
 };
 use Ngmy\L4Dav\Tests\TestCase;
 use RuntimeException;
@@ -33,8 +32,8 @@ class ClientTest extends TestCase
         $path = stream_get_meta_data($file)['uri'];
         $response = $client->upload($path, 'file');
 
-        $this->assertEquals('201 Created', $response->getMessage());
-        $this->assertEquals(201, $response->getStatus());
+        $this->assertEquals('Created', $response->getReasonPhrase());
+        $this->assertEquals(201, $response->getStatusCode());
     }
 
     public function testDeleteFile(): void
@@ -46,8 +45,8 @@ class ClientTest extends TestCase
         $response = $client->upload($path, 'file');
         $response = $client->delete('file');
 
-        $this->assertEquals('204 No Content', $response->getMessage());
-        $this->assertEquals(204, $response->getStatus());
+        $this->assertEquals('No Content', $response->getReasonPhrase());
+        $this->assertEquals(204, $response->getStatusCode());
     }
 
     public function testGetFile(): void
@@ -62,8 +61,8 @@ class ClientTest extends TestCase
         $path = stream_get_meta_data($file)['uri'];
         $response = $client->download('file', $path);
 
-        $this->assertEquals('200 OK', $response->getMessage());
-        $this->assertEquals(200, $response->getStatus());
+        $this->assertEquals('OK', $response->getReasonPhrase());
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testCopyFile(): void
@@ -76,8 +75,8 @@ class ClientTest extends TestCase
 
         $response = $client->copy('file', 'file2');
 
-        $this->assertEquals('201 Created', $response->getMessage());
-        $this->assertEquals(201, $response->getStatus());
+        $this->assertEquals('Created', $response->getReasonPhrase());
+        $this->assertEquals(201, $response->getStatusCode());
     }
 
     public function testMoveFile(): void
@@ -90,8 +89,8 @@ class ClientTest extends TestCase
 
         $response = $client->move('file', 'file2');
 
-        $this->assertEquals('201 Created', $response->getMessage());
-        $this->assertEquals(201, $response->getStatus());
+        $this->assertEquals('Created', $response->getReasonPhrase());
+        $this->assertEquals(201, $response->getStatusCode());
     }
 
     public function testMakeDirectory(): void
@@ -100,8 +99,8 @@ class ClientTest extends TestCase
 
         $response = $client->makeDirectory('dir/');
 
-        $this->assertEquals('201 Created', $response->getMessage());
-        $this->assertEquals(201, $response->getStatus());
+        $this->assertEquals('Created', $response->getReasonPhrase());
+        $this->assertEquals(201, $response->getStatusCode());
     }
 
     public function testCheckExistenceDirectoryIfExists(): void
@@ -158,16 +157,16 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @return Client
+     * @return WebDavClient
      */
-    protected function createClient(): Client
+    protected function createClient(): WebDavClient
     {
-        $httpClient = new HttpClient(new Curl());
-        $server = Server::of('http://apache2' . $this->webdav);
+        $parameters = (new WebDavClientParameters())
+            ->setBaseAddress(new Uri('http://apache2' . $this->webdav));
         if (isset($this->username)) {
-            $credential = new Credential($this->username, $this->password);
+            $parameters->setCredential(new Credential($this->username, $this->password));
         }
-        return new Client($httpClient, $server, $credential ?? null);
+        return new WebDavClient($parameters);
     }
 
     /**
@@ -176,7 +175,7 @@ class ClientTest extends TestCase
      */
     protected function createTmpFile()
     {
-        $file = tmpfile();
+        $file = \tmpfile();
         if ($file === false) {
             throw new RuntimeException();
         }

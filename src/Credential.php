@@ -7,29 +7,42 @@ namespace Ngmy\L4Dav;
 class Credential
 {
     /** @var string */
-    private $username;
+    private $userName;
     /** @var string */
     private $password;
 
-    public function __construct(string $username, string $password)
+    /**
+     * @param string $userName
+     * @param string $password
+     * @return void
+     */
+    public function __construct(string $userName, string $password)
     {
-        $this->username = $username;
+        $this->userName = $userName;
         $this->password = $password;
     }
 
-    public function username(): string
+    /**
+     * @return string
+     */
+    public function getUserName(): string
     {
-        return $this->username;
+        return $this->userName;
     }
 
-    public function password(): string
+    /**
+     * @return string
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function provide($interest): void
+    /**
+     * @return string
+     */
+    public function __toString(): string
     {
-        $interest->username = $username;
-        $interest->password = $password;
+        return $this->userName . ':' . $this->password;
     }
 }

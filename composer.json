@@ -15,8 +15,10 @@
     ],
     "require": {
         "php": "^7.3|^8.0",
-        "anlutro/curl": "^1.4.7",
-        "illuminate/support": "^6.0|^7.0|^8.0"
+        "guzzlehttp/psr7": "^1.7.0",
+        "illuminate/support": "^6.0|^7.0|^8.0",
+        "league/uri": "^6.4.0",
+        "php-http/curl-client": "^1.7.1"
     },
     "require-dev": {
         "mikey179/vfsstream": "1.6.8",
