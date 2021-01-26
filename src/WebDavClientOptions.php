@@ -8,8 +8,8 @@ use Psr\Http\Message\UriInterface;
 
 class WebDavClientOptions
 {
-    /** @var array<string, string> */
-    private $defaultRequestHeaders = [];
+    /** @var Headers */
+    private $defaultRequestHeaders;
     /** @var UriInterface|null */
     private $baseUri;
     /** @var int|null */
@@ -18,10 +18,18 @@ class WebDavClientOptions
     private $credential;
 
     /**
-     * @param array<string, string> $defaultRequestHeaders
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->defaultRequestHeaders = new Headers();
+    }
+
+    /**
+     * @param Headers $defaultRequestHeaders
      * @return self
      */
-    public function setDefaultRequestHeaders(array $defaultRequestHeaders): self
+    public function setDefaultRequestHeaders(Headers $defaultRequestHeaders): self
     {
         $this->defaultRequestHeaders = $defaultRequestHeaders;
         return $this;
@@ -58,9 +66,9 @@ class WebDavClientOptions
     }
 
     /**
-     * @return array<string, string>
+     * @return Headers
      */
-    public function getDefaultRequestHeaders(): array
+    public function getDefaultRequestHeaders(): Headers
     {
         return $this->defaultRequestHeaders;
     }

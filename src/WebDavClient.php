@@ -52,7 +52,8 @@ class WebDavClient
             : UriResolver::resolve(new Uri($srcUri), $this->options->getBaseUri());
         \assert($srcUri instanceof UriInterface);
 
-        $request = new Request('GET', $srcUri);
+        $headers = $this->options->getDefaultRequestHeaders()->toArray();
+        $request = new Request('GET', $srcUri, $headers);
         $response = $this->httpClient->sendRequest($request);
 
         \file_put_contents($destPath, $response->getBody()->getContents());
@@ -83,7 +84,10 @@ class WebDavClient
         $stream = new Stream($fh);
         $body = $stream;
 
-        $request = new Request('PUT', $destUri, ['Content-Length' => $fileSize], $body);
+        $headers = $this->options->getDefaultRequestHeaders()
+            ->addHeader('Content-Length', (string) $fileSize)
+            ->toArray();
+        $request = new Request('PUT', $destUri, $headers, $body);
         return $this->httpClient->sendRequest($request);
     }
 
@@ -100,7 +104,8 @@ class WebDavClient
             : UriResolver::resolve(new Uri($uri), $this->options->getBaseUri());
         \assert($uri instanceof UriInterface);
 
-        $request = new Request('DELETE', $uri);
+        $headers = $this->options->getDefaultRequestHeaders()->toArray();
+        $request = new Request('DELETE', $uri, $headers);
         return $this->httpClient->sendRequest($request);
     }
 
@@ -122,7 +127,9 @@ class WebDavClient
         \assert($srcUri instanceof UriInterface);
         \assert($destUri instanceof UriInterface);
 
-        $headers['Destination'] = (string) $destUri;
+        $headers = $this->options->getDefaultRequestHeaders()
+            ->addHeader('Destination', (string) $destUri)
+            ->toArray();
         $request = new Request('COPY', $srcUri, $headers);
         return $this->httpClient->sendRequest($request);
     }
@@ -145,7 +152,9 @@ class WebDavClient
         \assert($srcUri instanceof UriInterface);
         \assert($destUri instanceof UriInterface);
 
-        $headers['Destination'] = (string) $destUri;
+        $headers = $this->options->getDefaultRequestHeaders()
+            ->addHeader('Destination', (string) $destUri)
+            ->toArray();
         $request = new Request('MOVE', $srcUri, $headers);
         return $this->httpClient->sendRequest($request);
     }
@@ -163,7 +172,8 @@ class WebDavClient
             : UriResolver::resolve(new Uri($uri), $this->options->getBaseUri());
         \assert($uri instanceof UriInterface);
 
-        $request = new Request('MKCOL', $uri);
+        $headers = $this->options->getDefaultRequestHeaders()->toArray();
+        $request = new Request('MKCOL', $uri, $headers);
         return $this->httpClient->sendRequest($request);
     }
 
@@ -180,7 +190,8 @@ class WebDavClient
             : UriResolver::resolve(new Uri($uri), $this->options->getBaseUri());
         \assert($uri instanceof UriInterface);
 
-        $request = new Request('HEAD', $uri);
+        $headers = $this->options->getDefaultRequestHeaders()->toArray();
+        $request = new Request('HEAD', $uri, $headers);
         $response = $this->httpClient->sendRequest($request);
 
         return new ExistsResponse($response);
@@ -199,7 +210,9 @@ class WebDavClient
             : UriResolver::resolve(new Uri($uri), $this->options->getBaseUri());
         \assert($uri instanceof UriInterface);
 
-        $headers = (new ListOptions())->getHeaders()->toArray();
+        $headers = $this->options->getDefaultRequestHeaders()
+            ->addHeaders((new ListOptions())->getHeaders())
+            ->toArray();
         $request = new Request('PROPFIND', $uri, $headers);
         $response = $this->httpClient->sendRequest($request);
         return (new ListResponseParser())->parse($response);

@@ -23,9 +23,18 @@ class Headers
      * @param string $value
      * @return self
      */
-    public function add(string $key, string $value): self
+    public function addHeader(string $key, string $value): self
     {
         return new self(array_merge($this->headers, [$key => $value]));
+    }
+
+    /**
+     * @param Headers $that
+     * @return self
+     */
+    public function addHeaders(Headers $that): self
+    {
+        return new self(array_merge($this->headers, $that->headers));
     }
 
     /**
