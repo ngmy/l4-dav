@@ -11,9 +11,11 @@ use GuzzleHttp\Psr7\{
 };
 use Http\Client\HttpClient;
 use League\Uri\UriResolver;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\{
+    ResponseInterface,
+    UriInterface,
+};
 use RuntimeException;
-use SimpleXMLElement;
 
 class WebDavClient
 {
@@ -38,16 +40,17 @@ class WebDavClient
     /**
      * Download a file from the WebDAV server.
      *
-     * @param string $srcPath  The source path of a file.
+     * @param string $srcUri   The source path of a file.
      * @param string $destPath The destination path of a file.
      * @throws RuntimeException
      * @return ResponseInterface Returns a Response class object.
      */
-    public function download(string $srcPath, string $destPath): ResponseInterface
+    public function download(string $srcUri, string $destPath): ResponseInterface
     {
-        $srcUri = \is_null($this->parameters->getBaseAddress())
-            ? new Uri($srcPath)
-            : UriResolver::resolve(new Uri($srcPath), $this->parameters->getBaseAddress());
+        $srcUri = \is_null($this->parameters->getBaseUri())
+            ? new Uri($srcUri)
+            : UriResolver::resolve(new Uri($srcUri), $this->parameters->getBaseUri());
+        \assert($srcUri instanceof UriInterface);
 
         $request = new Request('GET', $srcUri);
         $response = $this->httpClient->sendRequest($request);
@@ -60,42 +63,42 @@ class WebDavClient
     /**
      * Upload a file to the WebDAV server.
      *
-     * @param string $srcPath  The source path of a file.
-     * @param string $destPath The destination path of a file.
+     * @param string $srcPath The source path of a file.
+     * @param string $destUri The destination path of a file.
      * @throws RuntimeException
      * @return ResponseInterface Returns a Response class object.
      */
-    public function upload(string $srcPath, string $destPath): ResponseInterface
+    public function upload(string $srcPath, string $destUri): ResponseInterface
     {
-        $destUri = \is_null($this->parameters->getBaseAddress())
-            ? new Uri($destPath)
-            : UriResolver::resolve(new Uri($destPath), $this->parameters->getBaseAddress());
+        $destUri = \is_null($this->parameters->getBaseUri())
+            ? new Uri($destUri)
+            : UriResolver::resolve(new Uri($destUri), $this->parameters->getBaseUri());
+        \assert($uri instanceof UriInterface);
 
         $fileSize = \filesize($srcPath);
         $fh = \fopen($srcPath, 'r');
         if ($fh === false) {
-            throw new RuntimeException('Failed to open file (' . $srcPath . ')');
+            throw new RuntimeException('Failed to open file (' . $srcPath. ')');
         }
-        $fileStream = new Stream($fh);
-        $body = $fileStream;
+        $stream = new Stream($fh);
+        $body = $stream;
 
         $request = new Request('PUT', $destUri, ['Content-Length' => $fileSize], $body);
-        $response = $this->httpClient->sendRequest($request);
-
-        return $response;
+        return $this->httpClient->sendRequest($request);
     }
 
     /**
      * Delete an item on the WebDAV server.
      *
-     * @param string $path The path of an item.
+     * @param string $uri The path of an item.
      * @return ResponseInterface Returns a Response class object.
      */
-    public function delete(string $path): ResponseInterface
+    public function delete(string $uri): ResponseInterface
     {
-        $uri = \is_null($this->parameters->getBaseAddress())
-            ? new Uri($path)
-            : UriResolver::resolve(new Uri($path), $this->parameters->getBaseAddress());
+        $uri = \is_null($this->parameters->getBaseUri())
+            ? new Uri($uri)
+            : UriResolver::resolve(new Uri($uri), $this->parameters->getBaseUri());
+        \assert($uri instanceof UriInterface);
 
         $request = new Request('DELETE', $uri);
         return $this->httpClient->sendRequest($request);
@@ -104,18 +107,20 @@ class WebDavClient
     /**
      * Copy an item on the WebDAV server.
      *
-     * @param string $srcPath  The source path of an item.
-     * @param string $destPath The destination path of an item.
+     * @param string $srcUri  The source path of an item.
+     * @param string $destUri The destination path of an item.
      * @return ResponseInterface Returns a Response class object.
      */
-    public function copy(string $srcPath, string $destPath): ResponseInterface
+    public function copy(string $srcUri, string $destUri): ResponseInterface
     {
-        $srcUri = \is_null($this->parameters->getBaseAddress())
-            ? new Uri($srcPath)
-            : UriResolver::resolve(new Uri($srcPath), $this->parameters->getBaseAddress());
-        $destUri = \is_null($this->parameters->getBaseAddress())
-            ? new Uri($destPath)
-            : UriResolver::resolve(new Uri($destPath), $this->parameters->getBaseAddress());
+        $srcUri = \is_null($this->parameters->getBaseUri())
+            ? new Uri($srcUri)
+            : UriResolver::resolve(new Uri($srcUri), $this->parameters->getBaseUri());
+        $destUri = \is_null($this->parameters->getBaseUri())
+            ? new Uri($destUri)
+            : UriResolver::resolve(new Uri($destUri), $this->parameters->getBaseUri());
+        \assert($srcUri instanceof UriInterface);
+        \assert($destUri instanceof UriInterface);
 
         $headers['Destination'] = (string) $destUri;
         $request = new Request('COPY', $srcUri, $headers);
@@ -125,18 +130,20 @@ class WebDavClient
     /**
      * Rename an item on the WebDAV server.
      *
-     * @param string $srcPath  The source path of an item.
-     * @param string $destPath The destination path of an item.
+     * @param string $srcUri  The source path of an item.
+     * @param string $destUri The destination path of an item.
      * @return ResponseInterface Returns a Response class object.
      */
-    public function move(string $srcPath, string $destPath): ResponseInterface
+    public function move(string $srcUri, string $destUri): ResponseInterface
     {
-        $srcUri = \is_null($this->parameters->getBaseAddress())
-            ? new Uri($srcPath)
-            : UriResolver::resolve(new Uri($srcPath), $this->parameters->getBaseAddress());
-        $destUri = \is_null($this->parameters->getBaseAddress())
-            ? new Uri($destPath)
-            : UriResolver::resolve(new Uri($destPath), $this->parameters->getBaseAddress());
+        $srcUri = \is_null($this->parameters->getBaseUri())
+            ? new Uri($srcUri)
+            : UriResolver::resolve(new Uri($srcUri), $this->parameters->getBaseUri());
+        $destUri = \is_null($this->parameters->getBaseUri())
+            ? new Uri($destUri)
+            : UriResolver::resolve(new Uri($destUri), $this->parameters->getBaseUri());
+        \assert($srcUri instanceof UriInterface);
+        \assert($destUri instanceof UriInterface);
 
         $headers['Destination'] = (string) $destUri;
         $request = new Request('MOVE', $srcUri, $headers);
@@ -146,14 +153,15 @@ class WebDavClient
     /**
      * Make a directory on the WebDAV server.
      *
-     * @param string $path The directory path.
+     * @param string $uri The directory path.
      * @return ResponseInterface Returns a Response class object.
      */
-    public function makeDirectory(string $path): ResponseInterface
+    public function makeDirectory(string $uri): ResponseInterface
     {
-        $uri = \is_null($this->parameters->getBaseAddress())
-            ? new Uri($path)
-            : UriResolver::resolve(new Uri($path), $this->parameters->getBaseAddress());
+        $uri = \is_null($this->parameters->getBaseUri())
+            ? new Uri($uri)
+            : UriResolver::resolve(new Uri($uri), $this->parameters->getBaseUri());
+        \assert($uri instanceof UriInterface);
 
         $request = new Request('MKCOL', $uri);
         return $this->httpClient->sendRequest($request);
@@ -162,52 +170,38 @@ class WebDavClient
     /**
      * Check the existence of an item on the WebDAV server.
      *
-     * @param string $path The path of an item.
-     * @return bool Returns true if an item exists.
+     * @param string $uri The path of an item.
+     * @return ExistsResponse Returns true if an item exists.
      */
-    public function exists(string $path): bool
+    public function exists(string $uri): ExistsResponse
     {
-        $uri = \is_null($this->parameters->getBaseAddress())
-            ? new Uri($path)
-            : UriResolver::resolve(new Uri($path), $this->parameters->getBaseAddress());
+        $uri = \is_null($this->parameters->getBaseUri())
+            ? new Uri($uri)
+            : UriResolver::resolve(new Uri($uri), $this->parameters->getBaseUri());
+        \assert($uri instanceof UriInterface);
 
         $request = new Request('HEAD', $uri);
         $response = $this->httpClient->sendRequest($request);
 
-        return $response->getStatusCode() >= 200 && $response->getStatusCode() < 300;
+        return new ExistsResponse($response);
     }
 
     /**
      * List contents of a directory on the WebDAV server.
      *
-     * @param string $path  The directory path.
-     * @return list<string> Returns a list of contents of the directory.
+     * @param string $uri The directory path.
+     * @return ListResponse Returns a list of contents of the directory.
      */
-    public function list(string $path): array
+    public function list(string $uri): ListResponse
     {
-        $uri = \is_null($this->parameters->getBaseAddress())
-            ? new Uri($path)
-            : UriResolver::resolve(new Uri($path), $this->parameters->getBaseAddress());
+        $uri = \is_null($this->parameters->getBaseUri())
+            ? new Uri($uri)
+            : UriResolver::resolve(new Uri($uri), $this->parameters->getBaseUri());
+        \assert($uri instanceof UriInterface);
 
         $headers = (new ListParameters())->getHeaders()->toArray();
         $request = new Request('PROPFIND', $uri, $headers);
         $response = $this->httpClient->sendRequest($request);
-
-        if ($response->getStatusCode() < 200 || $response->getStatusCode() > 300) {
-            return [];
-        }
-
-        $xml = \simplexml_load_string($response->getBody()->getContents(), SimpleXMLElement::class, 0, 'D', true);
-
-        if ($xml === false) {
-            return [];
-        }
-
-        $list = [];
-        foreach ($xml->response as $element) {
-            $list[] = (string) $element->href;
-        }
-
-        return $list;
+        return (new ListResponseParser())->parse($response);
     }
 }

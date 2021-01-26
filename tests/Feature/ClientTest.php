@@ -111,18 +111,22 @@ class ClientTest extends TestCase
         $path = stream_get_meta_data($file)['uri'];
         $response = $client->upload($path, 'file');
 
-        $result = $client->exists('file');
+        $response = $client->exists('file');
 
-        $this->assertTrue($result);
+        $this->assertEquals('OK', $response->getReasonPhrase());
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertTrue($response->exists());
     }
 
     public function testCheckExistenceDirectoryIfNotExists(): void
     {
         $client = $this->createClient();
 
-        $result = $client->exists('file');
+        $response = $client->exists('file');
 
-        $this->assertFalse($result);
+        $this->assertEquals('Not Found', $response->getReasonPhrase());
+        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertFalse($response->exists());
     }
 
     public function testListDirectoryContentsIfDirectoryIsFound(): void
@@ -135,25 +139,31 @@ class ClientTest extends TestCase
         $client->makeDirectory('dir/');
         $client->upload($path, 'dir/file');
 
-        $list = $client->list('');
+        $response = $client->list('');
 
-        $this->assertEquals($this->webdav, $list[0]);
-        $this->assertEquals($this->webdav . 'file', $list[1]);
-        $this->assertEquals($this->webdav . 'dir/', $list[2]);
+        $this->assertEquals('Multi-Status', $response->getReasonPhrase());
+        $this->assertEquals(207, $response->getStatusCode());
+        $this->assertEquals($this->webdav, $response->getList()[0]);
+        $this->assertEquals($this->webdav . 'file', $response->getList()[1]);
+        $this->assertEquals($this->webdav . 'dir/', $response->getList()[2]);
 
-        $list = $client->list('dir/');
+        $response = $client->list('dir/');
 
-        $this->assertEquals($this->webdav . 'dir/', $list[0]);
-        $this->assertEquals($this->webdav . 'dir/file', $list[1]);
+        $this->assertEquals('Multi-Status', $response->getReasonPhrase());
+        $this->assertEquals(207, $response->getStatusCode());
+        $this->assertEquals($this->webdav . 'dir/', $response->getList()[0]);
+        $this->assertEquals($this->webdav . 'dir/file', $response->getList()[1]);
     }
 
     public function testListDirectoryContentsIfDirectoryIsNotFound(): void
     {
         $client = $this->createClient();
 
-        $list = $client->list('dir/');
+        $response = $client->list('dir/');
 
-        $this->assertEmpty($list);
+        $this->assertEquals('Not Found', $response->getReasonPhrase());
+        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertEmpty($response->getList());
     }
 
     /**
@@ -185,7 +195,7 @@ class ClientTest extends TestCase
     protected function deleteWebDav(string $path2 = '')
     {
         $client = $this->createClient();
-        foreach ($client->list($path2) as $path) {
+        foreach ($client->list($path2)->getList() as $path) {
             if ($path == $this->webdav . $path2) {
                 continue;
             }

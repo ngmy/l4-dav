@@ -11,7 +11,7 @@ class WebDavClientParameters
     /** @var array<string, string> */
     private $defaultRequestHeaders = [];
     /** @var UriInterface|null */
-    private $baseAddress;
+    private $baseUri;
     /** @var int|null */
     private $port;
     /** @var Credential|null */
@@ -28,12 +28,12 @@ class WebDavClientParameters
     }
 
     /**
-     * @param UriInterface $baseAddress
+     * @param UriInterface $baseUri
      * @return self
      */
-    public function setBaseAddress(UriInterface $baseAddress): self
+    public function setBaseAddress(UriInterface $baseUri): self
     {
-        $this->baseAddress = $baseAddress;
+        $this->baseUri = $baseUri;
         return $this;
     }
 
@@ -68,9 +68,9 @@ class WebDavClientParameters
     /**
      * @return UriInterface|null
      */
-    public function getBaseAddress(): ?UriInterface
+    public function getBaseUri(): ?UriInterface
     {
-        return $this->baseAddress;
+        return $this->baseUri;
     }
 
     /**
