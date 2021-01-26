@@ -18,30 +18,15 @@ use Psr\Http\Message\{
 class CurlHttpClientWrapper implements HttpClient
 {
     /** @var array<int, mixed> */
-    private $options = [];
+    private $curlOptions = [];
 
     /**
-     * @param WebDavClientParameters $parameters
+     * @param WebDavClientOptions $options
      * @return void
      */
-    public function __construct(WebDavClientParameters $parameters)
+    public function __construct(WebDavClientOptions $options)
     {
-        $this->configureOptions($parameters);
-    }
-
-    /**
-     * @param WebDavClientParameters $parameters
-     * @return void
-     */
-    public function configureOptions(WebDavClientParameters $parameters): void
-    {
-        if (!\is_null($parameters->getPort())) {
-            $this->options[\CURLOPT_PORT] = $parameters->getPort();
-        }
-        if (!\is_null($parameters->getCredential())) {
-            $this->options[\CURLOPT_USERPWD] = (string) $parameters->getCredential();
-        }
-        $this->options[\CURLOPT_HTTPAUTH] = \CURLAUTH_ANY;
+        $this->configureCurlOptions($options);
     }
 
     public function sendRequest(RequestInterface $request): ResponseInterface
@@ -49,8 +34,24 @@ class CurlHttpClientWrapper implements HttpClient
         return (new Client(
             MessageFactoryDiscovery::find(),
             StreamFactoryDiscovery::find(),
-            $this->options
+            $this->curlOptions
         ))
             ->sendRequest($request);
     }
+
+    /**
+     * @param WebDavClientOptions $options
+     * @return void
+     */
+    private function configureCurlOptions(WebDavClientOptions $options): void
+    {
+        if (!\is_null($options->getPort())) {
+            $this->curlOptions[\CURLOPT_PORT] = $options->getPort();
+        }
+        if (!\is_null($options->getCredential())) {
+            $this->curlOptions[\CURLOPT_USERPWD] = (string) $options->getCredential();
+        }
+        $this->curlOptions[\CURLOPT_HTTPAUTH] = \CURLAUTH_ANY;
+    }
+
 }

@@ -8,7 +8,7 @@ use GuzzleHttp\Psr7\Uri;
 use Ngmy\L4Dav\{
     Credential,
     WebDavClient,
-    WebDavClientParameters,
+    WebDavClientOptions,
 };
 use Ngmy\L4Dav\Tests\TestCase;
 use RuntimeException;
@@ -171,12 +171,12 @@ class ClientTest extends TestCase
      */
     protected function createClient(): WebDavClient
     {
-        $parameters = (new WebDavClientParameters())
+        $options = (new WebDavClientOptions())
             ->setBaseAddress(new Uri('http://apache2' . $this->webdav));
         if (isset($this->username)) {
-            $parameters->setCredential(new Credential($this->username, $this->password));
+            $options->setCredential(new Credential($this->username, $this->password));
         }
-        return new WebDavClient($parameters);
+        return new WebDavClient($options);
     }
 
     /**

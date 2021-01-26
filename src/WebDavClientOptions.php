@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\UriInterface;
 
-class WebDavClientParameters
+class WebDavClientOptions
 {
     /** @var array<string, string> */
     private $defaultRequestHeaders = [];

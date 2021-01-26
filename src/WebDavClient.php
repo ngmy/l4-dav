@@ -19,22 +19,22 @@ use RuntimeException;
 
 class WebDavClient
 {
-    /** @var WebDavClientParameters */
-    private $parameters;
+    /** @var WebDavClientOptions */
+    private $options;
     /** @var HttpClient */
     private $httpClient;
 
     /**
      * Create a new Client class object.
      *
-     * @param WebDavClientParameters|null $parameters
-     * @param HttpClient|null             $httpClient
+     * @param WebDavClientOptions|null $options
+     * @param HttpClient|null          $httpClient
      * @return void
      */
-    public function __construct(?WebDavClientParameters $parameters = null, ?HttpClient $httpClient = null)
+    public function __construct(?WebDavClientOptions $options = null, ?HttpClient $httpClient = null)
     {
-        $this->parameters = $parameters ?? new WebDavClientParameters();
-        $this->httpClient = $httpClient ?? new CurlHttpClientWrapper($this->parameters);
+        $this->options = $options ?? new WebDavClientOptions();
+        $this->httpClient = $httpClient ?? new CurlHttpClientWrapper($this->options);
     }
 
     /**
@@ -47,9 +47,9 @@ class WebDavClient
      */
     public function download(string $srcUri, string $destPath): ResponseInterface
     {
-        $srcUri = \is_null($this->parameters->getBaseUri())
+        $srcUri = \is_null($this->options->getBaseUri())
             ? new Uri($srcUri)
-            : UriResolver::resolve(new Uri($srcUri), $this->parameters->getBaseUri());
+            : UriResolver::resolve(new Uri($srcUri), $this->options->getBaseUri());
         \assert($srcUri instanceof UriInterface);
 
         $request = new Request('GET', $srcUri);
@@ -70,10 +70,10 @@ class WebDavClient
      */
     public function upload(string $srcPath, string $destUri): ResponseInterface
     {
-        $destUri = \is_null($this->parameters->getBaseUri())
+        $destUri = \is_null($this->options->getBaseUri())
             ? new Uri($destUri)
-            : UriResolver::resolve(new Uri($destUri), $this->parameters->getBaseUri());
-        \assert($uri instanceof UriInterface);
+            : UriResolver::resolve(new Uri($destUri), $this->options->getBaseUri());
+        \assert($destUri instanceof UriInterface);
 
         $fileSize = \filesize($srcPath);
         $fh = \fopen($srcPath, 'r');
@@ -95,9 +95,9 @@ class WebDavClient
      */
     public function delete(string $uri): ResponseInterface
     {
-        $uri = \is_null($this->parameters->getBaseUri())
+        $uri = \is_null($this->options->getBaseUri())
             ? new Uri($uri)
-            : UriResolver::resolve(new Uri($uri), $this->parameters->getBaseUri());
+            : UriResolver::resolve(new Uri($uri), $this->options->getBaseUri());
         \assert($uri instanceof UriInterface);
 
         $request = new Request('DELETE', $uri);
@@ -113,12 +113,12 @@ class WebDavClient
      */
     public function copy(string $srcUri, string $destUri): ResponseInterface
     {
-        $srcUri = \is_null($this->parameters->getBaseUri())
+        $srcUri = \is_null($this->options->getBaseUri())
             ? new Uri($srcUri)
-            : UriResolver::resolve(new Uri($srcUri), $this->parameters->getBaseUri());
-        $destUri = \is_null($this->parameters->getBaseUri())
+            : UriResolver::resolve(new Uri($srcUri), $this->options->getBaseUri());
+        $destUri = \is_null($this->options->getBaseUri())
             ? new Uri($destUri)
-            : UriResolver::resolve(new Uri($destUri), $this->parameters->getBaseUri());
+            : UriResolver::resolve(new Uri($destUri), $this->options->getBaseUri());
         \assert($srcUri instanceof UriInterface);
         \assert($destUri instanceof UriInterface);
 
@@ -136,12 +136,12 @@ class WebDavClient
      */
     public function move(string $srcUri, string $destUri): ResponseInterface
     {
-        $srcUri = \is_null($this->parameters->getBaseUri())
+        $srcUri = \is_null($this->options->getBaseUri())
             ? new Uri($srcUri)
-            : UriResolver::resolve(new Uri($srcUri), $this->parameters->getBaseUri());
-        $destUri = \is_null($this->parameters->getBaseUri())
+            : UriResolver::resolve(new Uri($srcUri), $this->options->getBaseUri());
+        $destUri = \is_null($this->options->getBaseUri())
             ? new Uri($destUri)
-            : UriResolver::resolve(new Uri($destUri), $this->parameters->getBaseUri());
+            : UriResolver::resolve(new Uri($destUri), $this->options->getBaseUri());
         \assert($srcUri instanceof UriInterface);
         \assert($destUri instanceof UriInterface);
 
@@ -158,9 +158,9 @@ class WebDavClient
      */
     public function makeDirectory(string $uri): ResponseInterface
     {
-        $uri = \is_null($this->parameters->getBaseUri())
+        $uri = \is_null($this->options->getBaseUri())
             ? new Uri($uri)
-            : UriResolver::resolve(new Uri($uri), $this->parameters->getBaseUri());
+            : UriResolver::resolve(new Uri($uri), $this->options->getBaseUri());
         \assert($uri instanceof UriInterface);
 
         $request = new Request('MKCOL', $uri);
@@ -175,9 +175,9 @@ class WebDavClient
      */
     public function exists(string $uri): ExistsResponse
     {
-        $uri = \is_null($this->parameters->getBaseUri())
+        $uri = \is_null($this->options->getBaseUri())
             ? new Uri($uri)
-            : UriResolver::resolve(new Uri($uri), $this->parameters->getBaseUri());
+            : UriResolver::resolve(new Uri($uri), $this->options->getBaseUri());
         \assert($uri instanceof UriInterface);
 
         $request = new Request('HEAD', $uri);
@@ -194,12 +194,12 @@ class WebDavClient
      */
     public function list(string $uri): ListResponse
     {
-        $uri = \is_null($this->parameters->getBaseUri())
+        $uri = \is_null($this->options->getBaseUri())
             ? new Uri($uri)
-            : UriResolver::resolve(new Uri($uri), $this->parameters->getBaseUri());
+            : UriResolver::resolve(new Uri($uri), $this->options->getBaseUri());
         \assert($uri instanceof UriInterface);
 
-        $headers = (new ListParameters())->getHeaders()->toArray();
+        $headers = (new ListOptions())->getHeaders()->toArray();
         $request = new Request('PROPFIND', $uri, $headers);
         $response = $this->httpClient->sendRequest($request);
         return (new ListResponseParser())->parse($response);

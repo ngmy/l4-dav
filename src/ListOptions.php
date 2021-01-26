@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-class ListParameters
+class ListOptions
 {
     /** @var Headers */
     private $headers;
