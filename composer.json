@@ -59,6 +59,9 @@
         "lint": [
             "@php tools/phpcs --colors"
         ],
+        "fixlint": [
+            "@php tools/phpcbf"
+        ],
         "findbugs": [
             "@php tools/phpstan analyse --ansi"
         ]
