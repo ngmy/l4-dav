@@ -44,15 +44,4 @@ class Headers
     {
         return $this->headers;
     }
-
-    /**
-     * @param object $interest
-     * @return void
-     */
-    public function provide($interest): void
-    {
-        foreach ($this->headers as $key => $value) {
-            $interest->setHeader($key, $value);
-        }
-    }
 }
