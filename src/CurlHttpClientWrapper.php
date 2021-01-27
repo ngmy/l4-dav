@@ -53,5 +53,4 @@ class CurlHttpClientWrapper implements HttpClient
         }
         $this->curlOptions[\CURLOPT_HTTPAUTH] = \CURLAUTH_ANY;
     }
-
 }

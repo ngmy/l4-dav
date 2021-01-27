@@ -79,7 +79,7 @@ class WebDavClient
         $fileSize = \filesize($srcPath);
         $fh = \fopen($srcPath, 'r');
         if ($fh === false) {
-            throw new RuntimeException('Failed to open file (' . $srcPath. ')');
+            throw new RuntimeException('Failed to open file (' . $srcPath . ')');
         }
         $stream = new Stream($fh);
         $body = $stream;
