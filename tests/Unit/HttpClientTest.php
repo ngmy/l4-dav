@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Ngmy\L4Dav\Tests\Unit;
 
 use anlutro\cURL\{
-    cURL as Curl,
     Response as CurlResponse,
+    cURL as Curl,
 };
 use Mockery;
+use Ngmy\L4Dav\Tests\TestCase;
 use Ngmy\L4Dav\{
     HttpClient,
     Response,
     Url,
 };
-use Ngmy\L4Dav\Tests\TestCase;
 
 class HttpClientTest extends TestCase
 {
@@ -32,7 +32,7 @@ class HttpClientTest extends TestCase
 
         $result = $httpClient->request('PROPFIND', $url, [
             'headers' => ['Depth' => '1'],
-            'curl'    => [CURLOPT_PORT => 80],
+            'curl'    => [\CURLOPT_PORT => 80],
         ]);
 
         $this->assertInstanceOf(Response::class, $result);

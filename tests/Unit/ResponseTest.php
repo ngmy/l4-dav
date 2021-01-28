@@ -60,7 +60,7 @@ EOF;
     private function buildHttpHeader(array $headers): string
     {
         $header = '';
-        $firstKey = array_key_first($headers);
+        $firstKey = \array_key_first($headers);
         foreach ($headers as $name => $value) {
             if ($name == $firstKey) {
                 $header .= $value . "\r\n";

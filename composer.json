@@ -57,13 +57,14 @@
             "@php tools/phpunit --colors=always"
         ],
         "lint": [
-            "@php tools/phpcs --colors"
-        ],
-        "fixlint": [
-            "@php tools/phpcbf"
+            "@php tools/phpcs"
         ],
         "findbugs": [
             "@php tools/phpstan analyse --ansi"
+        ],
+        "fmt": [
+            "@php tools/phpcbf | exit 0",
+            "@php tools/php-cs-fixer fix --ansi"
         ]
     }
 }

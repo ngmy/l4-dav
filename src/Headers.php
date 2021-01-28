@@ -25,7 +25,7 @@ class Headers
      */
     public function addHeader(string $key, string $value): self
     {
-        return new self(array_merge($this->headers, [$key => $value]));
+        return new self(\array_merge($this->headers, [$key => $value]));
     }
 
     /**
@@ -34,7 +34,7 @@ class Headers
      */
     public function addHeaders(Headers $that): self
     {
-        return new self(array_merge($this->headers, $that->headers));
+        return new self(\array_merge($this->headers, $that->headers));
     }
 
     /**

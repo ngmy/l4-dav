@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav\Tests\Unit;
 
-use InvalidArgumentException;
 use Mockery;
+use Ngmy\L4Dav\Tests\TestCase;
 use Ngmy\L4Dav\{
     Client,
     HttpClient,
     Response,
     Server,
 };
-use Ngmy\L4Dav\Tests\TestCase;
 use org\bovigo\vfs\{
     vfsStream,
     vfsStreamDirectory,
@@ -171,7 +170,7 @@ class ClientTest extends TestCase
         $server->shouldReceive('port');
         $response = Mockery::mock(Response::class);
         $response->shouldReceive('getStatus')->andReturn(207);
-        $response->shouldReceive('getBody')->andReturn(file_get_contents(__DIR__ . '/../data/mock_ls_response.xml'));
+        $response->shouldReceive('getBody')->andReturn(\file_get_contents(__DIR__ . '/../data/mock_ls_response.xml'));
         $httpClient->shouldReceive('request')->andReturn($response);
 
         $result = $client->list('');

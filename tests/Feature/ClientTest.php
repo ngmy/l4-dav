@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Ngmy\L4Dav\Tests\Feature;
 
 use GuzzleHttp\Psr7\Uri;
+use Ngmy\L4Dav\Tests\TestCase;
 use Ngmy\L4Dav\{
     Credential,
     WebDavClient,
     WebDavClientOptions,
 };
-use Ngmy\L4Dav\Tests\TestCase;
 use RuntimeException;
 
 class ClientTest extends TestCase
@@ -29,7 +29,7 @@ class ClientTest extends TestCase
         $client = $this->createClient();
 
         $file = $this->createTmpFile();
-        $path = stream_get_meta_data($file)['uri'];
+        $path = \stream_get_meta_data($file)['uri'];
         $response = $client->upload($path, 'file');
 
         $this->assertEquals('Created', $response->getReasonPhrase());
@@ -41,7 +41,7 @@ class ClientTest extends TestCase
         $client = $this->createClient();
 
         $file = $this->createTmpFile();
-        $path = stream_get_meta_data($file)['uri'];
+        $path = \stream_get_meta_data($file)['uri'];
         $response = $client->upload($path, 'file');
         $response = $client->delete('file');
 
@@ -54,11 +54,11 @@ class ClientTest extends TestCase
         $client = $this->createClient();
 
         $file = $this->createTmpFile();
-        $path = stream_get_meta_data($file)['uri'];
+        $path = \stream_get_meta_data($file)['uri'];
         $response = $client->upload($path, 'file');
 
         $file = $this->createTmpFile();
-        $path = stream_get_meta_data($file)['uri'];
+        $path = \stream_get_meta_data($file)['uri'];
         $response = $client->download('file', $path);
 
         $this->assertEquals('OK', $response->getReasonPhrase());
@@ -70,7 +70,7 @@ class ClientTest extends TestCase
         $client = $this->createClient();
 
         $file = $this->createTmpFile();
-        $path = stream_get_meta_data($file)['uri'];
+        $path = \stream_get_meta_data($file)['uri'];
         $response = $client->upload($path, 'file');
 
         $response = $client->copy('file', 'file2');
@@ -84,7 +84,7 @@ class ClientTest extends TestCase
         $client = $this->createClient();
 
         $file = $this->createTmpFile();
-        $path = stream_get_meta_data($file)['uri'];
+        $path = \stream_get_meta_data($file)['uri'];
         $response = $client->upload($path, 'file');
 
         $response = $client->move('file', 'file2');
@@ -108,7 +108,7 @@ class ClientTest extends TestCase
         $client = $this->createClient();
 
         $file = $this->createTmpFile();
-        $path = stream_get_meta_data($file)['uri'];
+        $path = \stream_get_meta_data($file)['uri'];
         $response = $client->upload($path, 'file');
 
         $response = $client->exists('file');
@@ -134,7 +134,7 @@ class ClientTest extends TestCase
         $client = $this->createClient();
 
         $file = $this->createTmpFile();
-        $path = stream_get_meta_data($file)['uri'];
+        $path = \stream_get_meta_data($file)['uri'];
         $client->upload($path, 'file');
         $client->makeDirectory('dir/');
         $client->upload($path, 'dir/file');
@@ -180,8 +180,8 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @return resource
      * @throws RuntimeException
+     * @return resource
      */
     protected function createTmpFile()
     {
@@ -199,11 +199,11 @@ class ClientTest extends TestCase
             if ($path == $this->webdav . $path2) {
                 continue;
             }
-            if (preg_match("|{$this->webdav}(.*\/)$|", $path, $matches)) {
+            if (\preg_match("|{$this->webdav}(.*\/)$|", $path, $matches)) {
                 $this->deleteWebDav($matches[1]);
             }
             $client = $this->createClient();
-            $client->delete(preg_replace("|{$this->webdav}(.*)|", '\1', $path));
+            $client->delete(\preg_replace("|{$this->webdav}(.*)|", '\1', $path));
         }
     }
 }
