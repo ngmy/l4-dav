@@ -22,6 +22,8 @@ class UploadCommand extends Command
             throw new RuntimeException('Failed to open file (' . $srcPath . ')');
         }
         $body = new Stream($fh);
-        parent::__construct($options, 'PUT', $destUri, new Headers(['Content-Length' => (string) \filesize($srcPath)]), $body);
+        parent::__construct($options, 'PUT', $destUri, new Headers([
+            'Content-Length' => (string) \filesize($srcPath),
+        ]), $body);
     }
 }

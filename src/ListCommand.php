@@ -18,7 +18,9 @@ class ListCommand extends Command
      */
     public function __construct(WebDavClientOptions $options, string $uri)
     {
-        parent::__construct($options, 'PROPFIND', $uri, new Headers(['Depth' => '1']));
+        parent::__construct($options, 'PROPFIND', $uri, new Headers([
+            'Depth' => '1',
+        ]));
         $this->parser = new ListResponseParser();
     }
 
