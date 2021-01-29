@@ -74,7 +74,7 @@ abstract class Command
     {
         $request = new Request($this->method, Utils::resolveUri($this->uri, $this->options));
         $headers = $this->options->getDefaultRequestHeaders()
-            ->addHeaders($this->headers)
+            ->add($this->headers)
             ->toArray();
         foreach ($headers as $key => $value) {
             $request = $request->withHeader($key, $value);

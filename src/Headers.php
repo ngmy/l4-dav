@@ -4,44 +4,49 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
+use Symfony\Component\HttpFoundation\HeaderBag;
+
 class Headers
 {
-    /** @var array<string, string> */
-    private $headers = [];
+    /** @var HeaderBag<string, string|string[]> */
+    private $headers;
 
     /**
-     * @param array<string, string> $headers
+     * @param array<string, string|string[]> $headers
      * @return void
      */
     public function __construct(array $headers = [])
     {
-        $this->headers = $headers;
+        $this->headers = new HeaderBag($headers);
     }
 
     /**
-     * @param string $key
-     * @param string $value
+     * @param string          $key
+     * @param string|string[] $values
+     */
+    public function set(string $key, $values): self
+    {
+        $new = clone $this->headers;
+        $new->set($key, $values);
+        return new self($new->all());
+    }
+
+    /**
+     * @param Headers $headers
      * @return self
      */
-    public function addHeader(string $key, string $value): self
+    public function add(Headers $headers): self
     {
-        return new self(\array_merge($this->headers, [$key => $value]));
+        $new = clone $this->headers;
+        $new->add($headers->toArray());
+        return new self($new->all());
     }
 
     /**
-     * @param Headers $that
-     * @return self
-     */
-    public function addHeaders(Headers $that): self
-    {
-        return new self(\array_merge($this->headers, $that->headers));
-    }
-
-    /**
-     * @return array<string, string>
+     * @return array<string, string|string[]>
      */
     public function toArray(): array
     {
-        return $this->headers;
+        return $this->headers->all();
     }
 }
