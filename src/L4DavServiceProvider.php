@@ -12,8 +12,6 @@ class L4DavServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Bootstrap the application events.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -24,8 +22,6 @@ class L4DavServiceProvider extends ServiceProvider implements DeferrableProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register(): void
     {

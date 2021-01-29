@@ -21,7 +21,6 @@ class Headers
     }
 
     /**
-     * @param string          $key
      * @param string|string[] $values
      */
     public function set(string $key, $values): self
@@ -31,10 +30,6 @@ class Headers
         return new self($new->all());
     }
 
-    /**
-     * @param Headers $headers
-     * @return self
-     */
     public function add(Headers $headers): self
     {
         $new = clone $this->headers;

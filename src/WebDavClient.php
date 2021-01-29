@@ -14,7 +14,6 @@ class WebDavClient
     /**
      * Create a new Client class object.
      *
-     * @param WebDavClientOptions|null $options
      * @return void
      */
     public function __construct(?WebDavClientOptions $options = null)

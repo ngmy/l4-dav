@@ -21,7 +21,6 @@ class CurlHttpClientWrapper implements HttpClient
     private $curlOptions = [];
 
     /**
-     * @param WebDavClientOptions $options
      * @return void
      */
     public function __construct(WebDavClientOptions $options)
@@ -39,10 +38,6 @@ class CurlHttpClientWrapper implements HttpClient
             ->sendRequest($request);
     }
 
-    /**
-     * @param WebDavClientOptions $options
-     * @return void
-     */
     private function configureCurlOptions(WebDavClientOptions $options): void
     {
         if (!\is_null($options->getPort())) {

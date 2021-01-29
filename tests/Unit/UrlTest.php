@@ -12,8 +12,8 @@ class UrlTest extends TestCase
 {
     public function testInvaliUrl(): void
     {
-         $this->expectException(InvalidArgumentException::class);
-         new Url('invalid_url');
+        $this->expectException(InvalidArgumentException::class);
+        new Url('invalid_url');
     }
 
     public function testValue(): void
@@ -73,7 +73,6 @@ class UrlTest extends TestCase
 
     /**
      * @dataProvider parseProvider
-     * @param string       $url
      * @param array<mixed> $expected
      */
     public function testParse(string $url, array $expected): void

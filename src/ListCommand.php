@@ -12,8 +12,6 @@ class ListCommand extends Command
     private $parser;
 
     /**
-     * @param WebDavClientOptions $options
-     * @param string              $uri
      * @return void
      */
     public function __construct(WebDavClientOptions $options, string $uri)

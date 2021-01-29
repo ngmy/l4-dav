@@ -9,8 +9,6 @@ use Psr\Http\Message\ResponseInterface;
 class ExistsCommand extends Command
 {
     /**
-     * @param WebDavClientOptions $options
-     * @param string              $uri
      * @return void
      */
     public function __construct(WebDavClientOptions $options, string $uri)

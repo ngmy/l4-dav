@@ -166,9 +166,6 @@ class ClientTest extends TestCase
         $this->assertEmpty($response->getList());
     }
 
-    /**
-     * @return WebDavClient
-     */
     protected function createClient(): WebDavClient
     {
         $options = (new WebDavClientOptions())

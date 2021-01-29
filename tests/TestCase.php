@@ -13,9 +13,6 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends OrchestraTestCase
 {
-    /**
-     * @return void
-     */
     protected function tearDown(): void
     {
         Mockery::close();

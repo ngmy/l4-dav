@@ -9,17 +9,12 @@ use SimpleXMLElement;
 
 class ListResponseParser implements ResponseParserInterface
 {
-    /**
-     * @param ResponseInterface $response
-     * @return ListResponse
-     */
     public function parse(ResponseInterface $response): ListResponse
     {
         return new ListResponse($response, $this->parseList($response));
     }
 
     /**
-     * @param ResponseInterface $response
      * @return list<string>
      */
     private function parseList(ResponseInterface $response): array

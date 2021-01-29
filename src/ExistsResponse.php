@@ -11,7 +11,6 @@ class ExistsResponse implements ResponseInterface
     use ResponseTrait;
 
     /**
-     * @param ResponseInterface $response
      * @return void
      */
     public function __construct(ResponseInterface $response)
@@ -19,9 +18,6 @@ class ExistsResponse implements ResponseInterface
         $this->response = $response;
     }
 
-    /**
-     * @return bool
-     */
     public function exists(): bool
     {
         return $this->response->getStatusCode() >= 200

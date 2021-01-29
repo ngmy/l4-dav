@@ -7,9 +7,6 @@ namespace Ngmy\L4Dav;
 class MoveCommand extends Command
 {
     /**
-     * @param WebDavClientOptions $options
-     * @param string              $srcUri
-     * @param string              $destUri
      * @return void
      */
     public function __construct(WebDavClientOptions $options, string $srcUri, string $destUri)

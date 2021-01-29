@@ -55,7 +55,6 @@ EOF;
 
     /**
      * @param array<string, string> $headers
-     * @return string
      */
     private function buildHttpHeader(array $headers): string
     {

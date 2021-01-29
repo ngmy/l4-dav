@@ -10,9 +10,6 @@ use RuntimeException;
 class UploadCommand extends Command
 {
     /**
-     * @param WebDavClientOptions $options
-     * @param string              $srcPath
-     * @param string              $destUri
      * @return void
      */
     public function __construct(WebDavClientOptions $options, string $srcPath, string $destUri)

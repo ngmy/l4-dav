@@ -32,9 +32,6 @@ abstract class Command
     private $response;
 
     /**
-     * @param WebDavClientOptions                  $options
-     * @param string                               $method
-     * @param string                               $uri
      * @param Headers                              $headers
      * @param resource|StreamInterface|string|null $body
      * @return void
