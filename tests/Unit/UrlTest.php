@@ -38,7 +38,7 @@ class UrlTest extends TestCase
     }
 
     /**
-     * @return array<mixed>
+     * @return list<mixed>
      */
     public function parseProvider(): array
     {
@@ -73,7 +73,7 @@ class UrlTest extends TestCase
 
     /**
      * @dataProvider parseProvider
-     * @param array<mixed> $expected
+     * @param list<mixed> $expected
      */
     public function testParse(string $url, array $expected): void
     {

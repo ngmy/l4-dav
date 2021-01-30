@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use Psr\Http\Message\{
-    ResponseInterface,
-    StreamInterface,
-};
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
 
 trait ResponseTrait
 {

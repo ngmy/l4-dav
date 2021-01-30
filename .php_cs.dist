@@ -9,18 +9,17 @@ return PhpCsFixer\Config::create()
                 'inheritDoc' => 'inheritdoc',
             ],
         ],
-        'group_import' => true,
         'native_constant_invocation' => true,
         'native_function_invocation' => true,
         'no_empty_phpdoc' => true,
         'no_extra_blank_lines' => true,
         'no_superfluous_phpdoc_tags' => ['allow_mixed' => true, 'allow_unused_params' => true],
         'no_unused_imports' => true,
+        'phpdoc_scalar' => true,
         'phpdoc_align' => ['tags' => ['param']],
         'phpdoc_order' => true,
         'phpdoc_trim' => true,
         'phpdoc_types_order' => ['null_adjustment' => 'always_last'],
-        'single_import_per_statement' => false,
     ])
     ->setFinder(PhpCsFixer\Finder::create()
         ->in('src')

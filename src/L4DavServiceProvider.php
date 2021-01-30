@@ -26,11 +26,24 @@ class L4DavServiceProvider extends ServiceProvider implements DeferrableProvider
     public function register(): void
     {
         $this->app->singleton(WebDavClient::class, function (Application $app) {
-            $options = (new WebDavClientOptions())
-                ->setCredential(new Credential(
-                    $app->make('config')->get('ngmy-l4-dav.url'),
-                    $app->make('config')->get('ngmy-l4-dav.port')
-                ));
+            $url      = $app->make('config')->get('ngmy-l4-dav.url');
+            $port     = $app->make('config')->get('ngmy-l4-dav.port');
+            $userName = $app->make('config')->get('ngmy-l4-dav.username');
+            $password = $app->make('config')->get('ngmy-l4-dav.password');
+
+            $optionsBuilder = new WebDavClientOptionsBuilder();
+            if (!empty($url)) {
+                $optionsBuilder->baseUri($url);
+            }
+            if (!empty($port)) {
+                $optionsBuilder->port($port);
+            }
+            if (!empty($userName)) {
+                $optionsBuilder
+                    ->userName($userName)
+                    ->password($password);
+            }
+            $options = $optionsBuilder->build();
             return new WebDavClient($options);
         });
     }

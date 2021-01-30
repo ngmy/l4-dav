@@ -4,68 +4,64 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use Psr\Http\Message\UriInterface;
+use League\Uri\Contracts\UserInfoInterface;
 
 class WebDavClientOptions
 {
-    /** @var Headers */
-    private $defaultRequestHeaders;
-    /** @var UriInterface|null */
+    /** @var BaseUri|null */
     private $baseUri;
     /** @var int|null */
     private $port;
-    /** @var Credential|null */
-    private $credential;
+    /** @var UserInfoInterface */
+    private $userInfo;
+    /** @var Headers */
+    private $defaultRequestHeaders;
+    /** @var array<int, mixed> */
+    private $defaultCurlOptions = [];
 
     /**
+     * @param array<int, mixed> $defaultCurlOptions
      * @return void
      */
-    public function __construct()
-    {
-        $this->defaultRequestHeaders = new Headers();
-    }
-
-    public function setDefaultRequestHeaders(Headers $defaultRequestHeaders): self
-    {
-        $this->defaultRequestHeaders = $defaultRequestHeaders;
-        return $this;
-    }
-
-    public function setBaseAddress(UriInterface $baseUri): self
-    {
+    public function __construct(
+        ?BaseUri $baseUri,
+        ?int $port,
+        UserInfoInterface $userInfo,
+        Headers $defaultRequestHeaders,
+        array $defaultCurlOptions
+    ) {
         $this->baseUri = $baseUri;
-        return $this;
-    }
-
-    public function setPort(int $port): self
-    {
         $this->port = $port;
-        return $this;
+        $this->userInfo = $userInfo;
+        $this->defaultRequestHeaders = $defaultRequestHeaders;
+        $this->defaultCurlOptions = $defaultCurlOptions;
     }
 
-    public function setCredential(Credential $credential): self
-    {
-        $this->credential = $credential;
-        return $this;
-    }
-
-    public function getDefaultRequestHeaders(): Headers
-    {
-        return $this->defaultRequestHeaders;
-    }
-
-    public function getBaseUri(): ?UriInterface
+    public function baseUri(): ?BaseUri
     {
         return $this->baseUri;
     }
 
-    public function getPort(): ?int
+    public function port(): ?int
     {
         return $this->port;
     }
 
-    public function getCredential(): ?Credential
+    public function userInfo(): UserInfoInterface
     {
-        return $this->credential;
+        return $this->userInfo;
+    }
+
+    public function defaultRequestHeaders(): Headers
+    {
+        return $this->defaultRequestHeaders;
+    }
+
+    /**
+     * @return array<int, mixed>
+     */
+    public function defaultCurlOptions(): array
+    {
+        return $this->defaultCurlOptions;
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
 
 class WebDavClient
 {
@@ -16,19 +17,19 @@ class WebDavClient
      *
      * @return void
      */
-    public function __construct(?WebDavClientOptions $options = null)
+    public function __construct(WebDavClientOptions $options = null)
     {
-        $this->options = $options ?? new WebDavClientOptions();
+        $this->options = $options ?: (new WebDavClientOptionsBuilder())->build();
     }
 
     /**
      * Download a file from the WebDAV server.
      *
-     * @param string $srcUri   The source path of a file.
-     * @param string $destPath The destination path of a file.
+     * @param string|UriInterface $srcUri   The source path of a file.
+     * @param string              $destPath The destination path of a file.
      * @return ResponseInterface Returns a Response class object.
      */
-    public function download(string $srcUri, string $destPath): ResponseInterface
+    public function download($srcUri, string $destPath): ResponseInterface
     {
         return (new DownloadCommand($this->options, $srcUri, $destPath))->execute();
     }
@@ -36,11 +37,11 @@ class WebDavClient
     /**
      * Upload a file to the WebDAV server.
      *
-     * @param string $srcPath The source path of a file.
-     * @param string $destUri The destination path of a file.
+     * @param string              $srcPath The source path of a file.
+     * @param string|UriInterface $destUri The destination path of a file.
      * @return ResponseInterface Returns a Response class object.
      */
-    public function upload(string $srcPath, string $destUri): ResponseInterface
+    public function upload(string $srcPath, $destUri): ResponseInterface
     {
         return (new UploadCommand($this->options, $srcPath, $destUri))->execute();
     }
@@ -59,11 +60,11 @@ class WebDavClient
     /**
      * Copy an item on the WebDAV server.
      *
-     * @param string $srcUri  The source path of an item.
-     * @param string $destUri The destination path of an item.
+     * @param string|UriInterface $srcUri  The source path of an item.
+     * @param string|UriInterface $destUri The destination path of an item.
      * @return ResponseInterface Returns a Response class object.
      */
-    public function copy(string $srcUri, string $destUri): ResponseInterface
+    public function copy($srcUri, $destUri): ResponseInterface
     {
         return (new CopyCommand($this->options, $srcUri, $destUri))->execute();
     }
@@ -71,11 +72,11 @@ class WebDavClient
     /**
      * Rename an item on the WebDAV server.
      *
-     * @param string $srcUri  The source path of an item.
-     * @param string $destUri The destination path of an item.
+     * @param string|UriInterface $srcUri  The source path of an item.
+     * @param string|UriInterface $destUri The destination path of an item.
      * @return ResponseInterface Returns a Response class object.
      */
-    public function move(string $srcUri, string $destUri): ResponseInterface
+    public function move($srcUri, $destUri): ResponseInterface
     {
         return (new MoveCommand($this->options, $srcUri, $destUri))->execute();
     }
@@ -83,10 +84,10 @@ class WebDavClient
     /**
      * Make a directory on the WebDAV server.
      *
-     * @param string $uri The directory path.
+     * @param string|UriInterface $uri The directory path.
      * @return ResponseInterface Returns a Response class object.
      */
-    public function makeDirectory(string $uri): ResponseInterface
+    public function makeDirectory($uri): ResponseInterface
     {
         return (new MakeDirectoryCommand($this->options, $uri))->execute();
     }
@@ -94,10 +95,10 @@ class WebDavClient
     /**
      * Check the existence of an item on the WebDAV server.
      *
-     * @param string $uri The path of an item.
+     * @param string|UriInterface $uri The path of an item.
      * @return ExistsResponse Returns true if an item exists.
      */
-    public function exists(string $uri): ExistsResponse
+    public function exists($uri): ExistsResponse
     {
         $response = (new ExistsCommand($this->options, $uri))->execute();
         \assert($response instanceof ExistsResponse);
@@ -107,10 +108,10 @@ class WebDavClient
     /**
      * List contents of a directory on the WebDAV server.
      *
-     * @param string $uri The directory path.
+     * @param string|UriInterface $uri The directory path.
      * @return ListResponse Returns a list of contents of the directory.
      */
-    public function list(string $uri): ListResponse
+    public function list($uri): ListResponse
     {
         $response = (new ListCommand($this->options, $uri))->execute();
         \assert($response instanceof ListResponse);

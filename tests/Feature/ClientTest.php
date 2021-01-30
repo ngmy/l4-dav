@@ -4,18 +4,14 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav\Tests\Feature;
 
-use GuzzleHttp\Psr7\Uri;
 use Ngmy\L4Dav\Tests\TestCase;
-use Ngmy\L4Dav\{
-    Credential,
-    WebDavClient,
-    WebDavClientOptions,
-};
+use Ngmy\L4Dav\WebDavClient;
+use Ngmy\L4Dav\WebDavClientOptionsBuilder;
 use RuntimeException;
 
 class ClientTest extends TestCase
 {
-    protected $webdav = '/webdav_no_auth/';
+    protected $webDavBasePath = '/webdav_no_auth/';
 
     public function tearDown(): void
     {
@@ -59,6 +55,7 @@ class ClientTest extends TestCase
 
         $file = $this->createTmpFile();
         $path = \stream_get_meta_data($file)['uri'];
+        \unlink($path);
         $response = $client->download('file', $path);
 
         $this->assertEquals('OK', $response->getReasonPhrase());
@@ -143,16 +140,16 @@ class ClientTest extends TestCase
 
         $this->assertEquals('Multi-Status', $response->getReasonPhrase());
         $this->assertEquals(207, $response->getStatusCode());
-        $this->assertEquals($this->webdav, $response->getList()[0]);
-        $this->assertEquals($this->webdav . 'file', $response->getList()[1]);
-        $this->assertEquals($this->webdav . 'dir/', $response->getList()[2]);
+        $this->assertEquals($this->webDavBasePath, $response->getList()[0]);
+        $this->assertEquals($this->webDavBasePath . 'file', $response->getList()[1]);
+        $this->assertEquals($this->webDavBasePath . 'dir/', $response->getList()[2]);
 
         $response = $client->list('dir/');
 
         $this->assertEquals('Multi-Status', $response->getReasonPhrase());
         $this->assertEquals(207, $response->getStatusCode());
-        $this->assertEquals($this->webdav . 'dir/', $response->getList()[0]);
-        $this->assertEquals($this->webdav . 'dir/file', $response->getList()[1]);
+        $this->assertEquals($this->webDavBasePath . 'dir/', $response->getList()[0]);
+        $this->assertEquals($this->webDavBasePath . 'dir/file', $response->getList()[1]);
     }
 
     public function testListDirectoryContentsIfDirectoryIsNotFound(): void
@@ -168,11 +165,14 @@ class ClientTest extends TestCase
 
     protected function createClient(): WebDavClient
     {
-        $options = (new WebDavClientOptions())
-            ->setBaseAddress(new Uri('http://apache2' . $this->webdav));
-        if (isset($this->username)) {
-            $options->setCredential(new Credential($this->username, $this->password));
+        $optionsBuilder = (new WebDavClientOptionsBuilder())
+            ->baseUri('http://apache2' . $this->webDavBasePath);
+        if (!empty($this->webDavUserName)) {
+            $optionsBuilder
+                ->userName($this->webDavUserName)
+                ->password($this->webDavPassword);
         }
+        $options = $optionsBuilder->build();
         return new WebDavClient($options);
     }
 
@@ -184,8 +184,9 @@ class ClientTest extends TestCase
     {
         $file = \tmpfile();
         if ($file === false) {
-            throw new RuntimeException();
+            throw new RuntimeException('Failed to create temporary file');
         }
+        \fwrite($file, 'This is test file.');
         return $file;
     }
 
@@ -193,14 +194,14 @@ class ClientTest extends TestCase
     {
         $client = $this->createClient();
         foreach ($client->list($path2)->getList() as $path) {
-            if ($path == $this->webdav . $path2) {
+            if ($path == $this->webDavBasePath . $path2) {
                 continue;
             }
-            if (\preg_match("|{$this->webdav}(.*\/)$|", $path, $matches)) {
+            if (\preg_match("|{$this->webDavBasePath}(.*\/)$|", $path, $matches)) {
                 $this->deleteWebDav($matches[1]);
             }
             $client = $this->createClient();
-            $client->delete(\preg_replace("|{$this->webdav}(.*)|", '\1', $path));
+            $client->delete(\preg_replace("|{$this->webDavBasePath}(.*)|", '\1', $path));
         }
     }
 }

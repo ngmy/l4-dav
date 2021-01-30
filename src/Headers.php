@@ -8,11 +8,11 @@ use Symfony\Component\HttpFoundation\HeaderBag;
 
 class Headers
 {
-    /** @var HeaderBag<string, string|string[]> */
+    /** @var HeaderBag<string, list<string>|string> */
     private $headers;
 
     /**
-     * @param array<string, string|string[]> $headers
+     * @param array<string, list<string>|string> $headers
      * @return void
      */
     public function __construct(array $headers = [])
@@ -21,7 +21,7 @@ class Headers
     }
 
     /**
-     * @param string|string[] $values
+     * @param list<string>|string $values
      */
     public function set(string $key, $values): self
     {
@@ -38,7 +38,7 @@ class Headers
     }
 
     /**
-     * @return array<string, string|string[]>
+     * @return array<string, list<string>|string>
      */
     public function toArray(): array
     {

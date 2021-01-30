@@ -6,16 +6,12 @@ namespace Ngmy\L4Dav\Tests\Unit;
 
 use Mockery;
 use Ngmy\L4Dav\Tests\TestCase;
-use Ngmy\L4Dav\{
-    Client,
-    HttpClient,
-    Response,
-    Server,
-};
-use org\bovigo\vfs\{
-    vfsStream,
-    vfsStreamDirectory,
-};
+use Ngmy\L4Dav\Client;
+use Ngmy\L4Dav\HttpClient;
+use Ngmy\L4Dav\Response;
+use Ngmy\L4Dav\Server;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
 
 class ClientTest extends TestCase
 {

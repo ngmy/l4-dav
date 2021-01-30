@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Ngmy\L4Dav\Tests;
 
 use Mockery;
-use Ngmy\L4Dav\{
-    L4DavFacade,
-    L4DavServiceProvider,
-};
+use Ngmy\L4Dav\L4DavFacade;
+use Ngmy\L4Dav\L4DavServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends OrchestraTestCase
@@ -22,7 +20,7 @@ abstract class TestCase extends OrchestraTestCase
 
     /**
      * @param \Illuminate\Foundation\Application $app
-     * @return array<int, string>
+     * @return list<string>
      */
     protected function getPackageProviders($app): array
     {

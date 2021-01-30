@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use GuzzleHttp\Psr7\{
-    Request,
-    Utils as Psr7Utils,
-};
+use GuzzleHttp\Psr7\Utils;
 use Http\Client\HttpClient;
-use Psr\Http\Message\{
-    ResponseInterface,
-    StreamInterface,
-};
+use Http\Discovery\Psr17FactoryDiscovery;
+use League\Uri\Components\Path;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriInterface;
 
 abstract class Command
 {
@@ -20,7 +18,7 @@ abstract class Command
     private $options;
     /** @var string */
     private $method;
-    /** @var string */
+    /** @var UriInterface */
     private $uri;
     /** @var Headers */
     private $headers;
@@ -32,6 +30,7 @@ abstract class Command
     private $response;
 
     /**
+     * @param string|UriInterface                  $uri
      * @param Headers                              $headers
      * @param resource|StreamInterface|string|null $body
      * @return void
@@ -39,16 +38,18 @@ abstract class Command
     public function __construct(
         WebDavClientOptions $options,
         string $method,
-        string $uri,
+        $uri,
         Headers $headers = null,
         $body = null
     ) {
         $this->options = $options;
         $this->method = $method;
-        $this->uri = $uri;
-        $this->headers = $headers ?? new Headers([]);
+        $this->uri = !\is_null($options->baseUri())
+            ? $options->baseUri()->withPath(new Path($uri))->uri()
+            : (new AbsoluteUri($uri))->uri();
+        $this->headers = $headers ?: new Headers([]);
         $this->body = $body;
-        $this->httpClient = HttpClientFactory::create($options);
+        $this->httpClient = (new HttpClientFactory($options))->create();
     }
 
     public function execute(): ResponseInterface
@@ -69,14 +70,14 @@ abstract class Command
 
     protected function sendRequest(): void
     {
-        $request = new Request($this->method, Utils::resolveUri($this->uri, $this->options));
-        $headers = $this->options->getDefaultRequestHeaders()
+        $request = Psr17FactoryDiscovery::findRequestFactory()->createRequest($this->method, $this->uri);
+        $headers = $this->options->defaultRequestHeaders()
             ->add($this->headers)
             ->toArray();
         foreach ($headers as $key => $value) {
             $request = $request->withHeader($key, $value);
         }
-        $request = $this->body ? $request->withBody(Psr7Utils::streamFor($this->body)) : $request;
+        $request = $this->body ? $request->withBody(Utils::streamFor($this->body)) : $request;
         $this->response = $this->httpClient->sendRequest($request);
     }
 
@@ -90,7 +91,7 @@ abstract class Command
         return $this->method;
     }
 
-    protected function getUri(): string
+    protected function getUri(): UriInterface
     {
         return $this->uri;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
+use Psr\Http\Message\UriInterface;
 use RuntimeException;
 
 class DownloadCommand extends Command
@@ -12,9 +13,10 @@ class DownloadCommand extends Command
     private $destPath;
 
     /**
+     * @param string|UriInterface $srcUri
      * @return void
      */
-    public function __construct(WebDavClientOptions $options, string $srcUri, string $destPath)
+    public function __construct(WebDavClientOptions $options, $srcUri, string $destPath)
     {
         parent::__construct($options, 'GET', $srcUri);
         $this->destPath = $destPath;
@@ -25,8 +27,14 @@ class DownloadCommand extends Command
      */
     protected function postRequest(): void
     {
-        if (\file_put_contents($this->destPath, parent::getResponse()->getBody()->getContents()) === false) {
+        $fh = \fopen($this->destPath, 'x');
+        if ($fh === false) {
             throw new RuntimeException('Failed to create file (' . $this->destPath . ')');
         }
+        $stream = parent::getResponse()->getBody();
+        while (!$stream->eof()) {
+            \fwrite($fh, $stream->read(2048));
+        }
+        \fclose($fh);
     }
 }

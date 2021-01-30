@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost/webdav/',
+    'url' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -24,11 +24,11 @@ return [
     |
     */
 
-    'port' => 80,
+    'port' => null,
 
     /*
     |--------------------------------------------------------------------------
-    | WebDAC Server Username
+    | WebDAV Server Username
     |--------------------------------------------------------------------------
     |
     | If your WebDAV server requires a username for authentication, you should
@@ -37,7 +37,7 @@ return [
     |
     */
 
-    'username' => '',
+    'username' => null,
 
-    'password' => '',
+    'password' => null,
 ];

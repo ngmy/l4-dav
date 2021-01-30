@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav\Tests\Unit;
 
-use anlutro\cURL\{
-    Response as CurlResponse,
-    cURL as Curl,
-};
+use anlutro\cURL\Response as CurlResponse;
+use anlutro\cURL\cURL as Curl;
 use Mockery;
 use Ngmy\L4Dav\Tests\TestCase;
-use Ngmy\L4Dav\{
-    HttpClient,
-    Response,
-    Url,
-};
+use Ngmy\L4Dav\HttpClient;
+use Ngmy\L4Dav\Response;
+use Ngmy\L4Dav\Url;
 
 class HttpClientTest extends TestCase
 {
