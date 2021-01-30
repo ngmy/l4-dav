@@ -8,8 +8,8 @@ use League\Uri\Contracts\UserInfoInterface;
 
 class WebDavClientOptions
 {
-    /** @var BaseUri|null */
-    private $baseUri;
+    /** @var BaseUrl|null */
+    private $baseUrl;
     /** @var int|null */
     private $port;
     /** @var UserInfoInterface */
@@ -24,22 +24,22 @@ class WebDavClientOptions
      * @return void
      */
     public function __construct(
-        ?BaseUri $baseUri,
+        ?BaseUrl $baseUrl,
         ?int $port,
         UserInfoInterface $userInfo,
         Headers $defaultRequestHeaders,
         array $defaultCurlOptions
     ) {
-        $this->baseUri = $baseUri;
+        $this->baseUrl = $baseUrl;
         $this->port = $port;
         $this->userInfo = $userInfo;
         $this->defaultRequestHeaders = $defaultRequestHeaders;
         $this->defaultCurlOptions = $defaultCurlOptions;
     }
 
-    public function baseUri(): ?BaseUri
+    public function baseUrl(): ?BaseUrl
     {
-        return $this->baseUri;
+        return $this->baseUrl;
     }
 
     public function port(): ?int

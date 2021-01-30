@@ -44,8 +44,8 @@ abstract class Command
     ) {
         $this->options = $options;
         $this->method = $method;
-        $this->uri = !\is_null($options->baseUri())
-            ? $options->baseUri()->withPath(new Path($uri))->uri()
+        $this->uri = !\is_null($options->baseUrl())
+            ? $options->baseUrl()->withPath(new Path($uri))->uri()
             : (new AbsoluteUri($uri))->uri();
         $this->headers = $headers ?: new Headers([]);
         $this->body = $body;

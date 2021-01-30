@@ -10,7 +10,7 @@ use League\Uri\Contracts\PathInterface;
 use League\Uri\Uri as UriManipulator;
 use Psr\Http\Message\UriInterface;
 
-class BaseUri
+class BaseUrl
 {
     /** @var UriInterface */
     private $uri;

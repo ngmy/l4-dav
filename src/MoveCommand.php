@@ -16,8 +16,8 @@ class MoveCommand extends Command
      */
     public function __construct(WebDavClientOptions $options, $srcUri, $destUri)
     {
-        $destUri = !\is_null($options->baseUri())
-            ? $options->baseUri()->withPath(new Path($destUri))
+        $destUri = !\is_null($options->baseUrl())
+            ? $options->baseUrl()->withPath(new Path($destUri))->uri()
             : new AbsoluteUri($destUri);
         parent::__construct($options, 'MOVE', $srcUri, new Headers([
             'Destination' => (string) $destUri,

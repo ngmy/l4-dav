@@ -10,8 +10,8 @@ use Psr\Http\Message\UriInterface;
 
 class WebDavClientOptionsBuilder
 {
-    /** @var BaseUri|null */
-    private $baseUri;
+    /** @var BaseUrl|null */
+    private $baseUrl;
     /** @var int|null */
     private $port;
     /** @var UserInfoInterface */
@@ -28,12 +28,12 @@ class WebDavClientOptionsBuilder
     }
 
     /**
-     * @param string|UriInterface $baseUri
+     * @param string|UriInterface $baseUrl
      * @return $this
      */
-    public function baseUri($baseUri): self
+    public function baseUrl($baseUrl): self
     {
-        $this->baseUri = new BaseUri((string) $baseUri);
+        $this->baseUrl = new BaseUrl((string) $baseUrl);
         return $this;
     }
 
@@ -86,7 +86,7 @@ class WebDavClientOptionsBuilder
     public function build(): WebDavClientOptions
     {
         return new WebDavClientOptions(
-            $this->baseUri,
+            $this->baseUrl,
             $this->port,
             $this->userInfo,
             $this->defaultRequestHeaders,

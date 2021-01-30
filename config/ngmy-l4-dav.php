@@ -6,21 +6,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | WebDAV Server URL
+    | WebDAV Server Base URL
     |--------------------------------------------------------------------------
     |
-    | Here you must specify the URL of your WebDAV server.
+    | Here you can specify the base URL of your WebDAV server.
     |
     */
 
-    'url' => null,
+    'base_url' => null,
 
     /*
     |--------------------------------------------------------------------------
     | WebDAV Server Port
     |--------------------------------------------------------------------------
     |
-    | Here you must specify the port of your WebDAV server.
+    | Here you can specify the port of your WebDAV server.
     |
     */
 
@@ -40,4 +40,5 @@ return [
     'username' => null,
 
     'password' => null,
+
 ];

@@ -166,7 +166,7 @@ class ClientTest extends TestCase
     protected function createClient(): WebDavClient
     {
         $optionsBuilder = (new WebDavClientOptionsBuilder())
-            ->baseUri('http://apache2' . $this->webDavBasePath);
+            ->baseUrl('http://apache2' . $this->webDavBasePath);
         if (!empty($this->webDavUserName)) {
             $optionsBuilder
                 ->userName($this->webDavUserName)
