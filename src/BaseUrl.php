@@ -39,6 +39,9 @@ class BaseUrl
         return (string) $this->uri;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     private function validate(): void
     {
         if (empty($this->uri->getScheme())) {

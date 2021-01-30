@@ -190,11 +190,11 @@ class ClientTest extends TestCase
         return $file;
     }
 
-    protected function deleteWebDav(string $path2 = '')
+    protected function deleteWebDav(string $directoryPath = '')
     {
         $client = $this->createClient();
-        foreach ($client->list($path2)->getList() as $path) {
-            if ($path == $this->webDavBasePath . $path2) {
+        foreach ($client->list($directoryPath)->getList() as $path) {
+            if ($path == $this->webDavBasePath . $directoryPath) {
                 continue;
             }
             if (\preg_match("|{$this->webDavBasePath}(.*\/)$|", $path, $matches)) {

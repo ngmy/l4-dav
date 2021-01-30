@@ -12,7 +12,7 @@ class UploadCommand extends Command
 {
     /**
      * @param string|UriInterface $destUri
-     * @return void
+     * @throws RuntimeException
      */
     public function __construct(WebDavClientOptions $options, string $srcPath, $destUri)
     {

@@ -13,7 +13,6 @@ class Headers
 
     /**
      * @param array<string, list<string>|string> $headers
-     * @return void
      */
     public function __construct(array $headers = [])
     {

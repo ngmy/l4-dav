@@ -12,7 +12,6 @@ class CopyCommand extends Command
     /**
      * @param string|UriInterface $srcUri
      * @param string|UriInterface $destUri
-     * @return void
      */
     public function __construct(WebDavClientOptions $options, $srcUri, $destUri)
     {

@@ -33,7 +33,6 @@ abstract class Command
      * @param string|UriInterface                  $uri
      * @param Headers                              $headers
      * @param resource|StreamInterface|string|null $body
-     * @return void
      */
     public function __construct(
         WebDavClientOptions $options,

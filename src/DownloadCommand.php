@@ -14,7 +14,6 @@ class DownloadCommand extends Command
 
     /**
      * @param string|UriInterface $srcUri
-     * @return void
      */
     public function __construct(WebDavClientOptions $options, $srcUri, string $destPath)
     {

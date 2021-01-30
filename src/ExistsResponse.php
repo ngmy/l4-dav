@@ -10,9 +10,6 @@ class ExistsResponse implements ResponseInterface
 {
     use ResponseTrait;
 
-    /**
-     * @return void
-     */
     public function __construct(ResponseInterface $response)
     {
         $this->response = $response;

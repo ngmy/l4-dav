@@ -21,7 +21,6 @@ class WebDavClientOptions
 
     /**
      * @param array<int, mixed> $defaultCurlOptions
-     * @return void
      */
     public function __construct(
         ?BaseUrl $baseUrl,

@@ -15,7 +15,6 @@ class ListResponse implements ResponseInterface
 
     /**
      * @param list<string> $list
-     * @return void
      */
     public function __construct(ResponseInterface $response, array $list)
     {

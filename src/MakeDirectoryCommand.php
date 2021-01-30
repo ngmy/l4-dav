@@ -10,7 +10,6 @@ class MakeDirectoryCommand extends Command
 {
     /**
      * @param string|UriInterface $uri
-     * @return void
      */
     public function __construct(WebDavClientOptions $options, $uri)
     {
