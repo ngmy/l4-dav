@@ -40,8 +40,8 @@ class HttpClientFactory
     private function configureCurlOptions(array $curlOptions): array
     {
         $curlOptions = $curlOptions + $this->options->defaultCurlOptions();
-        if (!\is_null($this->options->port())) {
-            $curlOptions[\CURLOPT_PORT] = $this->options->port();
+        if (!\is_null($this->options->port()->toInt())) {
+            $curlOptions[\CURLOPT_PORT] = $this->options->port()->toInt();
         }
         if (!empty((string) $this->options->userInfo())) {
             $curlOptions[\CURLOPT_USERPWD] = (string) $this->options->userInfo();

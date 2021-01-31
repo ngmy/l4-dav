@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
+use League\Uri\Components\Port;
 use League\Uri\Components\UserInfo;
+use League\Uri\Contracts\PortInterface;
 use League\Uri\Contracts\UserInfoInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -12,7 +14,7 @@ class WebDavClientOptionsBuilder
 {
     /** @var BaseUrl|null */
     private $baseUrl;
-    /** @var int|null */
+    /** @var PortInterface */
     private $port;
     /** @var UserInfoInterface */
     private $userInfo;
@@ -23,6 +25,7 @@ class WebDavClientOptionsBuilder
 
     public function __construct()
     {
+        $this->port = new Port();
         $this->userInfo = new UserInfo();
         $this->defaultRequestHeaders = new Headers([]);
     }
@@ -42,7 +45,7 @@ class WebDavClientOptionsBuilder
      */
     public function port(int $port): self
     {
-        $this->port = $port;
+        $this->port = new Port($port);
         return $this;
     }
 

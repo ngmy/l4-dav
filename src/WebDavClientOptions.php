@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
+use League\Uri\Contracts\PortInterface;
 use League\Uri\Contracts\UserInfoInterface;
 
 class WebDavClientOptions
 {
     /** @var BaseUrl|null */
     private $baseUrl;
-    /** @var int|null */
+    /** @var PortInterface */
     private $port;
     /** @var UserInfoInterface */
     private $userInfo;
@@ -24,7 +25,7 @@ class WebDavClientOptions
      */
     public function __construct(
         ?BaseUrl $baseUrl,
-        ?int $port,
+        PortInterface $port,
         UserInfoInterface $userInfo,
         Headers $defaultRequestHeaders,
         array $defaultCurlOptions
@@ -41,7 +42,7 @@ class WebDavClientOptions
         return $this->baseUrl;
     }
 
-    public function port(): ?int
+    public function port(): PortInterface
     {
         return $this->port;
     }

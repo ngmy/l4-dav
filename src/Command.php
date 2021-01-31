@@ -7,7 +7,6 @@ namespace Ngmy\L4Dav;
 use GuzzleHttp\Psr7\Utils;
 use Http\Client\HttpClient;
 use Http\Discovery\Psr17FactoryDiscovery;
-use League\Uri\Components\Path;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
@@ -18,7 +17,7 @@ abstract class Command
     private $options;
     /** @var string */
     private $method;
-    /** @var UriInterface */
+    /** @var FullUrl */
     private $uri;
     /** @var Headers */
     private $headers;
@@ -43,9 +42,7 @@ abstract class Command
     ) {
         $this->options = $options;
         $this->method = $method;
-        $this->uri = !\is_null($options->baseUrl())
-            ? $options->baseUrl()->withPath(new Path($uri))->uri()
-            : (new AbsoluteUri($uri))->uri();
+        $this->uri = FullUrl::createFromBaseUrl($uri, $options->baseUrl());
         $this->headers = $headers ?: new Headers([]);
         $this->body = $body;
         $this->httpClient = (new HttpClientFactory($options))->create();
@@ -69,7 +66,7 @@ abstract class Command
 
     protected function sendRequest(): void
     {
-        $request = Psr17FactoryDiscovery::findRequestFactory()->createRequest($this->method, $this->uri);
+        $request = Psr17FactoryDiscovery::findRequestFactory()->createRequest($this->method, (string) $this->uri);
         $headers = $this->options->defaultRequestHeaders()
             ->add($this->headers)
             ->toArray();
@@ -90,7 +87,7 @@ abstract class Command
         return $this->method;
     }
 
-    protected function getUri(): UriInterface
+    protected function getUri(): FullUrl
     {
         return $this->uri;
     }

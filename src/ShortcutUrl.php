@@ -8,7 +8,7 @@ use Http\Discovery\Psr17FactoryDiscovery;
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 
-class AbsoluteUri
+class ShortcutUrl
 {
     /** @var UriInterface */
     private $uri;
@@ -37,8 +37,15 @@ class AbsoluteUri
      */
     private function validate(): void
     {
-        if (empty($this->uri->getScheme())) {
-            throw new InvalidArgumentException(\sprintf('The absolute URI `%s` must be absolute', $this->uri));
+        if (!empty($this->uri->getScheme())) {
+            throw new InvalidArgumentException(
+                \sprintf('The shortcut URL `%s` must not contain scheme', $this->uri)
+            );
+        }
+        if (!empty($this->uri->getAuthority())) {
+            throw new InvalidArgumentException(
+                \sprintf('The shortcut URL `%s` must not contain authority', $this->uri)
+            );
         }
     }
 }

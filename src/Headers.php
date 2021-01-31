@@ -37,7 +37,7 @@ class Headers
     }
 
     /**
-     * @return array<string, list<string>|string>
+     * @return array<string, list<string>>
      */
     public function toArray(): array
     {
