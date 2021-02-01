@@ -8,6 +8,7 @@ use Http\Discovery\Psr17FactoryDiscovery;
 use Exception;
 use InvalidArgumentException;
 use Ngmy\L4Dav\BaseUrl;
+use Ngmy\L4Dav\Url;
 use Ngmy\L4Dav\Tests\TestCase;
 
 class BaseUrlTest extends TestCase
@@ -45,72 +46,72 @@ class BaseUrlTest extends TestCase
         if ($expected instanceof Exception) {
             $this->expectException(\get_class($expected));
         }
-        new BaseUrl($url);
+        Url::createBaseUrl($url);
     }
 
     /**
      * @return list<list<mixed>>
      */
-    public function withPathProvider(): array
+    public function withShortcutUrlProvider(): array
     {
         return [
             [
-                new BaseUrl('http://example.com'),
+                Url::createBaseUrl('http://example.com'),
                 'shortcut',
                 Psr17FactoryDiscovery::findUriFactory()->createUri('http://example.com/shortcut'),
             ],
             [
-                new BaseUrl('http://example.com'),
+                Url::createBaseUrl('http://example.com'),
                 '/shortcut',
                 Psr17FactoryDiscovery::findUriFactory()->createUri('http://example.com/shortcut'),
             ],
             [
-                new BaseUrl('http://example.com/'),
+                Url::createBaseUrl('http://example.com/'),
                 'shortcut',
                 Psr17FactoryDiscovery::findUriFactory()->createUri('http://example.com/shortcut'),
             ],
             [
-                new BaseUrl('http://example.com/'),
+                Url::createBaseUrl('http://example.com/'),
                 '/shortcut',
                 Psr17FactoryDiscovery::findUriFactory()->createUri('http://example.com/shortcut'),
             ],
             [
-                new BaseUrl('http://example.com/path'),
+                Url::createBaseUrl('http://example.com/path'),
                 'shortcut',
                 Psr17FactoryDiscovery::findUriFactory()->createUri('http://example.com/path/shortcut'),
             ],
             [
-                new BaseUrl('http://example.com/path'),
+                Url::createBaseUrl('http://example.com/path'),
                 '/shortcut',
                 Psr17FactoryDiscovery::findUriFactory()->createUri('http://example.com/path/shortcut'),
             ],
             [
-                new BaseUrl('http://example.com/path/'),
+                Url::createBaseUrl('http://example.com/path/'),
                 'shortcut',
                 Psr17FactoryDiscovery::findUriFactory()->createUri('http://example.com/path/shortcut'),
             ],
             [
-                new BaseUrl('http://example.com/path/'),
+                Url::createBaseUrl('http://example.com/path/'),
                 '/shortcut',
                 Psr17FactoryDiscovery::findUriFactory()->createUri('http://example.com/path/shortcut'),
             ],
             [
-                new BaseUrl('http://example.com'),
+                Url::createBaseUrl('http://example.com'),
                 '',
                 Psr17FactoryDiscovery::findUriFactory()->createUri('http://example.com'),
             ],
             [
-                new BaseUrl('http://example.com/'),
+                Url::createBaseUrl('http://example.com/'),
                 '',
                 Psr17FactoryDiscovery::findUriFactory()->createUri('http://example.com/'),
             ],
             [
-                new BaseUrl('http://example.com/'),
+                Url::createBaseUrl('http://example.com/'),
                 'shortcut?key=value#fragment',
                 Psr17FactoryDiscovery::findUriFactory()->createUri('http://example.com/shortcut?key=value#fragment'),
             ],
             [
-                new BaseUrl('http://example.com/'),
+                Url::createBaseUrl('http://example.com/'),
                 'http://example.com/',
                 new InvalidArgumentException(),
             ],
@@ -119,9 +120,9 @@ class BaseUrlTest extends TestCase
 
     /**
      * @param BaseUrl $expected
-     * @dataProvider withPathProvider
+     * @dataProvider withShortcutUrlProvider
      */
-    public function testWithPass(BaseUrl $baseUrl, string $path, $expected): void
+    public function testWithShortcutUrl(BaseUrl $baseUrl, string $path, $expected): void
     {
         if ($expected instanceof Exception) {
             $this->expectException(\get_class($expected));

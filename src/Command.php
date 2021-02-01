@@ -42,7 +42,7 @@ abstract class Command
     ) {
         $this->options = $options;
         $this->method = $method;
-        $this->uri = FullUrl::createFromBaseUrl($uri, $options->baseUrl());
+        $this->uri = Url::createFullUrl($uri, $options->baseUrl());
         $this->headers = $headers ?: new Headers([]);
         $this->body = $body;
         $this->httpClient = (new HttpClientFactory($options))->create();

@@ -4,61 +4,14 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use Http\Discovery\Psr17FactoryDiscovery;
 use InvalidArgumentException;
-use Psr\Http\Message\UriInterface;
 
-class FullUrl
+class FullUrl extends Url
 {
-    /** @var UriInterface */
-    private $uri;
-
-    /**
-     * @param string|UriInterface $uri
-     * @throws InvalidArgumentException
-     */
-    public static function createFromBaseUrl($uri, ?BaseUrl $baseUrl = null): self
-    {
-        $candidate = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri);
-
-        if (\is_null($baseUrl)) {
-            return new self($candidate);
-        }
-
-        try {
-            $candidate = new ShortcutUrl($candidate);
-        } catch (InvalidArgumentException $e) {
-            \assert($candidate instanceof UriInterface);
-            return new self($candidate);
-        }
-
-        $candidate = $baseUrl->uriWithShortcutUrl($candidate);
-        return new self($candidate);
-    }
-
-    /**
-     * @param string|UriInterface $uri
-     */
-    public function __construct($uri)
-    {
-        $this->uri = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri);
-        $this->validate();
-    }
-
-    public function uri(): UriInterface
-    {
-        return $this->uri;
-    }
-
-    public function __toString(): string
-    {
-        return (string) $this->uri;
-    }
-
     /**
      * @throws InvalidArgumentException
      */
-    private function validate(): void
+    protected function validate(): void
     {
         if (!\in_array($this->uri->getScheme(), ['http', 'https'])) {
             throw new InvalidArgumentException(

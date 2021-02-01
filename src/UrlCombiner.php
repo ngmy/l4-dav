@@ -19,8 +19,8 @@ class UrlCombiner
      */
     public function __construct($baseUrl, $shortcutUrl)
     {
-        $this->baseUrl = new BaseUrl((string) $baseUrl);
-        $this->shortcutUrl = new ShortcutUrl((string) $shortcutUrl);
+        $this->baseUrl = Url::createBaseUrl((string) $baseUrl);
+        $this->shortcutUrl = Url::createShortcutUrl((string) $shortcutUrl);
     }
 
     public function combine(): UriInterface
@@ -37,9 +37,9 @@ class UrlCombiner
         $shortcutUrlPath = $this->shortcutUrl->uri()->getPath();
         if (!$this->baseUrl->hasPath() && !$this->shortcutUrl->hasPath()) {
             return '';
-        } elseif ($this->baseUrl->hasTrailingSlash() && $this->shortcutUrl->hasLeadingSlash()) {
+        } elseif ($this->baseUrl->hasPathWithTrailingSlash() && $this->shortcutUrl->hasPathWithLeadingSlash()) {
             return \substr($baseUrlPath, 0, \strlen($baseUrlPath) - 1) . '/' . \substr($shortcutUrlPath, 1);
-        } elseif (!$this->baseUrl->hasTrailingSlash() && !$this->shortcutUrl->hasLeadingSlash()) {
+        } elseif (!$this->baseUrl->hasPathWithTrailingSlash() && !$this->shortcutUrl->hasPathWithLeadingSlash()) {
             return $baseUrlPath . '/' . $shortcutUrlPath;
         } else {
             return $baseUrlPath . $shortcutUrlPath;

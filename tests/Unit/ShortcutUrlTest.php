@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav\Tests\Unit;
 
 use Exception;
 use InvalidArgumentException;
-use Ngmy\L4Dav\ShortcutUrl;
+use Ngmy\L4Dav\Url;
 use Ngmy\L4Dav\Tests\TestCase;
 
 class ShortcutUrlTest extends TestCase
@@ -42,6 +42,6 @@ class ShortcutUrlTest extends TestCase
         if ($expected instanceof Exception) {
             $this->expectException(\get_class($expected));
         }
-        new ShortcutUrl($url);
+        Url::createShortcutUrl($url);
     }
 }

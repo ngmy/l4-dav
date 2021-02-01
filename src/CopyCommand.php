@@ -14,7 +14,7 @@ class CopyCommand extends Command
      */
     public function __construct(WebDavClientOptions $options, $srcUri, $destUri)
     {
-        $fullDestUri = FullUrl::createFromBaseUrl($destUri, $options->baseUrl());
+        $fullDestUri = Url::createFullUrl($destUri, $options->baseUrl());
         parent::__construct($options, 'Copy', $srcUri, new Headers([
             'Destination' => (string) $fullDestUri,
         ]));

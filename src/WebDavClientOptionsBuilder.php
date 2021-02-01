@@ -36,7 +36,7 @@ class WebDavClientOptionsBuilder
      */
     public function baseUrl($baseUrl): self
     {
-        $this->baseUrl = new BaseUrl((string) $baseUrl);
+        $this->baseUrl = Url::createBaseUrl((string) $baseUrl);
         return $this;
     }
 

@@ -4,29 +4,11 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use Http\Discovery\Psr17FactoryDiscovery;
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 
-class BaseUrl
+class BaseUrl extends Url
 {
-    /** @var UriInterface */
-    private $uri;
-
-    /**
-     * @param string|UriInterface $uri
-     */
-    public function __construct($uri)
-    {
-        $this->uri = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri);
-        $this->validate();
-    }
-
-    public function uri(): UriInterface
-    {
-        return $this->uri;
-    }
-
     /**
      * @param ShortcutUrl|string|UriInterface $shortcutUrl
      */
@@ -35,25 +17,10 @@ class BaseUrl
         return (new UrlCombiner($this, $shortcutUrl))->combine();
     }
 
-    public function hasPath(): bool
-    {
-        return $this->uri->getPath() != '';
-    }
-
-    public function hasTrailingSlash(): bool
-    {
-        return $this->uri->getPath() != '' && $this->uri->getPath()[-1] == '/';
-    }
-
-    public function __toString(): string
-    {
-        return (string) $this->uri;
-    }
-
     /**
      * @throws InvalidArgumentException
      */
-    private function validate(): void
+    protected function validate(): void
     {
         if (!\in_array($this->uri->getScheme(), ['http', 'https'])) {
             throw new InvalidArgumentException(
