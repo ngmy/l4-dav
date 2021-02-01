@@ -8,10 +8,15 @@ use Http\Discovery\Psr17FactoryDiscovery;
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 
-class Url
+abstract class Url
 {
     /** @var UriInterface */
     protected $uri;
+
+    /**
+     * @throws InvalidArgumentException
+     */
+    abstract protected function validate(): void;
 
     /**
      * @param string|UriInterface|Url $uri
@@ -35,7 +40,7 @@ class Url
      */
     public static function createFullUrl($uri, ?BaseUrl $baseUrl = null): FullUrl
     {
-        $candidate = new self(Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri));
+        $candidate = new CandidateUrl(Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri));
 
         if ($candidate->isFullUrl()) {
             return new FullUrl($candidate);
@@ -74,13 +79,6 @@ class Url
     public function __toString(): string
     {
         return (string) $this->uri;
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     */
-    protected function validate(): void
-    {
     }
 
     /**
