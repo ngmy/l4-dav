@@ -14,9 +14,9 @@ class MoveCommand extends Command
      */
     public function __construct(WebDavClientOptions $options, $srcUri, $destUri)
     {
-        $destUri = FullUrl::createFromBaseUrl($destUri, $options->baseUrl());
+        $fullDestUri = FullUrl::createFromBaseUrl($destUri, $options->baseUrl());
         parent::__construct($options, 'MOVE', $srcUri, new Headers([
-            'Destination' => (string) $destUri,
+            'Destination' => (string) $fullDestUri,
         ]));
     }
 }

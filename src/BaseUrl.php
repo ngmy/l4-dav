@@ -32,35 +32,17 @@ class BaseUrl
      */
     public function uriWithShortcutUrl($shortcutUrl): UriInterface
     {
-        $shortcutUrl = new ShortcutUrl((string) $shortcutUrl);
+        return (new UrlCombiner($this, $shortcutUrl))->combine();
+    }
 
-        $baseUrlPath = $this->uri->getPath();
-        $shortcutUrlPath = $shortcutUrl->uri()->getPath();
+    public function hasPath(): bool
+    {
+        return $this->uri->getPath() != '';
+    }
 
-        $baseUrlPathHasTrailingSlash = false;
-        $shortcutUrlPathHasLeadingSlash = false;
-
-        if ($baseUrlPath != '' && $baseUrlPath[-1] == '/') {
-            $baseUrlPathHasTrailingSlash = true;
-        }
-        if ($shortcutUrlPath != '' && $shortcutUrlPath[0] == '/') {
-            $shortcutUrlPathHasLeadingSlash = true;
-        }
-
-        if ($baseUrlPath == '' && $shortcutUrlPath == '') {
-            $newPath = '';
-        } elseif ($baseUrlPathHasTrailingSlash && $shortcutUrlPathHasLeadingSlash) {
-            $newPath = \substr($baseUrlPath, 0, \strlen($baseUrlPath) - 1) . '/' . \substr($shortcutUrlPath, 1);
-        } elseif (!$baseUrlPathHasTrailingSlash && !$shortcutUrlPathHasLeadingSlash) {
-            $newPath = $baseUrlPath . '/' . $shortcutUrlPath;
-        } else {
-            $newPath = $baseUrlPath . $shortcutUrlPath;
-        }
-
-        return $this->uri
-            ->withPath($newPath)
-            ->withQuery($shortcutUrl->uri()->getQuery())
-            ->withFragment($shortcutUrl->uri()->getFragment());
+    public function hasTrailingSlash(): bool
+    {
+        return $this->uri->getPath() != '' && $this->uri->getPath()[-1] == '/';
     }
 
     public function __toString(): string

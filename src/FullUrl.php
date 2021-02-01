@@ -19,21 +19,21 @@ class FullUrl
      */
     public static function createFromBaseUrl($uri, ?BaseUrl $baseUrl = null): self
     {
-        $uri = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri);
+        $candidate = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri);
 
         if (\is_null($baseUrl)) {
-            return new self($uri);
+            return new self($candidate);
         }
 
         try {
-            $uri = new ShortcutUrl($uri);
+            $candidate = new ShortcutUrl($candidate);
         } catch (InvalidArgumentException $e) {
-            \assert($uri instanceof UriInterface);
-            return new self($uri);
+            \assert($candidate instanceof UriInterface);
+            return new self($candidate);
         }
 
-        $uri = $baseUrl->uriWithShortcutUrl($uri);
-        return new self($uri);
+        $candidate = $baseUrl->uriWithShortcutUrl($candidate);
+        return new self($candidate);
     }
 
     /**

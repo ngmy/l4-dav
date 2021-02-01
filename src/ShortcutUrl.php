@@ -27,6 +27,16 @@ class ShortcutUrl
         return $this->uri;
     }
 
+    public function hasPath(): bool
+    {
+        return $this->uri->getPath() != '';
+    }
+
+    public function hasLeadingSlash(): bool
+    {
+        return $this->uri->getPath() != '' && $this->uri->getPath()[0] == '/';
+    }
+
     public function __toString(): string
     {
         return (string) $this->uri;

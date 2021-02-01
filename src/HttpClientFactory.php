@@ -24,20 +24,20 @@ class HttpClientFactory
      */
     public function create(array $curlOptions = []): HttpClient
     {
+        $this->configureCurlOptions($curlOptions);
         return new Client(
             // TODO: When cURL client supports PSR-17, use Psr17FactoryDiscovery instead
             MessageFactoryDiscovery::find(),
             // TODO: When cURL client supports PSR-17, use Psr17FactoryDiscovery instead
             StreamFactoryDiscovery::find(),
-            $this->configureCurlOptions($curlOptions)
+            $curlOptions
         );
     }
 
     /**
      * @param array<int, mixed> $curlOptions
-     * @return array<int, mixed>
      */
-    private function configureCurlOptions(array $curlOptions): array
+    private function configureCurlOptions(array &$curlOptions): void
     {
         $curlOptions = $curlOptions + $this->options->defaultCurlOptions();
         if (!\is_null($this->options->port()->toInt())) {
@@ -47,6 +47,5 @@ class HttpClientFactory
             $curlOptions[\CURLOPT_USERPWD] = (string) $this->options->userInfo();
         }
         $curlOptions[\CURLOPT_HTTPAUTH] = \CURLAUTH_ANY;
-        return $curlOptions;
     }
 }

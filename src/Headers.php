@@ -22,14 +22,14 @@ class Headers
     /**
      * @param list<string>|string $values
      */
-    public function set(string $key, $values): self
+    public function withHeader(string $key, $values): self
     {
         $new = clone $this->headers;
         $new->set($key, $values);
         return new self($new->all());
     }
 
-    public function add(Headers $headers): self
+    public function withHeaders(Headers $headers): self
     {
         $new = clone $this->headers;
         $new->add($headers->toArray());

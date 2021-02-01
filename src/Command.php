@@ -68,7 +68,7 @@ abstract class Command
     {
         $request = Psr17FactoryDiscovery::findRequestFactory()->createRequest($this->method, (string) $this->uri);
         $headers = $this->options->defaultRequestHeaders()
-            ->add($this->headers)
+            ->withHeaders($this->headers)
             ->toArray();
         foreach ($headers as $key => $value) {
             $request = $request->withHeader($key, $value);

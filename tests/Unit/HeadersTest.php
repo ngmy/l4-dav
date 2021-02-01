@@ -31,25 +31,101 @@ class HeadersTest extends TestCase
         new Headers($headers);
     }
 
-    public function testAdd(): void
+    /**
+     * @return list<list<mixed>>
+     */
+    public function withHeaderProvider(): array
     {
-        $expected = new Headers([
-            'key1' => 'value1',
-            'key2' => 'value2',
-        ]);
-        $actual = (new Headers(['key1' => 'value1']))
-            ->set('key2', 'value2');
+        return [
+            [
+                new Headers(),
+                ['key', 'value'],
+                new Headers([
+                    'key' => 'value',
+                ]),
+            ],
+            [
+                new Headers([
+                    'key1' => 'value1',
+                ]),
+                ['key2', 'value2'],
+                new Headers([
+                    'key1' => 'value1',
+                    'key2' => 'value2',
+                ]),
+            ],
+            [
+                new Headers([
+                    'key' => 'value',
+                ]),
+                ['key', 'value\''],
+                new Headers([
+                    'key' => 'value\'',
+                ]),
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider withHeaderProvider
+     */
+    public function testWithHeader(Headers $headers, array $withHeader, Headers $expected): void
+    {
+        $actual = $headers->withHeader(...$withHeader);
         $this->assertEquals($expected, $actual);
     }
 
-    public function testSet(): void
+    /**
+     * @return list<list<mixed>>
+     */
+    public function withHeadersProvider(): array
     {
-        $expected = new Headers([
-            'key1' => 'value1',
-            'key2' => 'value2',
-        ]);
-        $actual = (new Headers(['key1' => 'value1']))
-            ->add(new Headers(['key2' => 'value2']));
+        return [
+            [
+                new Headers(),
+                new Headers([
+                    'key' => 'value',
+                ]),
+                new Headers([
+                    'key' => 'value',
+                ]),
+            ],
+            [
+                new Headers([
+                    'key1' => 'value1',
+                ]),
+                new Headers([
+                    'key2' => 'value2',
+                ]),
+                new Headers([
+                    'key1' => 'value1',
+                    'key2' => 'value2',
+                ]),
+            ],
+            [
+                new Headers([
+                    'key1' => 'value1',
+                    'key2' => 'value2',
+                ]),
+                new Headers([
+                    'key2' => 'value2\'',
+                    'key3' => 'value3',
+                ]),
+                new Headers([
+                    'key1' => 'value1',
+                    'key2' => 'value2\'',
+                    'key3' => 'value3',
+                ]),
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider withHeadersProvider
+     */
+    public function testWithHeaders(Headers $headers, Headers $withHeaders, Headers $expected): void
+    {
+        $actual = $headers->withHeaders($withHeaders);
         $this->assertEquals($expected, $actual);
     }
 
