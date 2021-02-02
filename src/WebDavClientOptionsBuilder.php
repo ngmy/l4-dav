@@ -12,17 +12,20 @@ use Psr\Http\Message\UriInterface;
 
 class WebDavClientOptionsBuilder
 {
-    /** @var BaseUrl|null */
+    /** @var BaseUrl|null Base URL */
     private $baseUrl;
-    /** @var PortInterface */
+    /** @var PortInterface Port */
     private $port;
-    /** @var UserInfoInterface */
+    /** @var UserInfoInterface User info */
     private $userInfo;
-    /** @var Headers */
+    /** @var Headers Default HTTP request headers */
     private $defaultRequestHeaders;
-    /** @var array<int, mixed> */
+    /** @var array<int, mixed> Default cURL options */
     private $defaultCurlOptions = [];
 
+    /**
+     * Create new WebDAV client options builder.
+     */
     public function __construct()
     {
         $this->port = new Port();
@@ -31,6 +34,8 @@ class WebDavClientOptionsBuilder
     }
 
     /**
+     * Set base URL.
+     *
      * @param string|UriInterface $baseUrl
      * @return $this
      */
@@ -41,6 +46,8 @@ class WebDavClientOptionsBuilder
     }
 
     /**
+     * Set port.
+     *
      * @return $this
      */
     public function port(int $port): self
@@ -50,6 +57,8 @@ class WebDavClientOptionsBuilder
     }
 
     /**
+     * Set password for authentication.
+     *
      * @return $this
      */
     public function userName(string $userName): self
@@ -59,6 +68,8 @@ class WebDavClientOptionsBuilder
     }
 
     /**
+     * Set password for authentication.
+     *
      * @return $this
      */
     public function password(string $password): self
@@ -68,6 +79,8 @@ class WebDavClientOptionsBuilder
     }
 
     /**
+     * Set default HTTP request headers.
+     *
      * @param array<string, string> $defaultRequestHeaders
      * @return $this
      */
@@ -78,6 +91,8 @@ class WebDavClientOptionsBuilder
     }
 
     /**
+     * Set default cURL options.
+     *
      * @param array<int, mixed> $defaultCurlOptions
      */
     public function defaultCurlOptions(array $defaultCurlOptions): self
@@ -86,6 +101,9 @@ class WebDavClientOptionsBuilder
         return $this;
     }
 
+    /**
+     * Build WebDAV client options.
+     */
     public function build(): WebDavClientOptions
     {
         return new WebDavClientOptions(
