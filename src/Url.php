@@ -84,26 +84,26 @@ abstract class Url
     /**
      * @param string|UriInterface|Url $uri
      */
-    private function __construct($uri)
+    protected function __construct($uri)
     {
         $this->uri = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri);
         $this->validate();
     }
 
-    private function isBaseUrl(): bool
+    protected function isBaseUrl(): bool
     {
         return $this->isFullUrl()
             && empty($this->uri->getQuery())
             && empty($this->uri->getFragment());
     }
 
-    private function isShortcutUrl(): bool
+    protected function isShortcutUrl(): bool
     {
         return empty($this->uri->getScheme())
             && empty($this->uri->getAuthority());
     }
 
-    private function isFullUrl(): bool
+    protected function isFullUrl(): bool
     {
         return \in_array($this->uri->getScheme(), ['http', 'https'])
             && !empty($this->uri->getAuthority())

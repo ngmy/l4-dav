@@ -12,17 +12,17 @@ use Psr\Http\Message\UriInterface;
 abstract class Command
 {
     /** @var WebDavClientOptions */
-    private $options;
+    protected $options;
     /** @var string */
-    private $method;
+    protected $method;
     /** @var FullUrl */
-    private $uri;
+    protected $uri;
     /** @var Headers */
-    private $headers;
+    protected $headers;
     /** @var resource|StreamInterface|string|null */
-    private $body;
+    protected $body;
     /** @var CommandDispatcher */
-    private $dispatcher;
+    protected $dispatcher;
     /** @var ResponseInterface */
     protected $response;
 
@@ -103,13 +103,13 @@ abstract class Command
         // no-op
     }
 
+    protected function dispatch(): void
+    {
+        $this->response = $this->dispatcher->dispatch();
+    }
+
     protected function doAfter(): void
     {
         // no-op
-    }
-
-    private function dispatch(): void
-    {
-        $this->response = $this->dispatcher->dispatch();
     }
 }
