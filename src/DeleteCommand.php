@@ -11,7 +11,7 @@ class DeleteCommand extends Command
     /**
      * @param string|UriInterface $uri
      */
-    public function __construct(WebDavClientOptions $options, $uri)
+    protected function __construct(WebDavClientOptions $options, $uri)
     {
         parent::__construct($options, 'DELETE', $uri);
     }

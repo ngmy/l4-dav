@@ -12,7 +12,7 @@ class CopyCommand extends Command
      * @param string|UriInterface $srcUri
      * @param string|UriInterface $destUri
      */
-    public function __construct(WebDavClientOptions $options, $srcUri, $destUri)
+    protected function __construct(WebDavClientOptions $options, $srcUri, $destUri)
     {
         $fullDestUri = Url::createFullUrl($destUri, $options->baseUrl());
         parent::__construct($options, 'Copy', $srcUri, new Headers([

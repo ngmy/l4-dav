@@ -52,7 +52,7 @@ class BaseUrlTest extends TestCase
     /**
      * @return list<list<mixed>>
      */
-    public function withShortcutUrlProvider(): array
+    public function uriWithShortcutUrlProvider(): array
     {
         return [
             [
@@ -119,10 +119,10 @@ class BaseUrlTest extends TestCase
     }
 
     /**
-     * @param BaseUrl $expected
-     * @dataProvider withShortcutUrlProvider
+     * @param Exception|UriInterface $expected
+     * @dataProvider uriWithShortcutUrlProvider
      */
-    public function testWithShortcutUrl(BaseUrl $baseUrl, string $path, $expected): void
+    public function testUriWithShortcutUrl(BaseUrl $baseUrl, string $path, $expected): void
     {
         if ($expected instanceof Exception) {
             $this->expectException(\get_class($expected));

@@ -14,7 +14,7 @@ class UploadCommand extends Command
      * @param string|UriInterface $destUri
      * @throws RuntimeException
      */
-    public function __construct(WebDavClientOptions $options, string $srcPath, $destUri)
+    protected function __construct(WebDavClientOptions $options, string $srcPath, $destUri)
     {
         $fh = \fopen($srcPath, 'r');
         if ($fh === false) {

@@ -15,7 +15,7 @@ class DownloadCommand extends Command
     /**
      * @param string|UriInterface $srcUri
      */
-    public function __construct(WebDavClientOptions $options, $srcUri, string $destPath)
+    protected function __construct(WebDavClientOptions $options, $srcUri, string $destPath)
     {
         parent::__construct($options, 'GET', $srcUri);
         $this->destPath = $destPath;
@@ -24,13 +24,13 @@ class DownloadCommand extends Command
     /**
      * @throws RuntimeException
      */
-    protected function postRequest(): void
+    protected function doAfter(): void
     {
         $fh = \fopen($this->destPath, 'x');
         if ($fh === false) {
             throw new RuntimeException('Failed to create file (' . $this->destPath . ')');
         }
-        $stream = parent::getResponse()->getBody();
+        $stream = $this->response->getBody();
         while (!$stream->eof()) {
             \fwrite($fh, $stream->read(2048));
         }

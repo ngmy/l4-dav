@@ -4,30 +4,26 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
 class ListCommand extends Command
 {
     /** @var ListResponseParser */
-    private $parser;
+    private $responseParser;
 
     /**
      * @param string|UriInterface $uri
      */
-    public function __construct(WebDavClientOptions $options, $uri)
+    protected function __construct(WebDavClientOptions $options, $uri)
     {
         parent::__construct($options, 'PROPFIND', $uri, new Headers([
             'Depth' => '1',
         ]));
-        $this->parser = new ListResponseParser();
+        $this->responseParser = new ListResponseParser();
     }
 
-    /**
-     * @inheritdoc
-     */
-    protected function getResponse(): ResponseInterface
+    protected function doAfter(): void
     {
-        return $this->parser->parse(parent::getResponse());
+        $this->response = $this->responseParser->parse($this->response);
     }
 }

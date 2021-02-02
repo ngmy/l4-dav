@@ -29,7 +29,9 @@ class WebDavClient
      */
     public function download($srcUri, string $destPath): ResponseInterface
     {
-        return (new DownloadCommand($this->options, $srcUri, $destPath))->execute();
+        $command = Command::create(__FUNCTION__, $this->options, $srcUri, $destPath);
+        $command->execute();
+        return $command->getResult();
     }
 
     /**
@@ -41,7 +43,9 @@ class WebDavClient
      */
     public function upload(string $srcPath, $destUri): ResponseInterface
     {
-        return (new UploadCommand($this->options, $srcPath, $destUri))->execute();
+        $command = Command::create(__FUNCTION__, $this->options, $srcPath, $destUri);
+        $command->execute();
+        return $command->getResult();
     }
 
     /**
@@ -52,7 +56,9 @@ class WebDavClient
      */
     public function delete(string $uri): ResponseInterface
     {
-        return (new DeleteCommand($this->options, $uri))->execute();
+        $command = Command::create(__FUNCTION__, $this->options, $uri);
+        $command->execute();
+        return $command->getResult();
     }
 
     /**
@@ -64,7 +70,9 @@ class WebDavClient
      */
     public function copy($srcUri, $destUri): ResponseInterface
     {
-        return (new CopyCommand($this->options, $srcUri, $destUri))->execute();
+        $command = Command::create(__FUNCTION__, $this->options, $srcUri, $destUri);
+        $command->execute();
+        return $command->getResult();
     }
 
     /**
@@ -76,7 +84,9 @@ class WebDavClient
      */
     public function move($srcUri, $destUri): ResponseInterface
     {
-        return (new MoveCommand($this->options, $srcUri, $destUri))->execute();
+        $command = Command::create(__FUNCTION__, $this->options, $srcUri, $destUri);
+        $command->execute();
+        return $command->getResult();
     }
 
     /**
@@ -87,7 +97,9 @@ class WebDavClient
      */
     public function makeDirectory($uri): ResponseInterface
     {
-        return (new MakeDirectoryCommand($this->options, $uri))->execute();
+        $command = Command::create(__FUNCTION__, $this->options, $uri);
+        $command->execute();
+        return $command->getResult();
     }
 
     /**
@@ -98,9 +110,10 @@ class WebDavClient
      */
     public function exists($uri): ExistsResponse
     {
-        $response = (new ExistsCommand($this->options, $uri))->execute();
-        \assert($response instanceof ExistsResponse);
-        return $response;
+        $command = Command::create(__FUNCTION__, $this->options, $uri);
+        $command->execute();
+        \assert($command->getResult() instanceof ExistsResponse);
+        return $command->getResult();
     }
 
     /**
@@ -111,8 +124,9 @@ class WebDavClient
      */
     public function list($uri): ListResponse
     {
-        $response = (new ListCommand($this->options, $uri))->execute();
-        \assert($response instanceof ListResponse);
-        return $response;
+        $command = Command::create(__FUNCTION__, $this->options, $uri);
+        $command->execute();
+        \assert($command->getResult() instanceof ListResponse);
+        return $command->getResult();
     }
 }
