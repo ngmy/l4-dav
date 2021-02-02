@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Ngmy\L4Dav\Tests\Unit;
 
 use Mockery;
-use Ngmy\L4Dav\Tests\TestCase;
 use Ngmy\L4Dav\Client;
 use Ngmy\L4Dav\HttpClient;
 use Ngmy\L4Dav\Response;
 use Ngmy\L4Dav\Server;
+use Ngmy\L4Dav\Tests\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 

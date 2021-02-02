@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use Http\Client\HttpClient;
 use GuzzleHttp\Psr7\Utils;
+use Http\Client\HttpClient;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;

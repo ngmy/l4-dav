@@ -13,7 +13,7 @@ class WebDavClient
     private $options;
 
     /**
-     * Create a new Client class object.
+     * Create new WebDAV client.
      */
     public function __construct(WebDavClientOptions $options = null)
     {
@@ -23,9 +23,9 @@ class WebDavClient
     /**
      * Download a file from the WebDAV server.
      *
-     * @param string|UriInterface $srcUri   The source path of a file.
-     * @param string              $destPath The destination path of a file.
-     * @return ResponseInterface Returns a Response class object.
+     * @param string|UriInterface $srcUri   The source path of a file
+     * @param string              $destPath The destination path of a file
+     * @return ResponseInterface Returns a Response class object
      */
     public function download($srcUri, string $destPath): ResponseInterface
     {
@@ -37,9 +37,9 @@ class WebDavClient
     /**
      * Upload a file to the WebDAV server.
      *
-     * @param string              $srcPath The source path of a file.
-     * @param string|UriInterface $destUri The destination path of a file.
-     * @return ResponseInterface Returns a Response class object.
+     * @param string              $srcPath The source path of a file
+     * @param string|UriInterface $destUri The destination path of a file
+     * @return ResponseInterface Returns a Response class object
      */
     public function upload(string $srcPath, $destUri): ResponseInterface
     {
@@ -51,8 +51,8 @@ class WebDavClient
     /**
      * Delete an item on the WebDAV server.
      *
-     * @param string $uri The path of an item.
-     * @return ResponseInterface Returns a Response class object.
+     * @param string $uri The path of an item
+     * @return ResponseInterface Returns a Response class object
      */
     public function delete(string $uri): ResponseInterface
     {
@@ -64,9 +64,9 @@ class WebDavClient
     /**
      * Copy an item on the WebDAV server.
      *
-     * @param string|UriInterface $srcUri  The source path of an item.
-     * @param string|UriInterface $destUri The destination path of an item.
-     * @return ResponseInterface Returns a Response class object.
+     * @param string|UriInterface $srcUri  The source path of an item
+     * @param string|UriInterface $destUri The destination path of an item
+     * @return ResponseInterface Returns a Response class object
      */
     public function copy($srcUri, $destUri): ResponseInterface
     {
@@ -78,9 +78,9 @@ class WebDavClient
     /**
      * Rename an item on the WebDAV server.
      *
-     * @param string|UriInterface $srcUri  The source path of an item.
-     * @param string|UriInterface $destUri The destination path of an item.
-     * @return ResponseInterface Returns a Response class object.
+     * @param string|UriInterface $srcUri  The source path of an item
+     * @param string|UriInterface $destUri The destination path of an item
+     * @return ResponseInterface Returns a Response class object
      */
     public function move($srcUri, $destUri): ResponseInterface
     {
@@ -92,8 +92,8 @@ class WebDavClient
     /**
      * Make a directory on the WebDAV server.
      *
-     * @param string|UriInterface $uri The directory path.
-     * @return ResponseInterface Returns a Response class object.
+     * @param string|UriInterface $uri The directory path
+     * @return ResponseInterface Returns a Response class object
      */
     public function makeDirectory($uri): ResponseInterface
     {
@@ -105,8 +105,8 @@ class WebDavClient
     /**
      * Check the existence of an item on the WebDAV server.
      *
-     * @param string|UriInterface $uri The path of an item.
-     * @return ExistsResponse Returns true if an item exists.
+     * @param string|UriInterface $uri The path of an item
+     * @return ExistsResponse Returns true if an item exists
      */
     public function exists($uri): ExistsResponse
     {
@@ -119,8 +119,8 @@ class WebDavClient
     /**
      * List contents of a directory on the WebDAV server.
      *
-     * @param string|UriInterface $uri The directory path.
-     * @return ListResponse Returns a list of contents of the directory.
+     * @param string|UriInterface $uri The directory path
+     * @return ListResponse Returns a list of contents of the directory
      */
     public function list($uri): ListResponse
     {
