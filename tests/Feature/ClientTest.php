@@ -11,6 +11,7 @@ use RuntimeException;
 
 class ClientTest extends TestCase
 {
+    /** @var string */
     protected $webDavBasePath = '/webdav_no_auth/';
 
     public function tearDown(): void
@@ -167,10 +168,11 @@ class ClientTest extends TestCase
     {
         $optionsBuilder = (new WebDavClientOptionsBuilder())
             ->baseUrl('http://apache2' . $this->webDavBasePath);
-        if (!empty($this->webDavUserName)) {
-            $optionsBuilder
-                ->userName($this->webDavUserName)
-                ->password($this->webDavPassword);
+        if (isset($this->webDavUserName)) {
+            $optionsBuilder->userName($this->webDavUserName);
+        }
+        if (isset($this->webDavPassword)) {
+            $optionsBuilder->password($this->webDavPassword);
         }
         $options = $optionsBuilder->build();
         return new WebDavClient($options);
@@ -190,7 +192,7 @@ class ClientTest extends TestCase
         return $file;
     }
 
-    protected function deleteWebDav(string $directoryPath = '')
+    protected function deleteWebDav(string $directoryPath = ''): void
     {
         $client = $this->createClient();
         foreach ($client->list($directoryPath)->getList() as $path) {
@@ -201,6 +203,7 @@ class ClientTest extends TestCase
                 $this->deleteWebDav($matches[1]);
             }
             $client = $this->createClient();
+            \assert(!\is_null(\preg_replace("|{$this->webDavBasePath}(.*)|", '\1', $path)));
             $client->delete(\preg_replace("|{$this->webDavBasePath}(.*)|", '\1', $path));
         }
     }

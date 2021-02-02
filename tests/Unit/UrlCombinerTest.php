@@ -11,6 +11,7 @@ use Ngmy\L4Dav\BaseUrl;
 use Ngmy\L4Dav\Tests\TestCase;
 use Ngmy\L4Dav\Url;
 use Ngmy\L4Dav\UrlCombiner;
+use Psr\Http\Message\UriInterface;
 
 class UrlCombinerTest extends TestCase
 {

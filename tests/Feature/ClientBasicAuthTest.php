@@ -6,7 +6,10 @@ namespace Ngmy\L4Dav\Tests\Feature;
 
 class ClientBasicAuthTest extends ClientTest
 {
+    /** @var string */
     protected $webDavBasePath = '/webdav_basic_auth/';
+    /** @var string */
     protected $webDavUserName = 'basic';
+    /** @var string */
     protected $webDavPassword = 'basic';
 }

@@ -10,6 +10,7 @@ use InvalidArgumentException;
 use Ngmy\L4Dav\BaseUrl;
 use Ngmy\L4Dav\Tests\TestCase;
 use Ngmy\L4Dav\Url;
+use Psr\Http\Message\UriInterface;
 
 class BaseUrlTest extends TestCase
 {

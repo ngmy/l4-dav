@@ -12,6 +12,7 @@ use Ngmy\L4Dav\Tests\TestCase;
 use Ngmy\L4Dav\Url;
 use Ngmy\L4Dav\WebDavClientOptions;
 use Ngmy\L4Dav\WebDavClientOptionsBuilder;
+use Psr\Http\Message\UriInterface;
 
 class WebDavClientOptionsBuilderTest extends TestCase
 {
@@ -117,13 +118,13 @@ class WebDavClientOptionsBuilderTest extends TestCase
                 null,
                 null,
                 null,
-                ['curl_option_key' => 'curl_option_value'],
+                [\CURLOPT_PORT => 80],
                 new WebDavClientOptions(
                     null,
                     new Port(null),
                     new UserInfo(null, null),
                     new Headers(),
-                    ['curl_option_key' => 'curl_option_value'],
+                    [\CURLOPT_PORT => 80],
                 ),
             ],
             [
@@ -132,21 +133,23 @@ class WebDavClientOptionsBuilderTest extends TestCase
                 'username',
                 'password',
                 ['header_key' => 'header_value'],
-                ['curl_option_key' => 'curl_option_value'],
+                [\CURLOPT_PORT => 80],
                 new WebDavClientOptions(
                     Url::createBaseUrl('http://example.com'),
                     new Port(80),
                     new UserInfo('username', 'password'),
                     new Headers(['header_key' => 'header_value']),
-                    ['curl_option_key' => 'curl_option_value'],
+                    [\CURLOPT_PORT => 80],
                 ),
             ],
         ];
     }
 
     /**
-     * @param string|UriInterface|null $baseUrl
-     * @param WebDavClientOptions      $expected
+     * @param string|UriInterface|null   $baseUrl
+     * @param array<string, string>|null $defaultRequestHeaders
+     * @param list<mixed>|null           $defaultCurlOptions
+     * @param WebDavClientOptions        $expected
      * @dataProvider buildProvider
      */
     public function testBuild(

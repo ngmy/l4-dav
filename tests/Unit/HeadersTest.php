@@ -67,6 +67,7 @@ class HeadersTest extends TestCase
     }
 
     /**
+     * @param list<string> $withHeader
      * @dataProvider withHeaderProvider
      */
     public function testWithHeader(Headers $headers, array $withHeader, Headers $expected): void
