@@ -66,13 +66,14 @@ class WebDavClient
     /**
      * Copy an item on the WebDAV server.
      *
-     * @param string|UriInterface $srcUri  The source path of an item
-     * @param string|UriInterface $destUri The destination path of an item
+     * @param string|UriInterface $srcUri    The source path of an item
+     * @param string|UriInterface $destUri   The destination path of an item
+     * @param bool                $overwrite Whether to overwrite copy
      * @return ResponseInterface Returns a Response class object
      */
-    public function copy($srcUri, $destUri): ResponseInterface
+    public function copy($srcUri, $destUri, $overwrite = false): ResponseInterface
     {
-        $command = Command::create(__FUNCTION__, $this->options, $srcUri, $destUri);
+        $command = Command::create(__FUNCTION__, $this->options, $srcUri, $destUri, $overwrite);
         $command->execute();
         return $command->getResult();
     }

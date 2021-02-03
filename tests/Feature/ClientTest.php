@@ -7,6 +7,7 @@ namespace Ngmy\L4Dav\Tests\Feature;
 use Ngmy\L4Dav\Tests\TestCase;
 use Ngmy\L4Dav\WebDavClient;
 use Ngmy\L4Dav\WebDavClientOptionsBuilder;
+use Psr\Http\Message\UriInterface;
 use RuntimeException;
 
 class ClientTest extends TestCase
@@ -63,32 +64,248 @@ class ClientTest extends TestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
-    public function testCopyFile(): void
+    /**
+     * @return list<list<mixed>>
+     */
+    public function copyProvider(): array
     {
-        $client = $this->createClient();
-
-        $file = $this->createTmpFile();
-        $path = \stream_get_meta_data($file)['uri'];
-        $response = $client->upload($path, 'file');
-
-        $response = $client->copy('file', 'file2');
-
-        $this->assertEquals('Created', $response->getReasonPhrase());
-        $this->assertEquals(201, $response->getStatusCode());
+        return [
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $client = $this->createClient();
+                    $client->upload($path, 'file1');
+                },
+                'file1',
+                'file2',
+                false,
+                [
+                    'reason_phrase' => 'Created',
+                    'status_code' => 201,
+                ],
+            ],
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $client = $this->createClient();
+                    $client->upload($path, 'file1');
+                    $client->upload($path, 'file2');
+                },
+                'file1',
+                'file2',
+                false,
+                [
+                    'reason_phrase' => 'Precondition Failed',
+                    'status_code' => 412,
+                ],
+            ],
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $client = $this->createClient();
+                    $client->upload($path, 'file1');
+                    $client->upload($path, 'file2');
+                },
+                'file1',
+                'file2',
+                true,
+                [
+                    'reason_phrase' => 'No Content',
+                    'status_code' => 204,
+                ],
+            ],
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $client = $this->createClient();
+                    $client->makeDirectory('dir1/');
+                    $client->upload($path, 'dir1/file1_1');
+                    $client->upload($path, 'dir1/file1_2');
+                    $client->makeDirectory('dir1/dir1_2/');
+                    $client->upload($path, 'dir1/dir1_2/file1_2_1');
+                    $client->upload($path, 'dir1/dir1_2/file1_2_2');
+                },
+                'dir1/',
+                'dir2/',
+                false,
+                [
+                    'reason_phrase' => 'Created',
+                    'status_code' => 201,
+                ],
+            ],
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $client = $this->createClient();
+                    $client->makeDirectory('dir1/');
+                    $client->upload($path, 'dir1/file1_1');
+                    $client->upload($path, 'dir1/file1_2');
+                    $client->makeDirectory('dir1/dir1_2/');
+                    $client->upload($path, 'dir1/dir1_2/file1_2_1');
+                    $client->upload($path, 'dir1/dir1_2/file1_2_2');
+                    $client->makeDirectory('dir2/');
+                    $client->upload($path, 'dir2/file2_1');
+                    $client->upload($path, 'dir2/file2_2');
+                    $client->makeDirectory('dir2/dir2_2/');
+                    $client->upload($path, 'dir2/dir2_2/file2_2_1');
+                    $client->upload($path, 'dir2/dir2_2/file2_2_2');
+                },
+                'dir1/',
+                'dir2/',
+                false,
+                [
+                    'reason_phrase' => 'Precondition Failed',
+                    'status_code' => 412,
+                ],
+            ],
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $client = $this->createClient();
+                    $client->makeDirectory('dir1/');
+                    $client->upload($path, 'dir1/file1_1');
+                    $client->upload($path, 'dir1/file1_2');
+                    $client->makeDirectory('dir1/dir1_2/');
+                    $client->upload($path, 'dir1/dir1_2/file1_2_1');
+                    $client->upload($path, 'dir1/dir1_2/file1_2_2');
+                    $client->makeDirectory('dir2/');
+                    $client->upload($path, 'dir2/file2_1');
+                    $client->upload($path, 'dir2/file2_2');
+                    $client->makeDirectory('dir2/dir2_2/');
+                    $client->upload($path, 'dir2/dir2_2/file2_2_1');
+                    $client->upload($path, 'dir2/dir2_2/file2_2_2');
+                },
+                'dir1/',
+                'dir2/',
+                true,
+                [
+                    'reason_phrase' => 'No Content',
+                    'status_code' => 204,
+                ],
+            ],
+        ];
     }
 
-    public function testMoveFile(): void
+    /**
+     * @param string|UriInterface $srcUri
+     * @param string|UriInterface $destUri
+     * @param array<string, string> $expected
+     * @dataProvider copyProvider
+     */
+    public function testCopy(callable $before, $srcUri, $destUri, bool $overwrite, array $expected): void
     {
+        $before();
+
         $client = $this->createClient();
+        $response = $client->copy($srcUri, $destUri, $overwrite);
 
-        $file = $this->createTmpFile();
-        $path = \stream_get_meta_data($file)['uri'];
-        $response = $client->upload($path, 'file');
+        $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
+        $this->assertEquals($expected['status_code'], $response->getStatusCode());
+    }
 
-        $response = $client->move('file', 'file2');
+    /**
+     * @return list<list<mixed>>
+     */
+    public function moveProvider(): array
+    {
+        return [
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $client = $this->createClient();
+                    $client->upload($path, 'file1');
+                },
+                'file1',
+                'file2',
+                [
+                    'reason_phrase' => 'Created',
+                    'status_code' => 201,
+                ],
+            ],
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $client = $this->createClient();
+                    $client->upload($path, 'file1');
+                    $client->upload($path, 'file2');
+                },
+                'file1',
+                'file2',
+                [
+                    'reason_phrase' => 'No Content',
+                    'status_code' => 204,
+                ],
+            ],
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $client = $this->createClient();
+                    $client->makeDirectory('dir1/');
+                    $client->upload($path, 'dir1/file1_1');
+                    $client->upload($path, 'dir1/file1_2');
+                    $client->makeDirectory('dir1/dir1_2/');
+                    $client->upload($path, 'dir1/dir1_2/file1_2_1');
+                    $client->upload($path, 'dir1/dir1_2/file1_2_2');
+                },
+                'dir1/',
+                'dir2/',
+                [
+                    'reason_phrase' => 'Created',
+                    'status_code' => 201,
+                ],
+            ],
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $client = $this->createClient();
+                    $client->makeDirectory('dir1/');
+                    $client->upload($path, 'dir1/file1_1');
+                    $client->upload($path, 'dir1/file1_2');
+                    $client->makeDirectory('dir1/dir1_2/');
+                    $client->upload($path, 'dir1/dir1_2/file1_2_1');
+                    $client->upload($path, 'dir1/dir1_2/file1_2_2');
+                    $client->makeDirectory('dir2/');
+                    $client->upload($path, 'dir2/file2_1');
+                    $client->upload($path, 'dir2/file2_2');
+                    $client->makeDirectory('dir2/dir2_2/');
+                    $client->upload($path, 'dir2/dir2_2/file2_2_1');
+                    $client->upload($path, 'dir2/dir2_2/file2_2_2');
+                },
+                'dir1/',
+                'dir2/',
+                [
+                    'reason_phrase' => 'No Content',
+                    'status_code' => 204,
+                ],
+            ],
+        ];
+    }
 
-        $this->assertEquals('Created', $response->getReasonPhrase());
-        $this->assertEquals(201, $response->getStatusCode());
+    /**
+     * @param string|UriInterface $srcUri
+     * @param string|UriInterface $destUri
+     * @param array<string, string> $expected
+     * @dataProvider moveProvider
+     */
+    public function testMove(callable $before, $srcUri, $destUri, array $expected): void
+    {
+        $before();
+
+        $client = $this->createClient();
+        $response = $client->move($srcUri, $destUri);
+
+        $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
+        $this->assertEquals($expected['status_code'], $response->getStatusCode());
     }
 
     public function testMakeDirectory(): void
