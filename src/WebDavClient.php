@@ -123,11 +123,12 @@ class WebDavClient
      * List contents of a directory on the WebDAV server.
      *
      * @param string|UriInterface $uri The directory path
+     * @param string|int|null     $depth
      * @return ListResponse Returns a list of contents of the directory
      */
-    public function list($uri): ListResponse
+    public function list($uri, $depth = null): ListResponse
     {
-        $command = Command::create(__FUNCTION__, $this->options, $uri);
+        $command = Command::create(__FUNCTION__, $this->options, $uri, $depth);
         $command->execute();
         \assert($command->getResult() instanceof ListResponse);
         return $command->getResult();

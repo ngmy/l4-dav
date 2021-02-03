@@ -34,17 +34,66 @@ class ClientTest extends TestCase
         $this->assertEquals(201, $response->getStatusCode());
     }
 
-    public function testDeleteFile(): void
+    /**
+     * @return list<list<mixed>>
+     */
+    public function deleteProvider(): array
     {
+        return [
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $client = $this->createClient();
+                    $client->upload($path, 'file');
+                },
+                'file',
+                [
+                    'reason_phrase' => 'No Content',
+                    'status_code' => 204,
+                ],
+            ],
+            [
+                function () {
+                    $client = $this->createClient();
+                    $client->makeDirectory('dir/');
+                },
+                'dir/',
+                [
+                    'reason_phrase' => 'No Content',
+                    'status_code' => 204,
+                ],
+            ],
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $client = $this->createClient();
+                    $client->makeDirectory('dir/');
+                    $client->upload($path, 'dir/file');
+                },
+                'dir/',
+                [
+                    'reason_phrase' => 'No Content',
+                    'status_code' => 204,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @param array<string, string> $expected
+     * @dataProvider deleteProvider
+     */
+    public function testDeleteFile(callable $before, string $uri, array $expected): void
+    {
+        $before();
+
         $client = $this->createClient();
+        $response = $client->delete($uri);
 
-        $file = $this->createTmpFile();
-        $path = \stream_get_meta_data($file)['uri'];
-        $response = $client->upload($path, 'file');
-        $response = $client->delete('file');
-
-        $this->assertEquals('No Content', $response->getReasonPhrase());
-        $this->assertEquals(204, $response->getStatusCode());
+        $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
+        $this->assertEquals($expected['status_code'], $response->getStatusCode());
     }
 
     public function testGetFile(): void
@@ -353,6 +402,8 @@ class ClientTest extends TestCase
         $client->upload($path, 'file');
         $client->makeDirectory('dir/');
         $client->upload($path, 'dir/file');
+        $client->makeDirectory('dir/dir2/');
+        $client->upload($path, 'dir/dir2/file');
 
         $response = $client->list('');
 
@@ -412,7 +463,7 @@ class ClientTest extends TestCase
     protected function deleteWebDav(string $directoryPath = ''): void
     {
         $client = $this->createClient();
-        foreach ($client->list($directoryPath)->getList() as $path) {
+        foreach ($client->list($directoryPath, 1)->getList() as $path) {
             if ($path == $this->webDavBasePath . $directoryPath) {
                 continue;
             }

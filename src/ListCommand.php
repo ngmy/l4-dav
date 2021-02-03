@@ -13,11 +13,12 @@ class ListCommand extends Command
 
     /**
      * @param string|UriInterface $uri
+     * @param string|int|null     $depth
      */
-    protected function __construct(WebDavClientOptions $options, $uri)
+    protected function __construct(WebDavClientOptions $options, $uri, $depth = null)
     {
         parent::__construct($options, 'PROPFIND', $uri, new Headers([
-            'Depth' => '1',
+            'Depth' => (string) new Depth($depth),
         ]));
         $this->responseParser = new ListResponseParser();
     }
