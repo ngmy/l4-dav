@@ -10,24 +10,19 @@ use SimpleXMLElement;
 
 class ProppatchCommand extends Command
 {
-    /**
-     * @param string|UriInterface    $uri
-     * @param list<SimpleXMLElement> $propertiesToSet
-     * @param list<SimpleXMLElement> $propertiesToRemove
-     */
-    protected function __construct(WebDavClientOptions $options, $uri, array $propertiesToSet, array $propertiesToRemove)
-    {
-        parent::__construct($options, 'PROPPATCH', $uri, new Headers(), $this->configureBody(
-            $propertiesToSet,
-            $propertiesToRemove
-        ));
-    }
+    /** @var ProppatchParameters */
+    protected $parameters;
 
     /**
-     * @param list<SimpleXMLElement> $propertiesToSet
-     * @param list<SimpleXMLElement> $propertiesToRemove
+     * @param string|UriInterface    $requestUri
      */
-    private function configureBody(array $propertiesToSet, array $propertiesToRemove): string
+    protected function __construct($requestUri, ProppatchParameters $parameters, WebDavClientOptions $options)
+    {
+        parent::__construct('PROPPATCH', $requestUri, $options, new Headers(), $this->configureBody($parameters));
+        $this->parameters = $parameters;
+    }
+
+    private function configureBody(ProppatchParameters $parameters): string
     {
         $xml = new SimpleXMLElement(<<<XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -36,11 +31,11 @@ class ProppatchCommand extends Command
 XML);
 
         // TODO shared
-        if (!empty($propertiesToSet)) {
+        if (!empty($parameters->propertiesToSet())) {
             $xml->addChild('set', '', 'DAV:')->addChild('prop', '', 'DAV:');
         }
 
-        foreach ($propertiesToSet as $propertyToSet) {
+        foreach ($parameters->propertiesToSet() as $propertyToSet) {
             $namespaces = $propertyToSet->getNamespaces();
 
             if (empty($namespaces)) {
@@ -54,11 +49,11 @@ XML);
             $xml->children('DAV:')->set->prop->addChild($propertyToSet->getName(), (string) $propertyToSet, $propertyToSetNamespaceUri);
         }
 
-        if (!empty($propertiesToRemove)) {
+        if (!empty($parameters->propertiesToRemove())) {
             $xml->addChild('remove', '', 'DAV:')->addChild('prop', '', 'DAV:');
         }
 
-        foreach ($propertiesToRemove as $propertyToRemove) {
+        foreach ($parameters->propertiesToRemove() as $propertyToRemove) {
             $namespaces = $propertyToRemove->getNamespaces();
 
             if (empty($namespaces)) {

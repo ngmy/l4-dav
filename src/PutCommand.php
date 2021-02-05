@@ -10,19 +10,23 @@ use RuntimeException;
 
 class PutCommand extends Command
 {
+    /** @var PutParameters */
+    protected $parameters;
+
     /**
-     * @param string|UriInterface $destUri
+     * @param string|UriInterface $requestUri
      * @throws RuntimeException
      */
-    protected function __construct(WebDavClientOptions $options, $destUri, string $srcPath)
+    protected function __construct($requestUri, PutParameters $parameters, WebDavClientOptions $options)
     {
-        $fh = \fopen($srcPath, 'r');
+        $fh = \fopen($parameters->srcPath(), 'r');
         if ($fh === false) {
-            throw new RuntimeException('Failed to open file (' . $srcPath . ')');
+            throw new RuntimeException('Failed to open file (' . $parameters->srcPath() . ')');
         }
         $body = Psr17FactoryDiscovery::findStreamFactory()->createStreamFromResource($fh);
-        parent::__construct($options, 'PUT', $destUri, new Headers([
-            'Content-Length' => (string) \filesize($srcPath),
+        parent::__construct('PUT', $requestUri, $options, new Headers([
+            'Content-Length' => (string) \filesize($parameters->srcPath()),
         ]), $body);
+        $this->parameters = $parameters;
     }
 }

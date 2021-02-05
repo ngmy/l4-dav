@@ -11,7 +11,7 @@ class CopyParametersBuilder
 {
     /** @var UriInterface */
     private $destUri;
-    /** @var bool */
+    /** @var Overwrite */
     private $overwrite;
 
     /**
@@ -25,7 +25,7 @@ class CopyParametersBuilder
 
     public function setOverwrite(bool $overwrite): self
     {
-        $this->overwrite = $overwrite;
+        $this->overwrite = new Overwrite($overwrite);
         return $this;
     }
 

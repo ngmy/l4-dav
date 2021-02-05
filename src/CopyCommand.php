@@ -8,16 +8,19 @@ use Psr\Http\Message\UriInterface;
 
 class CopyCommand extends Command
 {
+    /** @var CopyParameters */
+    protected $parameters;
+
     /**
-     * @param string|UriInterface $srcUri
-     * @param string|UriInterface $destUri
+     * @param string|UriInterface $requestUri
      */
-    protected function __construct(WebDavClientOptions $options, $srcUri, $destUri, bool $overwrite = false)
+    protected function __construct($requestUri, CopyParameters $parameters, WebDavClientOptions $options)
     {
-        $fullDestUri = Url::createFullUrl($destUri, $options->baseUrl());
-        parent::__construct($options, 'Copy', $srcUri, new Headers([
+        $fullDestUri = Url::createFullUrl($parameters->destUri(), $options->baseUrl());
+        parent::__construct('Copy', $requestUri, $options, new Headers([
             'Destination' => (string) $fullDestUri,
-            'Overwrite' => $overwrite ? 'T' : 'F',
+            'Overwrite' => (string) $parameters->overwrite(),
         ]));
+        $this->parameters = $parameters;
     }
 }

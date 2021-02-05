@@ -8,11 +8,15 @@ use Psr\Http\Message\UriInterface;
 
 class DeleteCommand extends Command
 {
+    /** @var DeleteParameters */
+    protected $parameters;
+
     /**
-     * @param string|UriInterface $uri
+     * @param string|UriInterface $requestUri
      */
-    protected function __construct(WebDavClientOptions $options, $uri)
+    protected function __construct($requestUri, DeleteParameters $parameters, WebDavClientOptions $options)
     {
-        parent::__construct($options, 'DELETE', $uri);
+        parent::__construct('DELETE', $requestUri, $options);
+        $this->parameters = $parameters;
     }
 }

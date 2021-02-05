@@ -9,16 +9,16 @@ use RuntimeException;
 
 class GetCommand extends Command
 {
-    /** @var string */
-    private $destPath;
+    /** @var GetParameters */
+    protected $parameters;
 
     /**
-     * @param string|UriInterface $srcUri
+     * @param string|UriInterface $requestUri
      */
-    protected function __construct(WebDavClientOptions $options, $srcUri, string $destPath)
+    protected function __construct($requestUri, GetParameters $parameters, WebDavClientOptions $options)
     {
-        parent::__construct($options, 'GET', $srcUri);
-        $this->destPath = $destPath;
+        parent::__construct('GET', $requestUri, $options);
+        $this->parameters = $parameters;
     }
 
     /**
@@ -26,14 +26,16 @@ class GetCommand extends Command
      */
     protected function doAfter(): void
     {
-        $fh = \fopen($this->destPath, 'x');
-        if ($fh === false) {
-            throw new RuntimeException('Failed to create file (' . $this->destPath . ')');
+        if (!is_null($this->parameters->destPath())) {
+            $fh = \fopen($this->parameters->destPath(), 'x');
+            if ($fh === false) {
+                throw new RuntimeException('Failed to create file (' . $this->parameters->destPath() . ')');
+            }
+            $stream = $this->response->getBody();
+            while (!$stream->eof()) {
+                \fwrite($fh, $stream->read(2048));
+            }
+            \fclose($fh);
         }
-        $stream = $this->response->getBody();
-        while (!$stream->eof()) {
-            \fwrite($fh, $stream->read(2048));
-        }
-        \fclose($fh);
     }
 }

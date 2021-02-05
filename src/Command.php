@@ -11,12 +11,12 @@ use Psr\Http\Message\UriInterface;
 
 abstract class Command
 {
-    /** @var WebDavClientOptions */
-    protected $options;
     /** @var string */
     protected $method;
     /** @var FullUrl */
-    protected $uri;
+    protected $requestUri;
+    /** @var WebDavClientOptions */
+    protected $options;
     /** @var Headers */
     protected $headers;
     /** @var resource|StreamInterface|string|null */
@@ -50,11 +50,6 @@ abstract class Command
         return $this->response;
     }
 
-    public function options(): WebDavClientOptions
-    {
-        return $this->options;
-    }
-
     public function method(): string
     {
         return $this->method;
@@ -62,7 +57,12 @@ abstract class Command
 
     public function uri(): FullUrl
     {
-        return $this->uri;
+        return $this->requestUri;
+    }
+
+    public function options(): WebDavClientOptions
+    {
+        return $this->options;
     }
 
     public function headers(): Headers
@@ -79,20 +79,20 @@ abstract class Command
     }
 
     /**
-     * @param string|UriInterface                  $uri
+     * @param string|UriInterface                  $requestUri
      * @param Headers                              $headers
      * @param resource|StreamInterface|string|null $body
      */
     protected function __construct(
-        WebDavClientOptions $options,
         string $method,
-        $uri,
+        $requestUri,
+        WebDavClientOptions $options,
         Headers $headers = null,
         $body = null
     ) {
-        $this->options = $options;
         $this->method = $method;
-        $this->uri = Url::createFullUrl($uri, $options->baseUrl());
+        $this->requestUri = Url::createFullUrl($requestUri, $options->baseUrl());
+        $this->options = $options;
         $this->headers = $headers ?: new Headers([]);
         $this->body = $body;
         $this->dispatcher = new CommandDispatcher($this);

@@ -8,15 +8,18 @@ use Psr\Http\Message\UriInterface;
 
 class PropfindCommand extends Command
 {
+    /** @var PropfindParameters */
+    protected $parameters;
+
     /**
-     * @param UriInterface|string $uri
-     * @param Depth               $depth
+     * @param UriInterface|string $requestUri
      */
-    protected function __construct(WebDavClientOptions $options, $uri, Depth $depth)
+    protected function __construct($requestUri, PropfindParameters $parameters, WebDavClientOptions $options)
     {
-        parent::__construct($options, 'PROPFIND', $uri, new Headers([
-            'Depth' => (string) $depth,
+        parent::__construct('PROPFIND', $requestUri, $options, new Headers([
+            'Depth' => (string) $parameters->depth(),
         ]));
+        $this->parameters = $parameters;
     }
 
     protected function doAfter(): void

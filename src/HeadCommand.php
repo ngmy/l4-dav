@@ -8,12 +8,16 @@ use Psr\Http\Message\UriInterface;
 
 class HeadCommand extends Command
 {
+    /** @var HeadParameters */
+    protected $parameters;
+
     /**
-     * @param string|UriInterface $uri
+     * @param string|UriInterface $requestUri
      */
-    protected function __construct(WebDavClientOptions $options, $uri)
+    protected function __construct($requestUri, HeadParameters $parameters, WebDavClientOptions $options)
     {
-        parent::__construct($options, 'HEAD', $uri);
+        parent::__construct('HEAD', $requestUri, $options);
+        $this->parameters = $parameters;
     }
 
     protected function doAfter(): void
