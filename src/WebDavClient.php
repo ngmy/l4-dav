@@ -6,6 +6,7 @@ namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
+use SimpleXMLElement;
 
 class WebDavClient
 {
@@ -53,10 +54,10 @@ class WebDavClient
     /**
      * Delete an item on the WebDAV server.
      *
-     * @param string $uri The path of an item
+     * @param string|UriInterface $uri The path of an item
      * @return ResponseInterface Returns a Response class object
      */
-    public function delete(string $uri): ResponseInterface
+    public function delete($uri): ResponseInterface
     {
         $command = Command::create(__FUNCTION__, $this->options, $uri);
         $command->execute();
@@ -122,8 +123,8 @@ class WebDavClient
     /**
      * List contents of a directory on the WebDAV server.
      *
-     * @param string|UriInterface $uri The directory path
-     * @param string|int|null     $depth
+     * @param string|UriInterface $uri   The directory path
+     * @param int|string|null     $depth
      * @return ListResponse Returns a list of contents of the directory
      */
     public function list($uri, $depth = null): ListResponse
@@ -131,6 +132,28 @@ class WebDavClient
         $command = Command::create(__FUNCTION__, $this->options, $uri, $depth);
         $command->execute();
         \assert($command->getResult() instanceof ListResponse);
+        return $command->getResult();
+    }
+
+    /**
+     * @param string|UriInterface                     $uri
+     * @param list<SimpleXMLElement>|SimpleXMLElement $properties
+     */
+    public function setProperties($uri, $properties): ResponseInterface
+    {
+        $command = Command::create(__FUNCTION__, $this->options, $uri, $properties);
+        $command->execute();
+        return $command->getResult();
+    }
+
+    /**
+     * @param string|UriInterface                     $uri
+     * @param list<SimpleXMLElement>|SimpleXMLElement $properties
+     */
+    public function removeProperties($uri, $properties): ResponseInterface
+    {
+        $command = Command::create(__FUNCTION__, $this->options, $uri, $properties);
+        $command->execute();
         return $command->getResult();
     }
 }

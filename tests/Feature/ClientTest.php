@@ -9,6 +9,7 @@ use Ngmy\L4Dav\WebDavClient;
 use Ngmy\L4Dav\WebDavClientOptionsBuilder;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
+use SimpleXMLElement;
 
 class ClientTest extends TestCase
 {
@@ -409,16 +410,16 @@ class ClientTest extends TestCase
 
         $this->assertEquals('Multi-Status', $response->getReasonPhrase());
         $this->assertEquals(207, $response->getStatusCode());
-        $this->assertEquals($this->webDavBasePath, $response->getList()[0]);
-        $this->assertEquals($this->webDavBasePath . 'file', $response->getList()[1]);
-        $this->assertEquals($this->webDavBasePath . 'dir/', $response->getList()[2]);
+        $this->assertEquals($this->webDavBasePath, $response->getResponse()->response[0]->href);
+        $this->assertEquals($this->webDavBasePath . 'file', $response->getResponse()->response[1]->href);
+        $this->assertEquals($this->webDavBasePath . 'dir/', $response->getResponse()->response[2]->href);
 
         $response = $client->list('dir/');
 
         $this->assertEquals('Multi-Status', $response->getReasonPhrase());
         $this->assertEquals(207, $response->getStatusCode());
-        $this->assertEquals($this->webDavBasePath . 'dir/', $response->getList()[0]);
-        $this->assertEquals($this->webDavBasePath . 'dir/file', $response->getList()[1]);
+        $this->assertEquals($this->webDavBasePath . 'dir/', $response->getResponse()->response[0]->href);
+        $this->assertEquals($this->webDavBasePath . 'dir/file', $response->getResponse()->response[1]->href);
     }
 
     public function testListDirectoryContentsIfDirectoryIsNotFound(): void
@@ -429,7 +430,33 @@ class ClientTest extends TestCase
 
         $this->assertEquals('Not Found', $response->getReasonPhrase());
         $this->assertEquals(404, $response->getStatusCode());
-        $this->assertEmpty($response->getList());
+        $this->assertEquals(new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><root></root>'), $response->getResponse());
+    }
+
+    public function testSetProperties(): void
+    {
+        $file = $this->createTmpFile();
+        $path = \stream_get_meta_data($file)['uri'];
+        $client = $this->createClient();
+        $client->upload($path, 'file');
+
+        $client = $this->createClient();
+
+        $listResponseBefore = $client->list('file');
+        $propertyBefore = $listResponseBefore->getResponse();
+
+        $this->assertEquals('F', $propertyBefore->response->propstat->prop->children('http://apache.org/dav/props/')->executable);
+
+        $propertyBefore->response->propstat->prop->children('http://apache.org/dav/props/')->executable = 'T';
+        $setPropertiesResponse = $client->setProperties('file', $propertyBefore->response->propstat->prop->children('http://apache.org/dav/props/')->executable);
+
+        $this->assertEquals('Multi-Status', $setPropertiesResponse->getReasonPhrase());
+        $this->assertEquals(207, $setPropertiesResponse->getStatusCode());
+
+        $listResponseAfter = $client->list('file');
+        $propertyAfter = $listResponseAfter->getResponse();
+
+        $this->assertEquals('T', $propertyAfter->response->propstat->prop->children('http://apache.org/dav/props/')->executable);
     }
 
     protected function createClient(): WebDavClient
@@ -463,16 +490,16 @@ class ClientTest extends TestCase
     protected function deleteWebDav(string $directoryPath = ''): void
     {
         $client = $this->createClient();
-        foreach ($client->list($directoryPath, 1)->getList() as $path) {
-            if ($path == $this->webDavBasePath . $directoryPath) {
+        foreach ($client->list($directoryPath, 1)->getAllFilesAndDirectories() as $path) {
+            if ((string) $path == $this->webDavBasePath . $directoryPath) {
                 continue;
             }
-            if (\preg_match("|{$this->webDavBasePath}(.*\/)$|", $path, $matches)) {
+            if (\preg_match("|{$this->webDavBasePath}(.*\/)$|", (string) $path, $matches)) {
                 $this->deleteWebDav($matches[1]);
             }
             $client = $this->createClient();
-            \assert(!\is_null(\preg_replace("|{$this->webDavBasePath}(.*)|", '\1', $path)));
-            $client->delete(\preg_replace("|{$this->webDavBasePath}(.*)|", '\1', $path));
+            \assert(!\is_null(\preg_replace("|{$this->webDavBasePath}(.*)|", '\1', (string) $path)));
+            $client->delete(\preg_replace("|{$this->webDavBasePath}(.*)|", '\1', (string) $path));
         }
     }
 }

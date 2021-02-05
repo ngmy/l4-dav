@@ -7,33 +7,33 @@ namespace Ngmy\L4Dav;
 use Psr\Http\Message\ResponseInterface;
 use SimpleXMLElement;
 
-class ListResponseParser implements ResponseParserInterface
+class ListResponseParser
 {
-    public function parse(ResponseInterface $response): ListResponse
+    /** @var ResponseInterface */
+    private $response;
+
+    public function __construct(ResponseInterface $response)
     {
-        return new ListResponse($response, $this->parseList($response));
+        $this->response = $response;
     }
 
-    /**
-     * @return list<string>
-     */
-    private function parseList(ResponseInterface $response): array
+    public function parse(): SimpleXMLElement
     {
-        if ($response->getStatusCode() < 200 || $response->getStatusCode() > 300) {
-            return [];
+        if ($this->response->getStatusCode() < 200 || $this->response->getStatusCode() > 300) {
+            return $this->emptySimpleXmlElement();
         }
 
-        $xml = \simplexml_load_string($response->getBody()->getContents(), SimpleXMLElement::class, 0, 'D', true);
+        $xml = \simplexml_load_string((string) $this->response->getBody(), SimpleXMLElement::class);
 
         if ($xml === false) {
-            return [];
+            return $this->emptySimpleXmlElement();
         }
 
-        $list = [];
-        foreach ($xml->response as $element) {
-            $list[] = (string) $element->href;
-        }
+        return $xml->children('DAV:');
+    }
 
-        return $list;
+    private function emptySimpleXmlElement(): SimpleXMLElement
+    {
+        return new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><root></root>');
     }
 }

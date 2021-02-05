@@ -16,7 +16,7 @@ class Depth
      */
     public function __construct($depth = null)
     {
-        $this->depth = is_null($depth) ? 'infinity' : (string) $depth;
+        $this->depth = \is_null($depth) ? 'infinity' : (string) $depth;
         $this->validate();
     }
 
@@ -27,7 +27,7 @@ class Depth
 
     protected function validate(): void
     {
-        if (!in_array($this->depth, ['0', '1', 'infinity'], true)) {
+        if (!\in_array($this->depth, ['0', '1', 'infinity'], true)) {
             throw new InvalidArgumentException(
                 \sprintf('The depth `%s` must be "0" or "1" or "infinity"', $this->depth)
             );
