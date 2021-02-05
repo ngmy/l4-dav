@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
 use SimpleXMLElement;
 
-class PropfindResponseParser
+class XmlResponseParser
 {
     /** @var ResponseInterface */
     private $response;
@@ -20,19 +21,19 @@ class PropfindResponseParser
     public function parse(): SimpleXMLElement
     {
         if ($this->response->getStatusCode() < 200 || $this->response->getStatusCode() > 300) {
-            return $this->emptySimpleXmlElement();
+            return $this->createEmptyXml();
         }
 
         $xml = \simplexml_load_string((string) $this->response->getBody(), SimpleXMLElement::class);
 
         if ($xml === false) {
-            return $this->emptySimpleXmlElement();
+            throw new RuntimeException();
         }
 
         return $xml->children('DAV:');
     }
 
-    private function emptySimpleXmlElement(): SimpleXMLElement
+    private function createEmptyXml(): SimpleXMLElement
     {
         return new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><root></root>');
     }

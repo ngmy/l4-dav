@@ -14,7 +14,7 @@ abstract class Command
     /** @var string */
     protected $method;
     /** @var FullUrl */
-    protected $requestUri;
+    protected $url;
     /** @var WebDavClientOptions */
     protected $options;
     /** @var Headers */
@@ -31,7 +31,7 @@ abstract class Command
      */
     public static function create(string $command, ...$args): self
     {
-        $class = '\\Ngmy\\L4Dav\\' . \ucfirst(strtolower($command)) . 'Command';
+        $class = '\\Ngmy\\L4Dav\\' . \ucfirst(\strtolower($command)) . 'Command';
         if (!\class_exists($class)) {
             throw new InvalidArgumentException(\sprintf('Class `%s` could not be instantiated', $class));
         }
@@ -55,9 +55,9 @@ abstract class Command
         return $this->method;
     }
 
-    public function uri(): FullUrl
+    public function url(): FullUrl
     {
-        return $this->requestUri;
+        return $this->url;
     }
 
     public function options(): WebDavClientOptions
@@ -79,19 +79,19 @@ abstract class Command
     }
 
     /**
-     * @param string|UriInterface                  $requestUri
+     * @param string|UriInterface                  $url
      * @param Headers                              $headers
      * @param resource|StreamInterface|string|null $body
      */
     protected function __construct(
         string $method,
-        $requestUri,
+        $url,
         WebDavClientOptions $options,
         Headers $headers = null,
         $body = null
     ) {
         $this->method = $method;
-        $this->requestUri = Url::createFullUrl($requestUri, $options->baseUrl());
+        $this->url = Url::createFullUrl($url, $options->baseUrl());
         $this->options = $options;
         $this->headers = $headers ?: new Headers([]);
         $this->body = $body;

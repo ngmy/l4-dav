@@ -9,13 +9,13 @@ use Psr\Http\Message\UriInterface;
 
 class WebDavClient
 {
-    /** @var WebDavClientOptions */
+    /** @var WebDavClientOptions Options for the WebDAV client */
     private $options;
 
     /**
-     * Create new WebDAV client.
+     * Create a new instance of the WebDAV Client.
      *
-     * @param WebDavClientOptions $options WebDavClient options
+     * @param WebDavClientOptions $options Options for the WebDAV client
      */
     public function __construct(WebDavClientOptions $options = null)
     {
@@ -25,14 +25,14 @@ class WebDavClient
     /**
      * Download a file from the WebDAV server.
      *
-     * @param string|UriInterface $requestUri   The source path of a file
-     * @param GetParameters $parameters
-     * @return ResponseInterface Returns a Response class object
+     * @param string|UriInterface $url        A full URL of a resource, or a URL relative to a base URL of a resource
+     * @param GetParameters       $parameters Parameters for the GET method
+     * @return ResponseInterface An instance of any class that implements the PSR-7 ResponseInterface
      */
-    public function get($requestUri, GetParameters $parameters = null): ResponseInterface
+    public function get($url, GetParameters $parameters = null): ResponseInterface
     {
         $parameters = $parameters ?: (new GetParametersBuilder())->build();
-        $command = Command::create('GET', $requestUri, $parameters, $this->options);
+        $command = Command::create('GET', $url, $parameters, $this->options);
         $command->execute();
         return $command->getResult();
     }
@@ -40,13 +40,13 @@ class WebDavClient
     /**
      * Upload a file to the WebDAV server.
      *
-     * @param string|UriInterface $requestUri The destination path of a file
-     * @param PutParameters $parameters
-     * @return ResponseInterface Returns a Response class object
+     * @param string|UriInterface $url        A full URL of a resource, or a URL relative to a base URL of a resource
+     * @param PutParameters       $parameters Parameters for the PUT method
+     * @return ResponseInterface An instance of any class that implements the PSR-7 ResponseInterface
      */
-    public function put($requestUri, PutParameters $parameters): ResponseInterface
+    public function put($url, PutParameters $parameters): ResponseInterface
     {
-        $command = Command::create('PUT', $requestUri, $parameters, $this->options);
+        $command = Command::create('PUT', $url, $parameters, $this->options);
         $command->execute();
         return $command->getResult();
     }
@@ -54,12 +54,12 @@ class WebDavClient
     /**
      * Delete an item on the WebDAV server.
      *
-     * @param string|UriInterface $requestUri The path of an item
-     * @return ResponseInterface Returns a Response class object
+     * @param string|UriInterface $url A full URL of a resource, or a URL relative to a base URL of a resource
+     * @return ResponseInterface An instance of any class that implements the PSR-7 ResponseInterface
      */
-    public function delete($requestUri): ResponseInterface
+    public function delete($url): ResponseInterface
     {
-        $command = Command::create('DELETE', $requestUri, new DeleteParameters(), $this->options);
+        $command = Command::create('DELETE', $url, new DeleteParameters(), $this->options);
         $command->execute();
         return $command->getResult();
     }
@@ -67,13 +67,13 @@ class WebDavClient
     /**
      * Copy an item on the WebDAV server.
      *
-     * @param string|UriInterface $requestUri    The source path of an item
-     * @param CopyParameters $parameters
-     * @return ResponseInterface Returns a Response class object
+     * @param string|UriInterface $url        A full URL of a resource, or a URL relative to a base URL of a resource
+     * @param CopyParameters      $parameters Parameters for the COPY method
+     * @return ResponseInterface An instance of any class that implements the PSR-7 ResponseInterface
      */
-    public function copy($requestUri, CopyParameters $parameters): ResponseInterface
+    public function copy($url, CopyParameters $parameters): ResponseInterface
     {
-        $command = Command::create('COPY', $requestUri, $parameters, $this->options);
+        $command = Command::create('COPY', $url, $parameters, $this->options);
         $command->execute();
         return $command->getResult();
     }
@@ -81,13 +81,13 @@ class WebDavClient
     /**
      * Rename an item on the WebDAV server.
      *
-     * @param string|UriInterface $requestUri  The source path of an item
-     * @param MoveParameters $parameters
-     * @return ResponseInterface Returns a Response class object
+     * @param string|UriInterface $url        A full URL of a resource, or a URL relative to a base URL of a resource
+     * @param MoveParameters      $parameters Parameters for the MOVE method
+     * @return ResponseInterface An instance of any class that implements the PSR-7 ResponseInterface
      */
-    public function move($requestUri, MoveParameters $parameters): ResponseInterface
+    public function move($url, MoveParameters $parameters): ResponseInterface
     {
-        $command = Command::create('MOVE', $requestUri, $parameters, $this->options);
+        $command = Command::create('MOVE', $url, $parameters, $this->options);
         $command->execute();
         return $command->getResult();
     }
@@ -95,12 +95,12 @@ class WebDavClient
     /**
      * Make a directory on the WebDAV server.
      *
-     * @param string|UriInterface $requestUri The directory path
-     * @return ResponseInterface Returns a Response class object
+     * @param string|UriInterface $url A full URL of a resource, or a URL relative to a base URL of a resource
+     * @return ResponseInterface An instance of any class that implements the PSR-7 ResponseInterface
      */
-    public function mkcol($requestUri): ResponseInterface
+    public function mkcol($url): ResponseInterface
     {
-        $command = Command::create('MKCOL', $requestUri, new MkcolParameters(), $this->options);
+        $command = Command::create('MKCOL', $url, new MkcolParameters(), $this->options);
         $command->execute();
         return $command->getResult();
     }
@@ -108,12 +108,12 @@ class WebDavClient
     /**
      * Check the existence of an item on the WebDAV server.
      *
-     * @param string|UriInterface $requestUri The path of an item
-     * @return HeadResponse Returns true if an item exists
+     * @param string|UriInterface $url A full URL of a resource, or a URL relative to a base URL of a resource
+     * @return HeadResponse An instance of the HeadResponse that implements the PSR-7 ResponseInterface
      */
-    public function head($requestUri): HeadResponse
+    public function head($url): HeadResponse
     {
-        $command = Command::create('HEAD', $requestUri, new HeadParameters(), $this->options);
+        $command = Command::create('HEAD', $url, new HeadParameters(), $this->options);
         $command->execute();
         \assert($command->getResult() instanceof HeadResponse);
         return $command->getResult();
@@ -122,26 +122,26 @@ class WebDavClient
     /**
      * List contents of a directory on the WebDAV server.
      *
-     * @param string|UriInterface $requestUri   The directory path
-     * @param PropfindParameters  $parameters
-     * @return PropfindResponse Returns a list of contents of the directory
+     * @param string|UriInterface $url        A full URL of a resource, or a URL relative to a base URL of a resource
+     * @param PropfindParameters  $parameters Parameters for the PROPFIND method.
+     * @return PropfindResponse An instance of the PropfindResponse that implements the PSR-7 ResponseInterface
      */
-    public function propfind($requestUri, PropfindParameters $parameters = null): PropfindResponse
+    public function propfind($url, PropfindParameters $parameters = null): PropfindResponse
     {
         $parameters = $parameters ?: (new PropfindParametersBuilder())->build();
-        $command = Command::create('PROPFIND', $requestUri, $parameters, $this->options);
+        $command = Command::create('PROPFIND', $url, $parameters, $this->options);
         $command->execute();
         \assert($command->getResult() instanceof PropfindResponse);
         return $command->getResult();
     }
 
     /**
-     * @param string|UriInterface $requestUri
-     * @param ProppatchParameters $parameters
+     * @param string|UriInterface $url A full URL of a resource, or a URL relative to a base URL of a resource
+     * @return ResponseInterface An instance of any class that implements the PSR-7 ResponseInterface
      */
-    public function proppatch($requestUri, ProppatchParameters $parameters): ResponseInterface
+    public function proppatch($url, ProppatchParameters $parameters): ResponseInterface
     {
-        $command = Command::create('PROPPATCH', $requestUri, $parameters, $this->options);
+        $command = Command::create('PROPPATCH', $url, $parameters, $this->options);
         $command->execute();
         return $command->getResult();
     }

@@ -13,11 +13,11 @@ class GetCommand extends Command
     protected $parameters;
 
     /**
-     * @param string|UriInterface $requestUri
+     * @param string|UriInterface $url
      */
-    protected function __construct($requestUri, GetParameters $parameters, WebDavClientOptions $options)
+    protected function __construct($url, GetParameters $parameters, WebDavClientOptions $options)
     {
-        parent::__construct('GET', $requestUri, $options);
+        parent::__construct('GET', $url, $options);
         $this->parameters = $parameters;
     }
 
@@ -26,7 +26,7 @@ class GetCommand extends Command
      */
     protected function doAfter(): void
     {
-        if (!is_null($this->parameters->destPath())) {
+        if (!\is_null($this->parameters->destPath())) {
             $fh = \fopen($this->parameters->destPath(), 'x');
             if ($fh === false) {
                 throw new RuntimeException('Failed to create file (' . $this->parameters->destPath() . ')');

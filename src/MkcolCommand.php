@@ -12,11 +12,11 @@ class MkcolCommand extends Command
     protected $parameters;
 
     /**
-     * @param string|UriInterface $requestUri
+     * @param string|UriInterface $url
      */
-    protected function __construct($requestUri, MkcolParameters $parameters, WebDavClientOptions $options)
+    protected function __construct($url, MkcolParameters $parameters, WebDavClientOptions $options)
     {
-        parent::__construct('MKCOL', $requestUri, $options);
+        parent::__construct('MKCOL', $url, $options);
         $this->parameters = $parameters;
     }
 }

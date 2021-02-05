@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use Psr\Http\Message\UriInterface;
 use Http\Discovery\Psr17FactoryDiscovery;
+use Psr\Http\Message\UriInterface;
 
 class CopyParametersBuilder
 {

@@ -12,12 +12,12 @@ class CopyCommand extends Command
     protected $parameters;
 
     /**
-     * @param string|UriInterface $requestUri
+     * @param string|UriInterface $url
      */
-    protected function __construct($requestUri, CopyParameters $parameters, WebDavClientOptions $options)
+    protected function __construct($url, CopyParameters $parameters, WebDavClientOptions $options)
     {
         $fullDestUri = Url::createFullUrl($parameters->destUri(), $options->baseUrl());
-        parent::__construct('Copy', $requestUri, $options, new Headers([
+        parent::__construct('Copy', $url, $options, new Headers([
             'Destination' => (string) $fullDestUri,
             'Overwrite' => (string) $parameters->overwrite(),
         ]));

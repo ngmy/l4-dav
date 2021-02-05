@@ -12,11 +12,11 @@ class HeadCommand extends Command
     protected $parameters;
 
     /**
-     * @param string|UriInterface $requestUri
+     * @param string|UriInterface $url
      */
-    protected function __construct($requestUri, HeadParameters $parameters, WebDavClientOptions $options)
+    protected function __construct($url, HeadParameters $parameters, WebDavClientOptions $options)
     {
-        parent::__construct('HEAD', $requestUri, $options);
+        parent::__construct('HEAD', $url, $options);
         $this->parameters = $parameters;
     }
 

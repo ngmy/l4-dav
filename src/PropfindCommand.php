@@ -12,11 +12,11 @@ class PropfindCommand extends Command
     protected $parameters;
 
     /**
-     * @param UriInterface|string $requestUri
+     * @param string|UriInterface $url
      */
-    protected function __construct($requestUri, PropfindParameters $parameters, WebDavClientOptions $options)
+    protected function __construct($url, PropfindParameters $parameters, WebDavClientOptions $options)
     {
-        parent::__construct('PROPFIND', $requestUri, $options, new Headers([
+        parent::__construct('PROPFIND', $url, $options, new Headers([
             'Depth' => (string) $parameters->depth(),
         ]));
         $this->parameters = $parameters;

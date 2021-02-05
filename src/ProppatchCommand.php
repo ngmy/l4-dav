@@ -14,11 +14,11 @@ class ProppatchCommand extends Command
     protected $parameters;
 
     /**
-     * @param string|UriInterface    $requestUri
+     * @param string|UriInterface $url
      */
-    protected function __construct($requestUri, ProppatchParameters $parameters, WebDavClientOptions $options)
+    protected function __construct($url, ProppatchParameters $parameters, WebDavClientOptions $options)
     {
-        parent::__construct('PROPPATCH', $requestUri, $options, new Headers(), $this->configureBody($parameters));
+        parent::__construct('PROPPATCH', $url, $options, new Headers(), $this->configureBody($parameters));
         $this->parameters = $parameters;
     }
 
@@ -39,14 +39,21 @@ XML);
             $namespaces = $propertyToSet->getNamespaces();
 
             if (empty($namespaces)) {
-                $xml->children('DAV:')->set->prop->addChild($propertyToSet->getName(), (string) $propertyToSet)->asXML();
+                $xml->children('DAV:')->set->prop->addChild(
+                    $propertyToSet->getName(),
+                    (string) $propertyToSet
+                )->asXML();
                 continue;
             }
 
             \assert(\count($namespaces) == 1);
             $propertyToSetNamespacePrefix = \array_key_first($namespaces);
             $propertyToSetNamespaceUri = $namespaces[$propertyToSetNamespacePrefix];
-            $xml->children('DAV:')->set->prop->addChild($propertyToSet->getName(), (string) $propertyToSet, $propertyToSetNamespaceUri);
+            $xml->children('DAV:')->set->prop->addChild(
+                $propertyToSet->getName(),
+                (string) $propertyToSet,
+                $propertyToSetNamespaceUri
+            );
         }
 
         if (!empty($parameters->propertiesToRemove())) {
@@ -57,14 +64,21 @@ XML);
             $namespaces = $propertyToRemove->getNamespaces();
 
             if (empty($namespaces)) {
-                $xml->children('DAV:')->remove->prop->addChild($propertyToRemove->getName(), (string) $propertyToRemove)->asXML();
+                $xml->children('DAV:')->remove->prop->addChild(
+                    $propertyToRemove->getName(),
+                    (string) $propertyToRemove
+                )->asXML();
                 continue;
             }
 
             \assert(\count($namespaces) == 1);
             $propertyToRemoveNamespacePrefix = \array_key_first($namespaces);
             $propertyToRemoveNamespaceUri = $namespaces[$propertyToRemoveNamespacePrefix];
-            $xml->children('DAV:')->remove->prop->addChild($propertyToRemove->getName(), (string) $propertyToRemove, $propertyToRemoveNamespaceUri);
+            $xml->children('DAV:')->remove->prop->addChild(
+                $propertyToRemove->getName(),
+                (string) $propertyToRemove,
+                $propertyToRemoveNamespaceUri
+            );
         }
 
         $body = $xml->asXML();

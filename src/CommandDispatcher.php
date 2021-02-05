@@ -24,7 +24,7 @@ class CommandDispatcher
         $this->command = $command;
         $this->httpClient = (new HttpClientFactory($command->options()))->create();
         $request = Psr17FactoryDiscovery::findRequestFactory()
-            ->createRequest($this->command->method(), (string) $this->command->uri());
+            ->createRequest($this->command->method(), (string) $this->command->url());
         $this->request = $this->configureRequest($request);
     }
 

@@ -14,8 +14,8 @@ class CopyParameters
     private $overwrite;
 
     /**
-     * @param UriInterface $destUri The destination path of a file
-     * @param Overwrite                $overwrite Whether to overwrite copy
+     * @param UriInterface $destUri   The destination path of a file
+     * @param Overwrite    $overwrite Whether to overwrite copy
      */
     public function __construct(UriInterface $destUri, Overwrite $overwrite = null)
     {

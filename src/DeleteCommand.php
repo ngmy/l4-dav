@@ -12,11 +12,11 @@ class DeleteCommand extends Command
     protected $parameters;
 
     /**
-     * @param string|UriInterface $requestUri
+     * @param string|UriInterface $url
      */
-    protected function __construct($requestUri, DeleteParameters $parameters, WebDavClientOptions $options)
+    protected function __construct($url, DeleteParameters $parameters, WebDavClientOptions $options)
     {
-        parent::__construct('DELETE', $requestUri, $options);
+        parent::__construct('DELETE', $url, $options);
         $this->parameters = $parameters;
     }
 }

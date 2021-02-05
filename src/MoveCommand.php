@@ -12,12 +12,12 @@ class MoveCommand extends Command
     protected $parameters;
 
     /**
-     * @param string|UriInterface $requestUri
+     * @param string|UriInterface $url
      */
-    protected function __construct($requestUri, MoveParameters $parameters, WebDavClientOptions $options)
+    protected function __construct($url, MoveParameters $parameters, WebDavClientOptions $options)
     {
         $fullDestUri = Url::createFullUrl($parameters->destUri(), $options->baseUrl());
-        parent::__construct('MOVE', $requestUri, $options, new Headers([
+        parent::__construct('MOVE', $url, $options, new Headers([
             'Destination' => (string) $fullDestUri,
         ]));
         $this->parameters = $parameters;
