@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\UriInterface;
 
-class MakeDirectoryCommand extends Command
+class MkcolCommand extends Command
 {
     /**
      * @param string|UriInterface $uri

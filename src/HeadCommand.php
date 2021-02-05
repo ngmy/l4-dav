@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\UriInterface;
 
-class ExistsCommand extends Command
+class HeadCommand extends Command
 {
     /**
      * @param string|UriInterface $uri
@@ -18,6 +18,6 @@ class ExistsCommand extends Command
 
     protected function doAfter(): void
     {
-        $this->response = new ExistsResponse($this->response);
+        $this->response = new HeadResponse($this->response);
     }
 }

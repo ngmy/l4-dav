@@ -31,7 +31,7 @@ abstract class Command
      */
     public static function create(string $command, ...$args): self
     {
-        $class = '\\Ngmy\\L4Dav\\' . \ucfirst($command) . 'Command';
+        $class = '\\Ngmy\\L4Dav\\' . \ucfirst(strtolower($command)) . 'Command';
         if (!\class_exists($class)) {
             throw new InvalidArgumentException(\sprintf('Class `%s` could not be instantiated', $class));
         }

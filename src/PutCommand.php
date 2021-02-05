@@ -8,13 +8,13 @@ use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
 
-class UploadCommand extends Command
+class PutCommand extends Command
 {
     /**
      * @param string|UriInterface $destUri
      * @throws RuntimeException
      */
-    protected function __construct(WebDavClientOptions $options, string $srcPath, $destUri)
+    protected function __construct(WebDavClientOptions $options, $destUri, string $srcPath)
     {
         $fh = \fopen($srcPath, 'r');
         if ($fh === false) {

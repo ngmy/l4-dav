@@ -6,7 +6,6 @@ namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
-use SimpleXMLElement;
 
 class WebDavClient
 {
@@ -27,12 +26,12 @@ class WebDavClient
      * Download a file from the WebDAV server.
      *
      * @param string|UriInterface $srcUri   The source path of a file
-     * @param string              $destPath The destination path of a file
+     * @param GetParameters $parameters
      * @return ResponseInterface Returns a Response class object
      */
-    public function download($srcUri, string $destPath): ResponseInterface
+    public function get($srcUri, GetParameters $parameters): ResponseInterface
     {
-        $command = Command::create(__FUNCTION__, $this->options, $srcUri, $destPath);
+        $command = Command::create('GET', $this->options, $srcUri, $parameters->destPath());
         $command->execute();
         return $command->getResult();
     }
@@ -40,13 +39,13 @@ class WebDavClient
     /**
      * Upload a file to the WebDAV server.
      *
-     * @param string              $srcPath The source path of a file
      * @param string|UriInterface $destUri The destination path of a file
+     * @param PutParameters $parameters
      * @return ResponseInterface Returns a Response class object
      */
-    public function upload(string $srcPath, $destUri): ResponseInterface
+    public function put($destUri, PutParameters $parameters): ResponseInterface
     {
-        $command = Command::create(__FUNCTION__, $this->options, $srcPath, $destUri);
+        $command = Command::create('PUT', $this->options, $destUri, $parameters->srcPath());
         $command->execute();
         return $command->getResult();
     }
@@ -59,7 +58,7 @@ class WebDavClient
      */
     public function delete($uri): ResponseInterface
     {
-        $command = Command::create(__FUNCTION__, $this->options, $uri);
+        $command = Command::create('DELETE', $this->options, $uri);
         $command->execute();
         return $command->getResult();
     }
@@ -68,13 +67,12 @@ class WebDavClient
      * Copy an item on the WebDAV server.
      *
      * @param string|UriInterface $srcUri    The source path of an item
-     * @param string|UriInterface $destUri   The destination path of an item
-     * @param bool                $overwrite Whether to overwrite copy
+     * @param CopyParameters $parameters
      * @return ResponseInterface Returns a Response class object
      */
-    public function copy($srcUri, $destUri, $overwrite = false): ResponseInterface
+    public function copy($srcUri, CopyParameters $parameters): ResponseInterface
     {
-        $command = Command::create(__FUNCTION__, $this->options, $srcUri, $destUri, $overwrite);
+        $command = Command::create('COPY', $this->options, $srcUri, $parameters->destUri(), $parameters->overwrite());
         $command->execute();
         return $command->getResult();
     }
@@ -83,12 +81,12 @@ class WebDavClient
      * Rename an item on the WebDAV server.
      *
      * @param string|UriInterface $srcUri  The source path of an item
-     * @param string|UriInterface $destUri The destination path of an item
+     * @param MoveParameters $parameters
      * @return ResponseInterface Returns a Response class object
      */
-    public function move($srcUri, $destUri): ResponseInterface
+    public function move($srcUri, MoveParameters $parameters): ResponseInterface
     {
-        $command = Command::create(__FUNCTION__, $this->options, $srcUri, $destUri);
+        $command = Command::create('MOVE', $this->options, $srcUri, $parameters->destUri());
         $command->execute();
         return $command->getResult();
     }
@@ -99,9 +97,9 @@ class WebDavClient
      * @param string|UriInterface $uri The directory path
      * @return ResponseInterface Returns a Response class object
      */
-    public function makeDirectory($uri): ResponseInterface
+    public function mkcol($uri): ResponseInterface
     {
-        $command = Command::create(__FUNCTION__, $this->options, $uri);
+        $command = Command::create('MKCOL', $this->options, $uri);
         $command->execute();
         return $command->getResult();
     }
@@ -110,13 +108,13 @@ class WebDavClient
      * Check the existence of an item on the WebDAV server.
      *
      * @param string|UriInterface $uri The path of an item
-     * @return ExistsResponse Returns true if an item exists
+     * @return HeadResponse Returns true if an item exists
      */
-    public function exists($uri): ExistsResponse
+    public function head($uri): HeadResponse
     {
-        $command = Command::create(__FUNCTION__, $this->options, $uri);
+        $command = Command::create('HEAD', $this->options, $uri);
         $command->execute();
-        \assert($command->getResult() instanceof ExistsResponse);
+        \assert($command->getResult() instanceof HeadResponse);
         return $command->getResult();
     }
 
@@ -124,35 +122,24 @@ class WebDavClient
      * List contents of a directory on the WebDAV server.
      *
      * @param string|UriInterface $uri   The directory path
-     * @param int|string|null     $depth
-     * @return ListResponse Returns a list of contents of the directory
+     * @param PropfindParameters  $parameters
+     * @return PropfindResponse Returns a list of contents of the directory
      */
-    public function list($uri, $depth = null): ListResponse
+    public function propfind($uri, PropfindParameters $parameters): PropfindResponse
     {
-        $command = Command::create(__FUNCTION__, $this->options, $uri, $depth);
+        $command = Command::create('PROPFIND', $this->options, $uri, $parameters->depth());
         $command->execute();
-        \assert($command->getResult() instanceof ListResponse);
+        \assert($command->getResult() instanceof PropfindResponse);
         return $command->getResult();
     }
 
     /**
-     * @param string|UriInterface                     $uri
-     * @param list<SimpleXMLElement>|SimpleXMLElement $properties
+     * @param string|UriInterface $uri
+     * @param ProppatchParameters $parameters
      */
-    public function setProperties($uri, $properties): ResponseInterface
+    public function proppatch($uri, ProppatchParameters $parameters): ResponseInterface
     {
-        $command = Command::create(__FUNCTION__, $this->options, $uri, $properties);
-        $command->execute();
-        return $command->getResult();
-    }
-
-    /**
-     * @param string|UriInterface                     $uri
-     * @param list<SimpleXMLElement>|SimpleXMLElement $properties
-     */
-    public function removeProperties($uri, $properties): ResponseInterface
-    {
-        $command = Command::create(__FUNCTION__, $this->options, $uri, $properties);
+        $command = Command::create('Proppatch', $this->options, $uri, $parameters->propertiesToSet(), $parameters->propertiesToRemove());
         $command->execute();
         return $command->getResult();
     }

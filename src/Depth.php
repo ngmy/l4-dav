@@ -16,7 +16,7 @@ class Depth
      */
     public function __construct($depth = null)
     {
-        $this->depth = \is_null($depth) ? 'infinity' : (string) $depth;
+        $this->depth = \is_null($depth) ? 'infinity' : strtolower((string) $depth);
         $this->validate();
     }
 

@@ -8,17 +8,17 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 use SimpleXMLElement;
 
-class ListResponse implements ResponseInterface
+class PropfindResponse implements ResponseInterface
 {
     use ResponseTrait;
 
-    /** @var ListResponseParser */
+    /** @var PropfindResponseParser */
     private $parser;
 
     public function __construct(ResponseInterface $response)
     {
         $this->response = $response;
-        $this->parser = new ListResponseParser($response);
+        $this->parser = new PropfindResponseParser($response);
     }
 
     /**

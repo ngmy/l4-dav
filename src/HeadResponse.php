@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\ResponseInterface;
 
-class ExistsResponse implements ResponseInterface
+class HeadResponse implements ResponseInterface
 {
     use ResponseTrait;
 

@@ -7,7 +7,7 @@ namespace Ngmy\L4Dav;
 use Psr\Http\Message\ResponseInterface;
 use SimpleXMLElement;
 
-class ListResponseParser
+class PropfindResponseParser
 {
     /** @var ResponseInterface */
     private $response;

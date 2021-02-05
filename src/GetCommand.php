@@ -7,7 +7,7 @@ namespace Ngmy\L4Dav;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
 
-class DownloadCommand extends Command
+class GetCommand extends Command
 {
     /** @var string */
     private $destPath;

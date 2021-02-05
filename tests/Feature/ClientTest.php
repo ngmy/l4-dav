@@ -5,6 +5,12 @@ declare(strict_types=1);
 namespace Ngmy\L4Dav\Tests\Feature;
 
 use Ngmy\L4Dav\Tests\TestCase;
+use Ngmy\L4Dav\GetParametersBuilder;
+use Ngmy\L4Dav\PutParametersBuilder;
+use Ngmy\L4Dav\CopyParametersBuilder;
+use Ngmy\L4Dav\MoveParametersBuilder;
+use Ngmy\L4Dav\PropfindParametersBuilder;
+use Ngmy\L4Dav\ProppatchParametersBuilder;
 use Ngmy\L4Dav\WebDavClient;
 use Ngmy\L4Dav\WebDavClientOptionsBuilder;
 use Psr\Http\Message\UriInterface;
@@ -29,7 +35,12 @@ class ClientTest extends TestCase
 
         $file = $this->createTmpFile();
         $path = \stream_get_meta_data($file)['uri'];
-        $response = $client->upload($path, 'file');
+
+        $parameters = (new PutParametersBuilder())
+            ->setSrcPath($path)
+            ->build();
+
+        $response = $client->put('file', $parameters);
 
         $this->assertEquals('Created', $response->getReasonPhrase());
         $this->assertEquals(201, $response->getStatusCode());
@@ -45,8 +56,11 @@ class ClientTest extends TestCase
                 function () {
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSrcPath($path)
+                        ->build();
                     $client = $this->createClient();
-                    $client->upload($path, 'file');
+                    $client->put('file', $parameters);
                 },
                 'file',
                 [
@@ -57,7 +71,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $client = $this->createClient();
-                    $client->makeDirectory('dir/');
+                    $client->mkcol('dir/');
                 },
                 'dir/',
                 [
@@ -69,9 +83,12 @@ class ClientTest extends TestCase
                 function () {
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSrcPath($path)
+                        ->build();
                     $client = $this->createClient();
-                    $client->makeDirectory('dir/');
-                    $client->upload($path, 'dir/file');
+                    $client->mkcol('dir/');
+                    $client->put('dir/file', $parameters);
                 },
                 'dir/',
                 [
@@ -103,12 +120,22 @@ class ClientTest extends TestCase
 
         $file = $this->createTmpFile();
         $path = \stream_get_meta_data($file)['uri'];
-        $response = $client->upload($path, 'file');
+
+        $parameters = (new PutParametersBuilder())
+            ->setSrcPath($path)
+            ->build();
+
+        $response = $client->put('file', $parameters);
 
         $file = $this->createTmpFile();
         $path = \stream_get_meta_data($file)['uri'];
         \unlink($path);
-        $response = $client->download('file', $path);
+
+        $parameters = (new GetParametersBuilder())
+            ->setDestPath($path)
+            ->build();
+
+        $response = $client->get('file', $parameters);
 
         $this->assertEquals('OK', $response->getReasonPhrase());
         $this->assertEquals(200, $response->getStatusCode());
@@ -124,8 +151,11 @@ class ClientTest extends TestCase
                 function () {
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSrcPath($path)
+                        ->build();
                     $client = $this->createClient();
-                    $client->upload($path, 'file1');
+                    $client->put('file1', $parameters);
                 },
                 'file1',
                 'file2',
@@ -139,9 +169,12 @@ class ClientTest extends TestCase
                 function () {
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSrcPath($path)
+                        ->build();
                     $client = $this->createClient();
-                    $client->upload($path, 'file1');
-                    $client->upload($path, 'file2');
+                    $client->put('file1', $parameters);
+                    $client->put('file2', $parameters);
                 },
                 'file1',
                 'file2',
@@ -155,9 +188,12 @@ class ClientTest extends TestCase
                 function () {
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSrcPath($path)
+                        ->build();
                     $client = $this->createClient();
-                    $client->upload($path, 'file1');
-                    $client->upload($path, 'file2');
+                    $client->put('file1', $parameters);
+                    $client->put('file2', $parameters);
                 },
                 'file1',
                 'file2',
@@ -171,13 +207,16 @@ class ClientTest extends TestCase
                 function () {
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSrcPath($path)
+                        ->build();
                     $client = $this->createClient();
-                    $client->makeDirectory('dir1/');
-                    $client->upload($path, 'dir1/file1_1');
-                    $client->upload($path, 'dir1/file1_2');
-                    $client->makeDirectory('dir1/dir1_2/');
-                    $client->upload($path, 'dir1/dir1_2/file1_2_1');
-                    $client->upload($path, 'dir1/dir1_2/file1_2_2');
+                    $client->mkcol('dir1/');
+                    $client->put('dir1/file1_1', $parameters);
+                    $client->put('dir1/file1_2', $parameters);
+                    $client->mkcol('dir1/dir1_2/');
+                    $client->put('dir1/dir1_2/file1_2_1', $parameters);
+                    $client->put('dir1/dir1_2/file1_2_2', $parameters);
                 },
                 'dir1/',
                 'dir2/',
@@ -191,19 +230,22 @@ class ClientTest extends TestCase
                 function () {
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSrcPath($path)
+                        ->build();
                     $client = $this->createClient();
-                    $client->makeDirectory('dir1/');
-                    $client->upload($path, 'dir1/file1_1');
-                    $client->upload($path, 'dir1/file1_2');
-                    $client->makeDirectory('dir1/dir1_2/');
-                    $client->upload($path, 'dir1/dir1_2/file1_2_1');
-                    $client->upload($path, 'dir1/dir1_2/file1_2_2');
-                    $client->makeDirectory('dir2/');
-                    $client->upload($path, 'dir2/file2_1');
-                    $client->upload($path, 'dir2/file2_2');
-                    $client->makeDirectory('dir2/dir2_2/');
-                    $client->upload($path, 'dir2/dir2_2/file2_2_1');
-                    $client->upload($path, 'dir2/dir2_2/file2_2_2');
+                    $client->mkcol('dir1/');
+                    $client->put('dir1/file1_1', $parameters);
+                    $client->put('dir1/file1_2', $parameters);
+                    $client->mkcol('dir1/dir1_2/');
+                    $client->put('dir1/dir1_2/file1_2_1', $parameters);
+                    $client->put('dir1/dir1_2/file1_2_2', $parameters);
+                    $client->mkcol('dir2/');
+                    $client->put('dir2/file2_1', $parameters);
+                    $client->put('dir2/file2_2', $parameters);
+                    $client->mkcol('dir2/dir2_2/');
+                    $client->put('dir2/dir2_2/file2_2_1', $parameters);
+                    $client->put('dir2/dir2_2/file2_2_2', $parameters);
                 },
                 'dir1/',
                 'dir2/',
@@ -217,19 +259,22 @@ class ClientTest extends TestCase
                 function () {
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSrcPath($path)
+                        ->build();
                     $client = $this->createClient();
-                    $client->makeDirectory('dir1/');
-                    $client->upload($path, 'dir1/file1_1');
-                    $client->upload($path, 'dir1/file1_2');
-                    $client->makeDirectory('dir1/dir1_2/');
-                    $client->upload($path, 'dir1/dir1_2/file1_2_1');
-                    $client->upload($path, 'dir1/dir1_2/file1_2_2');
-                    $client->makeDirectory('dir2/');
-                    $client->upload($path, 'dir2/file2_1');
-                    $client->upload($path, 'dir2/file2_2');
-                    $client->makeDirectory('dir2/dir2_2/');
-                    $client->upload($path, 'dir2/dir2_2/file2_2_1');
-                    $client->upload($path, 'dir2/dir2_2/file2_2_2');
+                    $client->mkcol('dir1/');
+                    $client->put('dir1/file1_1', $parameters);
+                    $client->put('dir1/file1_2', $parameters);
+                    $client->mkcol('dir1/dir1_2/');
+                    $client->put('dir1/dir1_2/file1_2_1', $parameters);
+                    $client->put('dir1/dir1_2/file1_2_2', $parameters);
+                    $client->mkcol('dir2/');
+                    $client->put('dir2/file2_1', $parameters);
+                    $client->put('dir2/file2_2', $parameters);
+                    $client->mkcol('dir2/dir2_2/');
+                    $client->put('dir2/dir2_2/file2_2_1', $parameters);
+                    $client->put('dir2/dir2_2/file2_2_2', $parameters);
                 },
                 'dir1/',
                 'dir2/',
@@ -252,8 +297,12 @@ class ClientTest extends TestCase
     {
         $before();
 
+        $parameters = (new CopyParametersBuilder())
+            ->setDestUri($destUri)
+            ->setOverwrite($overwrite)
+            ->build();
         $client = $this->createClient();
-        $response = $client->copy($srcUri, $destUri, $overwrite);
+        $response = $client->copy($srcUri, $parameters);
 
         $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
         $this->assertEquals($expected['status_code'], $response->getStatusCode());
@@ -269,8 +318,11 @@ class ClientTest extends TestCase
                 function () {
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSrcPath($path)
+                        ->build();
                     $client = $this->createClient();
-                    $client->upload($path, 'file1');
+                    $client->put('file1', $parameters);
                 },
                 'file1',
                 'file2',
@@ -283,9 +335,12 @@ class ClientTest extends TestCase
                 function () {
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSrcPath($path)
+                        ->build();
                     $client = $this->createClient();
-                    $client->upload($path, 'file1');
-                    $client->upload($path, 'file2');
+                    $client->put('file1', $parameters);
+                    $client->put('file2', $parameters);
                 },
                 'file1',
                 'file2',
@@ -298,13 +353,16 @@ class ClientTest extends TestCase
                 function () {
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSrcPath($path)
+                        ->build();
                     $client = $this->createClient();
-                    $client->makeDirectory('dir1/');
-                    $client->upload($path, 'dir1/file1_1');
-                    $client->upload($path, 'dir1/file1_2');
-                    $client->makeDirectory('dir1/dir1_2/');
-                    $client->upload($path, 'dir1/dir1_2/file1_2_1');
-                    $client->upload($path, 'dir1/dir1_2/file1_2_2');
+                    $client->mkcol('dir1/');
+                    $client->put('dir1/file1_1', $parameters);
+                    $client->put('dir1/file1_2', $parameters);
+                    $client->mkcol('dir1/dir1_2/');
+                    $client->put('dir1/dir1_2/file1_2_1', $parameters);
+                    $client->put('dir1/dir1_2/file1_2_2', $parameters);
                 },
                 'dir1/',
                 'dir2/',
@@ -317,19 +375,22 @@ class ClientTest extends TestCase
                 function () {
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSrcPath($path)
+                        ->build();
                     $client = $this->createClient();
-                    $client->makeDirectory('dir1/');
-                    $client->upload($path, 'dir1/file1_1');
-                    $client->upload($path, 'dir1/file1_2');
-                    $client->makeDirectory('dir1/dir1_2/');
-                    $client->upload($path, 'dir1/dir1_2/file1_2_1');
-                    $client->upload($path, 'dir1/dir1_2/file1_2_2');
-                    $client->makeDirectory('dir2/');
-                    $client->upload($path, 'dir2/file2_1');
-                    $client->upload($path, 'dir2/file2_2');
-                    $client->makeDirectory('dir2/dir2_2/');
-                    $client->upload($path, 'dir2/dir2_2/file2_2_1');
-                    $client->upload($path, 'dir2/dir2_2/file2_2_2');
+                    $client->mkcol('dir1/');
+                    $client->put('dir1/file1_1', $parameters);
+                    $client->put('dir1/file1_2', $parameters);
+                    $client->mkcol('dir1/dir1_2/');
+                    $client->put('dir1/dir1_2/file1_2_1', $parameters);
+                    $client->put('dir1/dir1_2/file1_2_2', $parameters);
+                    $client->mkcol('dir2/');
+                    $client->put('dir2/file2_1', $parameters);
+                    $client->put('dir2/file2_2', $parameters);
+                    $client->mkcol('dir2/dir2_2/');
+                    $client->put('dir2/dir2_2/file2_2_1', $parameters);
+                    $client->put('dir2/dir2_2/file2_2_2', $parameters);
                 },
                 'dir1/',
                 'dir2/',
@@ -351,43 +412,49 @@ class ClientTest extends TestCase
     {
         $before();
 
+        $parameters = (new MoveParametersBuilder())
+            ->setDestUri($destUri)
+            ->build();
         $client = $this->createClient();
-        $response = $client->move($srcUri, $destUri);
+        $response = $client->move($srcUri, $parameters);
 
         $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
         $this->assertEquals($expected['status_code'], $response->getStatusCode());
     }
 
-    public function testMakeDirectory(): void
+    public function testMkcol(): void
     {
         $client = $this->createClient();
 
-        $response = $client->makeDirectory('dir/');
+        $response = $client->mkcol('dir/');
 
         $this->assertEquals('Created', $response->getReasonPhrase());
         $this->assertEquals(201, $response->getStatusCode());
     }
 
-    public function testCheckExistenceDirectoryIfExists(): void
+    public function testHeadIfExists(): void
     {
         $client = $this->createClient();
 
         $file = $this->createTmpFile();
         $path = \stream_get_meta_data($file)['uri'];
-        $response = $client->upload($path, 'file');
+        $parameters = (new PutParametersBuilder())
+            ->setSrcPath($path)
+            ->build();
+        $response = $client->put('file', $parameters);
 
-        $response = $client->exists('file');
+        $response = $client->head('file');
 
         $this->assertEquals('OK', $response->getReasonPhrase());
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertTrue($response->exists());
     }
 
-    public function testCheckExistenceDirectoryIfNotExists(): void
+    public function testHeadIfNotExists(): void
     {
         $client = $this->createClient();
 
-        $response = $client->exists('file');
+        $response = $client->head('file');
 
         $this->assertEquals('Not Found', $response->getReasonPhrase());
         $this->assertEquals(404, $response->getStatusCode());
@@ -400,13 +467,18 @@ class ClientTest extends TestCase
 
         $file = $this->createTmpFile();
         $path = \stream_get_meta_data($file)['uri'];
-        $client->upload($path, 'file');
-        $client->makeDirectory('dir/');
-        $client->upload($path, 'dir/file');
-        $client->makeDirectory('dir/dir2/');
-        $client->upload($path, 'dir/dir2/file');
+        $parameters = (new PutParametersBuilder())
+            ->setSrcPath($path)
+            ->build();
+        $client->put('file', $parameters);
+        $client->mkcol('dir/');
+        $client->put('dir/file', $parameters);
+        $client->mkcol('dir/dir2/');
+        $client->put('dir/dir2/file', $parameters);
 
-        $response = $client->list('');
+        $parameters = (new PropfindParametersBuilder())
+            ->build();
+        $response = $client->propfind('', $parameters);
 
         $this->assertEquals('Multi-Status', $response->getReasonPhrase());
         $this->assertEquals(207, $response->getStatusCode());
@@ -414,7 +486,7 @@ class ClientTest extends TestCase
         $this->assertEquals($this->webDavBasePath . 'file', $response->getResponse()->response[1]->href);
         $this->assertEquals($this->webDavBasePath . 'dir/', $response->getResponse()->response[2]->href);
 
-        $response = $client->list('dir/');
+        $response = $client->propfind('dir/', $parameters);
 
         $this->assertEquals('Multi-Status', $response->getReasonPhrase());
         $this->assertEquals(207, $response->getStatusCode());
@@ -426,34 +498,64 @@ class ClientTest extends TestCase
     {
         $client = $this->createClient();
 
-        $response = $client->list('dir/');
+        $parameters = (new PropfindParametersBuilder())
+            ->build();
+        $response = $client->propfind('dir/', $parameters);
 
         $this->assertEquals('Not Found', $response->getReasonPhrase());
         $this->assertEquals(404, $response->getStatusCode());
         $this->assertEquals(new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><root></root>'), $response->getResponse());
     }
 
-    public function testSetProperties(): void
+    public function testProppatch(): void
     {
         $file = $this->createTmpFile();
         $path = \stream_get_meta_data($file)['uri'];
+        $parameters = (new PutParametersBuilder())
+            ->setSrcPath($path)
+            ->build();
         $client = $this->createClient();
-        $client->upload($path, 'file');
+        $client->put('file', $parameters);
 
         $client = $this->createClient();
 
-        $listResponseBefore = $client->list('file');
+        $parameters = (new PropfindParametersBuilder())
+            ->build();
+        $listResponseBefore = $client->propfind('file', $parameters);
         $propertyBefore = $listResponseBefore->getResponse();
 
         $this->assertEquals('F', $propertyBefore->response->propstat->prop->children('http://apache.org/dav/props/')->executable);
 
         $propertyBefore->response->propstat->prop->children('http://apache.org/dav/props/')->executable = 'T';
-        $setPropertiesResponse = $client->setProperties('file', $propertyBefore->response->propstat->prop->children('http://apache.org/dav/props/')->executable);
 
-        $this->assertEquals('Multi-Status', $setPropertiesResponse->getReasonPhrase());
-        $this->assertEquals(207, $setPropertiesResponse->getStatusCode());
+        $parameters = (new ProppatchParametersBuilder())
+            ->addPropertyToSet($propertyBefore->response->propstat->prop->children('http://apache.org/dav/props/')->executable)
+            ->build();
 
-        $listResponseAfter = $client->list('file');
+        $proppatchResponse = $client->proppatch('file', $parameters);
+
+        $this->assertEquals('Multi-Status', $proppatchResponse->getReasonPhrase());
+        $this->assertEquals(207, $proppatchResponse->getStatusCode());
+
+        $parameters = (new PropfindParametersBuilder())
+            ->build();
+        $listResponseAfter = $client->propfind('file', $parameters);
+        $propertyAfter = $listResponseAfter->getResponse();
+
+        $this->assertEquals('T', $propertyAfter->response->propstat->prop->children('http://apache.org/dav/props/')->executable);
+
+        $parameters = (new ProppatchParametersBuilder())
+            ->addPropertyToRemove($propertyBefore->response->propstat->prop->children('http://apache.org/dav/props/')->executable)
+            ->build();
+
+        $proppatchResponse = $client->proppatch('file', $parameters);
+
+        $this->assertEquals('Multi-Status', $proppatchResponse->getReasonPhrase());
+        $this->assertEquals(207, $proppatchResponse->getStatusCode());
+
+        $parameters = (new PropfindParametersBuilder())
+            ->build();
+        $listResponseAfter = $client->propfind('file', $parameters);
         $propertyAfter = $listResponseAfter->getResponse();
 
         $this->assertEquals('T', $propertyAfter->response->propstat->prop->children('http://apache.org/dav/props/')->executable);
@@ -490,7 +592,10 @@ class ClientTest extends TestCase
     protected function deleteWebDav(string $directoryPath = ''): void
     {
         $client = $this->createClient();
-        foreach ($client->list($directoryPath, 1)->getAllFilesAndDirectories() as $path) {
+        $parameters = (new PropfindParametersBuilder())
+            ->setDepth(1)
+            ->build();
+        foreach ($client->propfind($directoryPath, $parameters)->getAllFilesAndDirectories() as $path) {
             if ((string) $path == $this->webDavBasePath . $directoryPath) {
                 continue;
             }
