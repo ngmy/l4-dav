@@ -26,7 +26,7 @@ class WebDavClient
      * Download a file from the WebDAV server.
      *
      * @param string|UriInterface $url        A full URL of a resource, or a URL relative to a base URL of a resource
-     * @param GetParameters       $parameters Parameters for the GET method
+     * @param GetParameters       $parameters Parameters for the WebDAV GET method
      * @return ResponseInterface An instance of any class that implements the PSR-7 ResponseInterface
      */
     public function get($url, GetParameters $parameters = null): ResponseInterface
@@ -41,7 +41,7 @@ class WebDavClient
      * Upload a file to the WebDAV server.
      *
      * @param string|UriInterface $url        A full URL of a resource, or a URL relative to a base URL of a resource
-     * @param PutParameters       $parameters Parameters for the PUT method
+     * @param PutParameters       $parameters Parameters for the WebDAV PUT method
      * @return ResponseInterface An instance of any class that implements the PSR-7 ResponseInterface
      */
     public function put($url, PutParameters $parameters): ResponseInterface
@@ -68,7 +68,7 @@ class WebDavClient
      * Copy an item on the WebDAV server.
      *
      * @param string|UriInterface $url        A full URL of a resource, or a URL relative to a base URL of a resource
-     * @param CopyParameters      $parameters Parameters for the COPY method
+     * @param CopyParameters      $parameters Parameters for the WebDAV COPY method
      * @return ResponseInterface An instance of any class that implements the PSR-7 ResponseInterface
      */
     public function copy($url, CopyParameters $parameters): ResponseInterface
@@ -82,7 +82,7 @@ class WebDavClient
      * Rename an item on the WebDAV server.
      *
      * @param string|UriInterface $url        A full URL of a resource, or a URL relative to a base URL of a resource
-     * @param MoveParameters      $parameters Parameters for the MOVE method
+     * @param MoveParameters      $parameters Parameters for the WebDAV MOVE method
      * @return ResponseInterface An instance of any class that implements the PSR-7 ResponseInterface
      */
     public function move($url, MoveParameters $parameters): ResponseInterface
@@ -123,7 +123,7 @@ class WebDavClient
      * List contents of a directory on the WebDAV server.
      *
      * @param string|UriInterface $url        A full URL of a resource, or a URL relative to a base URL of a resource
-     * @param PropfindParameters  $parameters Parameters for the PROPFIND method.
+     * @param PropfindParameters  $parameters Parameters for the WebDAV PROPFIND method
      * @return PropfindResponse An instance of the PropfindResponse that implements the PSR-7 ResponseInterface
      */
     public function propfind($url, PropfindParameters $parameters = null): PropfindResponse

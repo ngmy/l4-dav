@@ -298,7 +298,7 @@ class ClientTest extends TestCase
         $before();
 
         $parameters = (new CopyParametersBuilder())
-            ->setDestUri($destUri)
+            ->setDestUrl($destUri)
             ->setOverwrite($overwrite)
             ->build();
         $client = $this->createClient();
@@ -413,7 +413,7 @@ class ClientTest extends TestCase
         $before();
 
         $parameters = (new MoveParametersBuilder())
-            ->setDestUri($destUri)
+            ->setDestUrl($destUri)
             ->build();
         $client = $this->createClient();
         $response = $client->move($srcUri, $parameters);

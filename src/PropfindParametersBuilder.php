@@ -11,6 +11,7 @@ class PropfindParametersBuilder
 
     /**
      * @param int|string $depth
+     * @return $this The value of the calling object
      */
     public function setDepth($depth): self
     {
@@ -19,12 +20,12 @@ class PropfindParametersBuilder
     }
 
     /**
-     * Build WebDAV client options.
+     * Build a new instance of a parameter class for the WebDAV PROPFIND method.
+     *
+     * @return PropfindParameters A new instance of a parameter class for the WebDAV PROPFIND method
      */
     public function build(): PropfindParameters
     {
-        return new PropfindParameters(
-            $this->depth
-        );
+        return new PropfindParameters($this->depth);
     }
 }

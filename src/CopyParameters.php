@@ -9,23 +9,23 @@ use Psr\Http\Message\UriInterface;
 class CopyParameters
 {
     /** @var UriInterface */
-    private $destUri;
+    private $destUrl;
     /** @var Overwrite */
     private $overwrite;
 
     /**
-     * @param UriInterface $destUri   The destination path of a file
+     * @param UriInterface $destUrl   The destination path of a file
      * @param Overwrite    $overwrite Whether to overwrite copy
      */
-    public function __construct(UriInterface $destUri, Overwrite $overwrite = null)
+    public function __construct(UriInterface $destUrl, Overwrite $overwrite = null)
     {
-        $this->destUri = $destUri;
+        $this->destUrl = $destUrl;
         $this->overwrite = $overwrite ?: new Overwrite(false);
     }
 
-    public function destUri(): UriInterface
+    public function destUrl(): UriInterface
     {
-        return $this->destUri;
+        return $this->destUrl;
     }
 
     public function overwrite(): Overwrite

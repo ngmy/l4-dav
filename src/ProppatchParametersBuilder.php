@@ -15,7 +15,7 @@ class ProppatchParametersBuilder
 
     /**
      * @param SimpleXMLElement $propertyToSet
-     * @return $this
+     * @return $this The value of the calling object
      */
     public function addPropertyToSet($propertyToSet): self
     {
@@ -25,7 +25,7 @@ class ProppatchParametersBuilder
 
     /**
      * @param SimpleXMLElement $propertyToRemove
-     * @return $this
+     * @return $this The value of the calling object
      */
     public function addPropertyToRemove($propertyToRemove): self
     {
@@ -34,13 +34,12 @@ class ProppatchParametersBuilder
     }
 
     /**
-     * Build WebDAV client options.
+     * Build a new instance of a parameter class for the WebDAV PROPPATCH method.
+     *
+     * @return ProppatchParameters A new instance of a parameter class for the WebDAV PROPPATCH method
      */
     public function build(): ProppatchParameters
     {
-        return new ProppatchParameters(
-            $this->propertiesToSet,
-            $this->propertiesToRemove
-        );
+        return new ProppatchParameters($this->propertiesToSet, $this->propertiesToRemove);
     }
 }

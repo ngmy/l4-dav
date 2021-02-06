@@ -9,6 +9,9 @@ class GetParametersBuilder
     /** @var string */
     private $destPath;
 
+    /**
+     * @return $this The value of the calling object
+     */
     public function setDestPath(string $destPath): self
     {
         $this->destPath = $destPath;
@@ -16,12 +19,12 @@ class GetParametersBuilder
     }
 
     /**
-     * Build WebDAV client options.
+     * Build a new instance of a parameter class for the WebDAV GET method.
+     *
+     * @return GetParameters A new instance of a parameter class for the WebDAV GET method
      */
     public function build(): GetParameters
     {
-        return new GetParameters(
-            $this->destPath
-        );
+        return new GetParameters($this->destPath);
     }
 }

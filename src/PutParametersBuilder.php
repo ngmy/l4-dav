@@ -9,6 +9,9 @@ class PutParametersBuilder
     /** @var string */
     private $srcPath;
 
+    /**
+     * @return $this The value of the calling object
+     */
     public function setSrcPath(string $srcPath): self
     {
         $this->srcPath = $srcPath;
@@ -16,12 +19,12 @@ class PutParametersBuilder
     }
 
     /**
-     * Build WebDAV client options.
+     * Build a new instance of a parameter class for the WebDAV PUT method.
+     *
+     * @return PutParameters A new instance of a parameter class for the WebDAV PUT method
      */
     public function build(): PutParameters
     {
-        return new PutParameters(
-            $this->srcPath
-        );
+        return new PutParameters($this->srcPath);
     }
 }

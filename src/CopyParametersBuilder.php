@@ -10,19 +10,23 @@ use Psr\Http\Message\UriInterface;
 class CopyParametersBuilder
 {
     /** @var UriInterface */
-    private $destUri;
+    private $destUrl;
     /** @var Overwrite */
     private $overwrite;
 
     /**
-     * @param string|UriInterface $destUri
+     * @param string|UriInterface $destUrl
+     * @return $this The value of the calling object
      */
-    public function setDestUri($destUri): self
+    public function setDestUrl($destUrl): self
     {
-        $this->destUri = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $destUri);
+        $this->destUrl = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $destUrl);
         return $this;
     }
 
+    /**
+     * @return $this The value of the calling object
+     */
     public function setOverwrite(bool $overwrite): self
     {
         $this->overwrite = new Overwrite($overwrite);
@@ -30,13 +34,12 @@ class CopyParametersBuilder
     }
 
     /**
-     * Build WebDAV client options.
+     * Build a new instance of a parameter class for the WebDAV COPY method.
+     *
+     * @return CopyParameters A new instance of a parameter class for the WebDAV COPY method
      */
     public function build(): CopyParameters
     {
-        return new CopyParameters(
-            $this->destUri,
-            $this->overwrite
-        );
+        return new CopyParameters($this->destUrl, $this->overwrite);
     }
 }

@@ -30,56 +30,8 @@ class ProppatchCommand extends Command
 </D:propertyupdate>
 XML);
 
-        // TODO shared
-        if (!empty($parameters->propertiesToSet())) {
-            $xml->addChild('set', '', 'DAV:')->addChild('prop', '', 'DAV:');
-        }
-
-        foreach ($parameters->propertiesToSet() as $propertyToSet) {
-            $namespaces = $propertyToSet->getNamespaces();
-
-            if (empty($namespaces)) {
-                $xml->children('DAV:')->set->prop->addChild(
-                    $propertyToSet->getName(),
-                    (string) $propertyToSet
-                )->asXML();
-                continue;
-            }
-
-            \assert(\count($namespaces) == 1);
-            $propertyToSetNamespacePrefix = \array_key_first($namespaces);
-            $propertyToSetNamespaceUri = $namespaces[$propertyToSetNamespacePrefix];
-            $xml->children('DAV:')->set->prop->addChild(
-                $propertyToSet->getName(),
-                (string) $propertyToSet,
-                $propertyToSetNamespaceUri
-            );
-        }
-
-        if (!empty($parameters->propertiesToRemove())) {
-            $xml->addChild('remove', '', 'DAV:')->addChild('prop', '', 'DAV:');
-        }
-
-        foreach ($parameters->propertiesToRemove() as $propertyToRemove) {
-            $namespaces = $propertyToRemove->getNamespaces();
-
-            if (empty($namespaces)) {
-                $xml->children('DAV:')->remove->prop->addChild(
-                    $propertyToRemove->getName(),
-                    (string) $propertyToRemove
-                )->asXML();
-                continue;
-            }
-
-            \assert(\count($namespaces) == 1);
-            $propertyToRemoveNamespacePrefix = \array_key_first($namespaces);
-            $propertyToRemoveNamespaceUri = $namespaces[$propertyToRemoveNamespacePrefix];
-            $xml->children('DAV:')->remove->prop->addChild(
-                $propertyToRemove->getName(),
-                (string) $propertyToRemove,
-                $propertyToRemoveNamespaceUri
-            );
-        }
+        Hoge::createSet($parameters->propertiesToSet())->hoge($xml);
+        Hoge::createRemove($parameters->propertiesToRemove())->hoge($xml);
 
         $body = $xml->asXML();
 

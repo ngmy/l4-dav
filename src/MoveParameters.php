@@ -9,18 +9,18 @@ use Psr\Http\Message\UriInterface;
 class MoveParameters
 {
     /** @var UriInterface */
-    private $destUri;
+    private $destUrl;
 
     /**
-     * @param UriInterface $destUri The destination path of a file
+     * @param UriInterface $destUrl The destination path of a file
      */
-    public function __construct(UriInterface $destUri)
+    public function __construct(UriInterface $destUrl)
     {
-        $this->destUri = $destUri;
+        $this->destUrl = $destUrl;
     }
 
-    public function destUri(): UriInterface
+    public function destUrl(): UriInterface
     {
-        return $this->destUri;
+        return $this->destUrl;
     }
 }

@@ -24,7 +24,7 @@ class WebDavClientOptionsBuilder
     private $defaultCurlOptions = [];
 
     /**
-     * Create new WebDAV client options builder.
+     * Create a new instance of the WebDAV client options builder.
      */
     public function __construct()
     {
@@ -37,7 +37,7 @@ class WebDavClientOptionsBuilder
      * Set base URL.
      *
      * @param string|UriInterface $baseUrl
-     * @return $this
+     * @return $this The value of the calling object
      */
     public function baseUrl($baseUrl): self
     {
@@ -48,7 +48,7 @@ class WebDavClientOptionsBuilder
     /**
      * Set port.
      *
-     * @return $this
+     * @return $this The value of the calling object
      */
     public function port(int $port): self
     {
@@ -59,7 +59,7 @@ class WebDavClientOptionsBuilder
     /**
      * Set password for authentication.
      *
-     * @return $this
+     * @return $this The value of the calling object
      */
     public function userName(string $userName): self
     {
@@ -70,7 +70,7 @@ class WebDavClientOptionsBuilder
     /**
      * Set password for authentication.
      *
-     * @return $this
+     * @return $this The value of the calling object
      */
     public function password(string $password): self
     {
@@ -82,7 +82,7 @@ class WebDavClientOptionsBuilder
      * Set default HTTP request headers.
      *
      * @param array<string, string> $defaultRequestHeaders
-     * @return $this
+     * @return $this The value of the calling object
      */
     public function defaultRequestHeaders(array $defaultRequestHeaders): self
     {
@@ -94,6 +94,7 @@ class WebDavClientOptionsBuilder
      * Set default cURL options.
      *
      * @param array<int, mixed> $defaultCurlOptions
+     * @return $this The value of the calling object
      */
     public function defaultCurlOptions(array $defaultCurlOptions): self
     {
