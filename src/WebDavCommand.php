@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 
-abstract class Command
+abstract class WebDavCommand
 {
     /** @var string */
     protected $method;
@@ -21,7 +21,7 @@ abstract class Command
     protected $headers;
     /** @var resource|StreamInterface|string|null */
     protected $body;
-    /** @var CommandDispatcher */
+    /** @var WebDavCommandDispatcher */
     protected $dispatcher;
     /** @var ResponseInterface */
     protected $response;
@@ -95,7 +95,7 @@ abstract class Command
         $this->options = $options;
         $this->headers = $headers ?: new Headers([]);
         $this->body = $body;
-        $this->dispatcher = new CommandDispatcher($this);
+        $this->dispatcher = new WebDavCommandDispatcher($this);
     }
 
     protected function doBefore(): void

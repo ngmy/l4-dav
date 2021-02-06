@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\UriInterface;
 
-class CopyCommand extends Command
+class CopyCommand extends WebDavCommand
 {
     /** @var CopyParameters */
     protected $parameters;

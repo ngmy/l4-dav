@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\UriInterface;
 
-class MoveCommand extends Command
+class MoveCommand extends WebDavCommand
 {
     /** @var MoveParameters */
     protected $parameters;

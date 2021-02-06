@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\UriInterface;
 
-class HeadCommand extends Command
+class HeadCommand extends WebDavCommand
 {
     /** @var HeadParameters */
     protected $parameters;

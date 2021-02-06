@@ -8,7 +8,7 @@ use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
 
-class PutCommand extends Command
+class PutCommand extends WebDavCommand
 {
     /** @var PutParameters */
     protected $parameters;

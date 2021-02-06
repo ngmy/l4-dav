@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\UriInterface;
 
-class MkcolCommand extends Command
+class MkcolCommand extends WebDavCommand
 {
     /** @var MkcolParameters */
     protected $parameters;

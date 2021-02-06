@@ -7,7 +7,7 @@ namespace Ngmy\L4Dav;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
 
-class GetCommand extends Command
+class GetCommand extends WebDavCommand
 {
     /** @var GetParameters */
     protected $parameters;

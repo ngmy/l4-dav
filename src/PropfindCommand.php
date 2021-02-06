@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\UriInterface;
 
-class PropfindCommand extends Command
+class PropfindCommand extends WebDavCommand
 {
     /** @var PropfindParameters */
     protected $parameters;

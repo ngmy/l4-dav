@@ -10,16 +10,16 @@ use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class CommandDispatcher
+class WebDavCommandDispatcher
 {
-    /** @var Command */
+    /** @var WebDavCommand */
     private $command;
     /** @var HttpClient */
     private $httpClient;
     /** @var RequestInterface */
     private $request;
 
-    public function __construct(Command $command)
+    public function __construct(WebDavCommand $command)
     {
         $this->command = $command;
         $this->httpClient = (new HttpClientFactory($command->options()))->create();

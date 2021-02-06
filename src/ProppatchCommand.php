@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\UriInterface;
 
-class ProppatchCommand extends Command
+class ProppatchCommand extends WebDavCommand
 {
     /** @var ProppatchParameters */
     protected $parameters;

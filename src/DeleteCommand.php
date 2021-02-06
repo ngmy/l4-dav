@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav;
 
 use Psr\Http\Message\UriInterface;
 
-class DeleteCommand extends Command
+class DeleteCommand extends WebDavCommand
 {
     /** @var DeleteParameters */
     protected $parameters;
