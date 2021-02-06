@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
-use SimpleXMLElement;
 
 class ProppatchCommand extends Command
 {
@@ -24,21 +22,13 @@ class ProppatchCommand extends Command
 
     private function configureBody(ProppatchParameters $parameters): string
     {
-        $xml = new SimpleXMLElement(<<<XML
-<?xml version="1.0" encoding="utf-8"?>
-<D:propertyupdate xmlns:D="DAV:">
-</D:propertyupdate>
-XML);
-
-        Hoge::createSet($parameters->propertiesToSet())->hoge($xml);
-        Hoge::createRemove($parameters->propertiesToRemove())->hoge($xml);
-
-        $body = $xml->asXML();
-
-        if ($body === false) {
-            throw new InvalidArgumentException();
+        $builder = new ProppatchRequestBodyBuilder();
+        foreach ($parameters->propertiesToSet() as $property) {
+            $builder->addPropetyToSet($property);
         }
-
-        return $body;
+        foreach ($parameters->propertiesToRemove() as $property) {
+            $builder->addPropetyToRemove($property);
+        }
+        return $builder->build();
     }
 }

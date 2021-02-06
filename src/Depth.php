@@ -25,7 +25,7 @@ class Depth
         return $this->depth;
     }
 
-    protected function validate(): void
+    private function validate(): void
     {
         if (!\in_array($this->depth, ['0', '1', 'infinity'], true)) {
             throw new InvalidArgumentException(
