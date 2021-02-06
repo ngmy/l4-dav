@@ -27,6 +27,9 @@ class AddChildCommand implements XmlCommandInterface
         }
     }
 
+    /**
+     * @return $this
+     */
     public function add(XmlCommandInterface $command): self
     {
         $this->commands[] = $command;

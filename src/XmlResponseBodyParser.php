@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 use SimpleXMLElement;
 
-class XmlResponseParser
+class XmlResponseBodyParser
 {
     /** @var ResponseInterface */
     private $response;

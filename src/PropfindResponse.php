@@ -17,7 +17,7 @@ class PropfindResponse implements ResponseInterface
     public function __construct(ResponseInterface $response)
     {
         $this->response = $response;
-        $this->parser = new XmlResponseParser($response);
+        $this->parser = new XmlResponseBodyParser($response);
     }
 
     public function getXml(): SimpleXMLElement
