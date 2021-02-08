@@ -15,17 +15,28 @@ class FullUrl extends Url
     {
         if (!\in_array($this->uri->getScheme(), ['http', 'https'])) {
             throw new InvalidArgumentException(
-                \sprintf('Scheme of full URL must be "http" or "https", "%s" given.', $this->uri)
+                \sprintf(
+                    'The scheme of the full URL "%s" must be "http" or "https", "%s" given.',
+                    $this->uri,
+                    $this->uri->getScheme()
+                )
             );
         }
         if (empty($this->uri->getAuthority())) {
             throw new InvalidArgumentException(
-                \sprintf('Full URL must contain authority, "%s" given.', $this->uri)
+                \sprintf(
+                    'The full URL "%s" must contain an authority.',
+                    $this->uri
+                )
             );
         }
         if ($this->uri->getPath() != '' && $this->uri->getPath()[0] != '/') {
             throw new InvalidArgumentException(
-                \sprintf('Path of full URL must be empty or begin with a slash, "%s" given.', $this->uri)
+                \sprintf(
+                    'The path of the full URL "%s" must be empty or begin with a slash, "%s" given.',
+                    $this->uri,
+                    $this->uri->getpath()
+                )
             );
         }
     }

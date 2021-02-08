@@ -47,7 +47,9 @@ class ProppatchParameters
     private function validate(): void
     {
         if (empty($this->propertiesToSet) && empty($this->popertiesToRemove)) {
-            throw new InvalidArgumentException('Either or both of the properties to set or the properties to remove.');
+            throw new InvalidArgumentException(
+                'PROPPATCH parameters must add either or both of properties to set or to remove.'
+            );
         }
     }
 }

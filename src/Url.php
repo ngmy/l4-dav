@@ -49,7 +49,7 @@ abstract class Url
         }
 
         throw new InvalidArgumentException(
-            \sprintf('The URL must be the full URL, or a pair of the shortcut URL and base URL, "%s" and "%s" given.', $uri, (string) $baseUrl)
+            \sprintf('The base URL is requied because the URL "%s" is the shortcut URL.', $uri)
         );
     }
 

@@ -63,7 +63,7 @@ class ProppatchRequestBodyBuilder
         $body = $this->xml->saveXML();
 
         if ($body === false) {
-            throw new InvalidArgumentException('Failed to build an XML request body.');
+            throw new InvalidArgumentException('Failed to build the PROPPATCH request body.');
         }
 
         return $body;

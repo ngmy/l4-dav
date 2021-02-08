@@ -30,7 +30,7 @@ class ProppatchAction
     {
         if (!\in_array($this->action, ['set', 'remove'], true)) {
             throw new InvalidArgumentException(
-                \sprintf('the PROPPATCH action must be "set" or "remove", "%s" given.', $this->action)
+                \sprintf('The PROPPATCH action must be "set" or "remove", "%s" given.', $this->action)
             );
         }
     }
