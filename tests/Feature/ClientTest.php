@@ -551,13 +551,16 @@ class ClientTest extends TestCase
             ->build();
         $listResponseBefore = $client->propfind('file', $parameters);
         $propertyBefore = $listResponseBefore->getBodyAsXml();
+        $executableBefore = $propertyBefore
+            ->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')
+            ->item(0);
 
-        $this->assertEquals('F', $propertyBefore->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')->item(0)->nodeValue);
+        $this->assertEquals('F', $executableBefore->nodeValue);
 
-        $propertyBefore->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')->item(0)->nodeValue = 'T';
+        $executableBefore->nodeValue = 'T';
 
         $parameters = (new ProppatchParametersBuilder())
-            ->addPropertyToSet($propertyBefore->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')->item(0))
+            ->addPropertyToSet($executableBefore)
             ->build();
 
         $proppatchResponse = $client->proppatch('file', $parameters);
@@ -569,11 +572,14 @@ class ClientTest extends TestCase
             ->build();
         $listResponseAfter = $client->propfind('file', $parameters);
         $propertyAfter = $listResponseAfter->getBodyAsXml();
+        $executableAfter = $propertyAfter
+            ->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')
+            ->item(0);
 
-        $this->assertEquals('T', $propertyAfter->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')->item(0)->nodeValue);
+        $this->assertEquals('T', $executableAfter->nodeValue);
 
         $parameters = (new ProppatchParametersBuilder())
-            ->addPropertyToRemove($propertyBefore->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')->item(0))
+            ->addPropertyToRemove($executableAfter)
             ->build();
 
         $proppatchResponse = $client->proppatch('file', $parameters);
@@ -585,8 +591,11 @@ class ClientTest extends TestCase
             ->build();
         $listResponseAfter = $client->propfind('file', $parameters);
         $propertyAfter = $listResponseAfter->getBodyAsXml();
+        $executableAfter = $propertyAfter
+            ->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')
+            ->item(0);
 
-        $this->assertEquals('T', $propertyAfter->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')->item(0)->nodeValue);
+        $this->assertEquals('T', $executableAfter->nodeValue);
     }
 
     protected function createClient(): WebDavClient
