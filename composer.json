@@ -67,6 +67,9 @@
         "fmt": [
             "@php tools/phpcbf | exit 0",
             "@php tools/php-cs-fixer fix --ansi"
+        ],
+        "docs": [
+            "@php tools/phpDocumentor"
         ]
     }
 }

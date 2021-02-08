@@ -1,5 +1,6 @@
 /.laradock/data/*
 !/.laradock/data/.gitkeep
+/.phpdoc.cache
 /build/
 /tools/
 /vendor
