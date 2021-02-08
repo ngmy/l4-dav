@@ -140,7 +140,7 @@ class ClientTest extends TestCase
         $this->assertEquals('OK', $response->getReasonPhrase());
         $this->assertEquals(200, $response->getStatusCode());
 
-        file_put_contents($path, $response->getBody());
+        \file_put_contents($path, $response->getBody());
 
         $this->assertFileExists($path);
 
