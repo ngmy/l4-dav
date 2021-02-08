@@ -24,7 +24,7 @@ class XmlResponseBodyParser
         $xml->preserveWhiteSpace = false;
         $xml->formatOutput = true;
 
-        if ($this->response->getStatusCode() < 200 || $this->response->getStatusCode() > 300) {
+        if (!\preg_match('~(text/xml|application/xml)~', \strtolower($this->response->getHeaderLine('Content-Type')))) {
             return $xml;
         }
 

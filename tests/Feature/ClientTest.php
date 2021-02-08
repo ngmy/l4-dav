@@ -631,12 +631,12 @@ class ClientTest extends TestCase
             if ($element->nodeValue == $this->webDavBasePath . $directoryPath) {
                 continue;
             }
-            if (\preg_match("|{$this->webDavBasePath}(.*\/)$|", $element->nodeValue, $matches)) {
+            if (\preg_match("~{$this->webDavBasePath}(.*\/)$~", $element->nodeValue, $matches)) {
                 $this->deleteWebDav($matches[1]);
             }
             $client = $this->createClient();
-            \assert(!\is_null(\preg_replace("|{$this->webDavBasePath}(.*)|", '\1', $element->nodeValue)));
-            $client->delete(\preg_replace("|{$this->webDavBasePath}(.*)|", '\1', $element->nodeValue));
+            \assert(!\is_null(\preg_replace("~{$this->webDavBasePath}(.*)~", '\1', $element->nodeValue)));
+            $client->delete(\preg_replace("~{$this->webDavBasePath}(.*)~", '\1', $element->nodeValue));
         }
     }
 }
