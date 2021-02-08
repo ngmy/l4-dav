@@ -11,7 +11,7 @@ use InvalidArgumentException;
 class ProppatchRequestBodyBuilder
 {
     /** @var DOMDocument */
-    private $dom;
+    private $xml;
     /** @var list<DOMNode> */
     private $propetiesToSet;
     /** @var list<DOMNode> */
@@ -19,11 +19,11 @@ class ProppatchRequestBodyBuilder
 
     public function __construct()
     {
-        $dom = new DOMDocument('1.0', 'utf-8');
-        $dom->preserveWhiteSpace = false;
-        $dom->formatOutput = true;
-        $dom->appendChild($dom->createElementNS('DAV:', 'D:propertyupdate'));
-        $this->dom = $dom;
+        $xml = new DOMDocument('1.0', 'utf-8');
+        $xml->preserveWhiteSpace = false;
+        $xml->formatOutput = true;
+        $xml->appendChild($xml->createElementNS('DAV:', 'D:propertyupdate'));
+        $this->xml = $xml;
     }
 
     /**
@@ -56,11 +56,11 @@ class ProppatchRequestBodyBuilder
         }
 
         foreach ($commands as $command) {
-            \assert(!\is_null($this->dom->getElementsByTagNameNS('DAV:', 'propertyupdate')->item(0)));
-            $command->execute($this->dom->getElementsByTagNameNS('DAV:', 'propertyupdate')->item(0));
+            \assert(!\is_null($this->xml->getElementsByTagNameNS('DAV:', 'propertyupdate')->item(0)));
+            $command->execute($this->xml->getElementsByTagNameNS('DAV:', 'propertyupdate')->item(0));
         }
 
-        $body = $this->dom->saveXML();
+        $body = $this->xml->saveXML();
 
         if ($body === false) {
             throw new InvalidArgumentException();
@@ -75,14 +75,14 @@ class ProppatchRequestBodyBuilder
     private function configureCommand(ProppatchAction $action, array $properties): XmlCommandInterface
     {
         $addActionCommand = new AppendChildCommand(
-            $this->dom->createElementNS('DAV:', \sprintf('D:%s', (string) $action))
+            $this->xml->createElementNS('DAV:', \sprintf('D:%s', (string) $action))
         );
         $addPropCommand = new AppendChildCommand(
-            $this->dom->createElementNS('DAV:', 'D:prop')
+            $this->xml->createElementNS('DAV:', 'D:prop')
         );
         foreach ($properties as $property) {
             $addPropCommand->add(new AppendChildCommand(
-                $this->dom->importNode($property, true)
+                $this->xml->importNode($property, true)
             ));
         }
         $addActionCommand->add($addPropCommand);

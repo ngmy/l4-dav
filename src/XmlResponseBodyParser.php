@@ -20,18 +20,22 @@ class XmlResponseBodyParser
 
     public function parse(): DOMDocument
     {
-        $dom = new DOMDocument('1.0', 'utf-8');
-        $dom->preserveWhiteSpace = false;
-        $dom->formatOutput = true;
+        $xml = new DOMDocument('1.0', 'utf-8');
+        $xml->preserveWhiteSpace = false;
+        $xml->formatOutput = true;
 
         if ($this->response->getStatusCode() < 200 || $this->response->getStatusCode() > 300) {
-            return $dom;
+            return $xml;
         }
 
-        if ($dom->loadXML((string) $this->response->getBody()) === false) {
+        $this->response->getBody()->rewind();
+        $body = $this->response->getBody()->getContents();
+        $this->response->getBody()->rewind();
+
+        if ($xml->loadXML($body) === false) {
             throw new RuntimeException();
         }
 
-        return $dom;
+        return $xml;
     }
 }

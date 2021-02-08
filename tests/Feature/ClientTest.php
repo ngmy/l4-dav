@@ -136,10 +136,30 @@ class ClientTest extends TestCase
             ->build();
 
         $response = $client->get('file');
-        $response->writeBodyToFile($path);
 
         $this->assertEquals('OK', $response->getReasonPhrase());
         $this->assertEquals(200, $response->getStatusCode());
+
+        file_put_contents($path, $response->getBody());
+
+        $this->assertFileExists($path);
+
+        $file = $this->createTmpFile();
+        $path = \stream_get_meta_data($file)['uri'];
+        \unlink($path);
+
+        $response->getBody()->rewind();
+
+        $fh = \fopen($path, 'x');
+        if ($fh === false) {
+            throw new RuntimeException('Failed to create file (' . $path . ')');
+        }
+        $stream = $response->getBody();
+        while (!$stream->eof()) {
+            \fwrite($fh, $stream->read(2048));
+        }
+        \fclose($fh);
+
         $this->assertFileExists($path);
     }
 
@@ -449,7 +469,6 @@ class ClientTest extends TestCase
 
         $this->assertEquals('OK', $response->getReasonPhrase());
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertTrue($response->resourceExists());
     }
 
     public function testHeadIfNotExists(): void
@@ -460,7 +479,6 @@ class ClientTest extends TestCase
 
         $this->assertEquals('Not Found', $response->getReasonPhrase());
         $this->assertEquals(404, $response->getStatusCode());
-        $this->assertFalse($response->resourceExists());
     }
 
     public function testListDirectoryContentsIfDirectoryIsFound(): void
@@ -511,10 +529,10 @@ class ClientTest extends TestCase
         $this->assertEquals('Not Found', $response->getReasonPhrase());
         $this->assertEquals(404, $response->getStatusCode());
 
-        $dom = new DOMDocument('1.0', 'utf-8');
-        $dom->preserveWhiteSpace = false;
-        $dom->formatOutput = true;
-        $this->assertEquals($dom, $response->getBodyAsXml());
+        $xml = new DOMDocument('1.0', 'utf-8');
+        $xml->preserveWhiteSpace = false;
+        $xml->formatOutput = true;
+        $this->assertEquals($xml, $response->getBodyAsXml());
     }
 
     public function testProppatch(): void
