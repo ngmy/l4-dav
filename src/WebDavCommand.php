@@ -4,45 +4,158 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use InvalidArgumentException;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
+use RuntimeException;
 
-abstract class WebDavCommand
+class WebDavCommand
 {
     /** @var string */
-    protected $method;
+    private $method;
     /** @var FullUrl */
-    protected $url;
+    private $url;
+    /** @var CopyParameters|DeleteParameters|GetParameters|HeadParameters|MkcolParameters|MoveParameters|PropfindParameters|ProppatchParameters|PutParameters */
+    private $parameters;
     /** @var WebDavClientOptions */
-    protected $options;
+    private $options;
     /** @var Headers */
-    protected $headers;
+    private $headers;
     /** @var resource|StreamInterface|string|null */
-    protected $body;
+    private $body;
     /** @var WebDavCommandDispatcher */
-    protected $dispatcher;
+    private $dispatcher;
     /** @var ResponseInterface */
-    protected $response;
+    private $response;
 
     /**
-     * @param list<mixed> ...$args
+     * @param string|UriInterface $url
      */
-    public static function create(string $command, ...$args): self
-    {
-        $class = '\\Ngmy\\L4Dav\\' . \ucfirst(\strtolower($command)) . 'Command';
-        if (!\class_exists($class)) {
-            throw new InvalidArgumentException(\sprintf('Class `%s` could not be instantiated', $class));
+    public static function createGetCommand(
+        $url,
+        GetParameters $parameters,
+        WebDavClientOptions $options
+    ): self {
+        return new self('GET', $url, $parameters, $options);
+    }
+
+    /**
+     * @param string|UriInterface $url
+     * @throws RuntimeException
+     */
+    public static function createPutCommand(
+        $url,
+        PutParameters $parameters,
+        WebDavClientOptions $options
+    ): self {
+        $fh = \fopen($parameters->srcPath(), 'r');
+        if ($fh === false) {
+            throw new RuntimeException('Failed to open file (' . $parameters->srcPath() . ')');
         }
-        return new $class(...$args);
+        $body = Psr17FactoryDiscovery::findStreamFactory()->createStreamFromResource($fh);
+        return new self('PUT', $url, $parameters, $options, new Headers([
+            'Content-Length' => (string) \filesize($parameters->srcPath()),
+        ]), $body);
+    }
+
+    /**
+     * @param string|UriInterface $url
+     */
+    public static function createDeleteCommand(
+        $url,
+        DeleteParameters $parameters,
+        WebDavClientOptions $options
+    ): self {
+        return new self('DELETE', $url, $parameters, $options);
+    }
+
+    /**
+     * @param string|UriInterface $url
+     */
+    public static function createCopyCommand(
+        $url,
+        CopyParameters $parameters,
+        WebDavClientOptions $options
+    ): self {
+        $fullDestUrl = Url::createFullUrl($parameters->destUrl(), $options->baseUrl());
+        return new self('COPY', $url, $parameters, $options, new Headers([
+            'Destination' => (string) $fullDestUrl,
+            'Overwrite' => (string) $parameters->overwrite(),
+        ]));
+    }
+
+    /**
+     * @param string|UriInterface $url
+     */
+    public static function createMoveCommand(
+        $url,
+        MoveParameters $parameters,
+        WebDavClientOptions $options
+    ): self {
+        $fullDestUrl = Url::createFullUrl($parameters->destUrl(), $options->baseUrl());
+        return new self('MOVE', $url, $parameters, $options, new Headers([
+            'Destination' => (string) $fullDestUrl,
+        ]));
+    }
+
+    /**
+     * @param string|UriInterface $url
+     */
+    public static function createMkcolCommand(
+        $url,
+        MkcolParameters $parameters,
+        WebDavClientOptions $options
+    ): self {
+        return new self('MKCOL', $url, $parameters, $options);
+    }
+
+    /**
+     * @param string|UriInterface $url
+     */
+    public static function createHeadCommand(
+        $url,
+        HeadParameters $parameters,
+        WebDavClientOptions $options
+    ): self {
+        return new self('HEAD', $url, $parameters, $options);
+    }
+
+    /**
+     * @param string|UriInterface $url
+     */
+    public static function createPropfindCommand(
+        $url,
+        PropfindParameters $parameters,
+        WebDavClientOptions $options
+    ): self {
+        return new self('PROPFIND', $url, $parameters, $options, new Headers([
+            'Depth' => (string) $parameters->depth(),
+        ]));
+    }
+
+    /**
+     * @param string|UriInterface $url
+     */
+    public static function createProppatchCommand(
+        $url,
+        ProppatchParameters $parameters,
+        WebDavClientOptions $options
+    ): self {
+        $bodyBuilder = new ProppatchRequestBodyBuilder();
+        foreach ($parameters->propertiesToSet() as $property) {
+            $bodyBuilder->addPropetyToSet($property);
+        }
+        foreach ($parameters->propertiesToRemove() as $property) {
+            $bodyBuilder->addPropetyToRemove($property);
+        }
+        $body = $bodyBuilder->build();
+        return new self('PROPPATCH', $url, $parameters, $options, new Headers(), $body);
     }
 
     public function execute(): void
     {
-        $this->doBefore();
-        $this->dispatch();
-        $this->doAfter();
+        $this->response = $this->dispatcher->dispatch();
     }
 
     public function getResult(): ResponseInterface
@@ -58,6 +171,14 @@ abstract class WebDavCommand
     public function url(): FullUrl
     {
         return $this->url;
+    }
+
+    /**
+     * @return CopyParameters|DeleteParameters|GetParameters|HeadParameters|MkcolParameters|MoveParameters|PropfindParameters|ProppatchParameters|PutParameters
+     */
+    public function parameters()
+    {
+        return $this->parameters;
     }
 
     public function options(): WebDavClientOptions
@@ -80,36 +201,24 @@ abstract class WebDavCommand
 
     /**
      * @param string|UriInterface                  $url
+     * @param mixed                                $parameters
      * @param Headers                              $headers
      * @param resource|StreamInterface|string|null $body
      */
-    protected function __construct(
+    private function __construct(
         string $method,
         $url,
+        $parameters,
         WebDavClientOptions $options,
         Headers $headers = null,
         $body = null
     ) {
         $this->method = $method;
         $this->url = Url::createFullUrl($url, $options->baseUrl());
+        $this->parameters = $parameters;
         $this->options = $options;
         $this->headers = $headers ?: new Headers([]);
         $this->body = $body;
         $this->dispatcher = new WebDavCommandDispatcher($this);
-    }
-
-    protected function doBefore(): void
-    {
-        // no-op
-    }
-
-    protected function dispatch(): void
-    {
-        $this->response = $this->dispatcher->dispatch();
-    }
-
-    protected function doAfter(): void
-    {
-        // no-op
     }
 }

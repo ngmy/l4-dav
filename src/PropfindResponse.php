@@ -11,7 +11,7 @@ class PropfindResponse implements ResponseInterface
 {
     use ResponseTrait;
 
-    /** @var XmlResponseParser */
+    /** @var XmlResponseBodyParser */
     private $parser;
 
     public function __construct(ResponseInterface $response)

@@ -135,10 +135,12 @@ class ClientTest extends TestCase
             ->setDestPath($path)
             ->build();
 
-        $response = $client->get('file', $parameters);
+        $response = $client->get('file');
+        $response->writeToFile($path);
 
         $this->assertEquals('OK', $response->getReasonPhrase());
         $this->assertEquals(200, $response->getStatusCode());
+        $this->assertFileExists($path);
     }
 
     /**

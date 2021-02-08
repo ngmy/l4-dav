@@ -32,9 +32,9 @@ class WebDavClient
     public function get($url, GetParameters $parameters = null): ResponseInterface
     {
         $parameters = $parameters ?: (new GetParametersBuilder())->build();
-        $command = WebDavCommand::create('GET', $url, $parameters, $this->options);
+        $command = WebDavCommand::createGetcommand($url, $parameters, $this->options);
         $command->execute();
-        return $command->getResult();
+        return new GetResponse($command->getResult());
     }
 
     /**
@@ -46,7 +46,7 @@ class WebDavClient
      */
     public function put($url, PutParameters $parameters): ResponseInterface
     {
-        $command = WebDavCommand::create('PUT', $url, $parameters, $this->options);
+        $command = WebDavCommand::createPutCommand($url, $parameters, $this->options);
         $command->execute();
         return $command->getResult();
     }
@@ -59,7 +59,7 @@ class WebDavClient
      */
     public function delete($url): ResponseInterface
     {
-        $command = WebDavCommand::create('DELETE', $url, new DeleteParameters(), $this->options);
+        $command = WebDavCommand::createDeleteCommand($url, new DeleteParameters(), $this->options);
         $command->execute();
         return $command->getResult();
     }
@@ -73,7 +73,7 @@ class WebDavClient
      */
     public function copy($url, CopyParameters $parameters): ResponseInterface
     {
-        $command = WebDavCommand::create('COPY', $url, $parameters, $this->options);
+        $command = WebDavCommand::createCopyCommand($url, $parameters, $this->options);
         $command->execute();
         return $command->getResult();
     }
@@ -87,7 +87,7 @@ class WebDavClient
      */
     public function move($url, MoveParameters $parameters): ResponseInterface
     {
-        $command = WebDavCommand::create('MOVE', $url, $parameters, $this->options);
+        $command = WebDavCommand::createMoveCommand($url, $parameters, $this->options);
         $command->execute();
         return $command->getResult();
     }
@@ -100,7 +100,7 @@ class WebDavClient
      */
     public function mkcol($url): ResponseInterface
     {
-        $command = WebDavCommand::create('MKCOL', $url, new MkcolParameters(), $this->options);
+        $command = WebDavCommand::createMkcolCommand($url, new MkcolParameters(), $this->options);
         $command->execute();
         return $command->getResult();
     }
@@ -113,10 +113,9 @@ class WebDavClient
      */
     public function head($url): HeadResponse
     {
-        $command = WebDavCommand::create('HEAD', $url, new HeadParameters(), $this->options);
+        $command = WebDavCommand::createHeadCommand($url, new HeadParameters(), $this->options);
         $command->execute();
-        \assert($command->getResult() instanceof HeadResponse);
-        return $command->getResult();
+        return new HeadResponse($command->getResult());
     }
 
     /**
@@ -129,10 +128,9 @@ class WebDavClient
     public function propfind($url, PropfindParameters $parameters = null): PropfindResponse
     {
         $parameters = $parameters ?: (new PropfindParametersBuilder())->build();
-        $command = WebDavCommand::create('PROPFIND', $url, $parameters, $this->options);
+        $command = WebDavCommand::createPropfindCommand($url, $parameters, $this->options);
         $command->execute();
-        \assert($command->getResult() instanceof PropfindResponse);
-        return $command->getResult();
+        return new PropfindResponse($command->getResult());
     }
 
     /**
@@ -141,7 +139,7 @@ class WebDavClient
      */
     public function proppatch($url, ProppatchParameters $parameters): ResponseInterface
     {
-        $command = WebDavCommand::create('PROPPATCH', $url, $parameters, $this->options);
+        $command = WebDavCommand::createProppatchCommand($url, $parameters, $this->options);
         $command->execute();
         return $command->getResult();
     }
