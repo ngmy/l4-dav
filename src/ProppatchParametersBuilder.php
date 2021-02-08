@@ -4,30 +4,28 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use SimpleXMLElement;
+use DOMNode;
 
 class ProppatchParametersBuilder
 {
-    /** @var list<SimpleXMLElement> */
+    /** @var list<DOMNode> */
     private $propertiesToSet = [];
-    /** @var list<SimpleXMLElement> */
+    /** @var list<DOMNode> */
     private $propertiesToRemove = [];
 
     /**
-     * @param SimpleXMLElement $propertyToSet
      * @return $this The value of the calling object
      */
-    public function addPropertyToSet($propertyToSet): self
+    public function addPropertyToSet(DOMNode $propertyToSet): self
     {
         $this->propertiesToSet[] = $propertyToSet;
         return $this;
     }
 
     /**
-     * @param SimpleXMLElement $propertyToRemove
      * @return $this The value of the calling object
      */
-    public function addPropertyToRemove($propertyToRemove): self
+    public function addPropertyToRemove(DOMNode $propertyToRemove): self
     {
         $this->propertiesToRemove[] = $propertyToRemove;
         return $this;

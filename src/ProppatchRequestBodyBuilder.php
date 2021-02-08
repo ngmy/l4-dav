@@ -4,31 +4,32 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
+use DOMDocument;
+use DOMNode;
 use InvalidArgumentException;
-use SimpleXMLElement;
 
 class ProppatchRequestBodyBuilder
 {
-    /** @var SimpleXMLElement */
-    private $xml;
-    /** @var list<SimpleXMLElement> */
+    /** @var DOMDocument */
+    private $dom;
+    /** @var list<DOMNode> */
     private $propetiesToSet;
-    /** @var list<SimpleXMLElement> */
+    /** @var list<DOMNode> */
     private $propetiesToRemove;
 
     public function __construct()
     {
-        $this->xml = new SimpleXMLElement(<<<XML
-<?xml version="1.0" encoding="utf-8"?>
-<D:propertyupdate xmlns:D="DAV:">
-</D:propertyupdate>
-XML);
+        $dom = new DOMDocument('1.0', 'utf-8');
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+        $dom->appendChild($dom->createElementNS('DAV:', 'D:propertyupdate'));
+        $this->dom = $dom;
     }
 
     /**
      * @return $this
      */
-    public function addPropetyToSet(SimpleXMLElement $property): self
+    public function addPropetyToSet(DOMNode $property): self
     {
         $this->propetiesToSet[] = $property;
         return $this;
@@ -37,7 +38,7 @@ XML);
     /**
      * @return $this
      */
-    public function addPropetyToRemove(SimpleXMLElement $property): self
+    public function addPropetyToRemove(DOMNode $property): self
     {
         $this->propetiesToRemove[] = $property;
         return $this;
@@ -55,10 +56,11 @@ XML);
         }
 
         foreach ($commands as $command) {
-            $command->execute($this->xml);
+            \assert(!\is_null($this->dom->getElementsByTagNameNS('DAV:', 'propertyupdate')->item(0)));
+            $command->execute($this->dom->getElementsByTagNameNS('DAV:', 'propertyupdate')->item(0));
         }
 
-        $body = $this->xml->asXML();
+        $body = $this->dom->saveXML();
 
         if ($body === false) {
             throw new InvalidArgumentException();
@@ -68,18 +70,20 @@ XML);
     }
 
     /**
-     * @param list<SimpleXMLElement> $properties
+     * @param list<DOMNode> $properties
      */
     private function configureCommand(ProppatchAction $action, array $properties): XmlCommandInterface
     {
-        $addActionCommand = new AddChildCommand(
-            new SimpleXMLElement(\sprintf('<%s/>', (string) $action), 0, false, 'DAV:')
+        $addActionCommand = new AppendChildCommand(
+            $this->dom->createElementNS('DAV:', \sprintf('D:%s', (string) $action))
         );
-        $addPropCommand = new AddChildCommand(
-            new SimpleXMLElement('<prop/>', 0, false, 'DAV:')
+        $addPropCommand = new AppendChildCommand(
+            $this->dom->createElementNS('DAV:', 'D:prop')
         );
         foreach ($properties as $property) {
-            $addPropCommand->add(new AddChildCommand($property));
+            $addPropCommand->add(new AppendChildCommand(
+                $this->dom->importNode($property, true)
+            ));
         }
         $addActionCommand->add($addPropCommand);
 

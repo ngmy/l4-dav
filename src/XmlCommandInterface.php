@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use SimpleXMLElement;
+use DOMNode;
 
 interface XmlCommandInterface
 {
-    public function execute(SimpleXMLElement $parent): void;
+    public function execute(DOMNode $parent): void;
 }

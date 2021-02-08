@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
+use DOMDocument;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
-use SimpleXMLElement;
 
 class Utils
 {
@@ -37,7 +37,7 @@ class Utils
         \fclose($fh);
     }
 
-    public static function getResponseBodyAsXml(ResponseInterface $response): SimpleXMLElement
+    public static function getResponseBodyAsXml(ResponseInterface $response): DOMDocument
     {
         return (new XmlResponseBodyParser($response))->parse();
     }

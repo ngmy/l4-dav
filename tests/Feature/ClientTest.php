@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav\Tests\Feature;
 
+use DOMDocument;
 use Ngmy\L4Dav\CopyParametersBuilder;
 use Ngmy\L4Dav\GetParametersBuilder;
 use Ngmy\L4Dav\MoveParametersBuilder;
@@ -15,7 +16,6 @@ use Ngmy\L4Dav\WebDavClient;
 use Ngmy\L4Dav\WebDavClientOptionsBuilder;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
-use SimpleXMLElement;
 
 class ClientTest extends TestCase
 {
@@ -482,20 +482,22 @@ class ClientTest extends TestCase
             ->build();
         $response = $client->propfind('', $parameters);
         $xml = $response->getBodyAsXml();
+        $hrefNodes = $xml->getElementsByTagNameNS('DAV:', 'href');
 
         $this->assertEquals('Multi-Status', $response->getReasonPhrase());
         $this->assertEquals(207, $response->getStatusCode());
-        $this->assertEquals($this->webDavBasePath, $xml->response[0]->href);
-        $this->assertEquals($this->webDavBasePath . 'file', $xml->response[1]->href);
-        $this->assertEquals($this->webDavBasePath . 'dir/', $xml->response[2]->href);
+        $this->assertEquals($this->webDavBasePath, $hrefNodes->item(0)->nodeValue);
+        $this->assertEquals($this->webDavBasePath . 'file', $hrefNodes->item(1)->nodeValue);
+        $this->assertEquals($this->webDavBasePath . 'dir/', $hrefNodes->item(2)->nodeValue);
 
         $response = $client->propfind('dir/', $parameters);
         $xml = $response->getBodyAsXml();
+        $hrefNodes = $xml->getElementsByTagNameNS('DAV:', 'href');
 
         $this->assertEquals('Multi-Status', $response->getReasonPhrase());
         $this->assertEquals(207, $response->getStatusCode());
-        $this->assertEquals($this->webDavBasePath . 'dir/', $xml->response[0]->href);
-        $this->assertEquals($this->webDavBasePath . 'dir/file', $xml->response[1]->href);
+        $this->assertEquals($this->webDavBasePath . 'dir/', $hrefNodes->item(0)->nodeValue);
+        $this->assertEquals($this->webDavBasePath . 'dir/file', $hrefNodes->item(1)->nodeValue);
     }
 
     public function testListDirectoryContentsIfDirectoryIsNotFound(): void
@@ -508,7 +510,11 @@ class ClientTest extends TestCase
 
         $this->assertEquals('Not Found', $response->getReasonPhrase());
         $this->assertEquals(404, $response->getStatusCode());
-        $this->assertEquals(new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><root></root>'), $response->getBodyAsXml());
+
+        $dom = new DOMDocument('1.0', 'utf-8');
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+        $this->assertEquals($dom, $response->getBodyAsXml());
     }
 
     public function testProppatch(): void
@@ -528,12 +534,12 @@ class ClientTest extends TestCase
         $listResponseBefore = $client->propfind('file', $parameters);
         $propertyBefore = $listResponseBefore->getBodyAsXml();
 
-        $this->assertEquals('F', $propertyBefore->response->propstat->prop->children('http://apache.org/dav/props/')->executable);
+        $this->assertEquals('F', $propertyBefore->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')->item(0)->nodeValue);
 
-        $propertyBefore->response->propstat->prop->children('http://apache.org/dav/props/')->executable = 'T';
+        $propertyBefore->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')->item(0)->nodeValue = 'T';
 
         $parameters = (new ProppatchParametersBuilder())
-            ->addPropertyToSet($propertyBefore->response->propstat->prop->children('http://apache.org/dav/props/')->executable)
+            ->addPropertyToSet($propertyBefore->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')->item(0))
             ->build();
 
         $proppatchResponse = $client->proppatch('file', $parameters);
@@ -546,10 +552,10 @@ class ClientTest extends TestCase
         $listResponseAfter = $client->propfind('file', $parameters);
         $propertyAfter = $listResponseAfter->getBodyAsXml();
 
-        $this->assertEquals('T', $propertyAfter->response->propstat->prop->children('http://apache.org/dav/props/')->executable);
+        $this->assertEquals('T', $propertyAfter->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')->item(0)->nodeValue);
 
         $parameters = (new ProppatchParametersBuilder())
-            ->addPropertyToRemove($propertyBefore->response->propstat->prop->children('http://apache.org/dav/props/')->executable)
+            ->addPropertyToRemove($propertyBefore->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')->item(0))
             ->build();
 
         $proppatchResponse = $client->proppatch('file', $parameters);
@@ -562,7 +568,7 @@ class ClientTest extends TestCase
         $listResponseAfter = $client->propfind('file', $parameters);
         $propertyAfter = $listResponseAfter->getBodyAsXml();
 
-        $this->assertEquals('T', $propertyAfter->response->propstat->prop->children('http://apache.org/dav/props/')->executable);
+        $this->assertEquals('T', $propertyAfter->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')->item(0)->nodeValue);
     }
 
     protected function createClient(): WebDavClient
@@ -599,16 +605,20 @@ class ClientTest extends TestCase
         $parameters = (new PropfindParametersBuilder())
             ->setDepth(1)
             ->build();
-        foreach ($client->propfind($directoryPath, $parameters)->getBodyAsXml() as $element) {
-            if ((string) $element->href == $this->webDavBasePath . $directoryPath) {
+        $hrefNodes = $client
+            ->propfind($directoryPath, $parameters)
+            ->getBodyAsXml()
+            ->getElementsByTagNameNS('DAV:', 'href');
+        foreach ($hrefNodes as $element) {
+            if ($element->nodeValue == $this->webDavBasePath . $directoryPath) {
                 continue;
             }
-            if (\preg_match("|{$this->webDavBasePath}(.*\/)$|", (string) $element->href, $matches)) {
+            if (\preg_match("|{$this->webDavBasePath}(.*\/)$|", $element->nodeValue, $matches)) {
                 $this->deleteWebDav($matches[1]);
             }
             $client = $this->createClient();
-            \assert(!\is_null(\preg_replace("|{$this->webDavBasePath}(.*)|", '\1', (string) $element->hrer)));
-            $client->delete(\preg_replace("|{$this->webDavBasePath}(.*)|", '\1', (string) $element->href));
+            \assert(!\is_null(\preg_replace("|{$this->webDavBasePath}(.*)|", '\1', $element->nodeValue)));
+            $client->delete(\preg_replace("|{$this->webDavBasePath}(.*)|", '\1', $element->nodeValue));
         }
     }
 }

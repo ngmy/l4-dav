@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
+use DOMNode;
 use InvalidArgumentException;
-use SimpleXMLElement;
 
 class ProppatchParameters
 {
-    /** @var list<SimpleXMLElement> */
+    /** @var list<DOMNode> */
     private $propertiesToSet = [];
-    /** @var list<SimpleXMLElement> */
+    /** @var list<DOMNode> */
     private $propertiesToRemove = [];
 
     /**
-     * @param list<SimpleXMLElement> $propertiesToSet
-     * @param list<SimpleXMLElement> $propertiesToRemove
+     * @param list<DOMNode> $propertiesToSet
+     * @param list<DOMNode> $propertiesToRemove
      */
     public function __construct($propertiesToSet = [], $propertiesToRemove = [])
     {
@@ -26,7 +26,7 @@ class ProppatchParameters
     }
 
     /**
-     * @return list<SimpleXMLElement>
+     * @return list<DOMNode>
      */
     public function propertiesToSet(): array
     {
@@ -34,7 +34,7 @@ class ProppatchParameters
     }
 
     /**
-     * @return list<SimpleXMLElement>
+     * @return list<DOMNode>
      */
     public function propertiesToRemove(): array
     {

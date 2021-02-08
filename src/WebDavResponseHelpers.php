@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
+use DOMDocument;
 use RuntimeException;
-use SimpleXMLElement;
 
 trait WebDavResponseHelpers
 {
@@ -33,7 +33,7 @@ trait WebDavResponseHelpers
         \fclose($fh);
     }
 
-    public function getBodyAsXml(): SimpleXMLElement
+    public function getBodyAsXml(): DOMDocument
     {
         return (new XmlResponseBodyParser($this->response))->parse();
     }

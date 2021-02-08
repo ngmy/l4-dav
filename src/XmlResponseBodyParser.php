@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
+use DOMDocument;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
-use SimpleXMLElement;
 
 class XmlResponseBodyParser
 {
@@ -18,23 +18,20 @@ class XmlResponseBodyParser
         $this->response = $response;
     }
 
-    public function parse(): SimpleXMLElement
+    public function parse(): DOMDocument
     {
+        $dom = new DOMDocument('1.0', 'utf-8');
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+
         if ($this->response->getStatusCode() < 200 || $this->response->getStatusCode() > 300) {
-            return $this->createEmptyXml();
+            return $dom;
         }
 
-        $xml = \simplexml_load_string((string) $this->response->getBody(), SimpleXMLElement::class);
-
-        if ($xml === false) {
+        if ($dom->loadXML((string) $this->response->getBody()) === false) {
             throw new RuntimeException();
         }
 
-        return $xml->children('DAV:');
-    }
-
-    private function createEmptyXml(): SimpleXMLElement
-    {
-        return new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><root></root>');
+        return $dom;
     }
 }
