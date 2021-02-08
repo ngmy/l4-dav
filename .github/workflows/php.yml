@@ -32,7 +32,7 @@ jobs:
           command: |
             php phive.phar --no-progress install \
               --copy \
-              --trust-gpg-keys E82B2FB314E9906E,31C7E470E2138192,CF1A108D0E7AE720,4AA394086372C20A
+              --trust-gpg-keys E82B2FB314E9906E,31C7E470E2138192,6DA3ACC4991FFAE5,CF1A108D0E7AE720,4AA394086372C20A
 
       - name: Upload tools to artifact store
         uses: actions/upload-artifact@master
