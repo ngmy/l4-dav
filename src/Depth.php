@@ -29,7 +29,7 @@ class Depth
     {
         if (!\in_array($this->depth, ['0', '1', 'infinity'], true)) {
             throw new InvalidArgumentException(
-                \sprintf('The depth `%s` must be "0" or "1" or "infinity"', $this->depth)
+                \sprintf('The depth must be "0", "1" or "infinity", "%s" given.', $this->depth)
             );
         }
     }

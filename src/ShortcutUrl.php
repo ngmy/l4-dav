@@ -15,12 +15,12 @@ class ShortcutUrl extends Url
     {
         if (!empty($this->uri->getScheme())) {
             throw new InvalidArgumentException(
-                \sprintf('The shortcut URL `%s` must not contain scheme', $this->uri)
+                \sprintf('The shortcut URL must not contain a scheme, "%s" given.', $this->uri)
             );
         }
         if (!empty($this->uri->getAuthority())) {
             throw new InvalidArgumentException(
-                \sprintf('The shortcut URL `%s` must not contain authority', $this->uri)
+                \sprintf('The shortcut URL must not contain an authority, "%s" given.', $this->uri)
             );
         }
     }

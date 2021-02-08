@@ -13,9 +13,6 @@ abstract class Url
     /** @var UriInterface */
     protected $uri;
 
-    /**
-     * @throws InvalidArgumentException
-     */
     abstract protected function validate(): void;
 
     /**
@@ -52,7 +49,7 @@ abstract class Url
         }
 
         throw new InvalidArgumentException(
-            \sprintf('The URL `%s` is invalid : The URL must be full URL, or be shortcut and base URL pairs', $uri)
+            \sprintf('The URL must be the full URL, or a pair of the shortcut URL and base URL, "%s" and "%s" given.', $uri, (string) $baseUrl)
         );
     }
 

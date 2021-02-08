@@ -51,7 +51,7 @@ class WebDavCommand
     ): self {
         $fh = \fopen($parameters->srcPath(), 'r');
         if ($fh === false) {
-            throw new RuntimeException('Failed to open file (' . $parameters->srcPath() . ')');
+            throw new RuntimeException(\sprintf('Failed to open the file "%s".', $parameters->srcPath()));
         }
         $body = Psr17FactoryDiscovery::findStreamFactory()->createStreamFromResource($fh);
         return new self('PUT', $url, $parameters, $options, new Headers([

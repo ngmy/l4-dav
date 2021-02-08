@@ -152,7 +152,7 @@ class ClientTest extends TestCase
 
         $fh = \fopen($path, 'x');
         if ($fh === false) {
-            throw new RuntimeException('Failed to create file (' . $path . ')');
+            throw new RuntimeException(\sprintf('Failed to open the file "%s".', $path));
         }
         $stream = $response->getBody();
         while (!$stream->eof()) {
@@ -611,7 +611,7 @@ class ClientTest extends TestCase
     {
         $file = \tmpfile();
         if ($file === false) {
-            throw new RuntimeException('Failed to create temporary file');
+            throw new RuntimeException('Failed to create a temporary file.');
         }
         \fwrite($file, 'This is test file.');
         return $file;

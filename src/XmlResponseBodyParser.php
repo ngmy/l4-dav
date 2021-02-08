@@ -33,7 +33,7 @@ class XmlResponseBodyParser
         $this->response->getBody()->rewind();
 
         if ($xml->loadXML($body) === false) {
-            throw new RuntimeException();
+            throw new RuntimeException('Failed to load the XML response body.');
         }
 
         return $xml;
