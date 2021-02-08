@@ -7,7 +7,7 @@ namespace Ngmy\L4Dav;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
-trait ResponseTrait
+trait Psr7ResponseTrait
 {
     /** @var ResponseInterface */
     private $response;

@@ -136,7 +136,7 @@ class ClientTest extends TestCase
             ->build();
 
         $response = $client->get('file');
-        $response->writeToFile($path);
+        $response->writeBodyToFile($path);
 
         $this->assertEquals('OK', $response->getReasonPhrase());
         $this->assertEquals(200, $response->getStatusCode());
@@ -449,7 +449,7 @@ class ClientTest extends TestCase
 
         $this->assertEquals('OK', $response->getReasonPhrase());
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertTrue($response->exists());
+        $this->assertTrue($response->resourceExists());
     }
 
     public function testHeadIfNotExists(): void
@@ -460,7 +460,7 @@ class ClientTest extends TestCase
 
         $this->assertEquals('Not Found', $response->getReasonPhrase());
         $this->assertEquals(404, $response->getStatusCode());
-        $this->assertFalse($response->exists());
+        $this->assertFalse($response->resourceExists());
     }
 
     public function testListDirectoryContentsIfDirectoryIsFound(): void
@@ -481,19 +481,21 @@ class ClientTest extends TestCase
         $parameters = (new PropfindParametersBuilder())
             ->build();
         $response = $client->propfind('', $parameters);
+        $xml = $response->getBodyAsXml();
 
         $this->assertEquals('Multi-Status', $response->getReasonPhrase());
         $this->assertEquals(207, $response->getStatusCode());
-        $this->assertEquals($this->webDavBasePath, $response->getXml()->response[0]->href);
-        $this->assertEquals($this->webDavBasePath . 'file', $response->getXml()->response[1]->href);
-        $this->assertEquals($this->webDavBasePath . 'dir/', $response->getXml()->response[2]->href);
+        $this->assertEquals($this->webDavBasePath, $xml->response[0]->href);
+        $this->assertEquals($this->webDavBasePath . 'file', $xml->response[1]->href);
+        $this->assertEquals($this->webDavBasePath . 'dir/', $xml->response[2]->href);
 
         $response = $client->propfind('dir/', $parameters);
+        $xml = $response->getBodyAsXml();
 
         $this->assertEquals('Multi-Status', $response->getReasonPhrase());
         $this->assertEquals(207, $response->getStatusCode());
-        $this->assertEquals($this->webDavBasePath . 'dir/', $response->getXml()->response[0]->href);
-        $this->assertEquals($this->webDavBasePath . 'dir/file', $response->getXml()->response[1]->href);
+        $this->assertEquals($this->webDavBasePath . 'dir/', $xml->response[0]->href);
+        $this->assertEquals($this->webDavBasePath . 'dir/file', $xml->response[1]->href);
     }
 
     public function testListDirectoryContentsIfDirectoryIsNotFound(): void
@@ -506,7 +508,7 @@ class ClientTest extends TestCase
 
         $this->assertEquals('Not Found', $response->getReasonPhrase());
         $this->assertEquals(404, $response->getStatusCode());
-        $this->assertEquals(new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><root></root>'), $response->getXml());
+        $this->assertEquals(new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><root></root>'), $response->getBodyAsXml());
     }
 
     public function testProppatch(): void
@@ -524,7 +526,7 @@ class ClientTest extends TestCase
         $parameters = (new PropfindParametersBuilder())
             ->build();
         $listResponseBefore = $client->propfind('file', $parameters);
-        $propertyBefore = $listResponseBefore->getXml();
+        $propertyBefore = $listResponseBefore->getBodyAsXml();
 
         $this->assertEquals('F', $propertyBefore->response->propstat->prop->children('http://apache.org/dav/props/')->executable);
 
@@ -542,7 +544,7 @@ class ClientTest extends TestCase
         $parameters = (new PropfindParametersBuilder())
             ->build();
         $listResponseAfter = $client->propfind('file', $parameters);
-        $propertyAfter = $listResponseAfter->getXml();
+        $propertyAfter = $listResponseAfter->getBodyAsXml();
 
         $this->assertEquals('T', $propertyAfter->response->propstat->prop->children('http://apache.org/dav/props/')->executable);
 
@@ -558,7 +560,7 @@ class ClientTest extends TestCase
         $parameters = (new PropfindParametersBuilder())
             ->build();
         $listResponseAfter = $client->propfind('file', $parameters);
-        $propertyAfter = $listResponseAfter->getXml();
+        $propertyAfter = $listResponseAfter->getBodyAsXml();
 
         $this->assertEquals('T', $propertyAfter->response->propstat->prop->children('http://apache.org/dav/props/')->executable);
     }
@@ -597,7 +599,7 @@ class ClientTest extends TestCase
         $parameters = (new PropfindParametersBuilder())
             ->setDepth(1)
             ->build();
-        foreach ($client->propfind($directoryPath, $parameters)->getXml() as $element) {
+        foreach ($client->propfind($directoryPath, $parameters)->getBodyAsXml() as $element) {
             if ((string) $element->href == $this->webDavBasePath . $directoryPath) {
                 continue;
             }
