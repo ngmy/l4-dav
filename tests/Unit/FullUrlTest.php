@@ -48,6 +48,6 @@ class FullUrlTest extends TestCase
         if ($expected instanceof Exception) {
             $this->expectException(\get_class($expected));
         }
-        Url::createFullUrl($url, $baseUrl);
+        Url::createRequestUrl($url, $baseUrl);
     }
 }

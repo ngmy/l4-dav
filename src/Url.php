@@ -7,6 +7,7 @@ namespace Ngmy\L4Dav;
 use Http\Discovery\Psr17FactoryDiscovery;
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
+use Throwable;
 
 abstract class Url
 {
@@ -16,7 +17,7 @@ abstract class Url
     abstract protected function validate(): void;
 
     /**
-     * @param CandidateUrl|string|UriInterface $uri
+     * @param string|UriInterface $uri
      */
     public static function createBaseUrl($uri): BaseUrl
     {
@@ -24,7 +25,7 @@ abstract class Url
     }
 
     /**
-     * @param CandidateUrl|string|UriInterface $uri
+     * @param string|UriInterface $uri
      */
     public static function createRelativeUrl($uri): RelativeUrl
     {
@@ -32,7 +33,7 @@ abstract class Url
     }
 
     /**
-     * @param CandidateUrl|string|UriInterface $uri
+     * @param string|UriInterface $uri
      */
     public static function createFullUrl($uri): FullUrl
     {
@@ -40,33 +41,31 @@ abstract class Url
     }
 
     /**
-     * @param CandidateUrl|string|UriInterface $uri
+     * @param string|UriInterface $uri
      * @throws InvalidArgumentException
      */
     public static function createRequestUrl($uri, ?BaseUrl $baseUrl = null): FullUrl
     {
-        $candidate = new CandidateUrl(Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri));
-
         if (\is_null($baseUrl)) {
-            if ($candidate->isFullUrl()) {
-                return new FullUrl($candidate);
+            try {
+                return new FullUrl($uri);
+            } catch (InvalidArgumentException $e) {
+                // no-op
             }
-            throw new InvalidArgumentException(
-                \sprintf(
-                    'The request URL "%s" must be the full URL because the base URL is not specifided.',
-                    (string) $uri
-                )
-            );
+            throw new InvalidArgumentException(\sprintf(
+                'The request URL "%s" must be the full URL because the base URL is not specifided.',
+                (string) $uri
+            ), 0, $e);
         } else {
-            if ($candidate->isRelativeUrl()) {
-                return $baseUrl->createFullUrlWithRelativeUrl(new RelativeUrl($candidate));
+            try {
+                return $baseUrl->createFullUrlWithRelativeUrl(new RelativeUrl($uri));
+            } catch (InvalidArgumentException $e) {
+                // no-op
             }
-            throw new InvalidArgumentException(
-                \sprintf(
-                    'The request URL "%s" must be the relative URL because the base URL is specified.',
-                    (string) $uri
-                )
-            );
+            throw new InvalidArgumentException(\sprintf(
+                'The request URL "%s" must be the relative URL because the base URL is specified.',
+                (string) $uri
+            ), 0, $e);
         }
     }
 
@@ -75,33 +74,34 @@ abstract class Url
      * @throws InvalidArgumentException
      * @return FullUrl|RelativeUrl
      */
-    public static function createDestUrl($uri, ?BaseUrl $baseUrl = null)
+    public static function createDestUrl($uri, ?BaseUrl $baseUrl = null): Url
     {
-        $candidate = new CandidateUrl(Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri));
-
         if (\is_null($baseUrl)) {
-            if ($candidate->isFullUrl()) {
-                return new FullUrl($candidate);
+            try {
+                return new FullUrl($uri);
+            } catch (InvalidArgumentException $e1) {
+                // no-op
             }
-            if ($candidate->isRelativeUrl()) {
-                return new RelativeUrl($candidate);
+            try {
+                return new RelativeUrl($uri);
+            } catch (InvalidArgumentException $e2) {
+                // no-op
             }
-            throw new InvalidArgumentException(
-                \sprintf(
-                    'The destination URL "%s" is invalid.',
-                    (string) $uri
-                )
-            );
+            $e = self::withPrevious($e2, $e1);
+            throw new InvalidArgumentException(\sprintf(
+                'The destination URL "%s" is invalid.',
+                (string) $uri
+            ), 0, $e);
         } else {
-            if ($candidate->isRelativeUrl()) {
-                return $baseUrl->createFullUrlWithRelativeUrl(new RelativeUrl($candidate));
+            try {
+                return $baseUrl->createFullUrlWithRelativeUrl(new RelativeUrl($uri));
+            } catch (InvalidArgumentException $e) {
+                // no-op
             }
-            throw new InvalidArgumentException(
-                \sprintf(
-                    'The destination URL "%s" must be the relative URL because the base URL is specified.',
-                    (string) $uri
-                )
-            );
+            throw new InvalidArgumentException(\sprintf(
+                'The destination URL "%s" must be the relative URL because the base URL is specified.',
+                (string) $uri
+            ), 0, $e);
         }
     }
 
@@ -137,5 +137,21 @@ abstract class Url
     {
         $this->uri = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri);
         $this->validate();
+    }
+
+    /**
+     * @see https://qiita.com/mpyw/items/7f5a9fe6472f38352d96
+     */
+    private static function withPrevious(Throwable $e, Throwable $previous): Throwable
+    {
+        try {
+            try {
+                throw $previous;
+            } finally {
+                throw $e;
+            }
+        } catch (Throwable $e) {
+            return $e;
+        }
     }
 }
