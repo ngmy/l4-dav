@@ -6,7 +6,6 @@ namespace Ngmy\L4Dav\Tests\Feature;
 
 use DOMDocument;
 use Ngmy\L4Dav\CopyParametersBuilder;
-use Ngmy\L4Dav\GetParametersBuilder;
 use Ngmy\L4Dav\MoveParametersBuilder;
 use Ngmy\L4Dav\PropfindParametersBuilder;
 use Ngmy\L4Dav\ProppatchParametersBuilder;
@@ -130,10 +129,6 @@ class ClientTest extends TestCase
         $file = $this->createTmpFile();
         $path = \stream_get_meta_data($file)['uri'];
         \unlink($path);
-
-        $parameters = (new GetParametersBuilder())
-            ->setDestPath($path)
-            ->build();
 
         $response = $client->get('file');
 

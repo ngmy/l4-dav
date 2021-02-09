@@ -24,13 +24,12 @@ class WebDavClient
     /**
      * Perform the WebDAV GET operation.
      *
-     * @param string|UriInterface $url        The full URL or the URL relative to the base URL of the resource
-     * @param GetParameters       $parameters Parameters for the WebDAV GET operation
+     * @param string|UriInterface $url The full URL or the URL relative to the base URL of the resource
      * @return WebDavResponse An instance of the WebDavResponse that implements the PSR-7 ResponseInterface
      */
-    public function get($url, GetParameters $parameters = null): WebDavResponse
+    public function get($url): WebDavResponse
     {
-        $parameters = $parameters ?: (new GetParametersBuilder())->build();
+        $parameters = new GetParameters();
         $command = WebDavCommand::createGetCommand($url, $parameters, $this->options);
         $command->execute();
         return new WebDavResponse($command->getResult());
