@@ -6,10 +6,10 @@ namespace Ngmy\L4Dav;
 
 use InvalidArgumentException;
 
-class ProppatchAction
+class ProppatchInstruction
 {
     /** @var string */
-    private $action;
+    private $instruction;
 
     public static function createSet(): self
     {
@@ -23,21 +23,21 @@ class ProppatchAction
 
     public function __toString(): string
     {
-        return $this->action;
+        return $this->instruction;
     }
 
     private function validate(): void
     {
-        if (!\in_array($this->action, ['set', 'remove'], true)) {
+        if (!\in_array($this->instruction, ['set', 'remove'], true)) {
             throw new InvalidArgumentException(
-                \sprintf('The PROPPATCH action must be "set" or "remove", "%s" given.', $this->action)
+                \sprintf('The PROPPATCH instruction must be "set" or "remove", "%s" given.', $this->instruction)
             );
         }
     }
 
-    private function __construct(string $action)
+    private function __construct(string $instruction)
     {
-        $this->action = $action;
+        $this->instruction = $instruction;
         $this->validate();
     }
 }

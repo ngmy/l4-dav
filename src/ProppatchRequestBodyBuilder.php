@@ -49,10 +49,10 @@ class ProppatchRequestBodyBuilder
         $commands = [];
 
         if (!empty($this->propetiesToSet)) {
-            $commands[] = $this->configureCommand(ProppatchAction::createSet(), $this->propetiesToSet);
+            $commands[] = $this->configureCommand(ProppatchInstruction::createSet(), $this->propetiesToSet);
         }
         if (!empty($this->propetiesToRemove)) {
-            $commands[] = $this->configureCommand(ProppatchAction::createRemove(), $this->propetiesToRemove);
+            $commands[] = $this->configureCommand(ProppatchInstruction::createRemove(), $this->propetiesToRemove);
         }
 
         foreach ($commands as $command) {
@@ -72,10 +72,10 @@ class ProppatchRequestBodyBuilder
     /**
      * @param list<DOMNode> $properties
      */
-    private function configureCommand(ProppatchAction $action, array $properties): XmlCommandInterface
+    private function configureCommand(ProppatchInstruction $instruction, array $properties): XmlCommandInterface
     {
-        $addActionCommand = new AppendChildCommand(
-            $this->xml->createElementNS('DAV:', \sprintf('D:%s', (string) $action))
+        $addInstructionCommand = new AppendChildCommand(
+            $this->xml->createElementNS('DAV:', \sprintf('D:%s', (string) $instruction))
         );
         $addPropCommand = new AppendChildCommand(
             $this->xml->createElementNS('DAV:', 'D:prop')
@@ -85,8 +85,8 @@ class ProppatchRequestBodyBuilder
                 $this->xml->importNode($property, true)
             ));
         }
-        $addActionCommand->add($addPropCommand);
+        $addInstructionCommand->add($addPropCommand);
 
-        return $addActionCommand;
+        return $addInstructionCommand;
     }
 }
