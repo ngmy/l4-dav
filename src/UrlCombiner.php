@@ -4,45 +4,41 @@ declare(strict_types=1);
 
 namespace Ngmy\L4Dav;
 
-use Psr\Http\Message\UriInterface;
-
 class UrlCombiner
 {
     /** @var BaseUrl */
     private $baseUrl;
-    /** @var ShortcutUrl */
-    private $shortcutUrl;
+    /** @var RelativeUrl */
+    private $relativeUrl;
 
-    /**
-     * @param BaseUrl|string|UriInterface     $baseUrl
-     * @param ShortcutUrl|string|UriInterface $shortcutUrl
-     */
-    public function __construct($baseUrl, $shortcutUrl)
+    public function __construct(BaseUrl $baseUrl, RelativeUrl $relativeUrl)
     {
-        $this->baseUrl = Url::createBaseUrl((string) $baseUrl);
-        $this->shortcutUrl = Url::createShortcutUrl((string) $shortcutUrl);
+        $this->baseUrl = $baseUrl;
+        $this->relativeUrl = $relativeUrl;
     }
 
-    public function combine(): UriInterface
+    public function combine(): FullUrl
     {
-        return $this->baseUrl->uri()
-            ->withPath($this->combinePath())
-            ->withQuery($this->shortcutUrl->uri()->getQuery())
-            ->withFragment($this->shortcutUrl->uri()->getFragment());
+        return Url::createFullUrl(
+            $this->baseUrl->uri()
+                ->withPath($this->combinePath())
+                ->withQuery($this->relativeUrl->uri()->getQuery())
+                ->withFragment($this->relativeUrl->uri()->getFragment())
+        );
     }
 
     private function combinePath(): string
     {
         $baseUrlPath = $this->baseUrl->uri()->getPath();
-        $shortcutUrlPath = $this->shortcutUrl->uri()->getPath();
-        if (!$this->baseUrl->hasPath() && !$this->shortcutUrl->hasPath()) {
+        $relativeUrlPath = $this->relativeUrl->uri()->getPath();
+        if (!$this->baseUrl->hasPath() && !$this->relativeUrl->hasPath()) {
             return '';
-        } elseif ($this->baseUrl->hasPathWithTrailingSlash() && $this->shortcutUrl->hasPathWithLeadingSlash()) {
-            return \substr($baseUrlPath, 0, \strlen($baseUrlPath) - 1) . '/' . \substr($shortcutUrlPath, 1);
-        } elseif (!$this->baseUrl->hasPathWithTrailingSlash() && !$this->shortcutUrl->hasPathWithLeadingSlash()) {
-            return $baseUrlPath . '/' . $shortcutUrlPath;
+        } elseif ($this->baseUrl->hasPathWithTrailingSlash() && $this->relativeUrl->hasPathWithLeadingSlash()) {
+            return \substr($baseUrlPath, 0, \strlen($baseUrlPath) - 1) . '/' . \substr($relativeUrlPath, 1);
+        } elseif (!$this->baseUrl->hasPathWithTrailingSlash() && !$this->relativeUrl->hasPathWithLeadingSlash()) {
+            return $baseUrlPath . '/' . $relativeUrlPath;
         } else {
-            return $baseUrlPath . $shortcutUrlPath;
+            return $baseUrlPath . $relativeUrlPath;
         }
     }
 }

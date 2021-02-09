@@ -6,7 +6,7 @@ namespace Ngmy\L4Dav;
 
 use InvalidArgumentException;
 
-class ShortcutUrl extends Url
+class RelativeUrl extends Url
 {
     /**
      * @throws InvalidArgumentException

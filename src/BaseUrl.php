@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace Ngmy\L4Dav;
 
 use InvalidArgumentException;
-use Psr\Http\Message\UriInterface;
 
 class BaseUrl extends Url
 {
-    /**
-     * @param ShortcutUrl|string|UriInterface $shortcutUrl
-     */
-    public function uriWithShortcutUrl($shortcutUrl): UriInterface
+    public function createFullUrlWithRelativeUrl(RelativeUrl $relativeUrl): FullUrl
     {
-        return (new UrlCombiner($this, $shortcutUrl))->combine();
+        return (new UrlCombiner($this, $relativeUrl))->combine();
     }
 
     /**

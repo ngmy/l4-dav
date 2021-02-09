@@ -10,4 +10,17 @@ class CandidateUrl extends Url
     {
         // no-op
     }
+
+    public function isRelativeUrl(): bool
+    {
+        return empty($this->uri->getScheme())
+            && empty($this->uri->getAuthority());
+    }
+
+    public function isFullUrl(): bool
+    {
+        return \in_array($this->uri->getScheme(), ['http', 'https'])
+            && !empty($this->uri->getAuthority())
+            && (!$this->hasPath() || $this->hasPathWithLeadingSlash());
+    }
 }

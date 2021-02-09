@@ -16,41 +16,93 @@ abstract class Url
     abstract protected function validate(): void;
 
     /**
-     * @param string|UriInterface|Url $uri
+     * @param CandidateUrl|string|UriInterface $uri
      */
     public static function createBaseUrl($uri): BaseUrl
     {
-        return new BaseUrl($uri);
+        return new BaseUrl((string) $uri);
     }
 
     /**
-     * @param string|UriInterface|Url $uri
+     * @param CandidateUrl|string|UriInterface $uri
      */
-    public static function createShortcutUrl($uri): ShortcutUrl
+    public static function createRelativeUrl($uri): RelativeUrl
     {
-        return new ShortcutUrl($uri);
+        return new RelativeUrl((string) $uri);
+    }
+
+    /**
+     * @param CandidateUrl|string|UriInterface $uri
+     */
+    public static function createFullUrl($uri): FullUrl
+    {
+        return new FullUrl((string) $uri);
+    }
+
+    /**
+     * @param CandidateUrl|string|UriInterface $uri
+     * @throws InvalidArgumentException
+     */
+    public static function createRequestUrl($uri, ?BaseUrl $baseUrl = null): FullUrl
+    {
+        $candidate = new CandidateUrl(Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri));
+
+        if (\is_null($baseUrl)) {
+            if ($candidate->isFullUrl()) {
+                return new FullUrl($candidate);
+            }
+            throw new InvalidArgumentException(
+                \sprintf(
+                    'The request URL "%s" must be the full URL because the base URL is not specifided.',
+                    (string) $uri
+                )
+            );
+        } else {
+            if ($candidate->isRelativeUrl()) {
+                return $baseUrl->createFullUrlWithRelativeUrl(new RelativeUrl($candidate));
+            }
+            throw new InvalidArgumentException(
+                \sprintf(
+                    'The request URL "%s" must be the relative URL because the base URL is specified.',
+                    (string) $uri
+                )
+            );
+        }
     }
 
     /**
      * @param string|UriInterface|Url $uri
      * @throws InvalidArgumentException
+     * @return FullUrl|RelativeUrl
      */
-    public static function createFullUrl($uri, ?BaseUrl $baseUrl = null): FullUrl
+    public static function createDestUrl($uri, ?BaseUrl $baseUrl = null)
     {
         $candidate = new CandidateUrl(Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri));
 
-        if ($candidate->isFullUrl()) {
-            return new FullUrl($candidate);
+        if (\is_null($baseUrl)) {
+            if ($candidate->isFullUrl()) {
+                return new FullUrl($candidate);
+            }
+            if ($candidate->isRelativeUrl()) {
+                return new RelativeUrl($candidate);
+            }
+            throw new InvalidArgumentException(
+                \sprintf(
+                    'The destination URL "%s" is invalid.',
+                    (string) $uri
+                )
+            );
+        } else {
+            if ($candidate->isRelativeUrl()) {
+                return $baseUrl->createFullUrlWithRelativeUrl(new RelativeUrl($candidate));
+            }
+            throw new InvalidArgumentException(
+                \sprintf(
+                    'The destination URL "%s" must be the relative URL because the base URL is specified.',
+                    (string) $uri
+                )
+            );
         }
-
-        if ($candidate->isShortcutUrl() && !\is_null($baseUrl)) {
-            $candidate = $baseUrl->uriWithShortcutUrl(self::createShortcutUrl($candidate));
-            return new FullUrl($candidate);
-        }
-
-        throw new InvalidArgumentException(
-            \sprintf('The base URL is requied because the URL "%s" is the shortcut URL.', $uri)
-        );
     }
 
     public function uri(): UriInterface
@@ -85,25 +137,5 @@ abstract class Url
     {
         $this->uri = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $uri);
         $this->validate();
-    }
-
-    protected function isBaseUrl(): bool
-    {
-        return $this->isFullUrl()
-            && empty($this->uri->getQuery())
-            && empty($this->uri->getFragment());
-    }
-
-    protected function isShortcutUrl(): bool
-    {
-        return empty($this->uri->getScheme())
-            && empty($this->uri->getAuthority());
-    }
-
-    protected function isFullUrl(): bool
-    {
-        return \in_array($this->uri->getScheme(), ['http', 'https'])
-            && !empty($this->uri->getAuthority())
-            && (!$this->hasPath() || $this->hasPathWithLeadingSlash());
     }
 }

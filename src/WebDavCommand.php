@@ -78,9 +78,9 @@ class WebDavCommand
         CopyParameters $parameters,
         WebDavClientOptions $options
     ): self {
-        $fullDestUrl = Url::createFullUrl($parameters->destUrl(), $options->baseUrl());
+        $destUrl = Url::createDestUrl($parameters->destUrl(), $options->baseUrl());
         return new self('COPY', $url, $parameters, $options, new Headers([
-            'Destination' => (string) $fullDestUrl,
+            'Destination' => (string) $destUrl,
             'Overwrite' => (string) $parameters->overwrite(),
         ]));
     }
@@ -93,9 +93,9 @@ class WebDavCommand
         MoveParameters $parameters,
         WebDavClientOptions $options
     ): self {
-        $fullDestUrl = Url::createFullUrl($parameters->destUrl(), $options->baseUrl());
+        $destUrl = Url::createDestUrl($parameters->destUrl(), $options->baseUrl());
         return new self('MOVE', $url, $parameters, $options, new Headers([
-            'Destination' => (string) $fullDestUrl,
+            'Destination' => (string) $destUrl,
         ]));
     }
 
@@ -214,7 +214,7 @@ class WebDavCommand
         $body = null
     ) {
         $this->method = $method;
-        $this->url = Url::createFullUrl($url, $options->baseUrl());
+        $this->url = Url::createRequestUrl($url, $options->baseUrl());
         $this->parameters = $parameters;
         $this->options = $options;
         $this->headers = $headers ?: new Headers([]);
