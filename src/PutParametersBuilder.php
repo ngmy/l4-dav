@@ -6,10 +6,13 @@ namespace Ngmy\L4Dav;
 
 class PutParametersBuilder
 {
-    /** @var string */
+    /** @var string The source file path */
     private $srcPath;
 
     /**
+     * Set the source file path.
+     *
+     * @param string $srcPath The source file path
      * @return $this The value of the calling object
      */
     public function setSrcPath(string $srcPath): self
@@ -19,9 +22,9 @@ class PutParametersBuilder
     }
 
     /**
-     * Build a new instance of a parameter class for the WebDAV PUT method.
+     * Build a new instance of a parameter class for the WebDAV PUT operation.
      *
-     * @return PutParameters A new instance of a parameter class for the WebDAV PUT method
+     * @return PutParameters A new instance of a parameter class for the WebDAV PUT operation
      */
     public function build(): PutParameters
     {

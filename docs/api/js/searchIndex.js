@@ -73,17 +73,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\CopyParametersBuilder\u003A\u003AsetDestUrl\u0028\u0029",
             "name": "setDestUrl",
-            "summary": "",
+            "summary": "Set\u0020the\u0020destination\u0020resource\u0020URL.",
             "url": "classes/Ngmy-L4Dav-CopyParametersBuilder.html#method_setDestUrl"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\CopyParametersBuilder\u003A\u003AsetOverwrite\u0028\u0029",
             "name": "setOverwrite",
-            "summary": "",
+            "summary": "Set\u0020whether\u0020to\u0020overwrite\u0020the\u0020resource\u0020if\u0020it\u0020exists.",
             "url": "classes/Ngmy-L4Dav-CopyParametersBuilder.html#method_setOverwrite"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\CopyParametersBuilder\u003A\u003Abuild\u0028\u0029",
             "name": "build",
-            "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020COPY\u0020method.",
+            "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameters\u0020class\u0020for\u0020the\u0020WebDAV\u0020COPY\u0020operation.",
             "url": "classes/Ngmy-L4Dav-CopyParametersBuilder.html#method_build"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\CopyParametersBuilder\u003A\u003A\u0024destUrl",
@@ -140,36 +140,6 @@ Search.appendIndex(
             "name": "GetParameters",
             "summary": "",
             "url": "classes/Ngmy-L4Dav-GetParameters.html"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\GetParameters\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-GetParameters.html#method___construct"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\GetParameters\u003A\u003A\u0024destPath",
-            "name": "destPath",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-GetParameters.html#property_destPath"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\GetParametersBuilder",
-            "name": "GetParametersBuilder",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-GetParametersBuilder.html"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\GetParametersBuilder\u003A\u003AsetDestPath\u0028\u0029",
-            "name": "setDestPath",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-GetParametersBuilder.html#method_setDestPath"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\GetParametersBuilder\u003A\u003Abuild\u0028\u0029",
-            "name": "build",
-            "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020GET\u0020method.",
-            "url": "classes/Ngmy-L4Dav-GetParametersBuilder.html#method_build"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\GetParametersBuilder\u003A\u003A\u0024destPath",
-            "name": "destPath",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-GetParametersBuilder.html#property_destPath"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Headers",
             "name": "Headers",
@@ -288,12 +258,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\MoveParametersBuilder\u003A\u003AsetDestUrl\u0028\u0029",
             "name": "setDestUrl",
-            "summary": "",
+            "summary": "Set\u0020the\u0020destination\u0020resource\u0020URL.",
             "url": "classes/Ngmy-L4Dav-MoveParametersBuilder.html#method_setDestUrl"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\MoveParametersBuilder\u003A\u003Abuild\u0028\u0029",
             "name": "build",
-            "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020MOVE\u0020method.",
+            "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020MOVE\u0020operation.",
             "url": "classes/Ngmy-L4Dav-MoveParametersBuilder.html#method_build"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\MoveParametersBuilder\u003A\u003A\u0024destUrl",
@@ -343,53 +313,18 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\PropfindParametersBuilder\u003A\u003AsetDepth\u0028\u0029",
             "name": "setDepth",
-            "summary": "",
+            "summary": "Set\u0020what\u0020depth\u0020to\u0020apply.",
             "url": "classes/Ngmy-L4Dav-PropfindParametersBuilder.html#method_setDepth"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\PropfindParametersBuilder\u003A\u003Abuild\u0028\u0029",
             "name": "build",
-            "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020PROPFIND\u0020method.",
+            "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020PROPFIND\u0020operation.",
             "url": "classes/Ngmy-L4Dav-PropfindParametersBuilder.html#method_build"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\PropfindParametersBuilder\u003A\u003A\u0024depth",
             "name": "depth",
             "summary": "",
             "url": "classes/Ngmy-L4Dav-PropfindParametersBuilder.html#property_depth"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\ProppatchAction",
-            "name": "ProppatchAction",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-ProppatchAction.html"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\ProppatchAction\u003A\u003AcreateSet\u0028\u0029",
-            "name": "createSet",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-ProppatchAction.html#method_createSet"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\ProppatchAction\u003A\u003AcreateRemove\u0028\u0029",
-            "name": "createRemove",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-ProppatchAction.html#method_createRemove"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\ProppatchAction\u003A\u003A__toString\u0028\u0029",
-            "name": "__toString",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-ProppatchAction.html#method___toString"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\ProppatchAction\u003A\u003Avalidate\u0028\u0029",
-            "name": "validate",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-ProppatchAction.html#method_validate"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\ProppatchAction\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-ProppatchAction.html#method___construct"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\ProppatchAction\u003A\u003A\u0024action",
-            "name": "action",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-ProppatchAction.html#property_action"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\ProppatchParameters",
             "name": "ProppatchParameters",
@@ -423,17 +358,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\ProppatchParametersBuilder\u003A\u003AaddPropertyToSet\u0028\u0029",
             "name": "addPropertyToSet",
-            "summary": "",
+            "summary": "Add\u0020the\u0020property\u0020to\u0020set.",
             "url": "classes/Ngmy-L4Dav-ProppatchParametersBuilder.html#method_addPropertyToSet"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\ProppatchParametersBuilder\u003A\u003AaddPropertyToRemove\u0028\u0029",
             "name": "addPropertyToRemove",
-            "summary": "",
+            "summary": "Add\u0020the\u0020property\u0020to\u0020remove.",
             "url": "classes/Ngmy-L4Dav-ProppatchParametersBuilder.html#method_addPropertyToRemove"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\ProppatchParametersBuilder\u003A\u003Abuild\u0028\u0029",
             "name": "build",
-            "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020PROPPATCH\u0020method.",
+            "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020PROPPATCH\u0020operation.",
             "url": "classes/Ngmy-L4Dav-ProppatchParametersBuilder.html#method_build"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\ProppatchParametersBuilder\u003A\u003A\u0024propertiesToSet",
@@ -493,77 +428,77 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait",
             "name": "Psr7ResponseTrait",
-            "summary": "",
+            "summary": "The\u0020trait\u0020to\u0020implement\u0020the\u0020PSR\u002D7\u0020ResponseInterface.",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AgetProtocolVersion\u0028\u0029",
             "name": "getProtocolVersion",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_getProtocolVersion"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AwithProtocolVersion\u0028\u0029",
             "name": "withProtocolVersion",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_withProtocolVersion"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AgetHeaders\u0028\u0029",
             "name": "getHeaders",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_getHeaders"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AhasHeader\u0028\u0029",
             "name": "hasHeader",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_hasHeader"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AgetHeader\u0028\u0029",
             "name": "getHeader",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_getHeader"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AgetHeaderLine\u0028\u0029",
             "name": "getHeaderLine",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_getHeaderLine"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AwithHeader\u0028\u0029",
             "name": "withHeader",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_withHeader"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AwithAddedHeader\u0028\u0029",
             "name": "withAddedHeader",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_withAddedHeader"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AwithoutHeader\u0028\u0029",
             "name": "withoutHeader",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_withoutHeader"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AgetBody\u0028\u0029",
             "name": "getBody",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_getBody"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AwithBody\u0028\u0029",
             "name": "withBody",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_withBody"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AgetStatusCode\u0028\u0029",
             "name": "getStatusCode",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_getStatusCode"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AgetReasonPhrase\u0028\u0029",
             "name": "getReasonPhrase",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_getReasonPhrase"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003AwithStatus\u0028\u0029",
             "name": "withStatus",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-L4Dav-Psr7ResponseTrait.html#method_withStatus"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Psr7ResponseTrait\u003A\u003A\u0024response",
@@ -593,12 +528,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\PutParametersBuilder\u003A\u003AsetSrcPath\u0028\u0029",
             "name": "setSrcPath",
-            "summary": "",
+            "summary": "Set\u0020the\u0020source\u0020file\u0020path.",
             "url": "classes/Ngmy-L4Dav-PutParametersBuilder.html#method_setSrcPath"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\PutParametersBuilder\u003A\u003Abuild\u0028\u0029",
             "name": "build",
-            "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020PUT\u0020method.",
+            "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020PUT\u0020operation.",
             "url": "classes/Ngmy-L4Dav-PutParametersBuilder.html#method_build"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\PutParametersBuilder\u003A\u003A\u0024srcPath",
@@ -718,47 +653,47 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClient\u003A\u003Aget\u0028\u0029",
             "name": "get",
-            "summary": "Download\u0020a\u0020file\u0020from\u0020the\u0020WebDAV\u0020server.",
+            "summary": "Perform\u0020the\u0020WebDAV\u0020GET\u0020operation.",
             "url": "classes/Ngmy-L4Dav-WebDavClient.html#method_get"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClient\u003A\u003Aput\u0028\u0029",
             "name": "put",
-            "summary": "Upload\u0020a\u0020file\u0020to\u0020the\u0020WebDAV\u0020server.",
+            "summary": "Perform\u0020the\u0020WebDAV\u0020PUT\u0020operation.",
             "url": "classes/Ngmy-L4Dav-WebDavClient.html#method_put"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClient\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
-            "summary": "Delete\u0020an\u0020item\u0020on\u0020the\u0020WebDAV\u0020server.",
+            "summary": "Perform\u0020the\u0020WebDAV\u0020DELETE\u0020operation.",
             "url": "classes/Ngmy-L4Dav-WebDavClient.html#method_delete"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClient\u003A\u003Acopy\u0028\u0029",
             "name": "copy",
-            "summary": "Copy\u0020an\u0020item\u0020on\u0020the\u0020WebDAV\u0020server.",
+            "summary": "Perform\u0020the\u0020WebDAV\u0020COPY\u0020operation.",
             "url": "classes/Ngmy-L4Dav-WebDavClient.html#method_copy"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClient\u003A\u003Amove\u0028\u0029",
             "name": "move",
-            "summary": "Rename\u0020an\u0020item\u0020on\u0020the\u0020WebDAV\u0020server.",
+            "summary": "Perform\u0020the\u0020WebDAV\u0020MOVE\u0020operation.",
             "url": "classes/Ngmy-L4Dav-WebDavClient.html#method_move"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClient\u003A\u003Amkcol\u0028\u0029",
             "name": "mkcol",
-            "summary": "Make\u0020a\u0020directory\u0020on\u0020the\u0020WebDAV\u0020server.",
+            "summary": "Perform\u0020the\u0020WebDAV\u0020MKCOL\u0020operation.",
             "url": "classes/Ngmy-L4Dav-WebDavClient.html#method_mkcol"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClient\u003A\u003Ahead\u0028\u0029",
             "name": "head",
-            "summary": "Check\u0020the\u0020existence\u0020of\u0020an\u0020item\u0020on\u0020the\u0020WebDAV\u0020server.",
+            "summary": "Perform\u0020the\u0020WebDAV\u0020HEAD\u0020operation.",
             "url": "classes/Ngmy-L4Dav-WebDavClient.html#method_head"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClient\u003A\u003Apropfind\u0028\u0029",
             "name": "propfind",
-            "summary": "List\u0020contents\u0020of\u0020a\u0020directory\u0020on\u0020the\u0020WebDAV\u0020server.",
+            "summary": "Perform\u0020the\u0020WebDAV\u0020PROPFIND\u0020operation.",
             "url": "classes/Ngmy-L4Dav-WebDavClient.html#method_propfind"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClient\u003A\u003Aproppatch\u0028\u0029",
             "name": "proppatch",
-            "summary": "",
+            "summary": "Perform\u0020the\u0020WebDAV\u0020PROPPATCH\u0020operation.",
             "url": "classes/Ngmy-L4Dav-WebDavClient.html#method_proppatch"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClient\u003A\u003A\u0024options",
@@ -823,12 +758,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClientOptionsBuilder\u003A\u003AuserName\u0028\u0029",
             "name": "userName",
-            "summary": "Set\u0020password\u0020for\u0020authentication.",
+            "summary": "Set\u0020the\u0020username\u0020for\u0020authentication.",
             "url": "classes/Ngmy-L4Dav-WebDavClientOptionsBuilder.html#method_userName"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClientOptionsBuilder\u003A\u003Apassword\u0028\u0029",
             "name": "password",
-            "summary": "Set\u0020password\u0020for\u0020authentication.",
+            "summary": "Set\u0020the\u0020password\u0020for\u0020authentication.",
             "url": "classes/Ngmy-L4Dav-WebDavClientOptionsBuilder.html#method_password"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClientOptionsBuilder\u003A\u003A\u0024defaultRequestHeaders",
@@ -1003,7 +938,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavResponse\u003A\u003AgetBodyAsXml\u0028\u0029",
             "name": "getBodyAsXml",
-            "summary": "",
+            "summary": "Get\u0020the\u0020response\u0020body\u0020as\u0020XML.",
             "url": "classes/Ngmy-L4Dav-WebDavResponse.html#method_getBodyAsXml"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavResponse\u003A\u003A\u0024responseBodyParser",
@@ -1050,6 +985,41 @@ Search.appendIndex(
             "name": "validate",
             "summary": "",
             "url": "classes/Ngmy-L4Dav-RelativeUrl.html#method_validate"
+        },                {
+            "fqsen": "\\Ngmy\\L4Dav\\ProppatchInstruction",
+            "name": "ProppatchInstruction",
+            "summary": "",
+            "url": "classes/Ngmy-L4Dav-ProppatchInstruction.html"
+        },                {
+            "fqsen": "\\Ngmy\\L4Dav\\ProppatchInstruction\u003A\u003AcreateSet\u0028\u0029",
+            "name": "createSet",
+            "summary": "",
+            "url": "classes/Ngmy-L4Dav-ProppatchInstruction.html#method_createSet"
+        },                {
+            "fqsen": "\\Ngmy\\L4Dav\\ProppatchInstruction\u003A\u003AcreateRemove\u0028\u0029",
+            "name": "createRemove",
+            "summary": "",
+            "url": "classes/Ngmy-L4Dav-ProppatchInstruction.html#method_createRemove"
+        },                {
+            "fqsen": "\\Ngmy\\L4Dav\\ProppatchInstruction\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "",
+            "url": "classes/Ngmy-L4Dav-ProppatchInstruction.html#method___toString"
+        },                {
+            "fqsen": "\\Ngmy\\L4Dav\\ProppatchInstruction\u003A\u003Avalidate\u0028\u0029",
+            "name": "validate",
+            "summary": "",
+            "url": "classes/Ngmy-L4Dav-ProppatchInstruction.html#method_validate"
+        },                {
+            "fqsen": "\\Ngmy\\L4Dav\\ProppatchInstruction\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Ngmy-L4Dav-ProppatchInstruction.html#method___construct"
+        },                {
+            "fqsen": "\\Ngmy\\L4Dav\\ProppatchInstruction\u003A\u003A\u0024instruction",
+            "name": "instruction",
+            "summary": "",
+            "url": "classes/Ngmy-L4Dav-ProppatchInstruction.html#property_instruction"
         },                {
             "fqsen": "\\",
             "name": "\\",

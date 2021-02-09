@@ -12,13 +12,13 @@ use Psr\Http\Message\UriInterface;
 
 class WebDavClientOptionsBuilder
 {
-    /** @var BaseUrl|null Base URL */
+    /** @var BaseUrl|null The base URL of the WebDAV server */
     private $baseUrl;
-    /** @var PortInterface Port */
+    /** @var PortInterface The port of the WebDAV server */
     private $port;
-    /** @var UserInfoInterface User info */
+    /** @var UserInfoInterface The User info */
     private $userInfo;
-    /** @var Headers Default HTTP request headers */
+    /** @var Headers Default request headers */
     private $defaultRequestHeaders;
     /** @var array<int, mixed> Default cURL options */
     private $defaultCurlOptions = [];
@@ -34,9 +34,9 @@ class WebDavClientOptionsBuilder
     }
 
     /**
-     * Set base URL.
+     * Set the base URL of the WebDAV server.
      *
-     * @param string|UriInterface $baseUrl
+     * @param string|UriInterface $baseUrl The base URL of the WebDAV server
      * @return $this The value of the calling object
      */
     public function baseUrl($baseUrl): self
@@ -46,8 +46,9 @@ class WebDavClientOptionsBuilder
     }
 
     /**
-     * Set port.
+     * Set the port number of the WebDAV server.
      *
+     * @param int $port The port number of ther WebDAV server
      * @return $this The value of the calling object
      */
     public function port(int $port): self
@@ -57,8 +58,9 @@ class WebDavClientOptionsBuilder
     }
 
     /**
-     * Set password for authentication.
+     * Set the username for authentication.
      *
+     * @param string $userName The username for authentication
      * @return $this The value of the calling object
      */
     public function userName(string $userName): self
@@ -68,8 +70,9 @@ class WebDavClientOptionsBuilder
     }
 
     /**
-     * Set password for authentication.
+     * Set the password for authentication.
      *
+     * @param string $password The password for authentication
      * @return $this The value of the calling object
      */
     public function password(string $password): self
@@ -79,9 +82,9 @@ class WebDavClientOptionsBuilder
     }
 
     /**
-     * Set default HTTP request headers.
+     * Set default request headers.
      *
-     * @param array<string, string> $defaultRequestHeaders
+     * @param array<string, string> $defaultRequestHeaders Default request headers
      * @return $this The value of the calling object
      */
     public function defaultRequestHeaders(array $defaultRequestHeaders): self
@@ -93,7 +96,7 @@ class WebDavClientOptionsBuilder
     /**
      * Set default cURL options.
      *
-     * @param array<int, mixed> $defaultCurlOptions
+     * @param array<int, mixed> $defaultCurlOptions Default cURL options
      * @return $this The value of the calling object
      */
     public function defaultCurlOptions(array $defaultCurlOptions): self
@@ -104,6 +107,8 @@ class WebDavClientOptionsBuilder
 
     /**
      * Build WebDAV client options.
+     *
+     * @return WebDavClientOptions WebDAV client options
      */
     public function build(): WebDavClientOptions
     {

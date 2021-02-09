@@ -9,11 +9,13 @@ use Psr\Http\Message\UriInterface;
 
 class MoveParametersBuilder
 {
-    /** @var UriInterface */
+    /** @var UriInterface The destination resource URL */
     private $destUrl;
 
     /**
-     * @param string|UriInterface $destUrl
+     * Set the destination resource URL.
+     *
+     * @param string|UriInterface $destUrl The destination resource URL
      * @return $this The value of the calling object
      */
     public function setDestUrl($destUrl): self
@@ -23,9 +25,9 @@ class MoveParametersBuilder
     }
 
     /**
-     * Build a new instance of a parameter class for the WebDAV MOVE method.
+     * Build a new instance of a parameter class for the WebDAV MOVE operation.
      *
-     * @return MoveParameters A new instance of a parameter class for the WebDAV MOVE method
+     * @return MoveParameters A new instance of a parameter class for the WebDAV MOVE operation
      */
     public function build(): MoveParameters
     {

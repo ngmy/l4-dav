@@ -8,12 +8,15 @@ use DOMNode;
 
 class ProppatchParametersBuilder
 {
-    /** @var list<DOMNode> */
+    /** @var list<DOMNode> Properties to set */
     private $propertiesToSet = [];
-    /** @var list<DOMNode> */
+    /** @var list<DOMNode> Properties to remove */
     private $propertiesToRemove = [];
 
     /**
+     * Add the property to set.
+     *
+     * @param DOMNode $propertyToSet The property to set
      * @return $this The value of the calling object
      */
     public function addPropertyToSet(DOMNode $propertyToSet): self
@@ -23,6 +26,9 @@ class ProppatchParametersBuilder
     }
 
     /**
+     * Add the property to remove.
+     *
+     * @param DOMNode $propertyToRemove The property to remove
      * @return $this The value of the calling object
      */
     public function addPropertyToRemove(DOMNode $propertyToRemove): self
@@ -32,9 +38,9 @@ class ProppatchParametersBuilder
     }
 
     /**
-     * Build a new instance of a parameter class for the WebDAV PROPPATCH method.
+     * Build a new instance of a parameter class for the WebDAV PROPPATCH operation.
      *
-     * @return ProppatchParameters A new instance of a parameter class for the WebDAV PROPPATCH method
+     * @return ProppatchParameters A new instance of a parameter class for the WebDAV PROPPATCH operation
      */
     public function build(): ProppatchParameters
     {

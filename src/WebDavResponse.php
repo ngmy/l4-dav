@@ -11,15 +11,23 @@ class WebDavResponse implements ResponseInterface
 {
     use Psr7ResponseTrait;
 
-    /** @var XmlResponseBodyParser */
+    /** @var XmlResponseBodyParser The parser of the XML response body */
     private $responseBodyParser;
 
+    /**
+     * @param ResponseInterface $response An instance of the any class that implements the PSR-7 ResponseInterface
+     */
     public function __construct(ResponseInterface $response)
     {
         $this->response = $response;
         $this->responseBodyParser = new XmlResponseBodyParser($response);
     }
 
+    /**
+     * Get the response body as XML.
+     *
+     * @return DOMDocument The response body as XML
+     */
     public function getBodyAsXml(): DOMDocument
     {
         return $this->responseBodyParser->parse();
