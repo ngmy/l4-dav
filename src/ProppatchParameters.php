@@ -48,7 +48,7 @@ class ProppatchParameters
     {
         if (empty($this->propertiesToSet) && empty($this->propertiesToRemove)) {
             throw new InvalidArgumentException(
-                'PROPPATCH parameters must add either or both of properties to set or to remove.'
+                'PROPPATCH parameters must add properties to set and/or remove.'
             );
         }
     }
