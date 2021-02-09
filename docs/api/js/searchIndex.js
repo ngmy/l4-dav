@@ -36,25 +36,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-L4Dav-BaseUrl.html"
         },                {
-            "fqsen": "\\Ngmy\\L4Dav\\BaseUrl\u003A\u003AuriWithShortcutUrl\u0028\u0029",
-            "name": "uriWithShortcutUrl",
+            "fqsen": "\\Ngmy\\L4Dav\\BaseUrl\u003A\u003AcreateFullUrlWithRelativeUrl\u0028\u0029",
+            "name": "createFullUrlWithRelativeUrl",
             "summary": "",
-            "url": "classes/Ngmy-L4Dav-BaseUrl.html#method_uriWithShortcutUrl"
+            "url": "classes/Ngmy-L4Dav-BaseUrl.html#method_createFullUrlWithRelativeUrl"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\BaseUrl\u003A\u003Avalidate\u0028\u0029",
             "name": "validate",
             "summary": "",
             "url": "classes/Ngmy-L4Dav-BaseUrl.html#method_validate"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\CandidateUrl",
-            "name": "CandidateUrl",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-CandidateUrl.html"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\CandidateUrl\u003A\u003Avalidate\u0028\u0029",
-            "name": "validate",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-CandidateUrl.html#method_validate"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\CopyParameters",
             "name": "CopyParameters",
@@ -616,16 +606,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-L4Dav-PutParametersBuilder.html#property_srcPath"
         },                {
-            "fqsen": "\\Ngmy\\L4Dav\\ShortcutUrl",
-            "name": "ShortcutUrl",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-ShortcutUrl.html"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\ShortcutUrl\u003A\u003Avalidate\u0028\u0029",
-            "name": "validate",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-ShortcutUrl.html#method_validate"
-        },                {
             "fqsen": "\\Ngmy\\L4Dav\\Url",
             "name": "Url",
             "summary": "",
@@ -641,15 +621,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-L4Dav-Url.html#method_createBaseUrl"
         },                {
-            "fqsen": "\\Ngmy\\L4Dav\\Url\u003A\u003AcreateShortcutUrl\u0028\u0029",
-            "name": "createShortcutUrl",
+            "fqsen": "\\Ngmy\\L4Dav\\Url\u003A\u003AcreateRelativeUrl\u0028\u0029",
+            "name": "createRelativeUrl",
             "summary": "",
-            "url": "classes/Ngmy-L4Dav-Url.html#method_createShortcutUrl"
+            "url": "classes/Ngmy-L4Dav-Url.html#method_createRelativeUrl"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Url\u003A\u003AcreateFullUrl\u0028\u0029",
             "name": "createFullUrl",
             "summary": "",
             "url": "classes/Ngmy-L4Dav-Url.html#method_createFullUrl"
+        },                {
+            "fqsen": "\\Ngmy\\L4Dav\\Url\u003A\u003AcreateRequestUrl\u0028\u0029",
+            "name": "createRequestUrl",
+            "summary": "",
+            "url": "classes/Ngmy-L4Dav-Url.html#method_createRequestUrl"
+        },                {
+            "fqsen": "\\Ngmy\\L4Dav\\Url\u003A\u003AcreateDestUrl\u0028\u0029",
+            "name": "createDestUrl",
+            "summary": "",
+            "url": "classes/Ngmy-L4Dav-Url.html#method_createDestUrl"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Url\u003A\u003A\u0024uri",
             "name": "uri",
@@ -681,20 +671,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-L4Dav-Url.html#method___construct"
         },                {
-            "fqsen": "\\Ngmy\\L4Dav\\Url\u003A\u003AisBaseUrl\u0028\u0029",
-            "name": "isBaseUrl",
+            "fqsen": "\\Ngmy\\L4Dav\\Url\u003A\u003AwithPrevious\u0028\u0029",
+            "name": "withPrevious",
             "summary": "",
-            "url": "classes/Ngmy-L4Dav-Url.html#method_isBaseUrl"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\Url\u003A\u003AisShortcutUrl\u0028\u0029",
-            "name": "isShortcutUrl",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-Url.html#method_isShortcutUrl"
-        },                {
-            "fqsen": "\\Ngmy\\L4Dav\\Url\u003A\u003AisFullUrl\u0028\u0029",
-            "name": "isFullUrl",
-            "summary": "",
-            "url": "classes/Ngmy-L4Dav-Url.html#method_isFullUrl"
+            "url": "classes/Ngmy-L4Dav-Url.html#method_withPrevious"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\UrlCombiner",
             "name": "UrlCombiner",
@@ -721,10 +701,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-L4Dav-UrlCombiner.html#property_baseUrl"
         },                {
-            "fqsen": "\\Ngmy\\L4Dav\\UrlCombiner\u003A\u003A\u0024shortcutUrl",
-            "name": "shortcutUrl",
+            "fqsen": "\\Ngmy\\L4Dav\\UrlCombiner\u003A\u003A\u0024relativeUrl",
+            "name": "relativeUrl",
             "summary": "",
-            "url": "classes/Ngmy-L4Dav-UrlCombiner.html#property_shortcutUrl"
+            "url": "classes/Ngmy-L4Dav-UrlCombiner.html#property_relativeUrl"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClient",
             "name": "WebDavClient",
@@ -1060,6 +1040,16 @@ Search.appendIndex(
             "name": "response",
             "summary": "",
             "url": "classes/Ngmy-L4Dav-XmlResponseBodyParser.html#property_response"
+        },                {
+            "fqsen": "\\Ngmy\\L4Dav\\RelativeUrl",
+            "name": "RelativeUrl",
+            "summary": "",
+            "url": "classes/Ngmy-L4Dav-RelativeUrl.html"
+        },                {
+            "fqsen": "\\Ngmy\\L4Dav\\RelativeUrl\u003A\u003Avalidate\u0028\u0029",
+            "name": "validate",
+            "summary": "",
+            "url": "classes/Ngmy-L4Dav-RelativeUrl.html#method_validate"
         },                {
             "fqsen": "\\",
             "name": "\\",
