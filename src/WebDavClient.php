@@ -15,6 +15,7 @@ class WebDavClient
      * Create a new instance of the WebDAV Client.
      *
      * @param WebDavClientOptions $options Options for the WebDAV client
+     * @return void
      */
     public function __construct(WebDavClientOptions $options = null)
     {
