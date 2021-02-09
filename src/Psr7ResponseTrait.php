@@ -9,10 +9,12 @@ use Psr\Http\Message\StreamInterface;
 
 /**
  * The trait to implement the PSR-7 ResponseInterface.
+ *
+ * @see https://www.php-fig.org/psr/psr-7/
  */
 trait Psr7ResponseTrait
 {
-    /** @var ResponseInterface */
+    /** @var ResponseInterface An instance of the any class that implements the PSR-7 ResponseInterface */
     private $response;
 
     /**
