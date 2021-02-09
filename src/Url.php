@@ -21,7 +21,7 @@ abstract class Url
      */
     public static function createBaseUrl($uri): BaseUrl
     {
-        return new BaseUrl((string) $uri);
+        return new BaseUrl($uri);
     }
 
     /**
@@ -29,7 +29,7 @@ abstract class Url
      */
     public static function createRelativeUrl($uri): RelativeUrl
     {
-        return new RelativeUrl((string) $uri);
+        return new RelativeUrl($uri);
     }
 
     /**
@@ -37,7 +37,7 @@ abstract class Url
      */
     public static function createFullUrl($uri): FullUrl
     {
-        return new FullUrl((string) $uri);
+        return new FullUrl($uri);
     }
 
     /**
