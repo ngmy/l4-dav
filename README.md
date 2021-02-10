@@ -12,17 +12,17 @@ The PHP WebDAV client.
 ## Supported WebDAV Features
 The PHP WebDAV client supports the following WebDAV features as defined in [RFC 4918](https://tools.ietf.org/html/rfc4918):
 
-- [x] PUT Store the resource
-- [x] GET Retrieves the resource
-- [x] HEAD Retrieves the
-- [x] DELETE Deletes the resource/collection
-- [x] MKCOL Creates a new collection
-- [x] COPY Creates a duplicate of the source resource
-- [x] MOVE Moves the resource
-- [x] PROPFIND Retrieves properties
-- [x] PROPPATCH Set and/or remove properties
-- [ ] LOCK lock the resource
-- [ ] UNLOCK Unlock the lock
+- [x] PUT - Stores the resource
+- [x] GET - Retrieves the resource
+- [x] HEAD - Retrieves the
+- [x] DELETE - Deletes the resource/collection
+- [x] MKCOL - Creates a new collection
+- [x] COPY - Creates a duplicate of the source resource
+- [x] MOVE - Moves the resource
+- [x] PROPFIND - Retrieves properties
+- [x] PROPPATCH - Set and/or removes properties
+- [ ] LOCK - Locks the resource
+- [ ] UNLOCK - Unlocks the lock
 
 ## Requirements
 The PHP WebDAV client has the following requirements:
