@@ -10,7 +10,7 @@
 The PHP WebDAV client.
 
 ## Supported WebDAV Features
-The PHP WebDAV client supports the following WebDAV features as defined in [RFC 2518](https://tools.ietf.org/html/rfc2518).
+The PHP WebDAV client supports the following WebDAV features as defined in [RFC 4918](https://tools.ietf.org/html/rfc4918).
 
 - [x] PUT Store the resource
 - [x] GET Retrieves the resource
