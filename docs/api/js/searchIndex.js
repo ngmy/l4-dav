@@ -873,7 +873,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetProtocolVersion\u0028\u0029",
             "name": "getProtocolVersion",
-            "summary": "",
+            "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getProtocolVersion"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AwithProtocolVersion\u0028\u0029",
