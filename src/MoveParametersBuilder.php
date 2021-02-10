@@ -9,7 +9,11 @@ use Psr\Http\Message\UriInterface;
 
 class MoveParametersBuilder
 {
-    /** @var UriInterface The destination resource URL */
+    /**
+     * The destination resource URL.
+     *
+     * @var UriInterface
+     */
     private $destUrl;
 
     /**

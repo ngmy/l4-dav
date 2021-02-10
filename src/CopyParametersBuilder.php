@@ -9,9 +9,17 @@ use Psr\Http\Message\UriInterface;
 
 class CopyParametersBuilder
 {
-    /** @var UriInterface The destination resource URL */
+    /**
+     * The destination resource URL.
+     *
+     * @var UriInterface
+     */
     private $destUrl;
-    /** @var Overwrite Whether to overwrite the resource if it exists */
+    /**
+     * Whether to overwrite the resource if it exists.
+     *
+     * @var Overwrite
+     */
     private $overwrite;
 
     /**

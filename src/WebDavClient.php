@@ -8,7 +8,11 @@ use Psr\Http\Message\UriInterface;
 
 class WebDavClient
 {
-    /** @var WebDavClientOptions Options for the WebDAV client */
+    /**
+     * Options for the WebDAV client.
+     *
+     * @var WebDavClientOptions
+     */
     private $options;
 
     /**

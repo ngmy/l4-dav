@@ -11,7 +11,11 @@ class WebDavResponse implements ResponseInterface
 {
     use Psr7ResponseTrait;
 
-    /** @var XmlResponseBodyParser The parser of the XML response body */
+    /**
+     * The parser of the XML response body.
+     *
+     * @var XmlResponseBodyParser
+     */
     private $responseBodyParser;
 
     /**

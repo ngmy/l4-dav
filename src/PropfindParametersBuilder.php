@@ -6,7 +6,11 @@ namespace Ngmy\L4Dav;
 
 class PropfindParametersBuilder
 {
-    /** @var Depth What depth to apply */
+    /**
+     * What depth to apply.
+     *
+     * @var Depth
+     */
     private $depth;
 
     /**

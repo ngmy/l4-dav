@@ -12,15 +12,35 @@ use Psr\Http\Message\UriInterface;
 
 class WebDavClientOptionsBuilder
 {
-    /** @var BaseUrl|null The base URL of the WebDAV server */
+    /**
+     * The base URL of the WebDAV server.
+     *
+     * @var BaseUrl|null
+     */
     private $baseUrl;
-    /** @var PortInterface The port of the WebDAV server */
+    /**
+     * The port of the WebDAV server.
+     *
+     * @var PortInterface
+     */
     private $port;
-    /** @var UserInfoInterface The User info */
+    /**
+     * The User info.
+     *
+     * @var UserInfoInterface
+     */
     private $userInfo;
-    /** @var Headers Default request headers */
+    /**
+     * Default request headers.
+     *
+     * @var Headers
+     */
     private $defaultRequestHeaders;
-    /** @var array<int, mixed> Default cURL options */
+    /**
+     * Default cURL options.
+     *
+     * @var array<int, mixed>
+     */
     private $defaultCurlOptions = [];
 
     /**

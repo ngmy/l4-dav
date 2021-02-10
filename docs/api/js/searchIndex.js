@@ -88,12 +88,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\CopyParametersBuilder\u003A\u003A\u0024destUrl",
             "name": "destUrl",
-            "summary": "",
+            "summary": "The\u0020destination\u0020resource\u0020URL.",
             "url": "classes/Ngmy-L4Dav-CopyParametersBuilder.html#property_destUrl"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\CopyParametersBuilder\u003A\u003A\u0024overwrite",
             "name": "overwrite",
-            "summary": "",
+            "summary": "Whether\u0020to\u0020overwrite\u0020the\u0020resource\u0020if\u0020it\u0020exists.",
             "url": "classes/Ngmy-L4Dav-CopyParametersBuilder.html#property_overwrite"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\DeleteParameters",
@@ -268,7 +268,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\MoveParametersBuilder\u003A\u003A\u0024destUrl",
             "name": "destUrl",
-            "summary": "",
+            "summary": "The\u0020destination\u0020resource\u0020URL.",
             "url": "classes/Ngmy-L4Dav-MoveParametersBuilder.html#property_destUrl"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Overwrite",
@@ -323,7 +323,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\PropfindParametersBuilder\u003A\u003A\u0024depth",
             "name": "depth",
-            "summary": "",
+            "summary": "What\u0020depth\u0020to\u0020apply.",
             "url": "classes/Ngmy-L4Dav-PropfindParametersBuilder.html#property_depth"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\ProppatchParameters",
@@ -373,12 +373,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\ProppatchParametersBuilder\u003A\u003A\u0024propertiesToSet",
             "name": "propertiesToSet",
-            "summary": "",
+            "summary": "Properties\u0020to\u0020set.",
             "url": "classes/Ngmy-L4Dav-ProppatchParametersBuilder.html#property_propertiesToSet"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\ProppatchParametersBuilder\u003A\u003A\u0024propertiesToRemove",
             "name": "propertiesToRemove",
-            "summary": "",
+            "summary": "Properties\u0020to\u0020remove.",
             "url": "classes/Ngmy-L4Dav-ProppatchParametersBuilder.html#property_propertiesToRemove"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\ProppatchRequestBodyBuilder",
@@ -538,7 +538,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\PutParametersBuilder\u003A\u003A\u0024srcPath",
             "name": "srcPath",
-            "summary": "",
+            "summary": "The\u0020source\u0020file\u0020path.",
             "url": "classes/Ngmy-L4Dav-PutParametersBuilder.html#property_srcPath"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\Url",
@@ -698,7 +698,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClient\u003A\u003A\u0024options",
             "name": "options",
-            "summary": "",
+            "summary": "Options\u0020for\u0020the\u0020WebDAV\u0020client.",
             "url": "classes/Ngmy-L4Dav-WebDavClient.html#property_options"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClientOptions",
@@ -748,12 +748,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClientOptionsBuilder\u003A\u003A\u0024baseUrl",
             "name": "baseUrl",
-            "summary": "",
+            "summary": "The\u0020base\u0020URL\u0020of\u0020the\u0020WebDAV\u0020server.",
             "url": "classes/Ngmy-L4Dav-WebDavClientOptionsBuilder.html#property_baseUrl"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClientOptionsBuilder\u003A\u003A\u0024port",
             "name": "port",
-            "summary": "",
+            "summary": "The\u0020port\u0020of\u0020the\u0020WebDAV\u0020server.",
             "url": "classes/Ngmy-L4Dav-WebDavClientOptionsBuilder.html#property_port"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClientOptionsBuilder\u003A\u003AuserName\u0028\u0029",
@@ -768,12 +768,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClientOptionsBuilder\u003A\u003A\u0024defaultRequestHeaders",
             "name": "defaultRequestHeaders",
-            "summary": "",
+            "summary": "Default\u0020request\u0020headers.",
             "url": "classes/Ngmy-L4Dav-WebDavClientOptionsBuilder.html#property_defaultRequestHeaders"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClientOptionsBuilder\u003A\u003A\u0024defaultCurlOptions",
             "name": "defaultCurlOptions",
-            "summary": "",
+            "summary": "Default\u0020cURL\u0020options.",
             "url": "classes/Ngmy-L4Dav-WebDavClientOptionsBuilder.html#property_defaultCurlOptions"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClientOptionsBuilder\u003A\u003Abuild\u0028\u0029",
@@ -783,7 +783,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavClientOptionsBuilder\u003A\u003A\u0024userInfo",
             "name": "userInfo",
-            "summary": "",
+            "summary": "The\u0020User\u0020info.",
             "url": "classes/Ngmy-L4Dav-WebDavClientOptionsBuilder.html#property_userInfo"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavCommand",
@@ -943,7 +943,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\WebDavResponse\u003A\u003A\u0024responseBodyParser",
             "name": "responseBodyParser",
-            "summary": "",
+            "summary": "The\u0020parser\u0020of\u0020the\u0020XML\u0020response\u0020body.",
             "url": "classes/Ngmy-L4Dav-WebDavResponse.html#property_responseBodyParser"
         },                {
             "fqsen": "\\Ngmy\\L4Dav\\XmlCommandInterface",

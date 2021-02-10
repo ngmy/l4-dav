@@ -8,9 +8,17 @@ use DOMNode;
 
 class ProppatchParametersBuilder
 {
-    /** @var list<DOMNode> Properties to set */
+    /**
+     * Properties to set.
+     *
+     * @var list<DOMNode>
+     */
     private $propertiesToSet = [];
-    /** @var list<DOMNode> Properties to remove */
+    /**
+     * Properties to remove.
+     *
+     * @var list<DOMNode>
+     */
     private $propertiesToRemove = [];
 
     /**

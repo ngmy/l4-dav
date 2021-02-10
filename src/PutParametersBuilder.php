@@ -6,7 +6,11 @@ namespace Ngmy\L4Dav;
 
 class PutParametersBuilder
 {
-    /** @var string The source file path */
+    /**
+     * The source file path.
+     *
+     * @var string
+     */
     private $srcPath;
 
     /**
