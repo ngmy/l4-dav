@@ -67,7 +67,7 @@ file_put_contents($path, $response->getBody());
 
 // Streaming file
 $response->getBody()->rewind();
-$fh = fopen($path, 'x');
+$fh = fopen($path, 'w');
 $stream = $response->getBody();
 while (!$stream->eof()) {
     fwrite($fh, $stream->read(2048));
