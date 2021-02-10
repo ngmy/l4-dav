@@ -1,9 +1,23 @@
-# L4Dav
+# PHP WebDAV client
 
 [![Build Status](https://travis-ci.org/ngmy/l4-dav.png?branch=master)](https://travis-ci.org/ngmy/l4-dav)
 [![Coverage Status](https://coveralls.io/repos/ngmy/l4-dav/badge.png?branch=master)](https://coveralls.io/r/ngmy/l4-dav?branch=master)
 
-A simple WebDAV client library for Laravel.
+A PHP WebDAV client.
+
+## Supported WebDAV Methods
+
+-[x] GET
+-[x] PUT
+-[x] DELETE
+-[x] COPY
+-[x] MOVE
+-[x] MKCOL
+-[x] HEAD
+-[x] PROPFIND
+-[x] PROPPATCH
+-[ ] LOCK
+-[ ] UNLOCK
 
 ## Requirements
 
@@ -12,45 +26,13 @@ The L4Dav has the following requirements:
 * PHP >= 7.3
 * Laravel >= 6.0
 
-## Dependencies
-
-The L4Dav has the following dependencies:
-
-* [anlutro/php-curl](https://github.com/anlutro/php-curl)
-
 ## Installation
 
 Add the package to your `composer.json` and run `composer update`:
 
 ```json
-{
-    "require": {
-        "ngmy/l4-dav": "dev-master"
-    }
-}
+composer require ngmy/l4-dav
 ```
-
-Add the following to the list of service providers in `app/config/app.php`:
-
-```php
-'Ngmy\L4Dav\L4DavServiceProvider',
-```
-
-Add the following to the list of class aliases in `app/config/app.php`:
-
-```php
-'L4Dav' => 'Ngmy\L4Dav\Facades\L4Dav',
-```
-
-## Configuration
-
-After installing, you can publish the package's configuration file into your application, by running the following command:
-
-```
-php artisan config:publish ngmy/l4-dav
-```
-
-This will publish the config file to `app/config/packages/ngmy/l4-dav/config.php` where you modify the package configuration.
 
 ## Examples
 
