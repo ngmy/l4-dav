@@ -17,34 +17,6 @@ The PHP WebDAV client that makes it easy to send WebDAV requests and trivial to 
 - Streaming large uploads, streaming large downloads via PSR-7 responses and streams
 - Supports the Basic and Digest authentication
 
-## Supported WebDAV Features
-The PHP WebDAV client supports the following WebDAV features as defined in [RFC 4918](https://tools.ietf.org/html/rfc4918):
-
-- [x] PUT - Stores the resource
-- [x] GET - Retrieves the resource
-- [x] HEAD - Retrieves the header information of the resource
-- [x] DELETE - Deletes the resource
-- [x] MKCOL - Creates a new collection
-- [x] COPY - Creates a duplicate of the resource
-- [x] MOVE - Moves the resource
-- [x] PROPFIND - Retrieves properties
-- [x] PROPPATCH - Set and/or removes properties
-- [ ] LOCK - Locks the resource
-- [ ] UNLOCK - Unlocks the resource
-
-## Requirements
-The PHP WebDAV client has the following requirements:
-
-* PHP >= 7.3
-* [libxml](https://www.php.net/manual/en/book.libxml.php) PHP extension
-
-## Installation
-Execute the Composer `require` command:
-```console
-composer require ngmy/l4-dav
-```
-
-## Usage
 ```php
 $options = (new WebDavClientOptionsBuilder())
     ->setBaseUrl('https://webdav.example.com')
@@ -75,9 +47,35 @@ while (!$stream->eof()) {
 fclose($fh);
 ```
 
-## Documentation
+## Supported WebDAV Features
+The PHP WebDAV client supports the following WebDAV features as defined in [RFC 4918](https://tools.ietf.org/html/rfc4918):
 
-Please see the [API documentation](https://ngmy.github.io/l4-dav/api/).
+- [x] PUT - Stores the resource
+- [x] GET - Retrieves the resource
+- [x] HEAD - Retrieves the header information of the resource
+- [x] DELETE - Deletes the resource
+- [x] MKCOL - Creates a new collection
+- [x] COPY - Creates a duplicate of the resource
+- [x] MOVE - Moves the resource
+- [x] PROPFIND - Retrieves properties
+- [x] PROPPATCH - Set and/or removes properties
+- [ ] LOCK - Locks the resource
+- [ ] UNLOCK - Unlocks the resource
+
+## Requirements
+The PHP WebDAV client has the following requirements:
+
+* PHP >= 7.3
+* [libxml](https://www.php.net/manual/en/book.libxml.php) PHP extension
+
+## Installation
+Execute the Composer `require` command:
+```console
+composer require ngmy/l4-dav
+```
+
+## Documentation
+Please see the [documentation](https://ngmy.github.io/l4-dav/api/).
 
 ## License
 The PHP WebDAV client is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
