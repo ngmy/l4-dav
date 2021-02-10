@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Ngmy\PhpWebDav;
 
 use DOMDocument;
+use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
-class WebDavResponse implements ResponseInterface
+class WebDavResponse implements MessageInterface, ResponseInterface
 {
     /**
      * An instance of the any class that implements the PSR-7 ResponseInterface.

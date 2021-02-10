@@ -89,14 +89,14 @@
     
             <span class="phpdocumentor-element__implements">
             implements
-                            <a href="classes/Psr-Http-Message-ResponseInterface.html"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></a>                    </span>
+                            <a href="classes/Psr-Http-Message-MessageInterface.html"><abbr title="\Psr\Http\Message\MessageInterface">MessageInterface</abbr></a>,                             <a href="classes/Psr-Http-Message-ResponseInterface.html"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></a>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 </aside>
 
         
@@ -112,6 +112,10 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Psr-Http-Message-MessageInterface.html"><abbr title="\Psr\Http\Message\MessageInterface">MessageInterface</abbr></a></dt>
+        <dd>HTTP messages consist of requests from a client to a server and responses
+from a server to a client. This interface defines the methods common to
+each.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Psr-Http-Message-ResponseInterface.html"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></a></dt>
         <dd>Representation of an outgoing, server-side response.</dd>
     
@@ -149,9 +153,9 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getBody">getBody()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: <a href="classes/Psr-Http-Message-StreamInterface.html"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></a>    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Gets the body of the message.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getBodyAsXml">getBodyAsXml()</a>
@@ -163,30 +167,30 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getHeader">getHeader()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: array&lt;string|int, string&gt;    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Retrieves a message header value by the given case-insensitive name.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getHeaderLine">getHeaderLine()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: string    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Retrieves a comma-separated string of the values for a single header.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getHeaders">getHeaders()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: array&lt;string|int, array&lt;string|int, string&gt;&gt;    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Retrieves all message header values.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getProtocolVersion">getProtocolVersion()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: string    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Retrieves the HTTP protocol version as a string.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getReasonPhrase">getReasonPhrase()</a>
@@ -205,44 +209,44 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_hasHeader">hasHeader()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: bool    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Checks if a header exists by the given case-insensitive name.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withAddedHeader">withAddedHeader()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: static    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Return an instance with the specified header appended with the given value.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withBody">withBody()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: static    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Return an instance with the specified message body.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withHeader">withHeader()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: static    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Return an instance with the provided value replacing the specified header.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withoutHeader">withoutHeader()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: static    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Return an instance without the specified header.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withProtocolVersion">withProtocolVersion()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: static    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Return an instance with the specified HTTP protocol version.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withStatus">withStatus()</a>
@@ -279,7 +283,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 </aside>
 
         <p class="phpdocumentor-summary">An instance of the any class that implements the PSR-7 ResponseInterface.</p>
@@ -311,7 +315,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 </aside>
 
         <p class="phpdocumentor-summary">The parser of the XML response body.</p>
@@ -347,7 +351,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 </aside>
 
     
@@ -392,14 +396,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">118</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Gets the body of the message.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getBody</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">getBody</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Psr-Http-Message-StreamInterface.html"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></a></span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -407,9 +411,10 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Psr-Http-Message-StreamInterface.html"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></a></span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
+            <section class="phpdocumentor-description"><p>Returns the body as a stream.</p>
+</section>
 
     
 </article>
@@ -426,7 +431,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">164</span>
+    <span class="phpdocumentor-element-found-in__line">165</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get the response body as XML.</p>
@@ -461,14 +466,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">73</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Retrieves a message header value by the given case-insensitive name.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getHeader</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$header</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">getHeader</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$header</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -486,9 +491,12 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
+            <section class="phpdocumentor-description"><p>An array of string values as provided for the given
+header. If the header does not appear in the message, this method MUST
+return an empty array.</p>
+</section>
 
     
 </article>
@@ -505,14 +513,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Retrieves a comma-separated string of the values for a single header.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getHeaderLine</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$header</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">getHeaderLine</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$header</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -530,9 +538,12 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
+            <section class="phpdocumentor-description"><p>A string of values as provided for the given header
+concatenated together using a comma. If the header does not appear in
+the message, this method MUST return an empty string.</p>
+</section>
 
     
 </article>
@@ -549,14 +560,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">56</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Retrieves all message header values.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getHeaders</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">getHeaders</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, array&lt;string|int, string&gt;&gt;</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -564,9 +575,12 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, array&lt;string|int, string&gt;&gt;</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
+            <section class="phpdocumentor-description"><p>Returns an associative array of the message's headers. Each
+key MUST be a header name, and each value MUST be an array of strings
+for that header.</p>
+</section>
 
     
 </article>
@@ -583,14 +597,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Retrieves the HTTP protocol version as a string.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getProtocolVersion</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">getProtocolVersion</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -598,9 +612,10 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
+            <section class="phpdocumentor-description"><p>HTTP protocol version.</p>
+</section>
 
     
 </article>
@@ -617,7 +632,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">144</span>
+    <span class="phpdocumentor-element-found-in__line">145</span>
 </aside>
 
         <p class="phpdocumentor-summary">Gets the response reason phrase associated with the status code.</p>
@@ -652,7 +667,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">136</span>
+    <span class="phpdocumentor-element-found-in__line">137</span>
 </aside>
 
         <p class="phpdocumentor-summary">Gets the response status code.</p>
@@ -687,14 +702,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">65</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Checks if a header exists by the given case-insensitive name.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">hasHeader</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$header</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">hasHeader</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$header</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -712,9 +727,12 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">bool</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
+            <section class="phpdocumentor-description"><p>Returns true if any header names match the given header
+name using a case-insensitive string comparison. Returns false if
+no matching header name is found in the message.</p>
+</section>
 
     
 </article>
@@ -731,14 +749,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">98</span>
+    <span class="phpdocumentor-element-found-in__line">99</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Return an instance with the specified header appended with the given value.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">withAddedHeader</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$header</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">withAddedHeader</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$header</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -756,14 +774,16 @@
                 : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Header value(s).</p>
+</section>
+
             </dd>
             </dl>
 
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">static</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -782,14 +802,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">126</span>
+    <span class="phpdocumentor-element-found-in__line">127</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Return an instance with the specified message body.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">withBody</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Psr-Http-Message-StreamInterface.html"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$body</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">withBody</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Psr-Http-Message-StreamInterface.html"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$body</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -800,14 +820,16 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Psr-Http-Message-StreamInterface.html"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Body.</p>
+</section>
+
             </dd>
             </dl>
 
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">static</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -826,14 +848,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">88</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Return an instance with the provided value replacing the specified header.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">withHeader</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$header</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">withHeader</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$header</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -851,14 +873,16 @@
                 : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Header value(s).</p>
+</section>
+
             </dd>
             </dl>
 
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">static</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -877,14 +901,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">108</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Return an instance without the specified header.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">withoutHeader</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$header</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">withoutHeader</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$header</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -902,7 +926,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">static</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -921,14 +945,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Return an instance with the specified HTTP protocol version.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">withProtocolVersion</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$version</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">withProtocolVersion</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$version</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -939,14 +963,16 @@
                 : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>HTTP protocol version</p>
+</section>
+
             </dd>
             </dl>
 
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">static</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -965,7 +991,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavResponse.php"><a href="files/src-webdavresponse.html"><abbr title="src/WebDavResponse.php">WebDavResponse.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">152</span>
+    <span class="phpdocumentor-element-found-in__line">153</span>
 </aside>
 
         <p class="phpdocumentor-summary">Return an instance with the specified status code and, optionally, reason phrase.</p>

@@ -873,57 +873,57 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetProtocolVersion\u0028\u0029",
             "name": "getProtocolVersion",
-            "summary": "\u007B\u0040inheritdoc\u007D",
+            "summary": "Retrieves\u0020the\u0020HTTP\u0020protocol\u0020version\u0020as\u0020a\u0020string.",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getProtocolVersion"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AwithProtocolVersion\u0028\u0029",
             "name": "withProtocolVersion",
-            "summary": "\u007B\u0040inheritdoc\u007D",
+            "summary": "Return\u0020an\u0020instance\u0020with\u0020the\u0020specified\u0020HTTP\u0020protocol\u0020version.",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withProtocolVersion"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetHeaders\u0028\u0029",
             "name": "getHeaders",
-            "summary": "\u007B\u0040inheritdoc\u007D",
+            "summary": "Retrieves\u0020all\u0020message\u0020header\u0020values.",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getHeaders"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AhasHeader\u0028\u0029",
             "name": "hasHeader",
-            "summary": "\u007B\u0040inheritdoc\u007D",
+            "summary": "Checks\u0020if\u0020a\u0020header\u0020exists\u0020by\u0020the\u0020given\u0020case\u002Dinsensitive\u0020name.",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_hasHeader"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetHeader\u0028\u0029",
             "name": "getHeader",
-            "summary": "\u007B\u0040inheritdoc\u007D",
+            "summary": "Retrieves\u0020a\u0020message\u0020header\u0020value\u0020by\u0020the\u0020given\u0020case\u002Dinsensitive\u0020name.",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getHeader"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetHeaderLine\u0028\u0029",
             "name": "getHeaderLine",
-            "summary": "\u007B\u0040inheritdoc\u007D",
+            "summary": "Retrieves\u0020a\u0020comma\u002Dseparated\u0020string\u0020of\u0020the\u0020values\u0020for\u0020a\u0020single\u0020header.",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getHeaderLine"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AwithHeader\u0028\u0029",
             "name": "withHeader",
-            "summary": "\u007B\u0040inheritdoc\u007D",
+            "summary": "Return\u0020an\u0020instance\u0020with\u0020the\u0020provided\u0020value\u0020replacing\u0020the\u0020specified\u0020header.",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withHeader"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AwithAddedHeader\u0028\u0029",
             "name": "withAddedHeader",
-            "summary": "\u007B\u0040inheritdoc\u007D",
+            "summary": "Return\u0020an\u0020instance\u0020with\u0020the\u0020specified\u0020header\u0020appended\u0020with\u0020the\u0020given\u0020value.",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withAddedHeader"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AwithoutHeader\u0028\u0029",
             "name": "withoutHeader",
-            "summary": "\u007B\u0040inheritdoc\u007D",
+            "summary": "Return\u0020an\u0020instance\u0020without\u0020the\u0020specified\u0020header.",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withoutHeader"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetBody\u0028\u0029",
             "name": "getBody",
-            "summary": "\u007B\u0040inheritdoc\u007D",
+            "summary": "Gets\u0020the\u0020body\u0020of\u0020the\u0020message.",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getBody"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AwithBody\u0028\u0029",
             "name": "withBody",
-            "summary": "\u007B\u0040inheritdoc\u007D",
+            "summary": "Return\u0020an\u0020instance\u0020with\u0020the\u0020specified\u0020message\u0020body.",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withBody"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetStatusCode\u0028\u0029",
