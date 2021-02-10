@@ -10,19 +10,21 @@
 
 A PHP WebDAV client.
 
-## Supported WebDAV Methods
+## Supported WebDAV Features
 
-- [x] GET
-- [x] PUT
-- [x] DELETE
-- [x] COPY
-- [x] MOVE
-- [x] MKCOL
-- [x] HEAD
-- [x] PROPFIND
-- [x] PROPPATCH
-- [ ] LOCK
-- [ ] UNLOCK
+PHP WebDAV client supports the following WebDAV features as defined in [RFC 2518](https://tools.ietf.org/html/rfc2518).
+
+- [x] `PUT`
+- [x] `GET`
+- [x] `HEAD`
+- [x] `DELETE`
+- [x] `MKCOL`
+- [x] `COPY`
+- [x] `MOVE`
+- [x] `PROPFIND`
+- [x] `PROPPATCH`
+- [ ] `LOCK`
+- [ ] `UNLOCK`
 
 ## Requirements
 
