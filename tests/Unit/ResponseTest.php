@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Tests\Unit;
+namespace Ngmy\PhpWebDav\Tests\Unit;
 
 use anlutro\cURL\Response as CurlResponse;
-use Ngmy\L4Dav\Response;
-use Ngmy\L4Dav\Tests\TestCase;
+use Ngmy\PhpWebDav\Response;
+use Ngmy\PhpWebDav\Tests\TestCase;
 
 class ResponseTest extends TestCase
 {

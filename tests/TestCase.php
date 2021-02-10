@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Tests;
+namespace Ngmy\PhpWebDav\Tests;
 
 use Mockery;
 use PHPUnit\Framework\TestCase as PhpUnitTestCase;

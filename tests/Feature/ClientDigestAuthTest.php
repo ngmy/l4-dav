@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Tests\Feature;
+namespace Ngmy\PhpWebDav\Tests\Feature;
 
 class ClientDigestAuthTest extends ClientTest
 {

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Tests\Unit;
+namespace Ngmy\PhpWebDav\Tests\Unit;
 
 use Http\Client\HttpClient;
 use Mockery;
-use Ngmy\L4Dav\Command;
-use Ngmy\L4Dav\CommandDispatcher;
-use Ngmy\L4Dav\HttpClientFactory;
-use Ngmy\L4Dav\Tests\TestCase;
-use Ngmy\L4Dav\WebDavClientOptionsBuilder;
+use Ngmy\PhpWebDav\Command;
+use Ngmy\PhpWebDav\CommandDispatcher;
+use Ngmy\PhpWebDav\HttpClientFactory;
+use Ngmy\PhpWebDav\Tests\TestCase;
+use Ngmy\PhpWebDav\WebDavClientOptionsBuilder;
 use org\bovigo\vfs\vfsStream;
 use Psr\Http\Message\ResponseInterface;
 

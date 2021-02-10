@@ -34,12 +34,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ngmy\\L4Dav\\": "src/"
+            "Ngmy\\PhpWebDav\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ngmy\\L4Dav\\Tests\\": "tests/"
+            "Ngmy\\PhpWebDav\\Tests\\": "tests/"
         }
     },
     "config": {

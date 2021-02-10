@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav;
+namespace Ngmy\PhpWebDav;
 
 use League\Uri\Contracts\PortInterface;
 use League\Uri\Contracts\UserInfoInterface;

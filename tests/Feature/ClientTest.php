@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Tests\Feature;
+namespace Ngmy\PhpWebDav\Tests\Feature;
 
 use DOMDocument;
-use Ngmy\L4Dav\CopyParametersBuilder;
-use Ngmy\L4Dav\MoveParametersBuilder;
-use Ngmy\L4Dav\PropfindParametersBuilder;
-use Ngmy\L4Dav\ProppatchParametersBuilder;
-use Ngmy\L4Dav\PutParametersBuilder;
-use Ngmy\L4Dav\Tests\TestCase;
-use Ngmy\L4Dav\WebDavClient;
-use Ngmy\L4Dav\WebDavClientOptionsBuilder;
+use Ngmy\PhpWebDav\CopyParametersBuilder;
+use Ngmy\PhpWebDav\MoveParametersBuilder;
+use Ngmy\PhpWebDav\PropfindParametersBuilder;
+use Ngmy\PhpWebDav\ProppatchParametersBuilder;
+use Ngmy\PhpWebDav\PutParametersBuilder;
+use Ngmy\PhpWebDav\Tests\TestCase;
+use Ngmy\PhpWebDav\WebDavClient;
+use Ngmy\PhpWebDav\WebDavClientOptionsBuilder;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
 

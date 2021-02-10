@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Tests\Unit;
+namespace Ngmy\PhpWebDav\Tests\Unit;
 
 use Http\Discovery\Psr17FactoryDiscovery;
 use League\Uri\Components\Port;
 use League\Uri\Components\UserInfo;
-use Ngmy\L4Dav\Headers;
-use Ngmy\L4Dav\Tests\TestCase;
-use Ngmy\L4Dav\Url;
-use Ngmy\L4Dav\WebDavClientOptions;
-use Ngmy\L4Dav\WebDavClientOptionsBuilder;
+use Ngmy\PhpWebDav\Headers;
+use Ngmy\PhpWebDav\Tests\TestCase;
+use Ngmy\PhpWebDav\Url;
+use Ngmy\PhpWebDav\WebDavClientOptions;
+use Ngmy\PhpWebDav\WebDavClientOptionsBuilder;
 use Psr\Http\Message\UriInterface;
 
 class WebDavClientOptionsBuilderTest extends TestCase

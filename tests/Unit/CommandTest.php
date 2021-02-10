@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\L4Dav\Tests\Unit;
+namespace Ngmy\PhpWebDav\Tests\Unit;
 
 use Exception;
 use InvalidArgumentException;
-use Ngmy\L4Dav\Command;
-use Ngmy\L4Dav\Tests\TestCase;
-use Ngmy\L4Dav\WebDavClientOptionsBuilder;
+use Ngmy\PhpWebDav\Command;
+use Ngmy\PhpWebDav\Tests\TestCase;
+use Ngmy\PhpWebDav\WebDavClientOptionsBuilder;
 use org\bovigo\vfs\vfsStream;
 
 class CommandTest extends TestCase
