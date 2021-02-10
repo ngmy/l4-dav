@@ -33,7 +33,7 @@ class WebDavResponse implements ResponseInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getProtocolVersion()
     {
