@@ -1,6 +1,11 @@
 # PHP WebDAV client
 
-[![Build Status](https://travis-ci.org/ngmy/l4-dav.png?branch=master)](https://travis-ci.org/ngmy/l4-dav)
+[![Latest Stable Version](https://poser.pugx.org/ngmy/l4-dav/v)](//packagist.org/packages/ngmy/l4-dav)
+[![Total Downloads](https://poser.pugx.org/ngmy/l4-dav/downloads)](//packagist.org/packages/ngmy/l4-dav)
+[![Latest Unstable Version](https://poser.pugx.org/ngmy/l4-dav/v/unstable)](//packagist.org/packages/ngmy/l4-dav)
+[![License](https://poser.pugx.org/ngmy/l4-dav/license)](//packagist.org/packages/ngmy/l4-dav)
+[![composer.lock](https://poser.pugx.org/ngmy/l4-dav/composerlock)](//packagist.org/packages/ngmy/l4-dav)
+[![PHP CI](https://github.com/ngmy/l4-dav/workflows/PHP%20CI/badge.svg)](https://github.com/ngmy/l4-dav/actions?query=workflow%3A%22PHP+CI%22)
 [![Coverage Status](https://coveralls.io/repos/ngmy/l4-dav/badge.png?branch=master)](https://coveralls.io/r/ngmy/l4-dav?branch=master)
 
 A PHP WebDAV client.
@@ -30,7 +35,7 @@ The L4Dav has the following requirements:
 
 Add the package to your `composer.json` and run `composer update`:
 
-```json
+```console
 composer require ngmy/l4-dav
 ```
 
