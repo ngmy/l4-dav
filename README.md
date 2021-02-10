@@ -7,17 +7,17 @@ A PHP WebDAV client.
 
 ## Supported WebDAV Methods
 
--[x] GET
--[x] PUT
--[x] DELETE
--[x] COPY
--[x] MOVE
--[x] MKCOL
--[x] HEAD
--[x] PROPFIND
--[x] PROPPATCH
--[ ] LOCK
--[ ] UNLOCK
+- [x] GET
+- [x] PUT
+- [x] DELETE
+- [x] COPY
+- [x] MOVE
+- [x] MKCOL
+- [x] HEAD
+- [x] PROPFIND
+- [x] PROPPATCH
+- [ ] LOCK
+- [ ] UNLOCK
 
 ## Requirements
 
