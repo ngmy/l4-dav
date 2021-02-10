@@ -106,5 +106,9 @@ $response = L4Dav::upload('/path/to/local/file', 'path/to/remote/file');
 $response->getBody();
 ```
 
+## Documentation
+
+Please see the [API documentation](https://ngmy.github.io/l4-dav/api/).
+
 ## License
 The PHP WebDAV client is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
