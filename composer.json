@@ -62,7 +62,7 @@
             "@php tools/php-cs-fixer fix --ansi"
         ],
         "docs": [
-            "@php tools/phpDocumentor"
+            "@php tools/phpDocumentor --force"
         ]
     }
 }

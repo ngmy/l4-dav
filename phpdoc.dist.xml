@@ -7,7 +7,6 @@
 >
     <paths>
         <output>docs/api</output>
-        <cache>.phpdoc.cache</cache>
     </paths>
     <version number="3.0.0">
         <api>
