@@ -44,74 +44,35 @@ Execute the Composer `require` command:
 composer require ngmy/l4-dav
 ```
 
-## Examples
-
-### Basic Usage
-#### Download a file from the WebDAV server
-
+## Usage
 ```php
-L4Dav::download('path/to/remote/file', '/path/to/local/file');
-```
+$options = (new WebDavClientOptionsBuilder())
+    ->setBaseUrl('https://webdav.example.com')
+    ->setUserName('username');
+    ->setPassword('password')
+    ->build();
+$client = new WebDavClient($options);
 
-#### Upload a file to the WebDAV server
+// PUT
+$parameters = (new PutParameters())
+    ->setSourcePath('/path/to/file')
+    ->build();
+$client->put('/file', $parameters);
 
-```php
-L4Dav::upload('/path/to/local/file', 'path/to/remote/file');
-```
+// GET
+$response = $client->get('/file');
 
-#### Delete a file on the WebDAV server
+// Download file
+file_put_contents($path, $response->getBody());
 
-```php
-L4Dav::delete('path/to/remote/file');
-```
-
-#### Copy a file on the WebDAV server
-
-```php
-L4Dav::copy('path/to/source/file', 'path/to/dest/file');
-```
-
-#### Rename a file on the WebDAV server
-
-```php
-L4Dav::move('path/to/source/file', 'path/to/dest/file');
-```
-
-#### Make a directory on the WebDAV server
-
-```php
-L4Dav::makeDirectory('path/to/remote/directory/');
-```
-
-#### Check the existence of a directory on the WebDAV server
-
-```php
-L4Dav::exists('path/to/remote/directory/');
-```
-
-#### List contents of a directory on the WebDAV server
-
-```php
-L4Dav::list('path/to/remote/directory/');
-```
-
-### Get Response
-#### Get the status code
-```php
-$response = L4Dav::upload('/path/to/local/file', 'path/to/remote/file');
-$response->getStatus();
-```
-
-#### Get the status message
-```php
-$response = L4Dav::upload('/path/to/local/file', 'path/to/remote/file');
-$response->getMessage();
-```
-
-#### Get the response body
-```php
-$response = L4Dav::upload('/path/to/local/file', 'path/to/remote/file');
-$response->getBody();
+// Streaming file
+$response->getBody()->rewind();
+$fh = fopen($path, 'x');
+$stream = $response->getBody();
+while (!$stream->eof()) {
+    fwrite($fh, $stream->read(2048));
+}
+fclose($fh);
 ```
 
 ## Documentation
