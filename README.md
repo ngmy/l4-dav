@@ -1,5 +1,4 @@
 # PHP WebDAV client
-
 [![Latest Stable Version](https://poser.pugx.org/ngmy/l4-dav/v)](//packagist.org/packages/ngmy/l4-dav)
 [![Total Downloads](https://poser.pugx.org/ngmy/l4-dav/downloads)](//packagist.org/packages/ngmy/l4-dav)
 [![Latest Unstable Version](https://poser.pugx.org/ngmy/l4-dav/v/unstable)](//packagist.org/packages/ngmy/l4-dav)
@@ -8,35 +7,31 @@
 [![PHP CI](https://github.com/ngmy/l4-dav/workflows/PHP%20CI/badge.svg)](https://github.com/ngmy/l4-dav/actions?query=workflow%3A%22PHP+CI%22)
 [![Coverage Status](https://coveralls.io/repos/github/ngmy/l4-dav/badge.svg?branch=master)](https://coveralls.io/github/ngmy/l4-dav?branch=master)
 
-A PHP WebDAV client.
+The PHP WebDAV client.
 
 ## Supported WebDAV Features
+The PHP WebDAV client supports the following WebDAV features as defined in [RFC 2518](https://tools.ietf.org/html/rfc2518).
 
-PHP WebDAV client supports the following WebDAV features as defined in [RFC 2518](https://tools.ietf.org/html/rfc2518).
-
-- [x] `PUT`
-- [x] `GET`
-- [x] `HEAD`
-- [x] `DELETE`
-- [x] `MKCOL`
-- [x] `COPY`
-- [x] `MOVE`
-- [x] `PROPFIND`
-- [x] `PROPPATCH`
-- [ ] `LOCK`
-- [ ] `UNLOCK`
+- [x] PUT Store the resource
+- [x] GET Retrieves the resource
+- [x] HEAD Retrieves the
+- [x] DELETE Deletes the resource/collection
+- [x] MKCOL Creates a new collection
+- [x] COPY Creates a duplicate of the source resource
+- [x] MOVE Moves the resource
+- [x] PROPFIND Retrieves properties
+- [x] PROPPATCH Set and/or remove properties
+- [ ] LOCK lock the resource
+- [ ] UNLOCK Unlock the lock
 
 ## Requirements
-
-The L4Dav has the following requirements:
+The PHP WebDAV client has the following requirements:
 
 * PHP >= 7.3
-* Laravel >= 6.0
+* [libxml](https://www.php.net/manual/ja/book.libxml.php)
 
 ## Installation
-
-Add the package to your `composer.json` and run `composer update`:
-
+Execute the Composer `require` command:
 ```console
 composer require ngmy/l4-dav
 ```
@@ -110,3 +105,6 @@ $response->getMessage();
 $response = L4Dav::upload('/path/to/local/file', 'path/to/remote/file');
 $response->getBody();
 ```
+
+## License
+The PHP WebDAV client is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
