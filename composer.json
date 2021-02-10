@@ -3,8 +3,14 @@
     "type": "library",
     "description": "A simple WebDAV client library for Laravel",
     "keywords": [
-        "laravel",
-        "webdav"
+        "webdav",
+        "client",
+        "webdav client",
+        "stream",
+        "curl",
+        "psr-7",
+        "psr-17",
+        "psr-18"
     ],
     "license": "MIT",
     "authors": [
@@ -17,7 +23,6 @@
         "php": "^7.3|^8.0",
         "guzzlehttp/psr7": "^1.7.0",
         "http-interop/http-factory-guzzle": "^1.0.0",
-        "illuminate/support": "^6.0|^7.0|^8.0",
         "league/uri-components": "^2.3.0",
         "php-http/curl-client": "^1.7.1",
         "symfony/http-foundation": "^5.2.2"
@@ -25,19 +30,7 @@
     "require-dev": {
         "mikey179/vfsstream": "1.6.8",
         "mockery/mockery": "1.4.2",
-        "nunomaduro/larastan": "0.6.11",
-        "orchestra/testbench": "4.13.0|5.12.1|6.7.2",
         "phpstan/phpstan-mockery": "0.12.11"
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Ngmy\\L4Dav\\L4DavServiceProvider"
-            ],
-            "aliases": {
-                "L4Dav": "Ngmy\\L4Dav\\L4DavFacade"
-            }
-        }
     },
     "autoload": {
         "psr-4": {

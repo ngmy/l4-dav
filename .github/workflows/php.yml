@@ -50,14 +50,12 @@ jobs:
       fail-fast: false
       matrix:
         php: ['7.3', '7.4', '8.0']
-        laravel: ['6', '7', '8']
         deps: [highest, lowest]
         include:
           - php: '7.4'
-            laravel: '8'
             deps: current
 
-    name: Test (PHP ${{ matrix.php }}, Laravel ${{ matrix.laravel }}, ${{ matrix.deps }} dependencies)
+    name: Test (PHP ${{ matrix.php }}, ${{ matrix.deps }} dependencies)
 
     steps:
       - name: Check out repository
@@ -68,18 +66,6 @@ jobs:
 
       - name: Update Composer to latest version
         run: composer self-update
-
-      - name: Specify composer.json to use
-        run: |
-          if [[ "${{ matrix.laravel }}" == '6' ]]; then
-            export COMPOSER=composer-ci-laravel6.json
-          fi
-          if [[ "${{ matrix.laravel }}" == '7' ]]; then
-            export COMPOSER=composer-ci-laravel7.json
-          fi
-          if [[ "${{ matrix.laravel }}" == '8' ]]; then
-            export COMPOSER=composer-ci-laravel8.json
-          fi
 
       - name: Validate composer.json and composer.lock
         run: composer validate

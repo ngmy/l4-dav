@@ -31,10 +31,4 @@
             <html outputDirectory="build/report" lowUpperBound="35" highLowerBound="70"/>
         </report>
     </coverage>
-    <php>
-        <env name="DB_HOST" value=""/>
-        <env name="DB_DATABASE" value=""/>
-        <env name="DB_USERNAME" value=""/>
-        <env name="DB_PASSWORD" value=""/>
-    </php>
 </phpunit>
