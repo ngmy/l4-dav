@@ -22,9 +22,9 @@ class WebDavCommandDispatcher
     public function __construct(WebDavCommand $command)
     {
         $this->command = $command;
-        $this->httpClient = (new HttpClientFactory($command->options()))->create();
+        $this->httpClient = (new HttpClientFactory($command->getOptions()))->create();
         $request = Psr17FactoryDiscovery::findRequestFactory()
-            ->createRequest($this->command->method(), (string) $this->command->url());
+            ->createRequest($this->command->getMethod(), (string) $this->command->getUrl());
         $this->request = $this->configureRequest($request);
     }
 
@@ -36,14 +36,14 @@ class WebDavCommandDispatcher
     private function configureRequest(RequestInterface $request): RequestInterface
     {
         $newRequest = $request;
-        $headers = $this->command->options()->defaultRequestHeaders()
-            ->withHeaders($this->command->headers())
+        $headers = $this->command->getOptions()->getDefaultRequestHeaders()
+            ->withHeaders($this->command->getHeaders())
             ->toArray();
         foreach ($headers as $key => $value) {
             $newRequest = $newRequest->withHeader($key, $value);
         }
-        return $this->command->body()
-            ? $newRequest->withBody(Utils::streamFor($this->command->body()))
+        return $this->command->getBody()
+            ? $newRequest->withBody(Utils::streamFor($this->command->getBody()))
             : $newRequest;
     }
 }

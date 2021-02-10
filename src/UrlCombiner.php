@@ -20,17 +20,17 @@ class UrlCombiner
     public function combine(): FullUrl
     {
         return Url::createFullUrl(
-            $this->baseUrl->uri()
+            $this->baseUrl->getUri()
                 ->withPath($this->combinePath())
-                ->withQuery($this->relativeUrl->uri()->getQuery())
-                ->withFragment($this->relativeUrl->uri()->getFragment())
+                ->withQuery($this->relativeUrl->getUri()->getQuery())
+                ->withFragment($this->relativeUrl->getUri()->getFragment())
         );
     }
 
     private function combinePath(): string
     {
-        $baseUrlPath = $this->baseUrl->uri()->getPath();
-        $relativeUrlPath = $this->relativeUrl->uri()->getPath();
+        $baseUrlPath = $this->baseUrl->getUri()->getPath();
+        $relativeUrlPath = $this->relativeUrl->getUri()->getPath();
         if (!$this->baseUrl->hasPath() && !$this->relativeUrl->hasPath()) {
             return '';
         } elseif ($this->baseUrl->hasPathWithTrailingSlash() && $this->relativeUrl->hasPathWithLeadingSlash()) {

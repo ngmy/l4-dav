@@ -7,18 +7,18 @@ namespace Ngmy\PhpWebDav;
 class PutParameters
 {
     /** @var string */
-    private $srcPath;
+    private $sourcePath;
 
     /**
-     * @param string $srcPath The source path of a file
+     * @param string $sourcePath The source path of a file
      */
-    public function __construct(string $srcPath)
+    public function __construct(string $sourcePath)
     {
-        $this->srcPath = $srcPath;
+        $this->sourcePath = $sourcePath;
     }
 
-    public function srcPath(): string
+    public function getSourcePath(): string
     {
-        return $this->srcPath;
+        return $this->sourcePath;
     }
 }

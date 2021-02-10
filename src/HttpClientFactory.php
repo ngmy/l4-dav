@@ -39,12 +39,12 @@ class HttpClientFactory
      */
     private function configureCurlOptions(array $curlOptions): array
     {
-        $newCurlOptions = $this->options->defaultCurlOptions();
-        if (!\is_null($this->options->port()->toInt())) {
-            $newCurlOptions[\CURLOPT_PORT] = $this->options->port()->toInt();
+        $newCurlOptions = $this->options->getDefaultCurlOptions();
+        if (!\is_null($this->options->getPort()->toInt())) {
+            $newCurlOptions[\CURLOPT_PORT] = $this->options->getPort()->toInt();
         }
-        if (!empty((string) $this->options->userInfo())) {
-            $newCurlOptions[\CURLOPT_USERPWD] = (string) $this->options->userInfo();
+        if (!empty((string) $this->options->getUserInfo())) {
+            $newCurlOptions[\CURLOPT_USERPWD] = (string) $this->options->getUserInfo();
         }
         $newCurlOptions[\CURLOPT_HTTPAUTH] = \CURLAUTH_ANY;
         $newCurlOptions = \array_replace($newCurlOptions, $curlOptions);

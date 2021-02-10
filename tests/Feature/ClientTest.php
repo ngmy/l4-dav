@@ -36,7 +36,7 @@ class ClientTest extends TestCase
         $path = \stream_get_meta_data($file)['uri'];
 
         $parameters = (new PutParametersBuilder())
-            ->setSrcPath($path)
+            ->setSourcePath($path)
             ->build();
 
         $response = $client->put('file', $parameters);
@@ -56,7 +56,7 @@ class ClientTest extends TestCase
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
                     $parameters = (new PutParametersBuilder())
-                        ->setSrcPath($path)
+                        ->setSourcePath($path)
                         ->build();
                     $client = $this->createClient();
                     $client->put('file', $parameters);
@@ -83,7 +83,7 @@ class ClientTest extends TestCase
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
                     $parameters = (new PutParametersBuilder())
-                        ->setSrcPath($path)
+                        ->setSourcePath($path)
                         ->build();
                     $client = $this->createClient();
                     $client->mkcol('dir/');
@@ -121,7 +121,7 @@ class ClientTest extends TestCase
         $path = \stream_get_meta_data($file)['uri'];
 
         $parameters = (new PutParametersBuilder())
-            ->setSrcPath($path)
+            ->setSourcePath($path)
             ->build();
 
         $response = $client->put('file', $parameters);
@@ -169,7 +169,7 @@ class ClientTest extends TestCase
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
                     $parameters = (new PutParametersBuilder())
-                        ->setSrcPath($path)
+                        ->setSourcePath($path)
                         ->build();
                     $client = $this->createClient();
                     $client->put('file1', $parameters);
@@ -187,7 +187,7 @@ class ClientTest extends TestCase
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
                     $parameters = (new PutParametersBuilder())
-                        ->setSrcPath($path)
+                        ->setSourcePath($path)
                         ->build();
                     $client = $this->createClient();
                     $client->put('file1', $parameters);
@@ -206,7 +206,7 @@ class ClientTest extends TestCase
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
                     $parameters = (new PutParametersBuilder())
-                        ->setSrcPath($path)
+                        ->setSourcePath($path)
                         ->build();
                     $client = $this->createClient();
                     $client->put('file1', $parameters);
@@ -225,7 +225,7 @@ class ClientTest extends TestCase
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
                     $parameters = (new PutParametersBuilder())
-                        ->setSrcPath($path)
+                        ->setSourcePath($path)
                         ->build();
                     $client = $this->createClient();
                     $client->mkcol('dir1/');
@@ -248,7 +248,7 @@ class ClientTest extends TestCase
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
                     $parameters = (new PutParametersBuilder())
-                        ->setSrcPath($path)
+                        ->setSourcePath($path)
                         ->build();
                     $client = $this->createClient();
                     $client->mkcol('dir1/');
@@ -277,7 +277,7 @@ class ClientTest extends TestCase
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
                     $parameters = (new PutParametersBuilder())
-                        ->setSrcPath($path)
+                        ->setSourcePath($path)
                         ->build();
                     $client = $this->createClient();
                     $client->mkcol('dir1/');
@@ -315,7 +315,7 @@ class ClientTest extends TestCase
         $before();
 
         $parameters = (new CopyParametersBuilder())
-            ->setDestUrl($destUri)
+            ->setDestinationUrl($destUri)
             ->setOverwrite($overwrite)
             ->build();
         $client = $this->createClient();
@@ -336,7 +336,7 @@ class ClientTest extends TestCase
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
                     $parameters = (new PutParametersBuilder())
-                        ->setSrcPath($path)
+                        ->setSourcePath($path)
                         ->build();
                     $client = $this->createClient();
                     $client->put('file1', $parameters);
@@ -353,7 +353,7 @@ class ClientTest extends TestCase
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
                     $parameters = (new PutParametersBuilder())
-                        ->setSrcPath($path)
+                        ->setSourcePath($path)
                         ->build();
                     $client = $this->createClient();
                     $client->put('file1', $parameters);
@@ -371,7 +371,7 @@ class ClientTest extends TestCase
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
                     $parameters = (new PutParametersBuilder())
-                        ->setSrcPath($path)
+                        ->setSourcePath($path)
                         ->build();
                     $client = $this->createClient();
                     $client->mkcol('dir1/');
@@ -393,7 +393,7 @@ class ClientTest extends TestCase
                     $file = $this->createTmpFile();
                     $path = \stream_get_meta_data($file)['uri'];
                     $parameters = (new PutParametersBuilder())
-                        ->setSrcPath($path)
+                        ->setSourcePath($path)
                         ->build();
                     $client = $this->createClient();
                     $client->mkcol('dir1/');
@@ -430,7 +430,7 @@ class ClientTest extends TestCase
         $before();
 
         $parameters = (new MoveParametersBuilder())
-            ->setDestUrl($destUri)
+            ->setDestinationUrl($destUri)
             ->build();
         $client = $this->createClient();
         $response = $client->move($srcUri, $parameters);
@@ -456,7 +456,7 @@ class ClientTest extends TestCase
         $file = $this->createTmpFile();
         $path = \stream_get_meta_data($file)['uri'];
         $parameters = (new PutParametersBuilder())
-            ->setSrcPath($path)
+            ->setSourcePath($path)
             ->build();
         $response = $client->put('file', $parameters);
 
@@ -483,7 +483,7 @@ class ClientTest extends TestCase
         $file = $this->createTmpFile();
         $path = \stream_get_meta_data($file)['uri'];
         $parameters = (new PutParametersBuilder())
-            ->setSrcPath($path)
+            ->setSourcePath($path)
             ->build();
         $client->put('file', $parameters);
         $client->mkcol('dir/');
@@ -535,7 +535,7 @@ class ClientTest extends TestCase
         $file = $this->createTmpFile();
         $path = \stream_get_meta_data($file)['uri'];
         $parameters = (new PutParametersBuilder())
-            ->setSrcPath($path)
+            ->setSourcePath($path)
             ->build();
         $client = $this->createClient();
         $client->put('file', $parameters);
@@ -596,12 +596,12 @@ class ClientTest extends TestCase
     protected function createClient(): WebDavClient
     {
         $optionsBuilder = (new WebDavClientOptionsBuilder())
-            ->baseUrl('http://apache2' . $this->webDavBasePath);
+            ->setBaseUrl('http://apache2' . $this->webDavBasePath);
         if (isset($this->webDavUserName)) {
-            $optionsBuilder->userName($this->webDavUserName);
+            $optionsBuilder->setUserName($this->webDavUserName);
         }
         if (isset($this->webDavPassword)) {
-            $optionsBuilder->password($this->webDavPassword);
+            $optionsBuilder->setPassword($this->webDavPassword);
         }
         $options = $optionsBuilder->build();
         return new WebDavClient($options);

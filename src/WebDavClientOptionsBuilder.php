@@ -59,7 +59,7 @@ class WebDavClientOptionsBuilder
      * @param string|UriInterface $baseUrl The base URL of the WebDAV server
      * @return $this The value of the calling object
      */
-    public function baseUrl($baseUrl): self
+    public function setBaseUrl($baseUrl): self
     {
         $this->baseUrl = Url::createBaseUrl((string) $baseUrl);
         return $this;
@@ -71,7 +71,7 @@ class WebDavClientOptionsBuilder
      * @param int $port The port number of ther WebDAV server
      * @return $this The value of the calling object
      */
-    public function port(int $port): self
+    public function setPort(int $port): self
     {
         $this->port = new Port($port);
         return $this;
@@ -83,7 +83,7 @@ class WebDavClientOptionsBuilder
      * @param string $userName The username for authentication
      * @return $this The value of the calling object
      */
-    public function userName(string $userName): self
+    public function setUserName(string $userName): self
     {
         $this->userInfo = $this->userInfo->withUserInfo($userName, $this->userInfo->getPass());
         return $this;
@@ -95,7 +95,7 @@ class WebDavClientOptionsBuilder
      * @param string $password The password for authentication
      * @return $this The value of the calling object
      */
-    public function password(string $password): self
+    public function setPassword(string $password): self
     {
         $this->userInfo = $this->userInfo->withUserInfo($this->userInfo->getUser(), $password);
         return $this;
@@ -107,7 +107,7 @@ class WebDavClientOptionsBuilder
      * @param array<string, string> $defaultRequestHeaders Default request headers
      * @return $this The value of the calling object
      */
-    public function defaultRequestHeaders(array $defaultRequestHeaders): self
+    public function setDefaultRequestHeaders(array $defaultRequestHeaders): self
     {
         $this->defaultRequestHeaders = new Headers($defaultRequestHeaders);
         return $this;
@@ -119,7 +119,7 @@ class WebDavClientOptionsBuilder
      * @param array<int, mixed> $defaultCurlOptions Default cURL options
      * @return $this The value of the calling object
      */
-    public function defaultCurlOptions(array $defaultCurlOptions): self
+    public function setDefaultCurlOptions(array $defaultCurlOptions): self
     {
         $this->defaultCurlOptions = $defaultCurlOptions;
         return $this;

@@ -11,17 +11,17 @@ class PutParametersBuilder
      *
      * @var string
      */
-    private $srcPath;
+    private $sourcePath;
 
     /**
      * Set the source file path.
      *
-     * @param string $srcPath The source file path
+     * @param string $sourcePath The source file path
      * @return $this The value of the calling object
      */
-    public function setSrcPath(string $srcPath): self
+    public function setSourcePath(string $sourcePath): self
     {
-        $this->srcPath = $srcPath;
+        $this->sourcePath = $sourcePath;
         return $this;
     }
 
@@ -32,6 +32,6 @@ class PutParametersBuilder
      */
     public function build(): PutParameters
     {
-        return new PutParameters($this->srcPath);
+        return new PutParameters($this->sourcePath);
     }
 }

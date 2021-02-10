@@ -28,7 +28,7 @@ class ProppatchParameters
     /**
      * @return list<DOMNode>
      */
-    public function propertiesToSet(): array
+    public function getPropertiesToSet(): array
     {
         return $this->propertiesToSet;
     }
@@ -36,7 +36,7 @@ class ProppatchParameters
     /**
      * @return list<DOMNode>
      */
-    public function propertiesToRemove(): array
+    public function getPropertiesToRemove(): array
     {
         return $this->propertiesToRemove;
     }

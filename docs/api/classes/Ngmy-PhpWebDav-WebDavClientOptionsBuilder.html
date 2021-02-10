@@ -154,13 +154,6 @@
 <dd>Create a new instance of the WebDAV client options builder.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_baseUrl">baseUrl()</a>
-    <span>
-                        &nbsp;: $this    </span>
-</dt>
-<dd>Set the base URL of the WebDAV server.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_build">build()</a>
     <span>
                         &nbsp;: <a href="classes/Ngmy-PhpWebDav-WebDavClientOptions.html"><abbr title="\Ngmy\PhpWebDav\WebDavClientOptions">WebDavClientOptions</abbr></a>    </span>
@@ -168,35 +161,42 @@
 <dd>Build WebDAV client options.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_defaultCurlOptions">defaultCurlOptions()</a>
+    <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setBaseUrl">setBaseUrl()</a>
+    <span>
+                        &nbsp;: $this    </span>
+</dt>
+<dd>Set the base URL of the WebDAV server.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setDefaultCurlOptions">setDefaultCurlOptions()</a>
     <span>
                         &nbsp;: $this    </span>
 </dt>
 <dd>Set default cURL options.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_defaultRequestHeaders">defaultRequestHeaders()</a>
+    <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setDefaultRequestHeaders">setDefaultRequestHeaders()</a>
     <span>
                         &nbsp;: $this    </span>
 </dt>
 <dd>Set default request headers.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_password">password()</a>
+    <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setPassword">setPassword()</a>
     <span>
                         &nbsp;: $this    </span>
 </dt>
 <dd>Set the password for authentication.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_port">port()</a>
+    <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setPort">setPort()</a>
     <span>
                         &nbsp;: $this    </span>
 </dt>
 <dd>Set the port number of the WebDAV server.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_userName">userName()</a>
+    <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setUserName">setUserName()</a>
     <span>
                         &nbsp;: $this    </span>
 </dt>
@@ -421,53 +421,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_baseUrl">
-        baseUrl()
-        <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_baseUrl" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavClientOptionsBuilder.php"><a href="files/src-webdavclientoptionsbuilder.html"><abbr title="src/WebDavClientOptionsBuilder.php">WebDavClientOptionsBuilder.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">62</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Set the base URL of the WebDAV server.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">baseUrl</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|<a href="classes/Psr-Http-Message-UriInterface.html"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$baseUrl</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$baseUrl</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|<a href="classes/Psr-Http-Message-UriInterface.html"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The base URL of the WebDAV server</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">$this</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>The value of the calling object</p>
-</section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_build">
         build()
         <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_build" class="headerlink"><i class="fas fa-link"></i></a>
@@ -503,9 +456,56 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_defaultCurlOptions">
-        defaultCurlOptions()
-        <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_defaultCurlOptions" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_setBaseUrl">
+        setBaseUrl()
+        <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setBaseUrl" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavClientOptionsBuilder.php"><a href="files/src-webdavclientoptionsbuilder.html"><abbr title="src/WebDavClientOptionsBuilder.php">WebDavClientOptionsBuilder.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">62</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Set the base URL of the WebDAV server.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">setBaseUrl</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|<a href="classes/Psr-Http-Message-UriInterface.html"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$baseUrl</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$baseUrl</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|<a href="classes/Psr-Http-Message-UriInterface.html"><abbr title="\Psr\Http\Message\UriInterface">UriInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The base URL of the WebDAV server</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">$this</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>The value of the calling object</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setDefaultCurlOptions">
+        setDefaultCurlOptions()
+        <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setDefaultCurlOptions" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavClientOptionsBuilder.php"><a href="files/src-webdavclientoptionsbuilder.html"><abbr title="src/WebDavClientOptionsBuilder.php">WebDavClientOptionsBuilder.php</abbr></a></abbr>
@@ -517,7 +517,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">defaultCurlOptions</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$defaultCurlOptions</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+                <span class="phpdocumentor-signature__name">setDefaultCurlOptions</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$defaultCurlOptions</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -550,9 +550,9 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_defaultRequestHeaders">
-        defaultRequestHeaders()
-        <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_defaultRequestHeaders" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_setDefaultRequestHeaders">
+        setDefaultRequestHeaders()
+        <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setDefaultRequestHeaders" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavClientOptionsBuilder.php"><a href="files/src-webdavclientoptionsbuilder.html"><abbr title="src/WebDavClientOptionsBuilder.php">WebDavClientOptionsBuilder.php</abbr></a></abbr>
@@ -564,7 +564,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">defaultRequestHeaders</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$defaultRequestHeaders</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+                <span class="phpdocumentor-signature__name">setDefaultRequestHeaders</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$defaultRequestHeaders</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -597,9 +597,9 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_password">
-        password()
-        <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_password" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_setPassword">
+        setPassword()
+        <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setPassword" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavClientOptionsBuilder.php"><a href="files/src-webdavclientoptionsbuilder.html"><abbr title="src/WebDavClientOptionsBuilder.php">WebDavClientOptionsBuilder.php</abbr></a></abbr>
@@ -611,7 +611,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">password</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$password</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+                <span class="phpdocumentor-signature__name">setPassword</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$password</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -644,9 +644,9 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_port">
-        port()
-        <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_port" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_setPort">
+        setPort()
+        <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setPort" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavClientOptionsBuilder.php"><a href="files/src-webdavclientoptionsbuilder.html"><abbr title="src/WebDavClientOptionsBuilder.php">WebDavClientOptionsBuilder.php</abbr></a></abbr>
@@ -658,7 +658,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">port</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$port</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+                <span class="phpdocumentor-signature__name">setPort</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$port</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -691,9 +691,9 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_userName">
-        userName()
-        <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_userName" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_setUserName">
+        setUserName()
+        <a href="classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setUserName" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/WebDavClientOptionsBuilder.php"><a href="files/src-webdavclientoptionsbuilder.html"><abbr title="src/WebDavClientOptionsBuilder.php">WebDavClientOptionsBuilder.php</abbr></a></abbr>
@@ -705,7 +705,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">userName</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$userName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+                <span class="phpdocumentor-signature__name">setUserName</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$userName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
 
         <section class="phpdocumentor-description"></section>
 

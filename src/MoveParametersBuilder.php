@@ -14,17 +14,17 @@ class MoveParametersBuilder
      *
      * @var UriInterface
      */
-    private $destUrl;
+    private $destinationUrl;
 
     /**
      * Set the destination resource URL.
      *
-     * @param string|UriInterface $destUrl The destination resource URL
+     * @param string|UriInterface $destinationUrl The destination resource URL
      * @return $this The value of the calling object
      */
-    public function setDestUrl($destUrl): self
+    public function setDestinationUrl($destinationUrl): self
     {
-        $this->destUrl = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $destUrl);
+        $this->destinationUrl = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $destinationUrl);
         return $this;
     }
 
@@ -35,6 +35,6 @@ class MoveParametersBuilder
      */
     public function build(): MoveParameters
     {
-        return new MoveParameters($this->destUrl);
+        return new MoveParameters($this->destinationUrl);
     }
 }

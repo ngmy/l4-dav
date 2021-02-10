@@ -14,7 +14,7 @@ class PropfindParameters
         $this->depth = $depth ?: new Depth();
     }
 
-    public function depth(): Depth
+    public function getDepth(): Depth
     {
         return $this->depth;
     }

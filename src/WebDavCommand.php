@@ -49,13 +49,13 @@ class WebDavCommand
         PutParameters $parameters,
         WebDavClientOptions $options
     ): self {
-        $fh = \fopen($parameters->srcPath(), 'r');
+        $fh = \fopen($parameters->getSourcePath(), 'r');
         if ($fh === false) {
-            throw new RuntimeException(\sprintf('Failed to open the file "%s".', $parameters->srcPath()));
+            throw new RuntimeException(\sprintf('Failed to open the file "%s".', $parameters->getSourcePath()));
         }
         $body = Psr17FactoryDiscovery::findStreamFactory()->createStreamFromResource($fh);
         return new self('PUT', $url, $parameters, $options, new Headers([
-            'Content-Length' => (string) \filesize($parameters->srcPath()),
+            'Content-Length' => (string) \filesize($parameters->getSourcePath()),
         ]), $body);
     }
 
@@ -78,10 +78,10 @@ class WebDavCommand
         CopyParameters $parameters,
         WebDavClientOptions $options
     ): self {
-        $destUrl = Url::createDestUrl($parameters->destUrl(), $options->baseUrl());
+        $destinationUrl = Url::createDestUrl($parameters->getDestinationUrl(), $options->getBaseUrl());
         return new self('COPY', $url, $parameters, $options, new Headers([
-            'Destination' => (string) $destUrl,
-            'Overwrite' => (string) $parameters->overwrite(),
+            'Destination' => (string) $destinationUrl,
+            'Overwrite' => (string) $parameters->getOverwrite(),
         ]));
     }
 
@@ -93,9 +93,9 @@ class WebDavCommand
         MoveParameters $parameters,
         WebDavClientOptions $options
     ): self {
-        $destUrl = Url::createDestUrl($parameters->destUrl(), $options->baseUrl());
+        $destinationUrl = Url::createDestUrl($parameters->getDestinationUrl(), $options->getBaseUrl());
         return new self('MOVE', $url, $parameters, $options, new Headers([
-            'Destination' => (string) $destUrl,
+            'Destination' => (string) $destinationUrl,
         ]));
     }
 
@@ -130,7 +130,7 @@ class WebDavCommand
         WebDavClientOptions $options
     ): self {
         return new self('PROPFIND', $url, $parameters, $options, new Headers([
-            'Depth' => (string) $parameters->depth(),
+            'Depth' => (string) $parameters->getDepth(),
         ]));
     }
 
@@ -143,10 +143,10 @@ class WebDavCommand
         WebDavClientOptions $options
     ): self {
         $bodyBuilder = new ProppatchRequestBodyBuilder();
-        foreach ($parameters->propertiesToSet() as $property) {
+        foreach ($parameters->getPropertiesToSet() as $property) {
             $bodyBuilder->addPropetyToSet($property);
         }
-        foreach ($parameters->propertiesToRemove() as $property) {
+        foreach ($parameters->getPropertiesToRemove() as $property) {
             $bodyBuilder->addPropetyToRemove($property);
         }
         $body = $bodyBuilder->build();
@@ -163,12 +163,12 @@ class WebDavCommand
         return $this->response;
     }
 
-    public function method(): string
+    public function getMethod(): string
     {
         return $this->method;
     }
 
-    public function url(): FullUrl
+    public function getUrl(): FullUrl
     {
         return $this->url;
     }
@@ -176,17 +176,17 @@ class WebDavCommand
     /**
      * @return CopyParameters|DeleteParameters|GetParameters|HeadParameters|MkcolParameters|MoveParameters|PropfindParameters|ProppatchParameters|PutParameters
      */
-    public function parameters()
+    public function getParameters()
     {
         return $this->parameters;
     }
 
-    public function options(): WebDavClientOptions
+    public function getOptions(): WebDavClientOptions
     {
         return $this->options;
     }
 
-    public function headers(): Headers
+    public function getHeaders(): Headers
     {
         return $this->headers;
     }
@@ -194,7 +194,7 @@ class WebDavCommand
     /**
      * @return resource|StreamInterface|string|null
      */
-    public function body()
+    public function getBody()
     {
         return $this->body;
     }
@@ -214,7 +214,7 @@ class WebDavCommand
         $body = null
     ) {
         $this->method = $method;
-        $this->url = Url::createRequestUrl($url, $options->baseUrl());
+        $this->url = Url::createRequestUrl($url, $options->getBaseUrl());
         $this->parameters = $parameters;
         $this->options = $options;
         $this->headers = $headers ?: new Headers([]);

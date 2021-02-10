@@ -14,7 +14,7 @@ class CopyParametersBuilder
      *
      * @var UriInterface
      */
-    private $destUrl;
+    private $destinationUrl;
     /**
      * Whether to overwrite the resource if it exists.
      *
@@ -25,12 +25,12 @@ class CopyParametersBuilder
     /**
      * Set the destination resource URL.
      *
-     * @param string|UriInterface $destUrl The destination resource URL
+     * @param string|UriInterface $destinationUrl The destination resource URL
      * @return $this The value of the calling object
      */
-    public function setDestUrl($destUrl): self
+    public function setDestinationUrl($destinationUrl): self
     {
-        $this->destUrl = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $destUrl);
+        $this->destinationUrl = Psr17FactoryDiscovery::findUriFactory()->createUri((string) $destinationUrl);
         return $this;
     }
 
@@ -53,6 +53,6 @@ class CopyParametersBuilder
      */
     public function build(): CopyParameters
     {
-        return new CopyParameters($this->destUrl, $this->overwrite);
+        return new CopyParameters($this->destinationUrl, $this->overwrite);
     }
 }

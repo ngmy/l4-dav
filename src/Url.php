@@ -105,7 +105,7 @@ abstract class Url
         }
     }
 
-    public function uri(): UriInterface
+    public function getUri(): UriInterface
     {
         return $this->uri;
     }

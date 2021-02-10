@@ -37,22 +37,22 @@ class WebDavClientOptions
         $this->defaultCurlOptions = $defaultCurlOptions;
     }
 
-    public function baseUrl(): ?BaseUrl
+    public function getBaseUrl(): ?BaseUrl
     {
         return $this->baseUrl;
     }
 
-    public function port(): PortInterface
+    public function getPort(): PortInterface
     {
         return $this->port;
     }
 
-    public function userInfo(): UserInfoInterface
+    public function getUserInfo(): UserInfoInterface
     {
         return $this->userInfo;
     }
 
-    public function defaultRequestHeaders(): Headers
+    public function getDefaultRequestHeaders(): Headers
     {
         return $this->defaultRequestHeaders;
     }
@@ -60,7 +60,7 @@ class WebDavClientOptions
     /**
      * @return array<int, mixed>
      */
-    public function defaultCurlOptions(): array
+    public function getDefaultCurlOptions(): array
     {
         return $this->defaultCurlOptions;
     }

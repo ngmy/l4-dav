@@ -56,10 +56,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-CopyParameters.html#method___construct"
         },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\CopyParameters\u003A\u003A\u0024destUrl",
-            "name": "destUrl",
+            "fqsen": "\\Ngmy\\PhpWebDav\\CopyParameters\u003A\u003AgetDestinationUrl\u0028\u0029",
+            "name": "getDestinationUrl",
             "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-CopyParameters.html#property_destUrl"
+            "url": "classes/Ngmy-PhpWebDav-CopyParameters.html#method_getDestinationUrl"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\CopyParameters\u003A\u003AgetOverwrite\u0028\u0029",
+            "name": "getOverwrite",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-CopyParameters.html#method_getOverwrite"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\CopyParameters\u003A\u003A\u0024destinationUrl",
+            "name": "destinationUrl",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-CopyParameters.html#property_destinationUrl"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\CopyParameters\u003A\u003A\u0024overwrite",
             "name": "overwrite",
@@ -71,10 +81,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-CopyParametersBuilder.html"
         },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\CopyParametersBuilder\u003A\u003AsetDestUrl\u0028\u0029",
-            "name": "setDestUrl",
+            "fqsen": "\\Ngmy\\PhpWebDav\\CopyParametersBuilder\u003A\u003AsetDestinationUrl\u0028\u0029",
+            "name": "setDestinationUrl",
             "summary": "Set\u0020the\u0020destination\u0020resource\u0020URL.",
-            "url": "classes/Ngmy-PhpWebDav-CopyParametersBuilder.html#method_setDestUrl"
+            "url": "classes/Ngmy-PhpWebDav-CopyParametersBuilder.html#method_setDestinationUrl"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\CopyParametersBuilder\u003A\u003AsetOverwrite\u0028\u0029",
             "name": "setOverwrite",
@@ -86,10 +96,10 @@ Search.appendIndex(
             "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameters\u0020class\u0020for\u0020the\u0020WebDAV\u0020COPY\u0020operation.",
             "url": "classes/Ngmy-PhpWebDav-CopyParametersBuilder.html#method_build"
         },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\CopyParametersBuilder\u003A\u003A\u0024destUrl",
-            "name": "destUrl",
+            "fqsen": "\\Ngmy\\PhpWebDav\\CopyParametersBuilder\u003A\u003A\u0024destinationUrl",
+            "name": "destinationUrl",
             "summary": "The\u0020destination\u0020resource\u0020URL.",
-            "url": "classes/Ngmy-PhpWebDav-CopyParametersBuilder.html#property_destUrl"
+            "url": "classes/Ngmy-PhpWebDav-CopyParametersBuilder.html#property_destinationUrl"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\CopyParametersBuilder\u003A\u003A\u0024overwrite",
             "name": "overwrite",
@@ -216,30 +226,35 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-MoveParameters.html#method___construct"
         },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\MoveParameters\u003A\u003A\u0024destUrl",
-            "name": "destUrl",
+            "fqsen": "\\Ngmy\\PhpWebDav\\MoveParameters\u003A\u003AgetDestinationUrl\u0028\u0029",
+            "name": "getDestinationUrl",
             "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-MoveParameters.html#property_destUrl"
+            "url": "classes/Ngmy-PhpWebDav-MoveParameters.html#method_getDestinationUrl"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\MoveParameters\u003A\u003A\u0024destinationUrl",
+            "name": "destinationUrl",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-MoveParameters.html#property_destinationUrl"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\MoveParametersBuilder",
             "name": "MoveParametersBuilder",
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-MoveParametersBuilder.html"
         },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\MoveParametersBuilder\u003A\u003AsetDestUrl\u0028\u0029",
-            "name": "setDestUrl",
+            "fqsen": "\\Ngmy\\PhpWebDav\\MoveParametersBuilder\u003A\u003AsetDestinationUrl\u0028\u0029",
+            "name": "setDestinationUrl",
             "summary": "Set\u0020the\u0020destination\u0020resource\u0020URL.",
-            "url": "classes/Ngmy-PhpWebDav-MoveParametersBuilder.html#method_setDestUrl"
+            "url": "classes/Ngmy-PhpWebDav-MoveParametersBuilder.html#method_setDestinationUrl"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\MoveParametersBuilder\u003A\u003Abuild\u0028\u0029",
             "name": "build",
             "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020MOVE\u0020operation.",
             "url": "classes/Ngmy-PhpWebDav-MoveParametersBuilder.html#method_build"
         },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\MoveParametersBuilder\u003A\u003A\u0024destUrl",
-            "name": "destUrl",
+            "fqsen": "\\Ngmy\\PhpWebDav\\MoveParametersBuilder\u003A\u003A\u0024destinationUrl",
+            "name": "destinationUrl",
             "summary": "The\u0020destination\u0020resource\u0020URL.",
-            "url": "classes/Ngmy-PhpWebDav-MoveParametersBuilder.html#property_destUrl"
+            "url": "classes/Ngmy-PhpWebDav-MoveParametersBuilder.html#property_destinationUrl"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\Overwrite",
             "name": "Overwrite",
@@ -270,6 +285,11 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-PropfindParameters.html#method___construct"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\PropfindParameters\u003A\u003AgetDepth\u0028\u0029",
+            "name": "getDepth",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-PropfindParameters.html#method_getDepth"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\PropfindParameters\u003A\u003A\u0024depth",
             "name": "depth",
@@ -341,6 +361,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-ProppatchParameters.html#method___construct"
         },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchParameters\u003A\u003AgetPropertiesToSet\u0028\u0029",
+            "name": "getPropertiesToSet",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-ProppatchParameters.html#method_getPropertiesToSet"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchParameters\u003A\u003AgetPropertiesToRemove\u0028\u0029",
+            "name": "getPropertiesToRemove",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-ProppatchParameters.html#method_getPropertiesToRemove"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchParameters\u003A\u003Avalidate\u0028\u0029",
+            "name": "validate",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-ProppatchParameters.html#method_validate"
+        },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchParameters\u003A\u003A\u0024propertiesToSet",
             "name": "propertiesToSet",
             "summary": "",
@@ -350,11 +385,6 @@ Search.appendIndex(
             "name": "propertiesToRemove",
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-ProppatchParameters.html#property_propertiesToRemove"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchParameters\u003A\u003Avalidate\u0028\u0029",
-            "name": "validate",
-            "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-ProppatchParameters.html#method_validate"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchParametersBuilder",
             "name": "ProppatchParametersBuilder",
@@ -441,30 +471,35 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-PutParameters.html#method___construct"
         },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\PutParameters\u003A\u003A\u0024srcPath",
-            "name": "srcPath",
+            "fqsen": "\\Ngmy\\PhpWebDav\\PutParameters\u003A\u003AgetSourcePath\u0028\u0029",
+            "name": "getSourcePath",
             "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-PutParameters.html#property_srcPath"
+            "url": "classes/Ngmy-PhpWebDav-PutParameters.html#method_getSourcePath"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\PutParameters\u003A\u003A\u0024sourcePath",
+            "name": "sourcePath",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-PutParameters.html#property_sourcePath"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\PutParametersBuilder",
             "name": "PutParametersBuilder",
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-PutParametersBuilder.html"
         },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\PutParametersBuilder\u003A\u003AsetSrcPath\u0028\u0029",
-            "name": "setSrcPath",
+            "fqsen": "\\Ngmy\\PhpWebDav\\PutParametersBuilder\u003A\u003AsetSourcePath\u0028\u0029",
+            "name": "setSourcePath",
             "summary": "Set\u0020the\u0020source\u0020file\u0020path.",
-            "url": "classes/Ngmy-PhpWebDav-PutParametersBuilder.html#method_setSrcPath"
+            "url": "classes/Ngmy-PhpWebDav-PutParametersBuilder.html#method_setSourcePath"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\PutParametersBuilder\u003A\u003Abuild\u0028\u0029",
             "name": "build",
             "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020PUT\u0020operation.",
             "url": "classes/Ngmy-PhpWebDav-PutParametersBuilder.html#method_build"
         },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\PutParametersBuilder\u003A\u003A\u0024srcPath",
-            "name": "srcPath",
+            "fqsen": "\\Ngmy\\PhpWebDav\\PutParametersBuilder\u003A\u003A\u0024sourcePath",
+            "name": "sourcePath",
             "summary": "The\u0020source\u0020file\u0020path.",
-            "url": "classes/Ngmy-PhpWebDav-PutParametersBuilder.html#property_srcPath"
+            "url": "classes/Ngmy-PhpWebDav-PutParametersBuilder.html#property_sourcePath"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\RelativeUrl",
             "name": "RelativeUrl",
@@ -511,10 +546,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-Url.html#method_createDestUrl"
         },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\Url\u003A\u003A\u0024uri",
-            "name": "uri",
+            "fqsen": "\\Ngmy\\PhpWebDav\\Url\u003A\u003AgetUri\u0028\u0029",
+            "name": "getUri",
             "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-Url.html#property_uri"
+            "url": "classes/Ngmy-PhpWebDav-Url.html#method_getUri"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\Url\u003A\u003AhasPath\u0028\u0029",
             "name": "hasPath",
@@ -545,6 +580,11 @@ Search.appendIndex(
             "name": "withPrevious",
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-Url.html#method_withPrevious"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\Url\u003A\u003A\u0024uri",
+            "name": "uri",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-Url.html#property_uri"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\UrlCombiner",
             "name": "UrlCombiner",
@@ -646,6 +686,31 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-WebDavClientOptions.html#method___construct"
         },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptions\u003A\u003AgetBaseUrl\u0028\u0029",
+            "name": "getBaseUrl",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptions.html#method_getBaseUrl"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptions\u003A\u003AgetPort\u0028\u0029",
+            "name": "getPort",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptions.html#method_getPort"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptions\u003A\u003AgetUserInfo\u0028\u0029",
+            "name": "getUserInfo",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptions.html#method_getUserInfo"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptions\u003A\u003AgetDefaultRequestHeaders\u0028\u0029",
+            "name": "getDefaultRequestHeaders",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptions.html#method_getDefaultRequestHeaders"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptions\u003A\u003AgetDefaultCurlOptions\u0028\u0029",
+            "name": "getDefaultCurlOptions",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptions.html#method_getDefaultCurlOptions"
+        },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptions\u003A\u003A\u0024baseUrl",
             "name": "baseUrl",
             "summary": "",
@@ -681,6 +746,41 @@ Search.appendIndex(
             "summary": "Create\u0020a\u0020new\u0020instance\u0020of\u0020the\u0020WebDAV\u0020client\u0020options\u0020builder.",
             "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method___construct"
         },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003AsetBaseUrl\u0028\u0029",
+            "name": "setBaseUrl",
+            "summary": "Set\u0020the\u0020base\u0020URL\u0020of\u0020the\u0020WebDAV\u0020server.",
+            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setBaseUrl"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003AsetPort\u0028\u0029",
+            "name": "setPort",
+            "summary": "Set\u0020the\u0020port\u0020number\u0020of\u0020the\u0020WebDAV\u0020server.",
+            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setPort"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003AsetUserName\u0028\u0029",
+            "name": "setUserName",
+            "summary": "Set\u0020the\u0020username\u0020for\u0020authentication.",
+            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setUserName"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003AsetPassword\u0028\u0029",
+            "name": "setPassword",
+            "summary": "Set\u0020the\u0020password\u0020for\u0020authentication.",
+            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setPassword"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003AsetDefaultRequestHeaders\u0028\u0029",
+            "name": "setDefaultRequestHeaders",
+            "summary": "Set\u0020default\u0020request\u0020headers.",
+            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setDefaultRequestHeaders"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003AsetDefaultCurlOptions\u0028\u0029",
+            "name": "setDefaultCurlOptions",
+            "summary": "Set\u0020default\u0020cURL\u0020options.",
+            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_setDefaultCurlOptions"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003Abuild\u0028\u0029",
+            "name": "build",
+            "summary": "Build\u0020WebDAV\u0020client\u0020options.",
+            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_build"
+        },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003A\u0024baseUrl",
             "name": "baseUrl",
             "summary": "The\u0020base\u0020URL\u0020of\u0020the\u0020WebDAV\u0020server.",
@@ -691,15 +791,10 @@ Search.appendIndex(
             "summary": "The\u0020port\u0020of\u0020the\u0020WebDAV\u0020server.",
             "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#property_port"
         },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003AuserName\u0028\u0029",
-            "name": "userName",
-            "summary": "Set\u0020the\u0020username\u0020for\u0020authentication.",
-            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_userName"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003Apassword\u0028\u0029",
-            "name": "password",
-            "summary": "Set\u0020the\u0020password\u0020for\u0020authentication.",
-            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_password"
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003A\u0024userInfo",
+            "name": "userInfo",
+            "summary": "The\u0020User\u0020info.",
+            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#property_userInfo"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003A\u0024defaultRequestHeaders",
             "name": "defaultRequestHeaders",
@@ -710,16 +805,6 @@ Search.appendIndex(
             "name": "defaultCurlOptions",
             "summary": "Default\u0020cURL\u0020options.",
             "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#property_defaultCurlOptions"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003Abuild\u0028\u0029",
-            "name": "build",
-            "summary": "Build\u0020WebDAV\u0020client\u0020options.",
-            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#method_build"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavClientOptionsBuilder\u003A\u003A\u0024userInfo",
-            "name": "userInfo",
-            "summary": "The\u0020User\u0020info.",
-            "url": "classes/Ngmy-PhpWebDav-WebDavClientOptionsBuilder.html#property_userInfo"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavCommand",
             "name": "WebDavCommand",
@@ -781,6 +866,41 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-WebDavCommand.html#method_getResult"
         },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavCommand\u003A\u003AgetMethod\u0028\u0029",
+            "name": "getMethod",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-WebDavCommand.html#method_getMethod"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavCommand\u003A\u003AgetUrl\u0028\u0029",
+            "name": "getUrl",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-WebDavCommand.html#method_getUrl"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavCommand\u003A\u003AgetParameters\u0028\u0029",
+            "name": "getParameters",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-WebDavCommand.html#method_getParameters"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavCommand\u003A\u003AgetOptions\u0028\u0029",
+            "name": "getOptions",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-WebDavCommand.html#method_getOptions"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavCommand\u003A\u003AgetHeaders\u0028\u0029",
+            "name": "getHeaders",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-WebDavCommand.html#method_getHeaders"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavCommand\u003A\u003AgetBody\u0028\u0029",
+            "name": "getBody",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-WebDavCommand.html#method_getBody"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavCommand\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-WebDavCommand.html#method___construct"
+        },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavCommand\u003A\u003A\u0024method",
             "name": "method",
             "summary": "",
@@ -810,11 +930,6 @@ Search.appendIndex(
             "name": "body",
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-WebDavCommand.html#property_body"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavCommand\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-WebDavCommand.html#method___construct"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavCommand\u003A\u003A\u0024dispatcher",
             "name": "dispatcher",
