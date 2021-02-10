@@ -906,10 +906,85 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method___construct"
         },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetProtocolVersion\u0028\u0029",
+            "name": "getProtocolVersion",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getProtocolVersion"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AwithProtocolVersion\u0028\u0029",
+            "name": "withProtocolVersion",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withProtocolVersion"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetHeaders\u0028\u0029",
+            "name": "getHeaders",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getHeaders"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AhasHeader\u0028\u0029",
+            "name": "hasHeader",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_hasHeader"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetHeader\u0028\u0029",
+            "name": "getHeader",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getHeader"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetHeaderLine\u0028\u0029",
+            "name": "getHeaderLine",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getHeaderLine"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AwithHeader\u0028\u0029",
+            "name": "withHeader",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withHeader"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AwithAddedHeader\u0028\u0029",
+            "name": "withAddedHeader",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withAddedHeader"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AwithoutHeader\u0028\u0029",
+            "name": "withoutHeader",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withoutHeader"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetBody\u0028\u0029",
+            "name": "getBody",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getBody"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AwithBody\u0028\u0029",
+            "name": "withBody",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withBody"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetStatusCode\u0028\u0029",
+            "name": "getStatusCode",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getStatusCode"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetReasonPhrase\u0028\u0029",
+            "name": "getReasonPhrase",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getReasonPhrase"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AwithStatus\u0028\u0029",
+            "name": "withStatus",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withStatus"
+        },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003AgetBodyAsXml\u0028\u0029",
             "name": "getBodyAsXml",
             "summary": "Get\u0020the\u0020response\u0020body\u0020as\u0020XML.",
             "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getBodyAsXml"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003A\u0024response",
+            "name": "response",
+            "summary": "An\u0020instance\u0020of\u0020the\u0020any\u0020class\u0020that\u0020implements\u0020the\u0020PSR\u002D7\u0020ResponseInterface.",
+            "url": "classes/Ngmy-PhpWebDav-WebDavResponse.html#property_response"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\WebDavResponse\u003A\u003A\u0024responseBodyParser",
             "name": "responseBodyParser",
