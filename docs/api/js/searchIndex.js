@@ -296,6 +296,41 @@ Search.appendIndex(
             "summary": "What\u0020depth\u0020to\u0020apply.",
             "url": "classes/Ngmy-PhpWebDav-PropfindParametersBuilder.html#property_depth"
         },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction",
+            "name": "ProppatchInstruction",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction\u003A\u003AcreateSet\u0028\u0029",
+            "name": "createSet",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html#method_createSet"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction\u003A\u003AcreateRemove\u0028\u0029",
+            "name": "createRemove",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html#method_createRemove"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html#method___toString"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction\u003A\u003Avalidate\u0028\u0029",
+            "name": "validate",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html#method_validate"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html#method___construct"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction\u003A\u003A\u0024instruction",
+            "name": "instruction",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html#property_instruction"
+        },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchParameters",
             "name": "ProppatchParameters",
             "summary": "",
@@ -430,6 +465,16 @@ Search.appendIndex(
             "name": "srcPath",
             "summary": "The\u0020source\u0020file\u0020path.",
             "url": "classes/Ngmy-PhpWebDav-PutParametersBuilder.html#property_srcPath"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\RelativeUrl",
+            "name": "RelativeUrl",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-RelativeUrl.html"
+        },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\RelativeUrl\u003A\u003Avalidate\u0028\u0029",
+            "name": "validate",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-RelativeUrl.html#method_validate"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\Url",
             "name": "Url",
@@ -940,51 +985,6 @@ Search.appendIndex(
             "name": "response",
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-XmlResponseBodyParser.html#property_response"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\RelativeUrl",
-            "name": "RelativeUrl",
-            "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-RelativeUrl.html"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\RelativeUrl\u003A\u003Avalidate\u0028\u0029",
-            "name": "validate",
-            "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-RelativeUrl.html#method_validate"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction",
-            "name": "ProppatchInstruction",
-            "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction\u003A\u003AcreateSet\u0028\u0029",
-            "name": "createSet",
-            "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html#method_createSet"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction\u003A\u003AcreateRemove\u0028\u0029",
-            "name": "createRemove",
-            "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html#method_createRemove"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction\u003A\u003A__toString\u0028\u0029",
-            "name": "__toString",
-            "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html#method___toString"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction\u003A\u003Avalidate\u0028\u0029",
-            "name": "validate",
-            "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html#method_validate"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html#method___construct"
-        },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\ProppatchInstruction\u003A\u003A\u0024instruction",
-            "name": "instruction",
-            "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-ProppatchInstruction.html#property_instruction"
         },                {
             "fqsen": "\\",
             "name": "\\",
