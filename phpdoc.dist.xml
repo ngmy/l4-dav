@@ -12,6 +12,7 @@
         <api>
             <source dsn=".">
                 <path>src</path>
+                <path>vendor/psr/http-message/src</path>
             </source>
         </api>
     </version>

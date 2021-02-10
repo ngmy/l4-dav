@@ -55,6 +55,10 @@
                 <ul class="phpdocumentor-list">
                                             <li><a href="namespaces/ngmy-phpwebdav.html"><abbr title="\Ngmy\PhpWebDav">PhpWebDav</abbr></a></li>
                                     </ul>
+                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/psr.html"><abbr title="\Psr">Psr</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="namespaces/psr-http.html"><abbr title="\Psr\Http">Http</abbr></a></li>
+                                    </ul>
                         </section>
 
     
@@ -85,7 +89,7 @@
     
             <span class="phpdocumentor-element__implements">
             implements
-                            <abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>                    </span>
+                            <a href="classes/Psr-Http-Message-ResponseInterface.html"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></a>                    </span>
     
     </h2>
 
@@ -108,8 +112,8 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></dt>
-        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Psr-Http-Message-ResponseInterface.html"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></a></dt>
+        <dd>Representation of an outgoing, server-side response.</dd>
     
     
     </dl>
@@ -124,7 +128,7 @@
                 <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#property_response">$response</a>
     <span>
-                &nbsp;: <abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>            </span>
+                &nbsp;: <a href="classes/Psr-Http-Message-ResponseInterface.html"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></a>            </span>
 </dt>
 <dd>An instance of the any class that implements the PSR-7 ResponseInterface.</dd>
 
@@ -187,16 +191,16 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getReasonPhrase">getReasonPhrase()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: string    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Gets the response reason phrase associated with the status code.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_getStatusCode">getStatusCode()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: int    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Gets the response status code.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_hasHeader">hasHeader()</a>
@@ -243,9 +247,9 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Ngmy-PhpWebDav-WebDavResponse.html#method_withStatus">withStatus()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: static    </span>
 </dt>
-<dd>{@inheritdoc}</dd>
+<dd>Return an instance with the specified status code and, optionally, reason phrase.</dd>
 
         </dl>
 
@@ -282,7 +286,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Psr-Http-Message-ResponseInterface.html"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></a></span>
     <span class="phpdocumentor-signature__name">$response</span>
     </code>
 
@@ -349,7 +353,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$response</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Psr-Http-Message-ResponseInterface.html"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$response</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -357,7 +361,7 @@
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$response</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Psr-Http-Message-ResponseInterface.html"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>An instance of the any class that implements the PSR-7 ResponseInterface</p>
@@ -616,11 +620,11 @@
     <span class="phpdocumentor-element-found-in__line">144</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Gets the response reason phrase associated with the status code.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getReasonPhrase</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">getReasonPhrase</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -628,9 +632,10 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
+            <section class="phpdocumentor-description"><p>Reason phrase; must return an empty string if none present.</p>
+</section>
 
     
 </article>
@@ -650,11 +655,11 @@
     <span class="phpdocumentor-element-found-in__line">136</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Gets the response status code.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getStatusCode</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">getStatusCode</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -662,9 +667,10 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">int</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
+            <section class="phpdocumentor-description"><p>Status code.</p>
+</section>
 
     
 </article>
@@ -783,7 +789,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">withBody</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$body</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">withBody</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Psr-Http-Message-StreamInterface.html"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$body</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -791,7 +797,7 @@
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$body</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Psr-Http-Message-StreamInterface.html"><abbr title="\Psr\Http\Message\StreamInterface">StreamInterface</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -962,11 +968,11 @@
     <span class="phpdocumentor-element-found-in__line">152</span>
 </aside>
 
-        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+        <p class="phpdocumentor-summary">Return an instance with the specified status code and, optionally, reason phrase.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">withStatus</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$code</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$reasonPhrase</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">withStatus</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$code</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$reasonPhrase</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -977,21 +983,27 @@
                 : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The 3-digit integer result code to set.</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$reasonPhrase</span>
                 : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                  = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The reason phrase to use with the
+provided status code; if none is provided, implementations MAY
+use the defaults as suggested in the HTTP specification.</p>
+</section>
+
             </dd>
             </dl>
 
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">static</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
