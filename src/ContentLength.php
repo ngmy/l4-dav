@@ -8,6 +8,8 @@ use RuntimeException;
 
 class ContentLength implements WebDavHeaderInterface
 {
+    private const HEADER_NAME = 'Content-Length';
+
     /** @var int */
     private $contentLength;
 
@@ -18,7 +20,9 @@ class ContentLength implements WebDavHeaderInterface
     {
         $contentLength = \filesize($filePath);
         if ($contentLength === false) {
-            throw new RuntimeException('Failed to get the size of the file "%s".', $filePath);
+            throw new RuntimeException(
+                \sprintf('Failed to get the size of the file "%s".', $filePath)
+            );
         }
         return new self($contentLength);
     }
@@ -35,6 +39,6 @@ class ContentLength implements WebDavHeaderInterface
 
     public function provide(Headers $headers): Headers
     {
-        return $headers->withHeader('Content-Length', (string) $this->contentLength);
+        return $headers->withHeader(self::HEADER_NAME, (string) $this->contentLength);
     }
 }

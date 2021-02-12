@@ -6,12 +6,19 @@ namespace Ngmy\PhpWebDav;
 
 class Overwrite implements WebDavHeaderInterface
 {
+    private const HEADER_NAME = 'Overwrite';
+
     /** @var WebDavBool */
     private $overwrite;
 
-    public function __construct(bool $overwrite)
+    public static function createFromBool(bool $overwrite): self
     {
-        $this->overwrite = new WebDavBool($overwrite);
+        return new self(WebDavBool::createFromBool($overwrite));
+    }
+
+    public function __construct(WebDavBool $overwrite)
+    {
+        $this->overwrite = $overwrite;
     }
 
     public function __toString(): string
@@ -21,6 +28,6 @@ class Overwrite implements WebDavHeaderInterface
 
     public function provide(Headers $headers): Headers
     {
-        return $headers->withHeader('Overwrite', (string) $this->overwrite);
+        return $headers->withHeader(self::HEADER_NAME, (string) $this->overwrite);
     }
 }

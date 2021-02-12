@@ -6,6 +6,8 @@ namespace Ngmy\PhpWebDav;
 
 class Destination implements WebDavHeaderInterface
 {
+    private const HEADER_NAME = 'Destination';
+
     /** @var FullUrl|RelativeUrl */
     private $destinationUrl;
 
@@ -24,6 +26,6 @@ class Destination implements WebDavHeaderInterface
 
     public function provide(Headers $headers): Headers
     {
-        return $headers->withHeader('Destination', (string) $this->destinationUrl);
+        return $headers->withHeader(self::HEADER_NAME, (string) $this->destinationUrl);
     }
 }

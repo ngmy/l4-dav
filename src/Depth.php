@@ -8,9 +8,10 @@ use InvalidArgumentException;
 
 class Depth implements WebDavHeaderInterface
 {
-    private const ZERO = '0';
-    private const ONE = '1';
-    private const INFINITY = 'infinity';
+    private const HEADER_NAME = 'Depth';
+    private const ENUM_ZERO = '0';
+    private const ENUM_ONE = '1';
+    private const ENUM_INFINITY = 'infinity';
 
     /** @var string */
     private $depth;
@@ -20,7 +21,7 @@ class Depth implements WebDavHeaderInterface
      */
     public function __construct($depth = null)
     {
-        $this->depth = \is_null($depth) ? self::INFINITY : \strtolower((string) $depth);
+        $this->depth = \is_null($depth) ? self::ENUM_INFINITY : \strtolower((string) $depth);
         $this->validate();
     }
 
@@ -31,12 +32,18 @@ class Depth implements WebDavHeaderInterface
 
     public function provide(Headers $headers): Headers
     {
-        return $headers->withHeader('Depth', (string) $this->depth);
+        return $headers->withHeader(self::HEADER_NAME, (string) $this->depth);
     }
 
     private function validate(): void
     {
-        if (!\in_array($this->depth, [self::ZERO, self::ONE, self::INFINITY], true)) {
+        if (
+            !\in_array($this->depth, [
+                self::ENUM_ZERO,
+                self::ENUM_ONE,
+                self::ENUM_INFINITY,
+            ], true)
+        ) {
             throw new InvalidArgumentException(
                 \sprintf('The depth must be "0", "1" or "infinity", "%s" given.', $this->depth)
             );
