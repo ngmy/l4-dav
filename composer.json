@@ -21,6 +21,8 @@
     ],
     "require": {
         "php": "^7.3|^8.0",
+        "ext-dom": "*",
+        "lib-libxml": "*",
         "guzzlehttp/psr7": "^1.7.0",
         "http-interop/http-factory-guzzle": "^1.0.0",
         "league/uri-components": "^2.3.0",
