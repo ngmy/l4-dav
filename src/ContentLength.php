@@ -16,9 +16,9 @@ class ContentLength implements WebDavHeaderInterface
      */
     public static function createFromFilePath(string $filePath): self
     {
-        $contentLength = filesize($filePath);
+        $contentLength = \filesize($filePath);
         if ($contentLength === false) {
-            throw new RuntimeException();
+            throw new RuntimeException('Failed to get the size of the file "%s".', $filePath);
         }
         return new self($contentLength);
     }
