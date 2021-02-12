@@ -12,7 +12,7 @@ use RuntimeException;
 
 class WebDavCommand
 {
-    /** @var string */
+    /** @var WebDavMethod */
     private $method;
     /** @var FullUrl */
     private $url;
@@ -37,7 +37,7 @@ class WebDavCommand
         GetParameters $parameters,
         WebDavClientOptions $options
     ): self {
-        return new self('GET', $url, $parameters, $options);
+        return new self(WebDavMethod::createGetMethod(), $url, $parameters, $options);
     }
 
     /**
@@ -54,9 +54,9 @@ class WebDavCommand
             throw new RuntimeException(\sprintf('Failed to open the file "%s".', $parameters->getSourcePath()));
         }
         $body = Psr17FactoryDiscovery::findStreamFactory()->createStreamFromResource($fh);
-        return new self('PUT', $url, $parameters, $options, new Headers([
-            'Content-Length' => (string) \filesize($parameters->getSourcePath()),
-        ]), $body);
+        $headers = new Headers();
+        $headers = ContentLength::createFromFilePath($parameters->getSourcePath())->provide($headers);
+        return new self(WebDavMethod::createPutMethod(), $url, $parameters, $options, $headers, $body);
     }
 
     /**
@@ -67,7 +67,7 @@ class WebDavCommand
         DeleteParameters $parameters,
         WebDavClientOptions $options
     ): self {
-        return new self('DELETE', $url, $parameters, $options);
+        return new self(WebDavMethod::createDeleteMethod(), $url, $parameters, $options);
     }
 
     /**
@@ -79,10 +79,11 @@ class WebDavCommand
         WebDavClientOptions $options
     ): self {
         $destinationUrl = Url::createDestUrl($parameters->getDestinationUrl(), $options->getBaseUrl());
-        return new self('COPY', $url, $parameters, $options, new Headers([
-            'Destination' => (string) $destinationUrl,
-            'Overwrite' => (string) $parameters->getOverwrite(),
-        ]));
+        $destination = new Destination($destinationUrl);
+        $headers = new Headers();
+        $headers = $parameters->getOverwrite()->provide($headers);
+        $headers = $destination->provide($headers);
+        return new self(WebDavMethod::createCopyMethod(), $url, $parameters, $options, $headers);
     }
 
     /**
@@ -94,9 +95,10 @@ class WebDavCommand
         WebDavClientOptions $options
     ): self {
         $destinationUrl = Url::createDestUrl($parameters->getDestinationUrl(), $options->getBaseUrl());
-        return new self('MOVE', $url, $parameters, $options, new Headers([
-            'Destination' => (string) $destinationUrl,
-        ]));
+        $destination = new Destination($destinationUrl);
+        $headers = new Headers();
+        $headers = $destination->provide($headers);
+        return new self(WebDavMethod::createMoveMethod(), $url, $parameters, $options, $headers);
     }
 
     /**
@@ -107,7 +109,7 @@ class WebDavCommand
         MkcolParameters $parameters,
         WebDavClientOptions $options
     ): self {
-        return new self('MKCOL', $url, $parameters, $options);
+        return new self(WebDavMethod::createMkcolMethod(), $url, $parameters, $options);
     }
 
     /**
@@ -118,7 +120,7 @@ class WebDavCommand
         HeadParameters $parameters,
         WebDavClientOptions $options
     ): self {
-        return new self('HEAD', $url, $parameters, $options);
+        return new self(WebDavMethod::createHeadMethod(), $url, $parameters, $options);
     }
 
     /**
@@ -129,9 +131,9 @@ class WebDavCommand
         PropfindParameters $parameters,
         WebDavClientOptions $options
     ): self {
-        return new self('PROPFIND', $url, $parameters, $options, new Headers([
-            'Depth' => (string) $parameters->getDepth(),
-        ]));
+        $headers = new Headers();
+        $headers = $parameters->getDepth()->provide($headers);
+        return new self(WebDavMethod::createPropfindMethod(), $url, $parameters, $options, $headers);
     }
 
     /**
@@ -150,7 +152,7 @@ class WebDavCommand
             $bodyBuilder->addPropetyToRemove($property);
         }
         $body = $bodyBuilder->build();
-        return new self('PROPPATCH', $url, $parameters, $options, new Headers(), $body);
+        return new self(WebDavMethod::createProppatchMethod(), $url, $parameters, $options, new Headers(), $body);
     }
 
     public function execute(): void
@@ -163,7 +165,7 @@ class WebDavCommand
         return $this->response;
     }
 
-    public function getMethod(): string
+    public function getMethod(): WebDavMethod
     {
         return $this->method;
     }
@@ -206,7 +208,7 @@ class WebDavCommand
      * @param resource|StreamInterface|string|null $body
      */
     private function __construct(
-        string $method,
+        WebDavMethod $method,
         $url,
         $parameters,
         WebDavClientOptions $options,

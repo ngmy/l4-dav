@@ -4,18 +4,23 @@ declare(strict_types=1);
 
 namespace Ngmy\PhpWebDav;
 
-class Overwrite
+class Overwrite implements WebDavHeaderInterface
 {
-    /** @var bool */
+    /** @var WebDavBool */
     private $overwrite;
 
     public function __construct(bool $overwrite)
     {
-        $this->overwrite = $overwrite;
+        $this->overwrite = new WebDavBool($overwrite);
     }
 
     public function __toString(): string
     {
-        return $this->overwrite ? 'T' : 'F';
+        return (string) $this->overwrite;
+    }
+
+    public function provide(Headers $headers): Headers
+    {
+        return $headers->withHeader('Overwrite', (string) $this->overwrite);
     }
 }

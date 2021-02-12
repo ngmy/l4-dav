@@ -24,7 +24,7 @@ class WebDavCommandDispatcher
         $this->command = $command;
         $this->httpClient = (new HttpClientFactory($command->getOptions()))->create();
         $request = Psr17FactoryDiscovery::findRequestFactory()
-            ->createRequest($this->command->getMethod(), (string) $this->command->getUrl());
+            ->createRequest((string) $this->command->getMethod(), (string) $this->command->getUrl());
         $this->request = $this->configureRequest($request);
     }
 

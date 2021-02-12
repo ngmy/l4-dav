@@ -6,8 +6,12 @@ namespace Ngmy\PhpWebDav;
 
 use InvalidArgumentException;
 
-class Depth
+class Depth implements WebDavHeaderInterface
 {
+    private const ZERO = '0';
+    private const ONE = '1';
+    private const INFINITY = 'infinity';
+
     /** @var string */
     private $depth;
 
@@ -16,7 +20,7 @@ class Depth
      */
     public function __construct($depth = null)
     {
-        $this->depth = \is_null($depth) ? 'infinity' : \strtolower((string) $depth);
+        $this->depth = \is_null($depth) ? self::INFINITY : \strtolower((string) $depth);
         $this->validate();
     }
 
@@ -25,9 +29,14 @@ class Depth
         return $this->depth;
     }
 
+    public function provide(Headers $headers): Headers
+    {
+        return $headers->withHeader('Depth', (string) $this->depth);
+    }
+
     private function validate(): void
     {
-        if (!\in_array($this->depth, ['0', '1', 'infinity'], true)) {
+        if (!\in_array($this->depth, [self::ZERO, self::ONE, self::INFINITY], true)) {
             throw new InvalidArgumentException(
                 \sprintf('The depth must be "0", "1" or "infinity", "%s" given.', $this->depth)
             );
