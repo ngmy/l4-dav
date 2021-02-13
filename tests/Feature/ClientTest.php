@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ngmy\PhpWebDav\Tests\Feature;
 
 use DOMDocument;
+use Exception;
 use Ngmy\PhpWebDav\CopyParametersBuilder;
 use Ngmy\PhpWebDav\MoveParametersBuilder;
 use Ngmy\PhpWebDav\PropfindParametersBuilder;
@@ -28,21 +29,65 @@ class ClientTest extends TestCase
         parent::tearDown();
     }
 
-    public function testPutFile(): void
+    /**
+     * @return list<list<mixed>>
+     */
+    public function putProvider(): array
     {
+        return [
+            [
+                function () {
+                    return $this->createTmpFile();
+                },
+                'file',
+                [
+                    'reason_phrase' => 'Created',
+                    'status_code' => 201,
+                ],
+            ],
+            // TODO これをpropfindすると400になる。なぜ。
+            [
+                function () {
+                    return $this->createTmpFile();
+                },
+                'dir/',
+                [
+                    'reason_phrase' => 'Created',
+                    'status_code' => 201,
+                ],
+            ],
+            [
+                function () {
+                    return null;
+                },
+                'file',
+                new RuntimeException()
+            ],
+        ];
+    }
+
+    /**
+     * @param string|UriInterface   $url
+     * @param array<string, mixed>|Exception $expected
+     * @dataProvider putProvider
+     */
+    public function testPut(callable $before, $url, $expected): void
+    {
+        if ($expected instanceof Exception) {
+            $this->expectException(\get_class($expected));
+        }
+
+        $file = $before();
+        $sourcePath = is_resource($file) ? \stream_get_meta_data($file)['uri'] : '';
+
         $client = $this->createClient();
-
-        $file = $this->createTmpFile();
-        $path = \stream_get_meta_data($file)['uri'];
-
         $parameters = (new PutParametersBuilder())
-            ->setSourcePath($path)
+            ->setSourcePath($sourcePath)
             ->build();
+        $response = $client->put($url, $parameters);
 
-        $response = $client->put('file', $parameters);
-
-        $this->assertEquals('Created', $response->getReasonPhrase());
-        $this->assertEquals(201, $response->getStatusCode());
+        $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
+        $this->assertEquals($expected['status_code'], $response->getStatusCode());
     }
 
     /**
@@ -99,15 +144,15 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @param array<string, string> $expected
+     * @param array<string, mixed> $expected
      * @dataProvider deleteProvider
      */
-    public function testDeleteFile(callable $before, string $uri, array $expected): void
+    public function testDeleteFile(callable $before, string $url, array $expected): void
     {
         $before();
 
         $client = $this->createClient();
-        $response = $client->delete($uri);
+        $response = $client->delete($url);
 
         $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
         $this->assertEquals($expected['status_code'], $response->getStatusCode());
@@ -305,21 +350,21 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @param string|UriInterface   $srcUri
-     * @param string|UriInterface   $destUri
-     * @param array<string, string> $expected
+     * @param string|UriInterface  $sourceUrl
+     * @param string|UriInterface  $destinationUrl
+     * @param array<string, mixed> $expected
      * @dataProvider copyProvider
      */
-    public function testCopy(callable $before, $srcUri, $destUri, bool $overwrite, array $expected): void
+    public function testCopy(callable $before, $sourceUrl, $destinationUrl, bool $overwrite, array $expected): void
     {
         $before();
 
+        $client = $this->createClient();
         $parameters = (new CopyParametersBuilder())
-            ->setDestinationUrl($destUri)
+            ->setDestinationUrl($destinationUrl)
             ->setOverwrite($overwrite)
             ->build();
-        $client = $this->createClient();
-        $response = $client->copy($srcUri, $parameters);
+        $response = $client->copy($sourceUrl, $parameters);
 
         $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
         $this->assertEquals($expected['status_code'], $response->getStatusCode());
@@ -420,20 +465,20 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @param string|UriInterface   $srcUri
-     * @param string|UriInterface   $destUri
-     * @param array<string, string> $expected
+     * @param string|UriInterface   $sourceUrl
+     * @param string|UriInterface   $destinationUrl
+     * @param array<string, mixed>  $expected
      * @dataProvider moveProvider
      */
-    public function testMove(callable $before, $srcUri, $destUri, array $expected): void
+    public function testMove(callable $before, $sourceUrl, $destinationUrl, array $expected): void
     {
         $before();
 
         $parameters = (new MoveParametersBuilder())
-            ->setDestinationUrl($destUri)
+            ->setDestinationUrl($destinationUrl)
             ->build();
         $client = $this->createClient();
-        $response = $client->move($srcUri, $parameters);
+        $response = $client->move($sourceUrl, $parameters);
 
         $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
         $this->assertEquals($expected['status_code'], $response->getStatusCode());
@@ -449,31 +494,72 @@ class ClientTest extends TestCase
         $this->assertEquals(201, $response->getStatusCode());
     }
 
-    public function testHeadIfExists(): void
+    public function headProvider(): array
     {
-        $client = $this->createClient();
-
-        $file = $this->createTmpFile();
-        $path = \stream_get_meta_data($file)['uri'];
-        $parameters = (new PutParametersBuilder())
-            ->setSourcePath($path)
-            ->build();
-        $response = $client->put('file', $parameters);
-
-        $response = $client->head('file');
-
-        $this->assertEquals('OK', $response->getReasonPhrase());
-        $this->assertEquals(200, $response->getStatusCode());
+        return [
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSourcePath($path)
+                        ->build();
+                    $client = $this->createClient();
+                    $client->put('file', $parameters);
+                },
+                'file',
+                [
+                    'reason_phrase' => 'OK',
+                    'status_code' => 200,
+                ],
+            ],
+            [
+                function () {
+                    $client = $this->createClient();
+                    $client->mkcol('dir/');
+                },
+                'dir/',
+                [
+                    'reason_phrase' => 'OK',
+                    'status_code' => 200,
+                ],
+            ],
+            [
+                function () {
+                },
+                'file',
+                [
+                    'reason_phrase' => 'Not Found',
+                    'status_code' => 404,
+                ],
+            ],
+            [
+                function () {
+                },
+                'dir/',
+                [
+                    'reason_phrase' => 'Not Found',
+                    'status_code' => 404,
+                ],
+            ],
+        ];
     }
 
-    public function testHeadIfNotExists(): void
+    /**
+     * @param string|UriInterface   $url
+     * @param array<string, mixed>  $expected
+     * @dataProvider headProvider
+     */
+    public function testHead(callable $before, $url, array $expected): void
     {
+        $before();
+
         $client = $this->createClient();
 
-        $response = $client->head('file');
+        $response = $client->head($url);
 
-        $this->assertEquals('Not Found', $response->getReasonPhrase());
-        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
+        $this->assertEquals($expected['status_code'], $response->getStatusCode());
     }
 
     public function testListDirectoryContentsIfDirectoryIsFound(): void
