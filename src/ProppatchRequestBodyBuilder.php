@@ -44,7 +44,7 @@ class ProppatchRequestBodyBuilder
         return $this;
     }
 
-    public function build(): string
+    public function build(): Body
     {
         $commands = [];
 
@@ -66,7 +66,7 @@ class ProppatchRequestBodyBuilder
             throw new InvalidArgumentException('Failed to build the PROPPATCH request body.');
         }
 
-        return $body;
+        return new Body($body);
     }
 
     /**

@@ -16,7 +16,7 @@ class Body
     /**
      * @param resource|StreamInterface|string|null $body
      */
-    public function __construct($body)
+    public function __construct($body = null)
     {
         $this->body = $body;
     }

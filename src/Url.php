@@ -70,11 +70,11 @@ abstract class Url
     }
 
     /**
-     * @param string|UriInterface|Url $uri
+     * @param string|UriInterface $uri
      * @throws InvalidArgumentException
      * @return FullUrl|RelativeUrl
      */
-    public static function createDestUrl($uri, ?BaseUrl $baseUrl = null): Url
+    public static function createDestinationUrl($uri, ?BaseUrl $baseUrl = null): Url
     {
         if (\is_null($baseUrl)) {
             try {

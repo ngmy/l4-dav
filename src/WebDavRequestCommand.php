@@ -6,7 +6,6 @@ namespace Ngmy\PhpWebDav;
 
 use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
 
@@ -48,7 +47,7 @@ class WebDavRequestCommand
         if ($fh === false) {
             throw new RuntimeException(\sprintf('Failed to open the file "%s".', $parameters->getSourcePath()));
         }
-        $body = Psr17FactoryDiscovery::findStreamFactory()->createStreamFromResource($fh);
+        $body = new Body(Psr17FactoryDiscovery::findStreamFactory()->createStreamFromResource($fh));
         return new self($options, WebDavMethod::createPutMethod(), $url, $headers, $body);
     }
 
@@ -70,10 +69,10 @@ class WebDavRequestCommand
         $url,
         CopyParameters $parameters
     ): self {
-        $destinationUrl = Url::createDestUrl($parameters->getDestinationUrl(), $options->getBaseUrl());
         $headers = new Headers();
         $headers = $parameters->getOverwrite()->provide($headers);
-        $headers = (new Destination($destinationUrl))->provide($headers);
+        $headers = Destination::createFromUrl($parameters->getDestinationUrl(), $options->getBaseUrl())
+            ->provide($headers);
         return new self($options, WebDavMethod::createCopyMethod(), $url, $headers);
     }
 
@@ -85,9 +84,9 @@ class WebDavRequestCommand
         $url,
         MoveParameters $parameters
     ): self {
-        $destinationUrl = Url::createDestUrl($parameters->getDestinationUrl(), $options->getBaseUrl());
         $headers = new Headers();
-        $headers = (new Destination($destinationUrl))->provide($headers);
+        $headers = Destination::createFromUrl($parameters->getDestinationUrl(), $options->getBaseUrl())
+            ->provide($headers);
         return new self($options, WebDavMethod::createMoveMethod(), $url, $headers);
     }
 
@@ -174,21 +173,20 @@ class WebDavRequestCommand
     }
 
     /**
-     * @param string|UriInterface                  $url
-     * @param resource|StreamInterface|string|null $body
+     * @param string|UriInterface $url
      */
     private function __construct(
         WebDavClientOptions $options,
         WebDavMethod $method,
         $url,
         Headers $headers = null,
-        $body = null
+        Body $body = null
     ) {
         $this->method = $method;
         $this->url = Url::createRequestUrl($url, $options->getBaseUrl());
         $this->headers = \is_null($headers)
             ? $options->getDefaultRequestHeaders()
             : $options->getDefaultRequestHeaders()->withHeaders($headers);
-        $this->body = new Body($body);
+        $this->body = $body ?: new Body();
     }
 }

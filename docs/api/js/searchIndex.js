@@ -276,6 +276,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-Destination.html"
         },                {
+            "fqsen": "\\Ngmy\\PhpWebDav\\Destination\u003A\u003AcreateFromUrl\u0028\u0029",
+            "name": "createFromUrl",
+            "summary": "",
+            "url": "classes/Ngmy-PhpWebDav-Destination.html#method_createFromUrl"
+        },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\Destination\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
@@ -736,10 +741,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-PhpWebDav-Url.html#method_createRequestUrl"
         },                {
-            "fqsen": "\\Ngmy\\PhpWebDav\\Url\u003A\u003AcreateDestUrl\u0028\u0029",
-            "name": "createDestUrl",
+            "fqsen": "\\Ngmy\\PhpWebDav\\Url\u003A\u003AcreateDestinationUrl\u0028\u0029",
+            "name": "createDestinationUrl",
             "summary": "",
-            "url": "classes/Ngmy-PhpWebDav-Url.html#method_createDestUrl"
+            "url": "classes/Ngmy-PhpWebDav-Url.html#method_createDestinationUrl"
         },                {
             "fqsen": "\\Ngmy\\PhpWebDav\\Url\u003A\u003AgetUri\u0028\u0029",
             "name": "getUri",
