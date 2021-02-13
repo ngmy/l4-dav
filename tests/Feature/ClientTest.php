@@ -67,7 +67,7 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @param string|UriInterface   $url
+     * @param string|UriInterface            $url
      * @param array<string, mixed>|Exception $expected
      * @dataProvider putProvider
      */
@@ -78,13 +78,129 @@ class ClientTest extends TestCase
         }
 
         $file = $before();
-        $sourcePath = is_resource($file) ? \stream_get_meta_data($file)['uri'] : '';
+        $sourcePath = \is_resource($file) ? \stream_get_meta_data($file)['uri'] : '';
 
         $client = $this->createClient();
         $parameters = (new PutParametersBuilder())
             ->setSourcePath($sourcePath)
             ->build();
         $response = $client->put($url, $parameters);
+
+        $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
+        $this->assertEquals($expected['status_code'], $response->getStatusCode());
+    }
+
+    public function testGetFile(): void
+    {
+        $client = $this->createClient();
+
+        $file = $this->createTmpFile();
+        $path = \stream_get_meta_data($file)['uri'];
+
+        $parameters = (new PutParametersBuilder())
+            ->setSourcePath($path)
+            ->build();
+
+        $response = $client->put('file', $parameters);
+
+        $file = $this->createTmpFile();
+        $path = \stream_get_meta_data($file)['uri'];
+        \unlink($path);
+
+        $response = $client->get('file');
+
+        $this->assertEquals('OK', $response->getReasonPhrase());
+        $this->assertEquals(200, $response->getStatusCode());
+
+        \file_put_contents($path, $response->getBody());
+
+        $this->assertFileExists($path);
+
+        $file = $this->createTmpFile();
+        $path = \stream_get_meta_data($file)['uri'];
+        \unlink($path);
+
+        $response->getBody()->rewind();
+
+        $fh = \fopen($path, 'x');
+        if ($fh === false) {
+            throw new RuntimeException(\sprintf('Failed to open the file "%s".', $path));
+        }
+        $stream = $response->getBody();
+        while (!$stream->eof()) {
+            \fwrite($fh, $stream->read(2048));
+        }
+        \fclose($fh);
+
+        $this->assertFileExists($path);
+    }
+
+    /**
+     * @return list<list<mixed>>
+     */
+    public function headProvider(): array
+    {
+        return [
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = \stream_get_meta_data($file)['uri'];
+                    $parameters = (new PutParametersBuilder())
+                        ->setSourcePath($path)
+                        ->build();
+                    $client = $this->createClient();
+                    $client->put('file', $parameters);
+                },
+                'file',
+                [
+                    'reason_phrase' => 'OK',
+                    'status_code' => 200,
+                ],
+            ],
+            [
+                function () {
+                    $client = $this->createClient();
+                    $client->mkcol('dir/');
+                },
+                'dir/', // TODO /がないとMoved Permanentlyになる。なぜ
+                [
+                    'reason_phrase' => 'OK',
+                    'status_code' => 200,
+                ],
+            ],
+            [
+                function () {
+                },
+                'file',
+                [
+                    'reason_phrase' => 'Not Found',
+                    'status_code' => 404,
+                ],
+            ],
+            [
+                function () {
+                },
+                'dir/',
+                [
+                    'reason_phrase' => 'Not Found',
+                    'status_code' => 404,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @param string|UriInterface  $url
+     * @param array<string, mixed> $expected
+     * @dataProvider headProvider
+     */
+    public function testHead(callable $before, $url, array $expected): void
+    {
+        $before();
+
+        $client = $this->createClient();
+
+        $response = $client->head($url);
 
         $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
         $this->assertEquals($expected['status_code'], $response->getStatusCode());
@@ -144,10 +260,11 @@ class ClientTest extends TestCase
     }
 
     /**
+     * @param string|UriInterface  $url
      * @param array<string, mixed> $expected
      * @dataProvider deleteProvider
      */
-    public function testDeleteFile(callable $before, string $url, array $expected): void
+    public function testDeleteFile(callable $before, $url, array $expected): void
     {
         $before();
 
@@ -158,49 +275,42 @@ class ClientTest extends TestCase
         $this->assertEquals($expected['status_code'], $response->getStatusCode());
     }
 
-    public function testGetFile(): void
+    /**
+     * @return list<list<mixed>>
+     */
+    public function mkcolProvider(): array
+    {
+        return [
+            [
+                'dir/',
+                [
+                    'reason_phrase' => 'Created',
+                    'status_code' => 201,
+                ],
+            ],
+            [
+                'dir',
+                [
+                    'reason_phrase' => 'Created',
+                    'status_code' => 201,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @param string|UriInterface  $url
+     * @param array<string, mixed> $expected
+     * @dataProvider mkcolProvider
+     */
+    public function testMkcol($url, array $expected): void
     {
         $client = $this->createClient();
 
-        $file = $this->createTmpFile();
-        $path = \stream_get_meta_data($file)['uri'];
+        $response = $client->mkcol($url);
 
-        $parameters = (new PutParametersBuilder())
-            ->setSourcePath($path)
-            ->build();
-
-        $response = $client->put('file', $parameters);
-
-        $file = $this->createTmpFile();
-        $path = \stream_get_meta_data($file)['uri'];
-        \unlink($path);
-
-        $response = $client->get('file');
-
-        $this->assertEquals('OK', $response->getReasonPhrase());
-        $this->assertEquals(200, $response->getStatusCode());
-
-        \file_put_contents($path, $response->getBody());
-
-        $this->assertFileExists($path);
-
-        $file = $this->createTmpFile();
-        $path = \stream_get_meta_data($file)['uri'];
-        \unlink($path);
-
-        $response->getBody()->rewind();
-
-        $fh = \fopen($path, 'x');
-        if ($fh === false) {
-            throw new RuntimeException(\sprintf('Failed to open the file "%s".', $path));
-        }
-        $stream = $response->getBody();
-        while (!$stream->eof()) {
-            \fwrite($fh, $stream->read(2048));
-        }
-        \fclose($fh);
-
-        $this->assertFileExists($path);
+        $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
+        $this->assertEquals($expected['status_code'], $response->getStatusCode());
     }
 
     /**
@@ -465,9 +575,9 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @param string|UriInterface   $sourceUrl
-     * @param string|UriInterface   $destinationUrl
-     * @param array<string, mixed>  $expected
+     * @param string|UriInterface  $sourceUrl
+     * @param string|UriInterface  $destinationUrl
+     * @param array<string, mixed> $expected
      * @dataProvider moveProvider
      */
     public function testMove(callable $before, $sourceUrl, $destinationUrl, array $expected): void
@@ -479,84 +589,6 @@ class ClientTest extends TestCase
             ->build();
         $client = $this->createClient();
         $response = $client->move($sourceUrl, $parameters);
-
-        $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
-        $this->assertEquals($expected['status_code'], $response->getStatusCode());
-    }
-
-    public function testMkcol(): void
-    {
-        $client = $this->createClient();
-
-        $response = $client->mkcol('dir/');
-
-        $this->assertEquals('Created', $response->getReasonPhrase());
-        $this->assertEquals(201, $response->getStatusCode());
-    }
-
-    public function headProvider(): array
-    {
-        return [
-            [
-                function () {
-                    $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
-                    $parameters = (new PutParametersBuilder())
-                        ->setSourcePath($path)
-                        ->build();
-                    $client = $this->createClient();
-                    $client->put('file', $parameters);
-                },
-                'file',
-                [
-                    'reason_phrase' => 'OK',
-                    'status_code' => 200,
-                ],
-            ],
-            [
-                function () {
-                    $client = $this->createClient();
-                    $client->mkcol('dir/');
-                },
-                'dir/',
-                [
-                    'reason_phrase' => 'OK',
-                    'status_code' => 200,
-                ],
-            ],
-            [
-                function () {
-                },
-                'file',
-                [
-                    'reason_phrase' => 'Not Found',
-                    'status_code' => 404,
-                ],
-            ],
-            [
-                function () {
-                },
-                'dir/',
-                [
-                    'reason_phrase' => 'Not Found',
-                    'status_code' => 404,
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * @param string|UriInterface   $url
-     * @param array<string, mixed>  $expected
-     * @dataProvider headProvider
-     */
-    public function testHead(callable $before, $url, array $expected): void
-    {
-        $before();
-
-        $client = $this->createClient();
-
-        $response = $client->head($url);
 
         $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
         $this->assertEquals($expected['status_code'], $response->getStatusCode());

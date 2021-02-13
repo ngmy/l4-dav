@@ -174,8 +174,8 @@ class WebDavRequestCommand
     }
 
     /**
-     * @param string|UriInterface                                                                                                                              $url
-     * @param resource|StreamInterface|string|null                                                                                                             $body
+     * @param string|UriInterface                  $url
+     * @param resource|StreamInterface|string|null $body
      */
     private function __construct(
         WebDavClientOptions $options,
