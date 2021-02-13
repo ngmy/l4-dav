@@ -9,41 +9,51 @@ use Http\Client\HttpClient;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
 
 class WebDavCommandDispatcher
 {
-    /** @var WebDavCommand */
-    private $command;
     /** @var HttpClient */
     private $httpClient;
-    /** @var RequestInterface */
-    private $request;
+    /** @var WebDavClientOptions */
+    private $options;
 
-    public function __construct(WebDavCommand $command)
+    public function __construct(WebDavClientOptions $options)
     {
-        $this->command = $command;
-        $this->httpClient = (new HttpClientFactory($command->getOptions()))->create();
+        $this->httpClient = (new HttpClientFactory($options))->create();
+        $this->options = $options;
+    }
+
+    /**
+     * @param resource|StreamInterface|string|null $body
+     */
+    public function dispatch(
+        WebDavMethod $method,
+        FullUrl $url,
+        ?Headers $headers = null,
+        $body = null
+    ): ResponseInterface {
         $request = Psr17FactoryDiscovery::findRequestFactory()
-            ->createRequest((string) $this->command->getMethod(), (string) $this->command->getUrl());
-        $this->request = $this->configureRequest($request);
+            ->createRequest((string) $method, (string) $url);
+        $request = $this->configureRequest($request, $headers, $body);
+        return $this->httpClient->sendRequest($request);
     }
 
-    public function dispatch(): ResponseInterface
-    {
-        return $this->httpClient->sendRequest($this->request);
-    }
-
-    private function configureRequest(RequestInterface $request): RequestInterface
+    /**
+     * @param resource|StreamInterface|string|null $body
+     */
+    private function configureRequest(RequestInterface $request, ?Headers $headers, $body): RequestInterface
     {
         $newRequest = $request;
-        $headers = $this->command->getOptions()->getDefaultRequestHeaders()
-            ->withHeaders($this->command->getHeaders())
+        $headers = $headers ?: new Headers();
+        $headers = $this->options->getDefaultRequestHeaders()
+            ->withHeaders($headers)
             ->toArray();
         foreach ($headers as $key => $value) {
             $newRequest = $newRequest->withHeader($key, $value);
         }
-        return $this->command->getBody()
-            ? $newRequest->withBody(Utils::streamFor($this->command->getBody()))
+        return $body
+            ? $newRequest->withBody(Utils::streamFor($body))
             : $newRequest;
     }
 }

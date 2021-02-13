@@ -603,6 +603,9 @@ class ClientTest extends TestCase
         if (isset($this->webDavPassword)) {
             $optionsBuilder->setPassword($this->webDavPassword);
         }
+        if (isset($this->webDavAuthType)) {
+            $optionsBuilder->setAuthType($this->webDavAuthType);
+        }
         $options = $optionsBuilder->build();
         return new WebDavClient($options);
     }

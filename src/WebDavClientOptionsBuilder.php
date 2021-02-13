@@ -31,6 +31,12 @@ class WebDavClientOptionsBuilder
      */
     private $userInfo;
     /**
+     * The type of the authentication.
+     *
+     * @var AuthType|null
+     */
+    private $authType;
+    /**
      * Default request headers.
      *
      * @var Headers
@@ -50,7 +56,7 @@ class WebDavClientOptionsBuilder
     {
         $this->port = new Port();
         $this->userInfo = new UserInfo();
-        $this->defaultRequestHeaders = new Headers([]);
+        $this->defaultRequestHeaders = new Headers();
     }
 
     /**
@@ -86,6 +92,7 @@ class WebDavClientOptionsBuilder
     public function setUserName(string $userName): self
     {
         $this->userInfo = $this->userInfo->withUserInfo($userName, $this->userInfo->getPass());
+        $this->authType = $this->authType ?: AuthType::createBasicAuthType();
         return $this;
     }
 
@@ -98,6 +105,19 @@ class WebDavClientOptionsBuilder
     public function setPassword(string $password): self
     {
         $this->userInfo = $this->userInfo->withUserInfo($this->userInfo->getUser(), $password);
+        $this->authType = $this->authType ?: AuthType::createBasicAuthType();
+        return $this;
+    }
+
+    /**
+     * Set the type of authentication.
+     *
+     * @param string $authType The type of authentication
+     * @return $this The value of the calling object
+     */
+    public function setAuthType(string $authType): self
+    {
+        $this->authType = new AuthType($authType);
         return $this;
     }
 
@@ -136,6 +156,7 @@ class WebDavClientOptionsBuilder
             $this->baseUrl,
             $this->port,
             $this->userInfo,
+            $this->authType,
             $this->defaultRequestHeaders,
             $this->defaultCurlOptions
         );

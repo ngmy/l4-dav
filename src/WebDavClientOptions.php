@@ -15,6 +15,8 @@ class WebDavClientOptions
     private $port;
     /** @var UserInfoInterface */
     private $userInfo;
+    /** @var AuthType */
+    private $authType;
     /** @var Headers */
     private $defaultRequestHeaders;
     /** @var array<int, mixed> */
@@ -27,12 +29,14 @@ class WebDavClientOptions
         ?BaseUrl $baseUrl,
         PortInterface $port,
         UserInfoInterface $userInfo,
+        ?AuthType $authType,
         Headers $defaultRequestHeaders,
         array $defaultCurlOptions
     ) {
         $this->baseUrl = $baseUrl;
         $this->port = $port;
         $this->userInfo = $userInfo;
+        $this->authType = $authType ?: AuthType::createNoneAuthtype();
         $this->defaultRequestHeaders = $defaultRequestHeaders;
         $this->defaultCurlOptions = $defaultCurlOptions;
     }
@@ -50,6 +54,11 @@ class WebDavClientOptions
     public function getUserInfo(): UserInfoInterface
     {
         return $this->userInfo;
+    }
+
+    public function getAuthType(): AuthType
+    {
+        return $this->authType;
     }
 
     public function getDefaultRequestHeaders(): Headers

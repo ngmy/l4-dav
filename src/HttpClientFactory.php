@@ -19,35 +19,30 @@ class HttpClientFactory
         $this->options = $options;
     }
 
-    /**
-     * @param array<int, mixed> $curlOptions
-     */
-    public function create(array $curlOptions = []): HttpClient
+    public function create(): HttpClient
     {
         return new Client(
             // TODO: When cURL client supports PSR-17, use Psr17FactoryDiscovery instead
             MessageFactoryDiscovery::find(),
             // TODO: When cURL client supports PSR-17, use Psr17FactoryDiscovery instead
             StreamFactoryDiscovery::find(),
-            $this->configureCurlOptions($curlOptions)
+            $this->configureCurlOptions()
         );
     }
 
     /**
-     * @param array<int, mixed> $curlOptions
      * @return array<int, mixed>
      */
-    private function configureCurlOptions(array $curlOptions): array
+    private function configureCurlOptions(): array
     {
-        $newCurlOptions = $this->options->getDefaultCurlOptions();
+        $curlOptions = $this->options->getDefaultCurlOptions();
         if (!\is_null($this->options->getPort()->toInt())) {
-            $newCurlOptions[\CURLOPT_PORT] = $this->options->getPort()->toInt();
+            $curlOptions[\CURLOPT_PORT] = $this->options->getPort()->toInt();
         }
         if (!empty((string) $this->options->getUserInfo())) {
-            $newCurlOptions[\CURLOPT_USERPWD] = (string) $this->options->getUserInfo();
+            $curlOptions[\CURLOPT_USERPWD] = (string) $this->options->getUserInfo();
         }
-        $newCurlOptions[\CURLOPT_HTTPAUTH] = \CURLAUTH_ANY;
-        $newCurlOptions = \array_replace($newCurlOptions, $curlOptions);
-        return $newCurlOptions;
+        $curlOptions = $this->options->getAuthType()->provide($curlOptions);
+        return $curlOptions;
     }
 }

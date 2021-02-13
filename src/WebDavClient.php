@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Ngmy\PhpWebDav;
 
+use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\UriInterface;
+use RuntimeException;
 
 class WebDavClient
 {
@@ -16,6 +18,13 @@ class WebDavClient
     private $options;
 
     /**
+     * WebDAV dispatcher.
+     *
+     * @var WebDavCommandDispatcher
+     */
+    private $dispatcher;
+
+    /**
      * Create a new instance of the WebDAV Client.
      *
      * @param WebDavClientOptions $options Options for the WebDAV client
@@ -23,6 +32,7 @@ class WebDavClient
     public function __construct(WebDavClientOptions $options = null)
     {
         $this->options = $options ?: (new WebDavClientOptionsBuilder())->build();
+        $this->dispatcher = new WebDavCommandDispatcher($this->options);
     }
 
     /**
@@ -33,10 +43,9 @@ class WebDavClient
      */
     public function get($url): WebDavResponse
     {
-        $parameters = new GetParameters();
-        $command = WebDavCommand::createGetCommand($url, $parameters, $this->options);
-        $command->execute();
-        return new WebDavResponse($command->getResult());
+        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
+        $response = $this->dispatcher->dispatch(WebDavMethod::createGetMethod(), $url);
+        return new WebDavResponse($response);
     }
 
     /**
@@ -48,9 +57,16 @@ class WebDavClient
      */
     public function put($url, PutParameters $parameters): WebDavResponse
     {
-        $command = WebDavCommand::createPutCommand($url, $parameters, $this->options);
-        $command->execute();
-        return new WebDavResponse($command->getResult());
+        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
+        $headers = new Headers();
+        $headers = ContentLength::createFromFilePath($parameters->getSourcePath())->provide($headers);
+        $fh = \fopen($parameters->getSourcePath(), 'r');
+        if ($fh === false) {
+            throw new RuntimeException(\sprintf('Failed to open the file "%s".', $parameters->getSourcePath()));
+        }
+        $body = Psr17FactoryDiscovery::findStreamFactory()->createStreamFromResource($fh);
+        $response = $this->dispatcher->dispatch(WebDavMethod::createPutMethod(), $url, $headers, $body);
+        return new WebDavResponse($response);
     }
 
     /**
@@ -61,9 +77,9 @@ class WebDavClient
      */
     public function delete($url): WebDavResponse
     {
-        $command = WebDavCommand::createDeleteCommand($url, new DeleteParameters(), $this->options);
-        $command->execute();
-        return new WebDavResponse($command->getResult());
+        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
+        $response = $this->dispatcher->dispatch(WebDavMethod::createDeleteMethod(), $url);
+        return new WebDavResponse($response);
     }
 
     /**
@@ -75,9 +91,14 @@ class WebDavClient
      */
     public function copy($url, CopyParameters $parameters): WebDavResponse
     {
-        $command = WebDavCommand::createCopyCommand($url, $parameters, $this->options);
-        $command->execute();
-        return new WebDavResponse($command->getResult());
+        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
+        $destinationUrl = Url::createDestUrl($parameters->getDestinationUrl(), $this->options->getBaseUrl());
+        $destination = new Destination($destinationUrl);
+        $headers = new Headers();
+        $headers = $parameters->getOverwrite()->provide($headers);
+        $headers = $destination->provide($headers);
+        $response = $this->dispatcher->dispatch(WebDavMethod::createCopyMethod(), $url, $headers);
+        return new WebDavResponse($response);
     }
 
     /**
@@ -89,9 +110,13 @@ class WebDavClient
      */
     public function move($url, MoveParameters $parameters): WebDavResponse
     {
-        $command = WebDavCommand::createMoveCommand($url, $parameters, $this->options);
-        $command->execute();
-        return new WebDavResponse($command->getResult());
+        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
+        $destinationUrl = Url::createDestUrl($parameters->getDestinationUrl(), $this->options->getBaseUrl());
+        $destination = new Destination($destinationUrl);
+        $headers = new Headers();
+        $headers = $destination->provide($headers);
+        $response = $this->dispatcher->dispatch(WebDavMethod::createMoveMethod(), $url, $headers);
+        return new WebDavResponse($response);
     }
 
     /**
@@ -102,9 +127,9 @@ class WebDavClient
      */
     public function mkcol($url): WebDavResponse
     {
-        $command = WebDavCommand::createMkcolCommand($url, new MkcolParameters(), $this->options);
-        $command->execute();
-        return new WebDavResponse($command->getResult());
+        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
+        $response = $this->dispatcher->dispatch(WebDavMethod::createMkcolMethod(), $url);
+        return new WebDavResponse($response);
     }
 
     /**
@@ -115,9 +140,9 @@ class WebDavClient
      */
     public function head($url): WebDavResponse
     {
-        $command = WebDavCommand::createHeadCommand($url, new HeadParameters(), $this->options);
-        $command->execute();
-        return new WebDavResponse($command->getResult());
+        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
+        $response = $this->dispatcher->dispatch(WebDavMethod::createHeadMethod(), $url);
+        return new WebDavResponse($response);
     }
 
     /**
@@ -129,10 +154,12 @@ class WebDavClient
      */
     public function propfind($url, PropfindParameters $parameters = null): WebDavResponse
     {
-        $parameters = $parameters ?: (new PropfindParametersBuilder())->build();
-        $command = WebDavCommand::createPropfindCommand($url, $parameters, $this->options);
-        $command->execute();
-        return new WebDavResponse($command->getResult());
+        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
+        $parameters = $parameters ?: new PropfindParameters();
+        $headers = new Headers();
+        $headers = $parameters->getDepth()->provide($headers);
+        $response = $this->dispatcher->dispatch(WebDavMethod::createPropfindMethod(), $url, $headers);
+        return new WebDavResponse($response);
     }
 
     /**
@@ -143,8 +170,16 @@ class WebDavClient
      */
     public function proppatch($url, ProppatchParameters $parameters): WebDavResponse
     {
-        $command = WebDavCommand::createProppatchCommand($url, $parameters, $this->options);
-        $command->execute();
-        return new WebDavResponse($command->getResult());
+        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
+        $bodyBuilder = new ProppatchRequestBodyBuilder();
+        foreach ($parameters->getPropertiesToSet() as $property) {
+            $bodyBuilder->addPropetyToSet($property);
+        }
+        foreach ($parameters->getPropertiesToRemove() as $property) {
+            $bodyBuilder->addPropetyToRemove($property);
+        }
+        $body = $bodyBuilder->build();
+        $response = $this->dispatcher->dispatch(WebDavMethod::createProppatchMethod(), $url, null, $body);
+        return new WebDavResponse($response);
     }
 }

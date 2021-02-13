@@ -12,4 +12,6 @@ class ClientDigestAuthTest extends ClientTest
     protected $webDavUserName = 'digest';
     /** @var string */
     protected $webDavPassword = 'digest';
+    /** @var string */
+    protected $webDavAuthType = 'digest';
 }

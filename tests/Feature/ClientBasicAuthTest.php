@@ -12,4 +12,6 @@ class ClientBasicAuthTest extends ClientTest
     protected $webDavUserName = 'basic';
     /** @var string */
     protected $webDavPassword = 'basic';
+    /** @var string */
+    protected $webDavAuthType = 'basic';
 }

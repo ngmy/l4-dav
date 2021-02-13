@@ -157,7 +157,7 @@ class WebDavCommand
 
     public function execute(): void
     {
-        $this->response = $this->dispatcher->dispatch();
+        $this->response = $this->dispatcher->dispatch($this->method, $this->url, $this->headers, $this->body);
     }
 
     public function getResult(): ResponseInterface
@@ -221,6 +221,6 @@ class WebDavCommand
         $this->options = $options;
         $this->headers = $headers ?: new Headers([]);
         $this->body = $body;
-        $this->dispatcher = new WebDavCommandDispatcher($this);
+        $this->dispatcher = new WebDavCommandDispatcher($this->getOptions());
     }
 }
