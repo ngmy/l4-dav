@@ -67,7 +67,8 @@ The PHP WebDAV client supports the following WebDAV features as defined in [RFC 
 The PHP WebDAV client has the following requirements:
 
 * PHP >= 7.3
-* [libxml](https://www.php.net/manual/en/book.libxml.php) PHP extension
+* DOM PHP extension
+* libxml PHP library
 
 ## Installation
 Execute the Composer `require` command:
