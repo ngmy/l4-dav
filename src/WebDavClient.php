@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Ngmy\PhpWebDav;
 
 use Http\Client\HttpClient;
-use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\UriInterface;
-use RuntimeException;
 
 class WebDavClient
 {
@@ -21,7 +19,7 @@ class WebDavClient
     /**
      * The dispatcher of the WebDAV request.
      *
-     * @var WebDavCommandDispatcher
+     * @var WebDavRequestDispatcher
      */
     private $dispatcher;
 
@@ -33,23 +31,10 @@ class WebDavClient
      */
     public function __construct(WebDavClientOptions $options = null, HttpClient $httpClient = null)
     {
-        $options = $options ?: (new WebDavClientOptionsBuilder())->build();
-        $httpClient = $httpClient ?: (new HttpClientFactory($options))->create();
-        $this->options = $options;
-        $this->dispatcher = new WebDavCommandDispatcher($options, $httpClient);
-    }
-
-    /**
-     * Perform the WebDAV GET operation.
-     *
-     * @param string|UriInterface $url The full URL or the URL relative to the base URL of the resource
-     * @return WebDavResponse An instance of the WebDavResponse that implements the PSR-7 ResponseInterface
-     */
-    public function get($url): WebDavResponse
-    {
-        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
-        $response = $this->dispatcher->dispatch(WebDavMethod::createGetMethod(), $url);
-        return new WebDavResponse($response);
+        $this->options = $options ?: (new WebDavClientOptionsBuilder())->build();
+        $this->dispatcher = new WebDavRequestDispatcher(
+            $httpClient ?: (new HttpClientFactory($this->options))->create()
+        );
     }
 
     /**
@@ -61,15 +46,37 @@ class WebDavClient
      */
     public function put($url, PutParameters $parameters): WebDavResponse
     {
-        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
-        $headers = new Headers();
-        $headers = ContentLength::createFromFilePath($parameters->getSourcePath())->provide($headers);
-        $fh = \fopen($parameters->getSourcePath(), 'r');
-        if ($fh === false) {
-            throw new RuntimeException(\sprintf('Failed to open the file "%s".', $parameters->getSourcePath()));
-        }
-        $body = Psr17FactoryDiscovery::findStreamFactory()->createStreamFromResource($fh);
-        $response = $this->dispatcher->dispatch(WebDavMethod::createPutMethod(), $url, $headers, $body);
+        $command = WebDavRequestCommand::createPutCommand($this->options, $url, $parameters);
+        $command->execute($this->dispatcher);
+        $response = $command->getResult();
+        return new WebDavResponse($response);
+    }
+
+    /**
+     * Perform the WebDAV GET operation.
+     *
+     * @param string|UriInterface $url The full URL or the URL relative to the base URL of the resource
+     * @return WebDavResponse An instance of the WebDavResponse that implements the PSR-7 ResponseInterface
+     */
+    public function get($url): WebDavResponse
+    {
+        $command = WebDavRequestCommand::createGetCommand($this->options, $url);
+        $command->execute($this->dispatcher);
+        $response = $command->getResult();
+        return new WebDavResponse($response);
+    }
+
+    /**
+     * Perform the WebDAV HEAD operation.
+     *
+     * @param string|UriInterface $url The full URL or the URL relative to the base URL of the resource
+     * @return WebDavResponse An instance of the WebDavResponse that implements the PSR-7 ResponseInterface
+     */
+    public function head($url): WebDavResponse
+    {
+        $command = WebDavRequestCommand::createHeadCommand($this->options, $url);
+        $command->execute($this->dispatcher);
+        $response = $command->getResult();
         return new WebDavResponse($response);
     }
 
@@ -81,8 +88,23 @@ class WebDavClient
      */
     public function delete($url): WebDavResponse
     {
-        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
-        $response = $this->dispatcher->dispatch(WebDavMethod::createDeleteMethod(), $url);
+        $command = WebDavRequestCommand::createDeleteCommand($this->options, $url);
+        $command->execute($this->dispatcher);
+        $response = $command->getResult();
+        return new WebDavResponse($response);
+    }
+
+    /**
+     * Perform the WebDAV MKCOL operation.
+     *
+     * @param string|UriInterface $url The full URL or the URL relative to the base URL of the resource
+     * @return WebDavResponse An instance of the WebDavResponse that implements the PSR-7 ResponseInterface
+     */
+    public function mkcol($url): WebDavResponse
+    {
+        $command = WebDavRequestCommand::createMkcolCommand($this->options, $url);
+        $command->execute($this->dispatcher);
+        $response = $command->getResult();
         return new WebDavResponse($response);
     }
 
@@ -95,13 +117,9 @@ class WebDavClient
      */
     public function copy($url, CopyParameters $parameters): WebDavResponse
     {
-        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
-        $destinationUrl = Url::createDestUrl($parameters->getDestinationUrl(), $this->options->getBaseUrl());
-        $destination = new Destination($destinationUrl);
-        $headers = new Headers();
-        $headers = $parameters->getOverwrite()->provide($headers);
-        $headers = $destination->provide($headers);
-        $response = $this->dispatcher->dispatch(WebDavMethod::createCopyMethod(), $url, $headers);
+        $command = WebDavRequestCommand::createCopyCommand($this->options, $url, $parameters);
+        $command->execute($this->dispatcher);
+        $response = $command->getResult();
         return new WebDavResponse($response);
     }
 
@@ -114,38 +132,9 @@ class WebDavClient
      */
     public function move($url, MoveParameters $parameters): WebDavResponse
     {
-        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
-        $destinationUrl = Url::createDestUrl($parameters->getDestinationUrl(), $this->options->getBaseUrl());
-        $destination = new Destination($destinationUrl);
-        $headers = new Headers();
-        $headers = $destination->provide($headers);
-        $response = $this->dispatcher->dispatch(WebDavMethod::createMoveMethod(), $url, $headers);
-        return new WebDavResponse($response);
-    }
-
-    /**
-     * Perform the WebDAV MKCOL operation.
-     *
-     * @param string|UriInterface $url The full URL or the URL relative to the base URL of the resource
-     * @return WebDavResponse An instance of the WebDavResponse that implements the PSR-7 ResponseInterface
-     */
-    public function mkcol($url): WebDavResponse
-    {
-        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
-        $response = $this->dispatcher->dispatch(WebDavMethod::createMkcolMethod(), $url);
-        return new WebDavResponse($response);
-    }
-
-    /**
-     * Perform the WebDAV HEAD operation.
-     *
-     * @param string|UriInterface $url The full URL or the URL relative to the base URL of the resource
-     * @return WebDavResponse An instance of the WebDavResponse that implements the PSR-7 ResponseInterface
-     */
-    public function head($url): WebDavResponse
-    {
-        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
-        $response = $this->dispatcher->dispatch(WebDavMethod::createHeadMethod(), $url);
+        $command = WebDavRequestCommand::createMoveCommand($this->options, $url, $parameters);
+        $command->execute($this->dispatcher);
+        $response = $command->getResult();
         return new WebDavResponse($response);
     }
 
@@ -158,11 +147,10 @@ class WebDavClient
      */
     public function propfind($url, PropfindParameters $parameters = null): WebDavResponse
     {
-        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
         $parameters = $parameters ?: new PropfindParameters();
-        $headers = new Headers();
-        $headers = $parameters->getDepth()->provide($headers);
-        $response = $this->dispatcher->dispatch(WebDavMethod::createPropfindMethod(), $url, $headers);
+        $command = WebDavRequestCommand::createPropfindCommand($this->options, $url, $parameters);
+        $command->execute($this->dispatcher);
+        $response = $command->getResult();
         return new WebDavResponse($response);
     }
 
@@ -174,16 +162,9 @@ class WebDavClient
      */
     public function proppatch($url, ProppatchParameters $parameters): WebDavResponse
     {
-        $url = Url::createRequestUrl($url, $this->options->getBaseUrl());
-        $bodyBuilder = new ProppatchRequestBodyBuilder();
-        foreach ($parameters->getPropertiesToSet() as $property) {
-            $bodyBuilder->addPropetyToSet($property);
-        }
-        foreach ($parameters->getPropertiesToRemove() as $property) {
-            $bodyBuilder->addPropetyToRemove($property);
-        }
-        $body = $bodyBuilder->build();
-        $response = $this->dispatcher->dispatch(WebDavMethod::createProppatchMethod(), $url, null, $body);
+        $command = WebDavRequestCommand::createProppatchCommand($this->options, $url, $parameters);
+        $command->execute($this->dispatcher);
+        $response = $command->getResult();
         return new WebDavResponse($response);
     }
 }

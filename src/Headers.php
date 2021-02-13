@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ngmy\PhpWebDav;
 
+use Psr\Http\Message\RequestInterface;
 use Symfony\Component\HttpFoundation\HeaderBag;
 
 class Headers
@@ -34,6 +35,14 @@ class Headers
         $new = clone $this->headers;
         $new->add($headers->toArray());
         return new self($new->all());
+    }
+
+    public function provide(RequestInterface $request): RequestInterface
+    {
+        foreach ($this->headers as $key => $value) {
+            $request = $request->withHeader($key, $value);
+        }
+        return $request;
     }
 
     /**
