@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ngmy\PhpWebDav;
 
+use Http\Client\HttpClient;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
@@ -18,7 +19,7 @@ class WebDavClient
     private $options;
 
     /**
-     * WebDAV dispatcher.
+     * The dispatcher of the WebDAV request.
      *
      * @var WebDavCommandDispatcher
      */
@@ -27,12 +28,15 @@ class WebDavClient
     /**
      * Create a new instance of the WebDAV Client.
      *
-     * @param WebDavClientOptions $options Options for the WebDAV client
+     * @param WebDavClientOptions $options    Options for the WebDAV client
+     * @param HttpClient          $httpClient An instance of any class that implements the PSR-18 HttpClient
      */
-    public function __construct(WebDavClientOptions $options = null)
+    public function __construct(WebDavClientOptions $options = null, HttpClient $httpClient = null)
     {
-        $this->options = $options ?: (new WebDavClientOptionsBuilder())->build();
-        $this->dispatcher = new WebDavCommandDispatcher($this->options);
+        $options = $options ?: (new WebDavClientOptionsBuilder())->build();
+        $httpClient = $httpClient ?: (new HttpClientFactory($options))->create();
+        $this->options = $options;
+        $this->dispatcher = new WebDavCommandDispatcher($options, $httpClient);
     }
 
     /**

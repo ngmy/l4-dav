@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ngmy\PhpWebDav;
 
-class Destination implements WebDavHeaderInterface
+class Destination
 {
     private const HEADER_NAME = 'Destination';
 

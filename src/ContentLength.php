@@ -6,7 +6,7 @@ namespace Ngmy\PhpWebDav;
 
 use RuntimeException;
 
-class ContentLength implements WebDavHeaderInterface
+class ContentLength
 {
     private const HEADER_NAME = 'Content-Length';
 

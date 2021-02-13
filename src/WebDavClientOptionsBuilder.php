@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Ngmy\PhpWebDav;
 
-use League\Uri\Components\Port;
-use League\Uri\Components\UserInfo;
-use League\Uri\Contracts\PortInterface;
-use League\Uri\Contracts\UserInfoInterface;
 use Psr\Http\Message\UriInterface;
 
 class WebDavClientOptionsBuilder
@@ -21,13 +17,13 @@ class WebDavClientOptionsBuilder
     /**
      * The port of the WebDAV server.
      *
-     * @var PortInterface
+     * @var Port
      */
     private $port;
     /**
      * The User info.
      *
-     * @var UserInfoInterface
+     * @var UserInfo
      */
     private $userInfo;
     /**
@@ -54,8 +50,8 @@ class WebDavClientOptionsBuilder
      */
     public function __construct()
     {
-        $this->port = new Port();
-        $this->userInfo = new UserInfo();
+        $this->port = Port::createFromNumber();
+        $this->userInfo = UserInfo::createFromUserNameAndPassword();
         $this->defaultRequestHeaders = new Headers();
     }
 
@@ -79,7 +75,7 @@ class WebDavClientOptionsBuilder
      */
     public function setPort(int $port): self
     {
-        $this->port = new Port($port);
+        $this->port = Port::createFromNumber($port);
         return $this;
     }
 
@@ -91,7 +87,7 @@ class WebDavClientOptionsBuilder
      */
     public function setUserName(string $userName): self
     {
-        $this->userInfo = $this->userInfo->withUserInfo($userName, $this->userInfo->getPass());
+        $this->userInfo = $this->userInfo->withUserNameAndPassword($userName, $this->userInfo->getPassword());
         $this->authType = $this->authType ?: AuthType::createBasicAuthType();
         return $this;
     }
@@ -104,7 +100,7 @@ class WebDavClientOptionsBuilder
      */
     public function setPassword(string $password): self
     {
-        $this->userInfo = $this->userInfo->withUserInfo($this->userInfo->getUser(), $password);
+        $this->userInfo = $this->userInfo->withUserNameAndPassword($this->userInfo->getUserName(), $password);
         $this->authType = $this->authType ?: AuthType::createBasicAuthType();
         return $this;
     }

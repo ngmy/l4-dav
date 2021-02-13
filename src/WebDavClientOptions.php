@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace Ngmy\PhpWebDav;
 
-use League\Uri\Contracts\PortInterface;
-use League\Uri\Contracts\UserInfoInterface;
-
 class WebDavClientOptions
 {
     /** @var BaseUrl|null */
     private $baseUrl;
-    /** @var PortInterface */
+    /** @var Port */
     private $port;
-    /** @var UserInfoInterface */
+    /** @var UserInfo */
     private $userInfo;
     /** @var AuthType */
     private $authType;
@@ -27,8 +24,8 @@ class WebDavClientOptions
      */
     public function __construct(
         ?BaseUrl $baseUrl,
-        PortInterface $port,
-        UserInfoInterface $userInfo,
+        Port $port,
+        UserInfo $userInfo,
         ?AuthType $authType,
         Headers $defaultRequestHeaders,
         array $defaultCurlOptions
@@ -46,12 +43,12 @@ class WebDavClientOptions
         return $this->baseUrl;
     }
 
-    public function getPort(): PortInterface
+    public function getPort(): Port
     {
         return $this->port;
     }
 
-    public function getUserInfo(): UserInfoInterface
+    public function getUserInfo(): UserInfo
     {
         return $this->userInfo;
     }

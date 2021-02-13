@@ -13,15 +13,15 @@ use Psr\Http\Message\StreamInterface;
 
 class WebDavCommandDispatcher
 {
-    /** @var HttpClient */
-    private $httpClient;
     /** @var WebDavClientOptions */
     private $options;
+    /** @var HttpClient */
+    private $httpClient;
 
-    public function __construct(WebDavClientOptions $options)
+    public function __construct(WebDavClientOptions $options, HttpClient $httpClient)
     {
-        $this->httpClient = (new HttpClientFactory($options))->create();
         $this->options = $options;
+        $this->httpClient = $httpClient;
     }
 
     /**

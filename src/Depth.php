@@ -6,7 +6,7 @@ namespace Ngmy\PhpWebDav;
 
 use InvalidArgumentException;
 
-class Depth implements WebDavHeaderInterface
+class Depth
 {
     private const HEADER_NAME = 'Depth';
     private const ENUM_ZERO = '0';

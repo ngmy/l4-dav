@@ -12,7 +12,7 @@ use Psr\Http\Message\StreamInterface;
 class WebDavResponse implements MessageInterface, ResponseInterface
 {
     /**
-     * An instance of the any class that implements the PSR-7 ResponseInterface.
+     * An instance of any class that implements the PSR-7 ResponseInterface.
      *
      * @var ResponseInterface
      */
@@ -25,7 +25,7 @@ class WebDavResponse implements MessageInterface, ResponseInterface
     private $responseBodyParser;
 
     /**
-     * @param ResponseInterface $response An instance of the any class that implements the PSR-7 ResponseInterface
+     * @param ResponseInterface $response An instance of any class that implements the PSR-7 ResponseInterface
      */
     public function __construct(ResponseInterface $response)
     {

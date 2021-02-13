@@ -83,7 +83,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    Depth
+    AuthType
 
     
     
@@ -91,7 +91,7 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Depth.php"><a href="files/src-depth.html"><abbr title="src/Depth.php">Depth.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AuthType.php"><a href="files/src-authtype.html"><abbr title="src/AuthType.php">AuthType.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">9</span>
 </aside>
@@ -112,63 +112,77 @@
 
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a href="classes/Ngmy-PhpWebDav-Depth.html#constant_ENUM_INFINITY">ENUM_INFINITY</a>
+    <a href="classes/Ngmy-PhpWebDav-AuthType.html#constant_ENUM_BASIC">ENUM_BASIC</a>
     <span>
-        &nbsp;= &#039;infinity&#039;                    </span>
+        &nbsp;= &#039;basic&#039;                    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a href="classes/Ngmy-PhpWebDav-Depth.html#constant_ENUM_ONE">ENUM_ONE</a>
+    <a href="classes/Ngmy-PhpWebDav-AuthType.html#constant_ENUM_DIGEST">ENUM_DIGEST</a>
     <span>
-        &nbsp;= &#039;1&#039;                    </span>
+        &nbsp;= &#039;digest&#039;                    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a href="classes/Ngmy-PhpWebDav-Depth.html#constant_ENUM_ZERO">ENUM_ZERO</a>
+    <a href="classes/Ngmy-PhpWebDav-AuthType.html#constant_ENUM_NONE">ENUM_NONE</a>
     <span>
-        &nbsp;= &#039;0&#039;                    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a href="classes/Ngmy-PhpWebDav-Depth.html#constant_HEADER_NAME">HEADER_NAME</a>
-    <span>
-        &nbsp;= &#039;Depth&#039;                    </span>
+        &nbsp;= &#039;none&#039;                    </span>
 </dt>
 <dd></dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Ngmy-PhpWebDav-Depth.html#property_depth">$depth</a>
+    <a href="classes/Ngmy-PhpWebDav-AuthType.html#property_authType">$authType</a>
     <span>
                 &nbsp;: string            </span>
 </dt>
 <dd></dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Ngmy-PhpWebDav-Depth.html#method___construct">__construct()</a>
+    <a href="classes/Ngmy-PhpWebDav-AuthType.html#method___construct">__construct()</a>
     <span>
                         &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Ngmy-PhpWebDav-Depth.html#method___toString">__toString()</a>
+    <a href="classes/Ngmy-PhpWebDav-AuthType.html#method___toString">__toString()</a>
     <span>
                         &nbsp;: string    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Ngmy-PhpWebDav-Depth.html#method_provide">provide()</a>
+    <a href="classes/Ngmy-PhpWebDav-AuthType.html#method_createBasicAuthType">createBasicAuthType()</a>
     <span>
-                        &nbsp;: <a href="classes/Ngmy-PhpWebDav-Headers.html"><abbr title="\Ngmy\PhpWebDav\Headers">Headers</abbr></a>    </span>
+                        &nbsp;: self    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Ngmy-PhpWebDav-AuthType.html#method_createDigestAuthType">createDigestAuthType()</a>
+    <span>
+                        &nbsp;: self    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Ngmy-PhpWebDav-AuthType.html#method_createNoneAuthType">createNoneAuthType()</a>
+    <span>
+                        &nbsp;: self    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Ngmy-PhpWebDav-AuthType.html#method_provide">provide()</a>
+    <span>
+                        &nbsp;: array&lt;int, mixed&gt;    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/Ngmy-PhpWebDav-Depth.html#method_validate">validate()</a>
+    <a href="classes/Ngmy-PhpWebDav-AuthType.html#method_validate">validate()</a>
     <span>
                         &nbsp;: void    </span>
 </dt>
@@ -182,66 +196,16 @@
     <section class="phpdocumentor-constants">
         <h3 class="phpdocumentor-elements__header" id="constants">
             Constants
-            <a href="classes/Ngmy-PhpWebDav-Depth.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Ngmy-PhpWebDav-AuthType.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_ENUM_INFINITY">
-        ENUM_INFINITY
-        <a href="classes/Ngmy-PhpWebDav-Depth.html#constant_ENUM_INFINITY" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_ENUM_BASIC">
+        ENUM_BASIC
+        <a href="classes/Ngmy-PhpWebDav-AuthType.html#constant_ENUM_BASIC" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Depth.php"><a href="files/src-depth.html"><abbr title="src/Depth.php">Depth.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">14</span>
-</aside>
-
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-    <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">ENUM_INFINITY</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;infinity&#039;</span>
-</code>
-
-
-    
-    
-
-</article>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_ENUM_ONE">
-        ENUM_ONE
-        <a href="classes/Ngmy-PhpWebDav-Depth.html#constant_ENUM_ONE" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Depth.php"><a href="files/src-depth.html"><abbr title="src/Depth.php">Depth.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">13</span>
-</aside>
-
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-    <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">ENUM_ONE</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;1&#039;</span>
-</code>
-
-
-    
-    
-
-</article>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_ENUM_ZERO">
-        ENUM_ZERO
-        <a href="classes/Ngmy-PhpWebDav-Depth.html#constant_ENUM_ZERO" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Depth.php"><a href="files/src-depth.html"><abbr title="src/Depth.php">Depth.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AuthType.php"><a href="files/src-authtype.html"><abbr title="src/AuthType.php">AuthType.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">12</span>
 </aside>
@@ -250,8 +214,8 @@
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">private</span>
     <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">ENUM_ZERO</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;0&#039;</span>
+    <span class="phpdocumentor-signature__name">ENUM_BASIC</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;basic&#039;</span>
 </code>
 
 
@@ -260,13 +224,38 @@
 
 </article>
                     <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_HEADER_NAME">
-        HEADER_NAME
-        <a href="classes/Ngmy-PhpWebDav-Depth.html#constant_HEADER_NAME" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_ENUM_DIGEST">
+        ENUM_DIGEST
+        <a href="classes/Ngmy-PhpWebDav-AuthType.html#constant_ENUM_DIGEST" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Depth.php"><a href="files/src-depth.html"><abbr title="src/Depth.php">Depth.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AuthType.php"><a href="files/src-authtype.html"><abbr title="src/AuthType.php">AuthType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">13</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+    <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ENUM_DIGEST</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;digest&#039;</span>
+</code>
+
+
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -private ">
+    <h4 class="phpdocumentor-element__name" id="constant_ENUM_NONE">
+        ENUM_NONE
+        <a href="classes/Ngmy-PhpWebDav-AuthType.html#constant_ENUM_NONE" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AuthType.php"><a href="files/src-authtype.html"><abbr title="src/AuthType.php">AuthType.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">11</span>
 </aside>
@@ -275,8 +264,8 @@
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">private</span>
     <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">HEADER_NAME</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;Depth&#039;</span>
+    <span class="phpdocumentor-signature__name">ENUM_NONE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;none&#039;</span>
 </code>
 
 
@@ -290,7 +279,7 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/Ngmy-PhpWebDav-Depth.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Ngmy-PhpWebDav-AuthType.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="
@@ -299,23 +288,23 @@
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_depth">
-        $depth
-        <a href="classes/Ngmy-PhpWebDav-Depth.html#property_depth" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_authType">
+        $authType
+        <a href="classes/Ngmy-PhpWebDav-AuthType.html#property_authType" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Depth.php"><a href="files/src-depth.html"><abbr title="src/Depth.php">Depth.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AuthType.php"><a href="files/src-authtype.html"><abbr title="src/AuthType.php">AuthType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$depth</span>
+    <span class="phpdocumentor-signature__name">$authType</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -328,7 +317,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Ngmy-PhpWebDav-Depth.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Ngmy-PhpWebDav-AuthType.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -338,30 +327,28 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Ngmy-PhpWebDav-Depth.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Ngmy-PhpWebDav-AuthType.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Depth.php"><a href="files/src-depth.html"><abbr title="src/Depth.php">Depth.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AuthType.php"><a href="files/src-authtype.html"><abbr title="src/AuthType.php">AuthType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">int|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$depth</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authType</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$depth</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int|string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+                <span class="phpdocumentor-signature__argument__name">$authType</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -382,12 +369,12 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___toString">
         __toString()
-        <a href="classes/Ngmy-PhpWebDav-Depth.html#method___toString" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Ngmy-PhpWebDav-AuthType.html#method___toString" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Depth.php"><a href="files/src-depth.html"><abbr title="src/Depth.php">Depth.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AuthType.php"><a href="files/src-authtype.html"><abbr title="src/AuthType.php">AuthType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 </aside>
 
     
@@ -410,39 +397,137 @@
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+                                    -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method_provide">
-        provide()
-        <a href="classes/Ngmy-PhpWebDav-Depth.html#method_provide" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_createBasicAuthType">
+        createBasicAuthType()
+        <a href="classes/Ngmy-PhpWebDav-AuthType.html#method_createBasicAuthType" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Depth.php"><a href="files/src-depth.html"><abbr title="src/Depth.php">Depth.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AuthType.php"><a href="files/src-authtype.html"><abbr title="src/AuthType.php">AuthType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">provide</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Ngmy-PhpWebDav-Headers.html"><abbr title="\Ngmy\PhpWebDav\Headers">Headers</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$headers</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Ngmy-PhpWebDav-Headers.html"><abbr title="\Ngmy\PhpWebDav\Headers">Headers</abbr></a></span></code>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">createBasicAuthType</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
     
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">self</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_createDigestAuthType">
+        createDigestAuthType()
+        <a href="classes/Ngmy-PhpWebDav-AuthType.html#method_createDigestAuthType" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AuthType.php"><a href="files/src-authtype.html"><abbr title="src/AuthType.php">AuthType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">28</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">createDigestAuthType</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">self</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_createNoneAuthType">
+        createNoneAuthType()
+        <a href="classes/Ngmy-PhpWebDav-AuthType.html#method_createNoneAuthType" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AuthType.php"><a href="files/src-authtype.html"><abbr title="src/AuthType.php">AuthType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">18</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">createNoneAuthType</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">self</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_provide">
+        provide()
+        <a href="classes/Ngmy-PhpWebDav-AuthType.html#method_provide" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AuthType.php"><a href="files/src-authtype.html"><abbr title="src/AuthType.php">AuthType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">48</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">provide</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$curlOptions</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, mixed&gt;</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$headers</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Ngmy-PhpWebDav-Headers.html"><abbr title="\Ngmy\PhpWebDav\Headers">Headers</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$curlOptions</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"></section>
+
             </dd>
             </dl>
 
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Ngmy-PhpWebDav-Headers.html"><abbr title="\Ngmy\PhpWebDav\Headers">Headers</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type">array&lt;int, mixed&gt;</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -456,12 +541,12 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_validate">
         validate()
-        <a href="classes/Ngmy-PhpWebDav-Depth.html#method_validate" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Ngmy-PhpWebDav-AuthType.html#method_validate" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Depth.php"><a href="files/src-depth.html"><abbr title="src/Depth.php">Depth.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AuthType.php"><a href="files/src-authtype.html"><abbr title="src/AuthType.php">AuthType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">59</span>
 </aside>
 
     
@@ -496,7 +581,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Ngmy-PhpWebDav-Depth.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Ngmy-PhpWebDav-AuthType.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

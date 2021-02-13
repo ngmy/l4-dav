@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ngmy\PhpWebDav;
 
-class Overwrite implements WebDavHeaderInterface
+class Overwrite
 {
     private const HEADER_NAME = 'Overwrite';
 
