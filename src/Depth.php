@@ -45,7 +45,7 @@ class Depth
             ], true)
         ) {
             throw new InvalidArgumentException(
-                \sprintf('The depth must be "0", "1" or "infinity", "%s" given.', $this->depth)
+                \sprintf('The depth must be "0", "1", or "infinity", "%s" given.', $this->depth)
             );
         }
     }

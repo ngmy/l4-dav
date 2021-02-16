@@ -66,7 +66,7 @@ class AuthType
             ], true)
         ) {
             throw new InvalidArgumentException(
-                \sprintf('The authType must be "none", "basic" or "digest", "%s" given.', $this->authType)
+                \sprintf('The authType must be "none", "basic", or "digest", "%s" given.', $this->authType)
             );
         }
     }
