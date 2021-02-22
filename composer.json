@@ -26,6 +26,7 @@
         "guzzlehttp/psr7": "^1.7.0",
         "http-interop/http-factory-guzzle": "^1.0.0",
         "league/uri-components": "^2.3.0",
+        "ngmy/enum": "^0.1.0",
         "php-http/curl-client": "^1.7.1",
         "symfony/http-foundation": "^5.2.2"
     },

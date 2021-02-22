@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "004f0d1c53cd7020f101facdfab9460d",
+    "content-hash": "e177c56dc0843027c156237f0d9e33f0",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -335,6 +335,114 @@
                 }
             ],
             "time": "2020-10-31T13:45:51+00:00"
+        },
+        {
+            "name": "ngmy/enum",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ngmy/php-enum.git",
+                "reference": "192736a8724d7644e9016d9a26208b08d717b5f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ngmy/php-enum/zipball/192736a8724d7644e9016d9a26208b08d717b5f2",
+                "reference": "192736a8724d7644e9016d9a26208b08d717b5f2",
+                "shasum": ""
+            },
+            "require": {
+                "ngmy/typed-array": "^0.4.0",
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ngmy\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yuta Nagamiya",
+                    "email": "y.nagamiya@gmail.com"
+                }
+            ],
+            "description": "The enumeration type for PHP",
+            "keywords": [
+                "array",
+                "enum",
+                "enumeration",
+                "trait",
+                "type"
+            ],
+            "funding": [
+                {
+                    "url": "https://flattr.com/@ngmy",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/ngmy",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-02-22T13:49:32+00:00"
+        },
+        {
+            "name": "ngmy/typed-array",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ngmy/php-typed-array.git",
+                "reference": "2eb114d4d5483893b3fd4db92a059deef4eef767"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ngmy/php-typed-array/zipball/2eb114d4d5483893b3fd4db92a059deef4eef767",
+                "reference": "2eb114d4d5483893b3fd4db92a059deef4eef767",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ngmy\\TypedArray\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yuta Nagamiya",
+                    "email": "y.nagamiya@gmail.com"
+                }
+            ],
+            "description": "The typed array for PHP",
+            "keywords": [
+                "Typed Array",
+                "array",
+                "type"
+            ],
+            "funding": [
+                {
+                    "url": "https://flattr.com/@ngmy",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/ngmy",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-02-22T12:46:49+00:00"
         },
         {
             "name": "php-http/curl-client",
