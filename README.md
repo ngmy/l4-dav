@@ -74,7 +74,7 @@ The PHP WebDAV client has the following requirements:
 ## Installation
 Execute the Composer `require` command:
 ```console
-composer require ngmy/l4-dav
+composer require ngmy/webdav-client
 ```
 
 ## Documentation
