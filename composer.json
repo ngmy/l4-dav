@@ -1,7 +1,7 @@
 {
-    "name": "ngmy/l4-dav",
+    "name": "ngmy/webdav-client",
     "type": "library",
-    "description": "A simple WebDAV client library for Laravel",
+    "description": "The WebDAV client for PHP",
     "keywords": [
         "webdav",
         "client",
