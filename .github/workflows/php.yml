@@ -10,35 +10,8 @@ jobs:
     name: Install tools
 
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-
-      - name: Install PHIVE
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 10
-          max_attempts: 3
-          command: |
-            wget -O phive.phar https://phar.io/releases/phive.phar
-            wget -O phive.phar.asc https://phar.io/releases/phive.phar.asc
-            gpg --keyserver pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79
-            gpg --verify phive.phar.asc phive.phar
-
-      - name: Install tools
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 10
-          max_attempts: 3
-          command: |
-            yes | \
-            php phive.phar --no-progress install \
-              --copy
-
-      - name: Upload tools to artifact store
-        uses: actions/upload-artifact@master
-        with:
-          name: tools
-          path: tools
+      - name: Install PHIVE Tools
+        uses: ngmy/phive-install-action@0.3.0
 
   test:
 
