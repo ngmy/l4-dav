@@ -44,7 +44,7 @@ jobs:
         run: sudo update-alternatives --set php /usr/bin/php${{ matrix.php }}
 
       - name: Update Composer to latest version
-        run: composer self-update
+        run: sudo composer self-update
 
       - name: Validate composer.json and composer.lock
         run: composer validate
