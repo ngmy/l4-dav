@@ -21,7 +21,7 @@ jobs:
 
   test:
 
-    needs: install_tools
+    needs: install_phive_tools
 
     runs-on: ubuntu-18.04
 
