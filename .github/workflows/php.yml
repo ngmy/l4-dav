@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Install tools
-        uses: ngmy/phive-install-action@master
+        uses: ngmy/phive-install-action@0.6.0
 
       - name: Upload tools to artifact store
         uses: actions/upload-artifact@master
@@ -37,12 +37,6 @@ jobs:
     name: Test (PHP ${{ matrix.php }}, ${{ matrix.deps }} dependencies)
 
     steps:
-      - name: Download tools from artifact store
-        uses: actions/download-artifact@master
-        with:
-          name: tools
-          path: tools
-
       - name: Check out repository
         uses: actions/checkout@v2
 
@@ -76,6 +70,12 @@ jobs:
           if [[ "${{ matrix.deps }}" == 'lowest' ]]; then
             composer update --no-interaction --prefer-lowest --prefer-stable
           fi
+
+      - name: Download tools from artifact store
+        uses: actions/download-artifact@master
+        with:
+          name: tools
+          path: tools
 
       - name: Run lint
         run: composer lint
