@@ -3,17 +3,17 @@ name: PHP CI
 on: [push, pull_request]
 
 jobs:
-  install_phive_tools:
+  install_tools:
 
     runs-on: ubuntu-18.04
 
-    name: Install PHIVE tools
+    name: Install tools
 
     steps:
-      - name: Install PHIVE tools
+      - name: Install tools
         uses: ngmy/phive-install-action@0.6.0
 
-      - name: Upload PHIVE tools to artifact store
+      - name: Upload tools to artifact store
         uses: actions/upload-artifact@master
         with:
           name: tools
@@ -21,7 +21,7 @@ jobs:
 
   test:
 
-    needs: install_phive_tools
+    needs: install_tools
 
     runs-on: ubuntu-18.04
 
