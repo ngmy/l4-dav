@@ -6,8 +6,7 @@ namespace Ngmy\PhpWebDav;
 
 use Http\Client\Curl\Client;
 use Http\Client\HttpClient;
-use Http\Discovery\MessageFactoryDiscovery;
-use Http\Discovery\StreamFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
 
 class HttpClientFactory
 {
@@ -22,10 +21,8 @@ class HttpClientFactory
     public function create(): HttpClient
     {
         return new Client(
-            // TODO: When cURL client supports PSR-17, use Psr17FactoryDiscovery instead
-            MessageFactoryDiscovery::find(),
-            // TODO: When cURL client supports PSR-17, use Psr17FactoryDiscovery instead
-            StreamFactoryDiscovery::find(),
+            Psr17FactoryDiscovery::findResponseFactory(),
+            Psr17FactoryDiscovery::findStreamFactory(),
             $this->configureCurlOptions()
         );
     }
