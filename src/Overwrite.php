@@ -11,14 +11,14 @@ class Overwrite
     /** @var WebDavBool */
     private $overwrite;
 
-    public static function createFromBool(bool $overwrite): self
+    public static function valueOf(string $overwrite): self
     {
-        return new self(WebDavBool::createFromBool($overwrite));
+        return new self(WebDavBool::valueOf($overwrite));
     }
 
-    public function __construct(WebDavBool $overwrite)
+    public static function getType(bool $overwrite): self
     {
-        $this->overwrite = $overwrite;
+        return new self(WebDavBool::getType($overwrite));
     }
 
     public function __toString(): string
@@ -29,5 +29,10 @@ class Overwrite
     public function provide(Headers $headers): Headers
     {
         return $headers->withHeader(self::HEADER_NAME, (string) $this->overwrite);
+    }
+
+    private function __construct(WebDavBool $overwrite)
+    {
+        $this->overwrite = $overwrite;
     }
 }

@@ -20,7 +20,7 @@ class CopyParameters
     public function __construct(UriInterface $destinationUrl, Overwrite $overwrite = null)
     {
         $this->destinationUrl = $destinationUrl;
-        $this->overwrite = $overwrite ?: Overwrite::createFromBool(false);
+        $this->overwrite = $overwrite ?: Overwrite::getType(false);
     }
 
     public function getDestinationUrl(): UriInterface

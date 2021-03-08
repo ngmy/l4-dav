@@ -33,7 +33,7 @@ class WebDavClientOptions
         $this->baseUrl = $baseUrl;
         $this->port = $port;
         $this->userInfo = $userInfo;
-        $this->authType = $authType ?: AuthType::createNoneAuthtype();
+        $this->authType = $authType ?: AuthType::NONE();
         $this->defaultRequestHeaders = $defaultRequestHeaders;
         $this->defaultCurlOptions = $defaultCurlOptions;
     }

@@ -11,7 +11,7 @@ class PropfindParameters
 
     public function __construct(?Depth $depth = null)
     {
-        $this->depth = $depth ?: new Depth();
+        $this->depth = $depth ?: Depth::INFINITY();
     }
 
     public function getDepth(): Depth

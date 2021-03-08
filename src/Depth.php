@@ -5,48 +5,50 @@ declare(strict_types=1);
 namespace Ngmy\PhpWebDav;
 
 use InvalidArgumentException;
+use Ngmy\Enum\Enum;
 
-class Depth
+/**
+ * @method static self ZERO()
+ * @method static self ONE()
+ * @method static self INFINITY()
+ */
+class Depth extends Enum
 {
     private const HEADER_NAME = 'Depth';
-    private const ENUM_ZERO = '0';
-    private const ENUM_ONE = '1';
-    private const ENUM_INFINITY = 'infinity';
-
-    /** @var string */
-    private $depth;
 
     /**
-     * @param int|string $depth
+     * @var string
+     * @enum
      */
-    public function __construct($depth = null)
+    private static $ZERO = '0';
+    /**
+     * @var string
+     * @enum
+     */
+    private static $ONE = '1';
+    /**
+     * @var string
+     * @enum
+     */
+    private static $INFINITY = 'infinity';
+
+    public static function getType(string $value): self
     {
-        $this->depth = \is_null($depth) ? self::ENUM_INFINITY : \strtolower((string) $depth);
-        $this->validate();
+        foreach (self::values() as $enum) {
+            if ($enum->getValue() == $value) {
+                return $enum;
+            }
+        }
+        throw new InvalidArgumentException('The type "%s" is invalid.');
     }
 
-    public function __toString(): string
+    public function getValue(): string
     {
-        return $this->depth;
+        return self::${$this->name()};
     }
 
     public function provide(Headers $headers): Headers
     {
-        return $headers->withHeader(self::HEADER_NAME, (string) $this->depth);
-    }
-
-    private function validate(): void
-    {
-        if (
-            !\in_array($this->depth, [
-                self::ENUM_ZERO,
-                self::ENUM_ONE,
-                self::ENUM_INFINITY,
-            ], true)
-        ) {
-            throw new InvalidArgumentException(
-                \sprintf('The depth must be "0", "1", or "infinity", "%s" given.', $this->depth)
-            );
-        }
+        return $headers->withHeader(self::HEADER_NAME, self::${$this->name()});
     }
 }

@@ -5,42 +5,37 @@ declare(strict_types=1);
 namespace Ngmy\PhpWebDav;
 
 use InvalidArgumentException;
+use Ngmy\Enum\Enum;
 
-class WebDavBool
+/**
+ * @method static self T()
+ * @method static self F()
+ */
+class WebDavBool extends Enum
 {
-    private const ENUM_TRUE = 'T';
-    private const ENUM_FALSE = 'F';
+    /**
+     * @var bool
+     * @enum
+     */
+    private static $T = true;
+    /**
+     * @var bool
+     * @enum
+     */
+    private static $F = false;
 
-    /** @var string */
-    private $bool;
-
-    public static function createFromBool(bool $bool): self
+    public static function getType(bool $value): self
     {
-        return new self($bool ? self::ENUM_TRUE : self::ENUM_FALSE);
-    }
-
-    public function __construct(string $bool)
-    {
-        $this->bool = $bool;
-        $this->validate();
-    }
-
-    public function __toString(): string
-    {
-        return $this->bool;
-    }
-
-    private function validate(): void
-    {
-        if (
-            !\in_array($this->bool, [
-                self::ENUM_TRUE,
-                self::ENUM_FALSE,
-            ], true)
-        ) {
-            throw new InvalidArgumentException(
-                \sprintf('The WebDAV bool must be "T" or "F", "%s" given.', $this->bool)
-            );
+        foreach (self::values() as $enum) {
+            if ($enum->getValue() == $value) {
+                return $enum;
+            }
         }
+        throw new InvalidArgumentException('The type "%s" is invalid.');
+    }
+
+    public function getValue(): bool
+    {
+        return self::${$this->name()};
     }
 }

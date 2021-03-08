@@ -88,7 +88,7 @@ class WebDavClientOptionsBuilder
     public function setUserName(string $userName): self
     {
         $this->userInfo = $this->userInfo->withUserNameAndPassword($userName, $this->userInfo->getPassword());
-        $this->authType = $this->authType ?: AuthType::createBasicAuthType();
+        $this->authType = $this->authType ?: AuthType::BASIC();
         return $this;
     }
 
@@ -101,7 +101,7 @@ class WebDavClientOptionsBuilder
     public function setPassword(string $password): self
     {
         $this->userInfo = $this->userInfo->withUserNameAndPassword($this->userInfo->getUserName(), $password);
-        $this->authType = $this->authType ?: AuthType::createBasicAuthType();
+        $this->authType = $this->authType ?: AuthType::BASIC();
         return $this;
     }
 
@@ -113,7 +113,7 @@ class WebDavClientOptionsBuilder
      */
     public function setAuthType(string $authType): self
     {
-        $this->authType = new AuthType($authType);
+        $this->authType = AuthType::valueOf(\strtoupper($authType));
         return $this;
     }
 

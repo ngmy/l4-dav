@@ -4,42 +4,30 @@ declare(strict_types=1);
 
 namespace Ngmy\PhpWebDav;
 
-use InvalidArgumentException;
+use Ngmy\Enum\Enum;
 
-class AuthType
+/**
+ * @method static self NONE()
+ * @method static self BASIC()
+ * @method static self DIGEST()
+ */
+class AuthType extends Enum
 {
-    private const ENUM_NONE = 'none';
-    private const ENUM_BASIC = 'basic';
-    private const ENUM_DIGEST = 'digest';
-
-    /** @var string */
-    private $authType;
-
-    public static function createNoneAuthType(): self
-    {
-        return new self(self::ENUM_NONE);
-    }
-
-    public static function createBasicAuthType(): self
-    {
-        return new self(self::ENUM_BASIC);
-    }
-
-    public static function createDigestAuthType(): self
-    {
-        return new self(self::ENUM_DIGEST);
-    }
-
-    public function __construct(string $authType)
-    {
-        $this->authType = $authType;
-        $this->validate();
-    }
-
-    public function __toString(): string
-    {
-        return $this->authType;
-    }
+    /**
+     * @var null
+     * @enum
+     */
+    private static $NONE;
+    /**
+     * @var null
+     * @enum
+     */
+    private static $BASIC;
+    /**
+     * @var null
+     * @enum
+     */
+    private static $DIGEST;
 
     /**
      * @param array<int, mixed> $curlOptions
@@ -47,27 +35,12 @@ class AuthType
      */
     public function provide(array $curlOptions): array
     {
-        if ($this->authType == self::ENUM_BASIC) {
+        if ($this->name() == 'BASIC') {
             $curlOptions[\CURLOPT_HTTPAUTH] = \CURLAUTH_BASIC;
         }
-        if ($this->authType == self::ENUM_DIGEST) {
+        if ($this->name() == 'DIGEST') {
             $curlOptions[\CURLOPT_HTTPAUTH] = \CURLAUTH_DIGEST;
         }
         return $curlOptions;
-    }
-
-    private function validate(): void
-    {
-        if (
-            !\in_array($this->authType, [
-                self::ENUM_NONE,
-                self::ENUM_BASIC,
-                self::ENUM_DIGEST,
-            ], true)
-        ) {
-            throw new InvalidArgumentException(
-                \sprintf('The authType must be "none", "basic", or "digest", "%s" given.', $this->authType)
-            );
-        }
     }
 }
