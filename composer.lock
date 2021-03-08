@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7b7fa99eb7a281f3d652bde8794aca9e",
+    "content-hash": "586d4919f29021caa859993bcf266f69",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -358,16 +358,16 @@
         },
         {
             "name": "ngmy/enum",
-            "version": "0.3.0",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ngmy/php-enum.git",
-                "reference": "c11574798e5d0b7e0bfc61c55bf2f8c683d2f7de"
+                "reference": "644181fccb5e638425095dc3cb26e0719ef6a174"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ngmy/php-enum/zipball/c11574798e5d0b7e0bfc61c55bf2f8c683d2f7de",
-                "reference": "c11574798e5d0b7e0bfc61c55bf2f8c683d2f7de",
+                "url": "https://api.github.com/repos/ngmy/php-enum/zipball/644181fccb5e638425095dc3cb26e0719ef6a174",
+                "reference": "644181fccb5e638425095dc3cb26e0719ef6a174",
                 "shasum": ""
             },
             "require": {
@@ -402,7 +402,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ngmy/php-enum/issues",
-                "source": "https://github.com/ngmy/php-enum/tree/0.3.0"
+                "source": "https://github.com/ngmy/php-enum/tree/0.4.0"
             },
             "funding": [
                 {
@@ -414,7 +414,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-03T04:39:38+00:00"
+            "time": "2021-03-08T07:41:21+00:00"
         },
         {
             "name": "ngmy/typed-array",
