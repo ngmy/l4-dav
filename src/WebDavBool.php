@@ -24,14 +24,14 @@ class WebDavBool extends Enum
      */
     private static $F = false;
 
-    public static function getType(bool $value): self
+    public static function getInstance(bool $value): self
     {
         foreach (self::values() as $enum) {
             if ($enum->getValue() == $value) {
                 return $enum;
             }
         }
-        throw new InvalidArgumentException('The type "%s" is invalid.');
+        throw new InvalidArgumentException('The value "%s" is invalid.');
     }
 
     public function getValue(): bool

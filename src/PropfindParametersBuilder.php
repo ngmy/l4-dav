@@ -21,7 +21,7 @@ class PropfindParametersBuilder
      */
     public function setDepth($depth): self
     {
-        $this->depth = Depth::getType((string) $depth);
+        $this->depth = Depth::getInstance((string) $depth);
         return $this;
     }
 

@@ -42,7 +42,7 @@ class CopyParametersBuilder
      */
     public function setOverwrite(bool $overwrite): self
     {
-        $this->overwrite = Overwrite::getType($overwrite);
+        $this->overwrite = Overwrite::getInstance($overwrite);
         return $this;
     }
 

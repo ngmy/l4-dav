@@ -16,9 +16,9 @@ class Overwrite
         return new self(WebDavBool::valueOf($overwrite));
     }
 
-    public static function getType(bool $overwrite): self
+    public static function getInstance(bool $overwrite): self
     {
-        return new self(WebDavBool::getType($overwrite));
+        return new self(WebDavBool::getInstance($overwrite));
     }
 
     public function __toString(): string

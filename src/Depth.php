@@ -32,14 +32,14 @@ class Depth extends Enum
      */
     private static $INFINITY = 'infinity';
 
-    public static function getType(string $value): self
+    public static function getInstance(string $value): self
     {
         foreach (self::values() as $enum) {
             if ($enum->getValue() == $value) {
                 return $enum;
             }
         }
-        throw new InvalidArgumentException('The type "%s" is invalid.');
+        throw new InvalidArgumentException('The value "%s" is invalid.');
     }
 
     public function getValue(): string
