@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\PhpWebDav\Tests\Unit;
+namespace Ngmy\WebDav\Tests\Unit;
 
 use Exception;
 use InvalidArgumentException;
-use Ngmy\PhpWebDav\BaseUrl;
-use Ngmy\PhpWebDav\Tests\TestCase;
-use Ngmy\PhpWebDav\Url;
+use Ngmy\WebDav\BaseUrl;
+use Ngmy\WebDav\Tests\TestCase;
+use Ngmy\WebDav\Url;
 
 class FullUrlTest extends TestCase
 {

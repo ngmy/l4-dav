@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\PhpWebDav\Tests\Unit;
+namespace Ngmy\WebDav\Tests\Unit;
 
 use Exception;
 use InvalidArgumentException;
-use Ngmy\PhpWebDav\Command;
-use Ngmy\PhpWebDav\Tests\TestCase;
-use Ngmy\PhpWebDav\WebDavClientOptionsBuilder;
+use Ngmy\WebDav\Command;
+use Ngmy\WebDav\Tests\TestCase;
+use Ngmy\WebDav\ClientOptionsBuilder;
 use org\bovigo\vfs\vfsStream;
 
 class CommandTest extends TestCase
@@ -25,7 +25,7 @@ class CommandTest extends TestCase
             [
                 [
                     'Copy',
-                    (new WebDavClientOptionsBuilder())->build(),
+                    (new ClientOptionsBuilder())->build(),
                     'http://example.com/file1',
                     'http://example.com/file2',
                 ],
@@ -33,14 +33,14 @@ class CommandTest extends TestCase
             [
                 [
                     'Delete',
-                    (new WebDavClientOptionsBuilder())->build(),
+                    (new ClientOptionsBuilder())->build(),
                     'http://example.com/file',
                 ],
             ],
             [
                 [
                     'Download',
-                    (new WebDavClientOptionsBuilder())->build(),
+                    (new ClientOptionsBuilder())->build(),
                     'http://example.com/file',
                     '/tmp/file',
                 ],
@@ -48,28 +48,28 @@ class CommandTest extends TestCase
             [
                 [
                     'Exists',
-                    (new WebDavClientOptionsBuilder())->build(),
+                    (new ClientOptionsBuilder())->build(),
                     'http://example.com/file',
                 ],
             ],
             [
                 [
                     'List',
-                    (new WebDavClientOptionsBuilder())->build(),
+                    (new ClientOptionsBuilder())->build(),
                     'http://example.com/dir/',
                 ],
             ],
             [
                 [
                     'MakeDirectory',
-                    (new WebDavClientOptionsBuilder())->build(),
+                    (new ClientOptionsBuilder())->build(),
                     'http://example.com/dir/',
                 ],
             ],
             [
                 [
                     'Move',
-                    (new WebDavClientOptionsBuilder())->build(),
+                    (new ClientOptionsBuilder())->build(),
                     'http://example.com/file1',
                     'http://example.com/file2',
                 ],
@@ -77,7 +77,7 @@ class CommandTest extends TestCase
             [
                 [
                     'Upload',
-                    (new WebDavClientOptionsBuilder())->build(),
+                    (new ClientOptionsBuilder())->build(),
                     $file->url(),
                     'http://example.com/file',
                 ],
@@ -85,7 +85,7 @@ class CommandTest extends TestCase
             [
                 [
                     'NotExsitsCommand',
-                    (new WebDavClientOptionsBuilder())->build(),
+                    (new ClientOptionsBuilder())->build(),
                 ],
                 new InvalidArgumentException(),
             ],

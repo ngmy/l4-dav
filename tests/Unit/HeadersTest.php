@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\PhpWebDav\Tests\Unit;
+namespace Ngmy\WebDav\Tests\Unit;
 
-use Ngmy\PhpWebDav\Headers;
-use Ngmy\PhpWebDav\Tests\TestCase;
+use Ngmy\WebDav\Headers;
+use Ngmy\WebDav\Tests\TestCase;
 
 class HeadersTest extends TestCase
 {

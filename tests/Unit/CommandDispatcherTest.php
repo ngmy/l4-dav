@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\PhpWebDav\Tests\Unit;
+namespace Ngmy\WebDav\Tests\Unit;
 
 use Http\Client\HttpClient;
 use Mockery;
-use Ngmy\PhpWebDav\Command;
-use Ngmy\PhpWebDav\CommandDispatcher;
-use Ngmy\PhpWebDav\HttpClientFactory;
-use Ngmy\PhpWebDav\Tests\TestCase;
-use Ngmy\PhpWebDav\WebDavClientOptionsBuilder;
+use Ngmy\WebDav\Command;
+use Ngmy\WebDav\CommandDispatcher;
+use Ngmy\WebDav\HttpClientFactory;
+use Ngmy\WebDav\Tests\TestCase;
+use Ngmy\WebDav\ClientOptionsBuilder;
 use org\bovigo\vfs\vfsStream;
 use Psr\Http\Message\ResponseInterface;
 
@@ -28,7 +28,7 @@ class CommandDispatcherTest extends TestCase
             [
                 Command::create(
                     'Download',
-                    (new WebDavClientOptionsBuilder())->build(),
+                    (new ClientOptionsBuilder())->build(),
                     'http://example.com/file',
                     '/tmp/file'
                 ),
@@ -37,7 +37,7 @@ class CommandDispatcherTest extends TestCase
             [
                 Command::create(
                     'Upload',
-                    (new WebDavClientOptionsBuilder())->build(),
+                    (new ClientOptionsBuilder())->build(),
                     $file->url(),
                     'http://example.com/file',
                 ),

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\PhpWebDav\Tests\Unit;
+namespace Ngmy\WebDav\Tests\Unit;
 
 use Http\Discovery\Psr17FactoryDiscovery;
 use League\Uri\Components\Port;
 use League\Uri\Components\UserInfo;
-use Ngmy\PhpWebDav\Headers;
-use Ngmy\PhpWebDav\Tests\TestCase;
-use Ngmy\PhpWebDav\Url;
-use Ngmy\PhpWebDav\WebDavClientOptions;
-use Ngmy\PhpWebDav\WebDavClientOptionsBuilder;
+use Ngmy\WebDav\Headers;
+use Ngmy\WebDav\Tests\TestCase;
+use Ngmy\WebDav\Url;
+use Ngmy\WebDav\ClientOptions;
+use Ngmy\WebDav\ClientOptionsBuilder;
 use Psr\Http\Message\UriInterface;
 
-class WebDavClientOptionsBuilderTest extends TestCase
+class ClientOptionsBuilderTest extends TestCase
 {
     /**
      * @return list<list<mixed>>
@@ -29,7 +29,7 @@ class WebDavClientOptionsBuilderTest extends TestCase
                 null,
                 null,
                 null,
-                new WebDavClientOptions(
+                new ClientOptions(
                     null,
                     new Port(null),
                     new UserInfo(null, null),
@@ -44,7 +44,7 @@ class WebDavClientOptionsBuilderTest extends TestCase
                 null,
                 null,
                 null,
-                new WebDavClientOptions(
+                new ClientOptions(
                     Url::createBaseUrl('http://example.com'),
                     new Port(null),
                     new UserInfo(null, null),
@@ -59,7 +59,7 @@ class WebDavClientOptionsBuilderTest extends TestCase
                 null,
                 null,
                 null,
-                new WebDavClientOptions(
+                new ClientOptions(
                     Url::createBaseUrl('http://example.com'),
                     new Port(null),
                     new UserInfo(null, null),
@@ -74,7 +74,7 @@ class WebDavClientOptionsBuilderTest extends TestCase
                 null,
                 null,
                 null,
-                new WebDavClientOptions(
+                new ClientOptions(
                     null,
                     new Port(80),
                     new UserInfo(null, null),
@@ -89,7 +89,7 @@ class WebDavClientOptionsBuilderTest extends TestCase
                 'password',
                 null,
                 null,
-                new WebDavClientOptions(
+                new ClientOptions(
                     null,
                     new Port(null),
                     new UserInfo('username', 'password'),
@@ -104,7 +104,7 @@ class WebDavClientOptionsBuilderTest extends TestCase
                 null,
                 ['header_key' => 'header_value'],
                 null,
-                new WebDavClientOptions(
+                new ClientOptions(
                     null,
                     new Port(null),
                     new UserInfo(null, null),
@@ -119,7 +119,7 @@ class WebDavClientOptionsBuilderTest extends TestCase
                 null,
                 null,
                 [\CURLOPT_PORT => 80],
-                new WebDavClientOptions(
+                new ClientOptions(
                     null,
                     new Port(null),
                     new UserInfo(null, null),
@@ -134,7 +134,7 @@ class WebDavClientOptionsBuilderTest extends TestCase
                 'password',
                 ['header_key' => 'header_value'],
                 [\CURLOPT_PORT => 80],
-                new WebDavClientOptions(
+                new ClientOptions(
                     Url::createBaseUrl('http://example.com'),
                     new Port(80),
                     new UserInfo('username', 'password'),
@@ -149,7 +149,7 @@ class WebDavClientOptionsBuilderTest extends TestCase
      * @param string|UriInterface|null   $baseUrl
      * @param array<string, string>|null $defaultRequestHeaders
      * @param list<mixed>|null           $defaultCurlOptions
-     * @param WebDavClientOptions        $expected
+     * @param ClientOptions              $expected
      * @dataProvider buildProvider
      */
     public function testBuild(
@@ -161,7 +161,7 @@ class WebDavClientOptionsBuilderTest extends TestCase
         ?array $defaultCurlOptions,
         $expected
     ): void {
-        $builder = new WebDavClientOptionsBuilder();
+        $builder = new ClientOptionsBuilder();
         if (!\is_null($baseUrl)) {
             $builder->baseUrl($baseUrl);
         }

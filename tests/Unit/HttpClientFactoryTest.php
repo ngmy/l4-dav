@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\PhpWebDav\Tests\Unit;
+namespace Ngmy\WebDav\Tests\Unit;
 
 use Http\Client\Curl\Client;
 use Http\Client\HttpClient;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\StreamFactoryDiscovery;
-use Ngmy\PhpWebDav\HttpClientFactory;
-use Ngmy\PhpWebDav\Tests\TestCase;
-use Ngmy\PhpWebDav\WebDavClientOptionsBuilder;
+use Ngmy\WebDav\HttpClientFactory;
+use Ngmy\WebDav\Tests\TestCase;
+use Ngmy\WebDav\ClientOptionsBuilder;
 
 class HttpClientFactoryTest extends TestCase
 {
@@ -22,7 +22,7 @@ class HttpClientFactoryTest extends TestCase
         return [
             [
                 new HttpClientFactory(
-                    (new WebDavClientOptionsBuilder())->build()
+                    (new ClientOptionsBuilder())->build()
                 ),
                 null,
                 new Client(
@@ -35,7 +35,7 @@ class HttpClientFactoryTest extends TestCase
             ],
             [
                 new HttpClientFactory(
-                    (new WebDavClientOptionsBuilder())
+                    (new ClientOptionsBuilder())
                         ->port(80)
                         ->build()
                 ),
@@ -51,7 +51,7 @@ class HttpClientFactoryTest extends TestCase
             ],
             [
                 new HttpClientFactory(
-                    (new WebDavClientOptionsBuilder())
+                    (new ClientOptionsBuilder())
                         ->username('username')
                         ->password('password')
                         ->build()
@@ -68,7 +68,7 @@ class HttpClientFactoryTest extends TestCase
             ],
             [
                 new HttpClientFactory(
-                    (new WebDavClientOptionsBuilder())
+                    (new ClientOptionsBuilder())
                         ->port(80)
                         ->username('username1')
                         ->password('password1')

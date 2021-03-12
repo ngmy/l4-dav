@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\PhpWebDav\Tests\Unit;
+namespace Ngmy\WebDav\Tests\Unit;
 
 use Mockery;
-use Ngmy\PhpWebDav\Client;
-use Ngmy\PhpWebDav\HttpClient;
-use Ngmy\PhpWebDav\Response;
-use Ngmy\PhpWebDav\Server;
-use Ngmy\PhpWebDav\Tests\TestCase;
+use Ngmy\WebDav\Client;
+use Ngmy\WebDav\HttpClient;
+use Ngmy\WebDav\Response;
+use Ngmy\WebDav\Server;
+use Ngmy\WebDav\Tests\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 

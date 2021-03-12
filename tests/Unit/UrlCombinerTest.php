@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\PhpWebDav\Tests\Unit;
+namespace Ngmy\WebDav\Tests\Unit;
 
 use Exception;
 use Http\Discovery\Psr17FactoryDiscovery;
 use InvalidArgumentException;
-use Ngmy\PhpWebDav\BaseUrl;
-use Ngmy\PhpWebDav\Tests\TestCase;
-use Ngmy\PhpWebDav\Url;
-use Ngmy\PhpWebDav\UrlCombiner;
+use Ngmy\WebDav\BaseUrl;
+use Ngmy\WebDav\Tests\TestCase;
+use Ngmy\WebDav\Url;
+use Ngmy\WebDav\UrlCombiner;
 use Psr\Http\Message\UriInterface;
 
 class UrlCombinerTest extends TestCase
