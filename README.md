@@ -17,7 +17,6 @@ The PHP WebDAV client that makes it easy to send WebDAV requests and trivial to 
 - Uses PSR-18 interface for the HTTP client. This allows you to utilize other PSR-18 compatible libraries with the PHP WebDAV client
 - Uses the [cURL client](https://github.com/php-http/curl-client) for the default HTTP client. This allows you to fine control of the HTTP client using the [cURL option](https://www.php.net/manual/en/function.curl-setopt.php)
 - Streaming large uploads, streaming large downloads via PSR-7 responses and streams
-- Supports the Basic and Digest authentication
 
 ```php
 $options = (new WebDavClientOptionsBuilder())
