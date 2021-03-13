@@ -6,6 +6,7 @@ namespace Ngmy\WebDav\Request\Body\Builder;
 
 use DOMDocument;
 use DOMNode;
+use Http\Discovery\Psr17FactoryDiscovery;
 use InvalidArgumentException;
 use Ngmy\WebDav\Request;
 
@@ -67,7 +68,7 @@ class Proppatch
             throw new InvalidArgumentException('Failed to build the PROPPATCH request body.');
         }
 
-        return new Request\Body($body);
+        return new Request\Body(Psr17FactoryDiscovery::findStreamFactory()->createStream($body));
     }
 
     /**

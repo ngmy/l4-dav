@@ -4,19 +4,15 @@ declare(strict_types=1);
 
 namespace Ngmy\WebDav\Request;
 
-use GuzzleHttp\Psr7\Utils;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
 
 class Body
 {
-    /** @var resource|StreamInterface|string|null */
+    /** @var StreamInterface|null */
     private $body;
 
-    /**
-     * @param resource|StreamInterface|string|null $body
-     */
-    public function __construct($body = null)
+    public function __construct(StreamInterface $body = null)
     {
         $this->body = $body;
     }
@@ -24,7 +20,7 @@ class Body
     public function provide(RequestInterface $request): RequestInterface
     {
         return $this->body
-            ? $request->withBody(Utils::streamFor($this->body))
+            ? $request->withBody($this->body)
             : $request;
     }
 }
