@@ -23,18 +23,18 @@
         "php": "^7.3|^8.0",
         "ext-dom": "*",
         "lib-libxml": "*",
-        "ngmy/enum": "^0.4.0",
-        "php-http/discovery": "^1.13.0",
+        "ngmy/enum": "^0.4",
+        "php-http/discovery": "^1.13",
         "psr/http-client-implementation": "^1.0",
         "psr/http-factory-implementation": "^1.0",
-        "psr/http-message": "^1.0.0",
+        "psr/http-message": "^1.0",
         "symfony/http-foundation": "^5.2.2"
     },
     "require-dev": {
         "mikey179/vfsstream": "1.6.8",
         "mockery/mockery": "1.4.2",
         "nyholm/psr7": "^1.1",
-        "php-http/curl-client": "^2.2.0",
+        "php-http/curl-client": "^2.2",
         "phpstan/phpstan-mockery": "0.12.11"
     },
     "autoload": {
