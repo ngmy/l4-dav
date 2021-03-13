@@ -1206,6 +1206,111 @@ Search.appendIndex(
             "summary": "The\u0020parser\u0020of\u0020the\u0020XML\u0020response\u0020body.",
             "url": "classes/Ngmy-WebDav-Response.html#property_responseBodyParser"
         },                {
+            "fqsen": "\\Psr\\Http\\Client\\ClientExceptionInterface",
+            "name": "ClientExceptionInterface",
+            "summary": "Every\u0020HTTP\u0020client\u0020related\u0020exception\u0020MUST\u0020implement\u0020this\u0020interface.",
+            "url": "classes/Psr-Http-Client-ClientExceptionInterface.html"
+        },                {
+            "fqsen": "\\Psr\\Http\\Client\\ClientInterface",
+            "name": "ClientInterface",
+            "summary": "",
+            "url": "classes/Psr-Http-Client-ClientInterface.html"
+        },                {
+            "fqsen": "\\Psr\\Http\\Client\\ClientInterface\u003A\u003AsendRequest\u0028\u0029",
+            "name": "sendRequest",
+            "summary": "Sends\u0020a\u0020PSR\u002D7\u0020request\u0020and\u0020returns\u0020a\u0020PSR\u002D7\u0020response.",
+            "url": "classes/Psr-Http-Client-ClientInterface.html#method_sendRequest"
+        },                {
+            "fqsen": "\\Psr\\Http\\Client\\NetworkExceptionInterface",
+            "name": "NetworkExceptionInterface",
+            "summary": "Thrown\u0020when\u0020the\u0020request\u0020cannot\u0020be\u0020completed\u0020because\u0020of\u0020network\u0020issues.",
+            "url": "classes/Psr-Http-Client-NetworkExceptionInterface.html"
+        },                {
+            "fqsen": "\\Psr\\Http\\Client\\NetworkExceptionInterface\u003A\u003AgetRequest\u0028\u0029",
+            "name": "getRequest",
+            "summary": "Returns\u0020the\u0020request.",
+            "url": "classes/Psr-Http-Client-NetworkExceptionInterface.html#method_getRequest"
+        },                {
+            "fqsen": "\\Psr\\Http\\Client\\RequestExceptionInterface",
+            "name": "RequestExceptionInterface",
+            "summary": "Exception\u0020for\u0020when\u0020a\u0020request\u0020failed.",
+            "url": "classes/Psr-Http-Client-RequestExceptionInterface.html"
+        },                {
+            "fqsen": "\\Psr\\Http\\Client\\RequestExceptionInterface\u003A\u003AgetRequest\u0028\u0029",
+            "name": "getRequest",
+            "summary": "Returns\u0020the\u0020request.",
+            "url": "classes/Psr-Http-Client-RequestExceptionInterface.html#method_getRequest"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\RequestFactoryInterface",
+            "name": "RequestFactoryInterface",
+            "summary": "",
+            "url": "classes/Psr-Http-Message-RequestFactoryInterface.html"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\RequestFactoryInterface\u003A\u003AcreateRequest\u0028\u0029",
+            "name": "createRequest",
+            "summary": "Create\u0020a\u0020new\u0020request.",
+            "url": "classes/Psr-Http-Message-RequestFactoryInterface.html#method_createRequest"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\ResponseFactoryInterface",
+            "name": "ResponseFactoryInterface",
+            "summary": "",
+            "url": "classes/Psr-Http-Message-ResponseFactoryInterface.html"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\ResponseFactoryInterface\u003A\u003AcreateResponse\u0028\u0029",
+            "name": "createResponse",
+            "summary": "Create\u0020a\u0020new\u0020response.",
+            "url": "classes/Psr-Http-Message-ResponseFactoryInterface.html#method_createResponse"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\ServerRequestFactoryInterface",
+            "name": "ServerRequestFactoryInterface",
+            "summary": "",
+            "url": "classes/Psr-Http-Message-ServerRequestFactoryInterface.html"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\ServerRequestFactoryInterface\u003A\u003AcreateServerRequest\u0028\u0029",
+            "name": "createServerRequest",
+            "summary": "Create\u0020a\u0020new\u0020server\u0020request.",
+            "url": "classes/Psr-Http-Message-ServerRequestFactoryInterface.html#method_createServerRequest"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\StreamFactoryInterface",
+            "name": "StreamFactoryInterface",
+            "summary": "",
+            "url": "classes/Psr-Http-Message-StreamFactoryInterface.html"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\StreamFactoryInterface\u003A\u003AcreateStream\u0028\u0029",
+            "name": "createStream",
+            "summary": "Create\u0020a\u0020new\u0020stream\u0020from\u0020a\u0020string.",
+            "url": "classes/Psr-Http-Message-StreamFactoryInterface.html#method_createStream"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\StreamFactoryInterface\u003A\u003AcreateStreamFromFile\u0028\u0029",
+            "name": "createStreamFromFile",
+            "summary": "Create\u0020a\u0020stream\u0020from\u0020an\u0020existing\u0020file.",
+            "url": "classes/Psr-Http-Message-StreamFactoryInterface.html#method_createStreamFromFile"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\StreamFactoryInterface\u003A\u003AcreateStreamFromResource\u0028\u0029",
+            "name": "createStreamFromResource",
+            "summary": "Create\u0020a\u0020new\u0020stream\u0020from\u0020an\u0020existing\u0020resource.",
+            "url": "classes/Psr-Http-Message-StreamFactoryInterface.html#method_createStreamFromResource"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\UploadedFileFactoryInterface",
+            "name": "UploadedFileFactoryInterface",
+            "summary": "",
+            "url": "classes/Psr-Http-Message-UploadedFileFactoryInterface.html"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\UploadedFileFactoryInterface\u003A\u003AcreateUploadedFile\u0028\u0029",
+            "name": "createUploadedFile",
+            "summary": "Create\u0020a\u0020new\u0020uploaded\u0020file.",
+            "url": "classes/Psr-Http-Message-UploadedFileFactoryInterface.html#method_createUploadedFile"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\UriFactoryInterface",
+            "name": "UriFactoryInterface",
+            "summary": "",
+            "url": "classes/Psr-Http-Message-UriFactoryInterface.html"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message\\UriFactoryInterface\u003A\u003AcreateUri\u0028\u0029",
+            "name": "createUri",
+            "summary": "Create\u0020a\u0020new\u0020URI.",
+            "url": "classes/Psr-Http-Message-UriFactoryInterface.html#method_createUri"
+        },                {
             "fqsen": "\\Psr\\Http\\Message\\MessageInterface",
             "name": "MessageInterface",
             "summary": "HTTP\u0020messages\u0020consist\u0020of\u0020requests\u0020from\u0020a\u0020client\u0020to\u0020a\u0020server\u0020and\u0020responses\nfrom\u0020a\u0020server\u0020to\u0020a\u0020client.\u0020This\u0020interface\u0020defines\u0020the\u0020methods\u0020common\u0020to\neach.",
@@ -1676,10 +1781,10 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/ngmy-webdav-response.html"
         },                {
-            "fqsen": "\\Psr\\Http\\Message",
-            "name": "Message",
+            "fqsen": "\\Psr\\Http\\Client",
+            "name": "Client",
             "summary": "",
-            "url": "namespaces/psr-http-message.html"
+            "url": "namespaces/psr-http-client.html"
         },                {
             "fqsen": "\\Psr\\Http",
             "name": "Http",
@@ -1690,5 +1795,10 @@ Search.appendIndex(
             "name": "Psr",
             "summary": "",
             "url": "namespaces/psr.html"
+        },                {
+            "fqsen": "\\Psr\\Http\\Message",
+            "name": "Message",
+            "summary": "",
+            "url": "namespaces/psr-http-message.html"
         }            ]
 );
