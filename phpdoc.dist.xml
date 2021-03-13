@@ -13,7 +13,6 @@
             <source dsn=".">
                 <path>src</path>
                 <path>vendor/psr/http-client/src</path>
-                <path>vendor/psr/http-factory/src</path>
                 <path>vendor/psr/http-message/src</path>
             </source>
         </api>
