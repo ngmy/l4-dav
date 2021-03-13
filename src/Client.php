@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Ngmy\WebDav;
 
-use Http\Client\HttpClient;
+use Psr\Http\Client\ClientInterface as HttpClientInterface;
 use Psr\Http\Message\UriInterface;
 
 class Client
 {
+    /**
+     * The dispatcher of the WebDAV request.
+     *
+     * @var Request\Dispatcher
+     */
+    private $dispatcher;
     /**
      * Options for the WebDAV client.
      *
@@ -17,24 +23,15 @@ class Client
     private $options;
 
     /**
-     * The dispatcher of the WebDAV request.
-     *
-     * @var Request\Dispatcher
-     */
-    private $dispatcher;
-
-    /**
      * Create a new instance of the WebDAV Client.
      *
-     * @param Client\Options $options    Options for the WebDAV client
-     * @param HttpClient     $httpClient An instance of any class that implements the PSR-18 HttpClient
+     * @param HttpClientInterface $httpClient An instance of any http client that implements the PSR-18 ClientInterface
+     * @param Client\Options      $options    Options for the WebDAV client
      */
-    public function __construct(Client\Options $options = null, HttpClient $httpClient = null)
+    public function __construct(HttpClientInterface $httpClient, Client\Options $options = null)
     {
+        $this->dispatcher = new Request\Dispatcher($httpClient);
         $this->options = $options ?: (new Client\Options\Builder())->build();
-        $this->dispatcher = new Request\Dispatcher(
-            $httpClient ?: (new Http\Client\Factory($this->options))->create()
-        );
     }
 
     /**

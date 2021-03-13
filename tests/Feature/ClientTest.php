@@ -11,6 +11,8 @@ use Ngmy\WebDav\Request;
 use Ngmy\WebDav\Tests\TestCase;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
+use Http\Client\Curl;
+use Http\Discovery\Psr17FactoryDiscovery;
 
 class ClientTest extends TestCase
 {
@@ -708,19 +710,25 @@ class ClientTest extends TestCase
 
     protected function createClient(): Client
     {
+        $curlOptions = [];
+        if (isset($this->webDavUserName)) {
+            $curlOptions[\CURLOPT_USERPWD] = $this->webDavUserName . ':' . $this->webDavPassword;
+            if ($this->webDavAuthType == 'basic') {
+                $curlOptions[\CURLOPT_HTTPAUTH] = \CURLAUTH_BASIC;
+            }
+            if ($this->webDavAuthType == 'digest') {
+                $curlOptions[\CURLOPT_HTTPAUTH] = \CURLAUTH_DIGEST;
+            }
+        }
+        $httpClient = new Curl\Client(
+            Psr17FactoryDiscovery::findResponseFactory(),
+            Psr17FactoryDiscovery::findStreamFactory(),
+            $curlOptions
+        );
         $optionsBuilder = (new Client\Options\Builder())
             ->setBaseUrl('http://apache2' . $this->webDavBasePath);
-        if (isset($this->webDavUserName)) {
-            $optionsBuilder->setUserName($this->webDavUserName);
-        }
-        if (isset($this->webDavPassword)) {
-            $optionsBuilder->setPassword($this->webDavPassword);
-        }
-        if (isset($this->webDavAuthType)) {
-            $optionsBuilder->setAuthType($this->webDavAuthType);
-        }
         $options = $optionsBuilder->build();
-        return new Client($options);
+        return new Client($httpClient, $options);
     }
 
     /**

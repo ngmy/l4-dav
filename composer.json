@@ -23,16 +23,15 @@
         "php": "^7.3|^8.0",
         "ext-dom": "*",
         "lib-libxml": "*",
-        "guzzlehttp/psr7": "^1.7.0",
         "http-interop/http-factory-guzzle": "^1.0.0",
-        "league/uri-components": "^2.3.0",
         "ngmy/enum": "^0.4.0",
-        "php-http/curl-client": "^2.2.0",
         "symfony/http-foundation": "^5.2.2"
     },
     "require-dev": {
+        "guzzlehttp/psr7": "^1.7.0",
         "mikey179/vfsstream": "1.6.8",
         "mockery/mockery": "1.4.2",
+        "php-http/curl-client": "^2.2.0",
         "phpstan/phpstan-mockery": "0.12.11"
     },
     "autoload": {

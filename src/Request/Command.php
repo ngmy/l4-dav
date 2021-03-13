@@ -13,6 +13,8 @@ use RuntimeException;
 
 class Command
 {
+    /** @var Client\Options */
+    private $options;
     /** @var Request\Method */
     private $method;
     /** @var Request\Url\Full */
@@ -154,6 +156,11 @@ class Command
         return $this->response;
     }
 
+    public function getOptions(): Client\Options
+    {
+        return $this->options;
+    }
+
     public function getMethod(): Request\Method
     {
         return $this->method;
@@ -184,6 +191,7 @@ class Command
         Headers $headers = null,
         Request\Body $body = null
     ) {
+        $this->options = $options;
         $this->method = $method;
         $this->url = Request\Url::createRequestUrl($url, $options->getBaseUrl());
         $this->headers = \is_null($headers)

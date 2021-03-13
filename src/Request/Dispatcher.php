@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Ngmy\WebDav\Request;
 
-use Http\Client\HttpClient;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Ngmy\WebDav\Request;
+use Psr\Http\Client\ClientInterface as HttpClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class Dispatcher
 {
-    /** @var HttpClient */
+    /** @var HttpClientInterface */
     private $httpClient;
 
-    public function __construct(HttpClient $httpClient)
+    public function __construct(HttpClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
     }
