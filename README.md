@@ -30,19 +30,19 @@ $client = new WebDav\Client(
     $options
 );
 
-// PUT
+// Store the file to the WebDAV server
 $parameters = (new WebDav\Request\Parameters\Builder\Put())
     ->setSourcePath('/path/to/file')
     ->build();
 $client->put('/file', $parameters);
 
-// GET
+// Retrieve the stream of the file from the WebDAV server
 $response = $client->get('/file');
 
-// Download file
+// Read data from the stream and write it to the file all at once
 file_put_contents($path, $response->getBody());
 
-// Streaming file
+// Read data from the stream and write it to the file little by little
 $response->getBody()->rewind();
 $fh = fopen($path, 'w');
 $stream = $response->getBody();
