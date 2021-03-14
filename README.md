@@ -40,11 +40,11 @@ $client->put('/file', $parameters);
 $response = $client->get('/file');
 
 // Read data from the stream and write it to the file all at once
-file_put_contents($path, $response->getBody());
+file_put_contents('/path/to/file2', $response->getBody());
 
 // Read data from the stream and write it to the file little by little
 $response->getBody()->rewind();
-$fh = fopen($path, 'w');
+$fh = fopen('/path/to/file3', 'w');
 $stream = $response->getBody();
 while (!$stream->eof()) {
     fwrite($fh, $stream->read(2048));
