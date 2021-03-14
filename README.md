@@ -19,15 +19,18 @@ The PHP WebDAV client that makes it easy to send WebDAV requests and trivial to 
 - Streaming large uploads, streaming large downloads via PSR-7 responses and streams
 
 ```php
-$options = (new WebDavClientOptionsBuilder())
+use Http\Discovery\Psr18ClientDiscovery;
+
+$options = (new Ngmy\WebDav\Client\Options\Builder())
     ->setBaseUrl('https://webdav.example.com')
-    ->setUserName('username');
-    ->setPassword('password')
     ->build();
-$client = new WebDavClient($options);
+$client = new Ngmy\WebDav\Client(
+    Psr18ClientDiscovery::find(),
+    $options
+);
 
 // PUT
-$parameters = (new PutParameters())
+$parameters = (new Ngmy\WebDav\Request\Parameters\Builder\Put())
     ->setSourcePath('/path/to/file')
     ->build();
 $client->put('/file', $parameters);
