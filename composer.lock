@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c45bef1f6cd49afe1c32ca8b48713334",
+    "content-hash": "0091bcac91195e3005c10f9eb6d57408",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -56,6 +56,10 @@
                 "stream_filter_append",
                 "stream_filter_register"
             ],
+            "support": {
+                "issues": "https://github.com/clue/stream-filter/issues",
+                "source": "https://github.com/clue/stream-filter/tree/v1.5.0"
+            },
             "funding": [
                 {
                     "url": "https://clue.engineering/support",
@@ -70,20 +74,20 @@
         },
         {
             "name": "ngmy/enum",
-            "version": "0.4.0",
+            "version": "0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ngmy/php-enum.git",
-                "reference": "644181fccb5e638425095dc3cb26e0719ef6a174"
+                "reference": "5c1031b3950ac5dbdd18e679089f64f321d40a6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ngmy/php-enum/zipball/644181fccb5e638425095dc3cb26e0719ef6a174",
-                "reference": "644181fccb5e638425095dc3cb26e0719ef6a174",
+                "url": "https://api.github.com/repos/ngmy/php-enum/zipball/5c1031b3950ac5dbdd18e679089f64f321d40a6a",
+                "reference": "5c1031b3950ac5dbdd18e679089f64f321d40a6a",
                 "shasum": ""
             },
             "require": {
-                "ngmy/typed-array": "^0.5.0",
+                "ngmy/typed-array": "^0.6.0",
                 "php": "^7.3|^8.0"
             },
             "type": "library",
@@ -114,7 +118,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ngmy/php-enum/issues",
-                "source": "https://github.com/ngmy/php-enum/tree/0.4.0"
+                "source": "https://github.com/ngmy/php-enum/tree/0.5.0"
             },
             "funding": [
                 {
@@ -126,20 +130,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-08T07:41:21+00:00"
+            "time": "2021-03-18T12:42:41+00:00"
         },
         {
             "name": "ngmy/typed-array",
-            "version": "0.5.0",
+            "version": "0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ngmy/php-typed-array.git",
-                "reference": "e0320576cf15fe3b5607f621a97684d9a57369ac"
+                "reference": "a7fb1b469b33f875c8198eb3a55de73673750eee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ngmy/php-typed-array/zipball/e0320576cf15fe3b5607f621a97684d9a57369ac",
-                "reference": "e0320576cf15fe3b5607f621a97684d9a57369ac",
+                "url": "https://api.github.com/repos/ngmy/php-typed-array/zipball/a7fb1b469b33f875c8198eb3a55de73673750eee",
+                "reference": "a7fb1b469b33f875c8198eb3a55de73673750eee",
                 "shasum": ""
             },
             "require": {
@@ -172,7 +176,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ngmy/php-typed-array/issues",
-                "source": "https://github.com/ngmy/php-typed-array/tree/0.5.0"
+                "source": "https://github.com/ngmy/php-typed-array/tree/0.6.0"
             },
             "funding": [
                 {
@@ -184,7 +188,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-02-26T17:01:12+00:00"
+            "time": "2021-03-18T12:09:44+00:00"
         },
         {
             "name": "nyholm/psr7",
@@ -247,6 +251,10 @@
                 "psr-17",
                 "psr-7"
             ],
+            "support": {
+                "issues": "https://github.com/Nyholm/psr7/issues",
+                "source": "https://github.com/Nyholm/psr7/tree/1.4.0"
+            },
             "funding": [
                 {
                     "url": "https://github.com/Zegnat",
@@ -322,6 +330,10 @@
                 "http",
                 "psr-18"
             ],
+            "support": {
+                "issues": "https://github.com/php-http/curl-client/issues",
+                "source": "https://github.com/php-http/curl-client/tree/2.2.0"
+            },
             "time": "2020-12-14T08:36:51+00:00"
         },
         {
@@ -387,6 +399,10 @@
                 "message",
                 "psr7"
             ],
+            "support": {
+                "issues": "https://github.com/php-http/discovery/issues",
+                "source": "https://github.com/php-http/discovery/tree/1.13.0"
+            },
             "time": "2020-11-27T14:49:42+00:00"
         },
         {
@@ -445,6 +461,10 @@
                 "client",
                 "http"
             ],
+            "support": {
+                "issues": "https://github.com/php-http/httplug/issues",
+                "source": "https://github.com/php-http/httplug/tree/master"
+            },
             "time": "2020-07-13T15:43:23+00:00"
         },
         {
@@ -515,6 +535,10 @@
                 "message",
                 "psr-7"
             ],
+            "support": {
+                "issues": "https://github.com/php-http/message/issues",
+                "source": "https://github.com/php-http/message/tree/1.11.0"
+            },
             "time": "2021-02-01T08:54:58+00:00"
         },
         {
@@ -565,6 +589,10 @@
                 "stream",
                 "uri"
             ],
+            "support": {
+                "issues": "https://github.com/php-http/message-factory/issues",
+                "source": "https://github.com/php-http/message-factory/tree/master"
+            },
             "time": "2015-12-19T14:08:53+00:00"
         },
         {
@@ -618,6 +646,10 @@
             "keywords": [
                 "promise"
             ],
+            "support": {
+                "issues": "https://github.com/php-http/promise/issues",
+                "source": "https://github.com/php-http/promise/tree/1.1.0"
+            },
             "time": "2020-07-07T09:29:14+00:00"
         },
         {
@@ -667,6 +699,9 @@
                 "psr",
                 "psr-18"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-client/tree/master"
+            },
             "time": "2020-06-29T06:28:15+00:00"
         },
         {
@@ -719,6 +754,9 @@
                 "request",
                 "response"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-factory/tree/master"
+            },
             "time": "2019-04-30T12:38:16+00:00"
         },
         {
@@ -769,6 +807,9 @@
                 "request",
                 "response"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-message/tree/master"
+            },
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
@@ -819,6 +860,9 @@
             ],
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/deprecation-contracts/tree/master"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -958,6 +1002,9 @@
                 "configuration",
                 "options"
             ],
+            "support": {
+                "source": "https://github.com/symfony/options-resolver/tree/v5.2.4"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -1114,6 +1161,9 @@
                 "portable",
                 "shim"
             ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php73/tree/v1.22.1"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -1260,6 +1310,10 @@
             "keywords": [
                 "test"
             ],
+            "support": {
+                "issues": "https://github.com/hamcrest/hamcrest-php/issues",
+                "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
+            },
             "time": "2020-07-09T08:09:16+00:00"
         },
         {
@@ -1306,6 +1360,11 @@
             ],
             "description": "Virtual file system to mock the real file system in unit tests.",
             "homepage": "http://vfs.bovigo.org/",
+            "support": {
+                "issues": "https://github.com/bovigo/vfsStream/issues",
+                "source": "https://github.com/bovigo/vfsStream/tree/master",
+                "wiki": "https://github.com/bovigo/vfsStream/wiki"
+            },
             "time": "2019-10-30T15:31:00+00:00"
         },
         {
@@ -1374,6 +1433,10 @@
                 "test double",
                 "testing"
             ],
+            "support": {
+                "issues": "https://github.com/mockery/mockery/issues",
+                "source": "https://github.com/mockery/mockery/tree/master"
+            },
             "time": "2020-08-11T18:10:13+00:00"
         },
         {
@@ -1416,6 +1479,10 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
+            "support": {
+                "issues": "https://github.com/phpstan/phpstan/issues",
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.81"
+            },
             "funding": [
                 {
                     "url": "https://github.com/ondrejmirtes",
@@ -1479,6 +1546,10 @@
                 "MIT"
             ],
             "description": "PHPStan Mockery extension",
+            "support": {
+                "issues": "https://github.com/phpstan/phpstan-mockery/issues",
+                "source": "https://github.com/phpstan/phpstan-mockery/tree/0.12.11"
+            },
             "time": "2020-12-14T14:20:20+00:00"
         }
     ],
@@ -1493,5 +1564,5 @@
         "lib-libxml": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
