@@ -6,5 +6,5 @@
   <phar name="phpcs" version="^3.5.8" installed="3.5.8" location="./tools/phpcs" copy="false"/>
   <phar name="phpdocumentor" version="^3.0.0" installed="3.0.0" location="./tools/phpDocumentor" copy="false"/>
   <phar name="phpstan" version="^0.12.64" installed="0.12.81" location="./tools/phpstan" copy="false"/>
-  <phar name="phpunit" version="^9.5.0" installed="9.5.2" location="./tools/phpunit" copy="false"/>
+  <phar name="phpunit" version="^9.5.0" installed="9.5.3" location="./tools/phpunit" copy="false"/>
 </phive>
