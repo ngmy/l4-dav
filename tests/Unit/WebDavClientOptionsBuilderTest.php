@@ -7,11 +7,11 @@ namespace Ngmy\WebDav\Tests\Unit;
 use Http\Discovery\Psr17FactoryDiscovery;
 use League\Uri\Components\Port;
 use League\Uri\Components\UserInfo;
+use Ngmy\WebDav\ClientOptions;
+use Ngmy\WebDav\ClientOptionsBuilder;
 use Ngmy\WebDav\Headers;
 use Ngmy\WebDav\Tests\TestCase;
 use Ngmy\WebDav\Url;
-use Ngmy\WebDav\ClientOptions;
-use Ngmy\WebDav\ClientOptionsBuilder;
 use Psr\Http\Message\UriInterface;
 
 class ClientOptionsBuilderTest extends TestCase

@@ -6,13 +6,13 @@ namespace Ngmy\WebDav\Tests\Feature;
 
 use DOMDocument;
 use Exception;
+use Http\Client\Curl;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Ngmy\WebDav\Client;
 use Ngmy\WebDav\Request;
 use Ngmy\WebDav\Tests\TestCase;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
-use Http\Client\Curl;
-use Http\Discovery\Psr17FactoryDiscovery;
 
 class ClientTest extends TestCase
 {

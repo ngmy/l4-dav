@@ -8,9 +8,9 @@ use Http\Client\Curl\Client;
 use Http\Client\HttpClient;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\StreamFactoryDiscovery;
+use Ngmy\WebDav\ClientOptionsBuilder;
 use Ngmy\WebDav\HttpClientFactory;
 use Ngmy\WebDav\Tests\TestCase;
-use Ngmy\WebDav\ClientOptionsBuilder;
 
 class HttpClientFactoryTest extends TestCase
 {

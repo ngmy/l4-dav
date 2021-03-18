@@ -6,9 +6,9 @@ namespace Ngmy\WebDav\Tests\Unit;
 
 use Exception;
 use InvalidArgumentException;
+use Ngmy\WebDav\ClientOptionsBuilder;
 use Ngmy\WebDav\Command;
 use Ngmy\WebDav\Tests\TestCase;
-use Ngmy\WebDav\ClientOptionsBuilder;
 use org\bovigo\vfs\vfsStream;
 
 class CommandTest extends TestCase

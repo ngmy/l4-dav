@@ -6,11 +6,11 @@ namespace Ngmy\WebDav\Tests\Unit;
 
 use Http\Client\HttpClient;
 use Mockery;
+use Ngmy\WebDav\ClientOptionsBuilder;
 use Ngmy\WebDav\Command;
 use Ngmy\WebDav\CommandDispatcher;
 use Ngmy\WebDav\HttpClientFactory;
 use Ngmy\WebDav\Tests\TestCase;
-use Ngmy\WebDav\ClientOptionsBuilder;
 use org\bovigo\vfs\vfsStream;
 use Psr\Http\Message\ResponseInterface;
 
