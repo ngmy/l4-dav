@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0091bcac91195e3005c10f9eb6d57408",
+    "content-hash": "9dacde55569c5bbd9b4249746e572f7f",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -74,20 +74,20 @@
         },
         {
             "name": "ngmy/enum",
-            "version": "0.5.0",
+            "version": "0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ngmy/php-enum.git",
-                "reference": "5c1031b3950ac5dbdd18e679089f64f321d40a6a"
+                "reference": "5c9f8e15ed9e3cb1ea39e64c5bd462ee5b53b254"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ngmy/php-enum/zipball/5c1031b3950ac5dbdd18e679089f64f321d40a6a",
-                "reference": "5c1031b3950ac5dbdd18e679089f64f321d40a6a",
+                "url": "https://api.github.com/repos/ngmy/php-enum/zipball/5c9f8e15ed9e3cb1ea39e64c5bd462ee5b53b254",
+                "reference": "5c9f8e15ed9e3cb1ea39e64c5bd462ee5b53b254",
                 "shasum": ""
             },
             "require": {
-                "ngmy/typed-array": "^0.6.0",
+                "ngmy/typed-array": "^0.8.0",
                 "php": "^7.3|^8.0"
             },
             "type": "library",
@@ -118,7 +118,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ngmy/php-enum/issues",
-                "source": "https://github.com/ngmy/php-enum/tree/0.5.0"
+                "source": "https://github.com/ngmy/php-enum/tree/0.6.0"
             },
             "funding": [
                 {
@@ -130,20 +130,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-18T12:42:41+00:00"
+            "time": "2021-03-20T15:43:44+00:00"
         },
         {
             "name": "ngmy/typed-array",
-            "version": "0.6.0",
+            "version": "0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ngmy/php-typed-array.git",
-                "reference": "a7fb1b469b33f875c8198eb3a55de73673750eee"
+                "reference": "edc2ba905657f8b7373ad8f08c9011fa524389ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ngmy/php-typed-array/zipball/a7fb1b469b33f875c8198eb3a55de73673750eee",
-                "reference": "a7fb1b469b33f875c8198eb3a55de73673750eee",
+                "url": "https://api.github.com/repos/ngmy/php-typed-array/zipball/edc2ba905657f8b7373ad8f08c9011fa524389ad",
+                "reference": "edc2ba905657f8b7373ad8f08c9011fa524389ad",
                 "shasum": ""
             },
             "require": {
@@ -176,7 +176,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ngmy/php-typed-array/issues",
-                "source": "https://github.com/ngmy/php-typed-array/tree/0.6.0"
+                "source": "https://github.com/ngmy/php-typed-array/tree/0.8.0"
             },
             "funding": [
                 {
@@ -188,7 +188,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-18T12:09:44+00:00"
+            "time": "2021-03-20T15:20:15+00:00"
         },
         {
             "name": "nyholm/psr7",
@@ -1441,16 +1441,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.81",
+            "version": "0.12.82",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "0dd5b0ebeff568f7000022ea5f04aa86ad3124b8"
+                "reference": "3920f0fb0aff39263d3a4cb0bca120a67a1a6a11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/0dd5b0ebeff568f7000022ea5f04aa86ad3124b8",
-                "reference": "0dd5b0ebeff568f7000022ea5f04aa86ad3124b8",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3920f0fb0aff39263d3a4cb0bca120a67a1a6a11",
+                "reference": "3920f0fb0aff39263d3a4cb0bca120a67a1a6a11",
                 "shasum": ""
             },
             "require": {
@@ -1481,7 +1481,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/0.12.81"
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.82"
             },
             "funding": [
                 {
@@ -1497,7 +1497,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-03-08T22:03:02+00:00"
+            "time": "2021-03-19T06:08:17+00:00"
         },
         {
             "name": "phpstan/phpstan-mockery",

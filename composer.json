@@ -23,7 +23,7 @@
         "php": "^7.3|^8.0",
         "ext-dom": "*",
         "lib-libxml": "*",
-        "ngmy/enum": "^0.5",
+        "ngmy/enum": "^0.6",
         "php-http/discovery": "^1.13",
         "psr/http-client-implementation": "^1.0",
         "psr/http-factory-implementation": "^1.0",

@@ -1,0 +1,26 @@
+{
+    "diagnostic-languageserver.filetypes": {
+        "php": ["phpstan"]
+    },
+    "diagnostic-languageserver.linters": {
+        "phpstan": {
+            "command": "docker",
+            "debounce": 100,
+            "rootPatterns": [ "composer.json", "composer.lock", "vendor", ".git" ],
+            "args": [ "exec", "laradock-l4-dav_workspace_1", "composer", "findbugs", "--", "--error-format", "raw", "--no-progress" ],
+            "offsetLine": 0,
+            "offsetColumn": 0,
+            "sourceName": "phpstan",
+            "formatLines": 1,
+            "formatPattern": [
+                "^/var/www/([^:]+):(\\d+):(.*)(\\r|\\n)*$",
+                {
+                    "sourceName": 1,
+                    "sourceNameFilter": true,
+                    "line": 2,
+                    "message": 3
+                }
+            ]
+        }
+    }
+}
