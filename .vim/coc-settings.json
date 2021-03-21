@@ -2,10 +2,10 @@
     "diagnostic-languageserver.mergeConfig": true,
     "diagnostic-languageserver.linters": {
         "ngmy.php-library.lint": {
-            "args": ["exec", "laradock-l4-dav_workspace_1", "composer", "lint", "--", "--report=emacs"]
+            "args": ["exec", "laradock-ngmy-l4-dav_workspace_1", "composer", "lint", "--", "--report=emacs"]
         },
         "ngmy.php-library.findbugs": {
-            "args": ["exec", "laradock-l4-dav_workspace_1", "composer", "findbugs", "--", "--error-format", "raw", "--no-progress"]
+            "args": ["exec", "laradock-ngmy-l4-dav_workspace_1", "composer", "findbugs", "--", "--error-format", "raw", "--no-progress"]
         }
     },
     "diagnostic-languageserver.filetypes": {
