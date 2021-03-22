@@ -1,9 +1,9 @@
 {
     "diagnostic-languageserver.linters": {
-        "ngmy.php-library.lint": {
+        "ngmy.laradock.composer.lint": {
             "args": ["exec", "laradock-ngmy-l4-dav_workspace_1", "composer", "lint", "--", "--report=emacs"]
         },
-        "ngmy.php-library.findbugs": {
+        "ngmy.laradock.composer.findbugs": {
             "args": ["exec", "laradock-ngmy-l4-dav_workspace_1", "composer", "findbugs", "--", "--error-format", "raw", "--no-progress"]
         }
     }
