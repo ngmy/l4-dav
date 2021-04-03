@@ -80,11 +80,16 @@ jobs:
           name: tools
           path: tools
 
-      - name: Run lint
-        run: composer lint
+      - name: Set tools as an executable
+        run: find tools -type f -print0 | xargs -0 chmod +x
 
-      - name: Run bug analysis
-        run: composer findbugs
+      - name: Run lint
+        env:
+          PSALM_SHEPHERD: 1
+          # TODO: Remove it when psalm no longer tries to create a cache directory
+          #       https://github.com/vimeo/psalm/issues/4267
+          XDG_CACHE_HOME: /tmp
+        run: composer lint
 
       - name: Run unit tests
         env:

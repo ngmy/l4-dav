@@ -7,6 +7,8 @@
 [![PHP CI](https://github.com/ngmy/l4-dav/actions/workflows/php.yml/badge.svg)](https://github.com/ngmy/l4-dav/actions/workflows/php.yml)
 [![Coverage Status](https://coveralls.io/repos/github/ngmy/l4-dav/badge.svg?branch=master)](https://coveralls.io/github/ngmy/l4-dav?branch=master)
 [![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
+[![Psalm Coverage](https://shepherd.dev/github/ngmy/l4-dav/coverage.svg?)](https://shepherd.dev/github/ngmy/l4-dav)
+[![Psalm Level](https://shepherd.dev/github/ngmy/l4-dav/level.svg?)](https://shepherd.dev/github/ngmy/l4-dav)
 
 The PHP WebDAV client that makes it easy to send WebDAV requests and trivial to integrate with web services.
 

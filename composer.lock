@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9dacde55569c5bbd9b4249746e572f7f",
+    "content-hash": "fc70054904b34207a5a84812c42e9247",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -74,20 +74,20 @@
         },
         {
             "name": "ngmy/enum",
-            "version": "0.6.0",
+            "version": "0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ngmy/php-enum.git",
-                "reference": "5c9f8e15ed9e3cb1ea39e64c5bd462ee5b53b254"
+                "reference": "adeff02162f0c8d1dcb2a24e6b4175135930f1de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ngmy/php-enum/zipball/5c9f8e15ed9e3cb1ea39e64c5bd462ee5b53b254",
-                "reference": "5c9f8e15ed9e3cb1ea39e64c5bd462ee5b53b254",
+                "url": "https://api.github.com/repos/ngmy/php-enum/zipball/adeff02162f0c8d1dcb2a24e6b4175135930f1de",
+                "reference": "adeff02162f0c8d1dcb2a24e6b4175135930f1de",
                 "shasum": ""
             },
             "require": {
-                "ngmy/typed-array": "^0.8.0",
+                "ngmy/typed-array": "^0.11.0",
                 "php": "^7.3|^8.0"
             },
             "type": "library",
@@ -118,7 +118,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ngmy/php-enum/issues",
-                "source": "https://github.com/ngmy/php-enum/tree/0.6.0"
+                "source": "https://github.com/ngmy/php-enum/tree/0.7.0"
             },
             "funding": [
                 {
@@ -130,20 +130,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-20T15:43:44+00:00"
+            "time": "2021-04-03T12:51:39+00:00"
         },
         {
             "name": "ngmy/typed-array",
-            "version": "0.8.0",
+            "version": "0.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ngmy/php-typed-array.git",
-                "reference": "edc2ba905657f8b7373ad8f08c9011fa524389ad"
+                "reference": "8dc440701096474f8848a7bd5d4028661277874f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ngmy/php-typed-array/zipball/edc2ba905657f8b7373ad8f08c9011fa524389ad",
-                "reference": "edc2ba905657f8b7373ad8f08c9011fa524389ad",
+                "url": "https://api.github.com/repos/ngmy/php-typed-array/zipball/8dc440701096474f8848a7bd5d4028661277874f",
+                "reference": "8dc440701096474f8848a7bd5d4028661277874f",
                 "shasum": ""
             },
             "require": {
@@ -176,7 +176,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ngmy/php-typed-array/issues",
-                "source": "https://github.com/ngmy/php-typed-array/tree/0.8.0"
+                "source": "https://github.com/ngmy/php-typed-array/tree/0.11.0"
             },
             "funding": [
                 {
@@ -188,7 +188,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-20T15:20:15+00:00"
+            "time": "2021-04-03T12:43:11+00:00"
         },
         {
             "name": "nyholm/psr7",
