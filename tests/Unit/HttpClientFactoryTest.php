@@ -12,6 +12,15 @@ use Ngmy\WebDav\ClientOptionsBuilder;
 use Ngmy\WebDav\HttpClientFactory;
 use Ngmy\WebDav\Tests\TestCase;
 
+use function is_null;
+
+use const CURLAUTH_ANY;
+use const CURLAUTH_BASIC;
+use const CURLOPT_HTTPAUTH;
+use const CURLOPT_PORT;
+use const CURLOPT_PROXY;
+use const CURLOPT_USERPWD;
+
 class HttpClientFactoryTest extends TestCase
 {
     /**
@@ -29,7 +38,7 @@ class HttpClientFactoryTest extends TestCase
                     MessageFactoryDiscovery::find(),
                     StreamFactoryDiscovery::find(),
                     [
-                        \CURLOPT_HTTPAUTH => \CURLAUTH_ANY,
+                        CURLOPT_HTTPAUTH => CURLAUTH_ANY,
                     ]
                 ),
             ],
@@ -44,8 +53,8 @@ class HttpClientFactoryTest extends TestCase
                     MessageFactoryDiscovery::find(),
                     StreamFactoryDiscovery::find(),
                     [
-                        \CURLOPT_PORT => 80,
-                        \CURLOPT_HTTPAUTH => \CURLAUTH_ANY,
+                        CURLOPT_PORT => 80,
+                        CURLOPT_HTTPAUTH => CURLAUTH_ANY,
                     ]
                 ),
             ],
@@ -61,8 +70,8 @@ class HttpClientFactoryTest extends TestCase
                     MessageFactoryDiscovery::find(),
                     StreamFactoryDiscovery::find(),
                     [
-                        \CURLOPT_USERPWD => 'username:password',
-                        \CURLOPT_HTTPAUTH => \CURLAUTH_ANY,
+                        CURLOPT_USERPWD => 'username:password',
+                        CURLOPT_HTTPAUTH => CURLAUTH_ANY,
                     ]
                 ),
             ],
@@ -75,19 +84,19 @@ class HttpClientFactoryTest extends TestCase
                         ->build()
                 ),
                 [
-                    \CURLOPT_PROXY => 'http://proxy',
-                    \CURLOPT_PORT => 8080,
-                    \CURLOPT_USERPWD => 'username2:password2',
-                    \CURLOPT_HTTPAUTH => \CURLAUTH_BASIC,
+                    CURLOPT_PROXY => 'http://proxy',
+                    CURLOPT_PORT => 8080,
+                    CURLOPT_USERPWD => 'username2:password2',
+                    CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
                 ],
                 new Client(
                     MessageFactoryDiscovery::find(),
                     StreamFactoryDiscovery::find(),
                     [
-                        \CURLOPT_PROXY => 'http://proxy',
-                        \CURLOPT_PORT => 8080,
-                        \CURLOPT_USERPWD => 'username2:password2',
-                        \CURLOPT_HTTPAUTH => \CURLAUTH_BASIC,
+                        CURLOPT_PROXY => 'http://proxy',
+                        CURLOPT_PORT => 8080,
+                        CURLOPT_USERPWD => 'username2:password2',
+                        CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
                     ]
                 ),
             ],
@@ -100,7 +109,7 @@ class HttpClientFactoryTest extends TestCase
      */
     public function testCreate(HttpClientFactory $factory, ?array $curlOptions, HttpClient $expected): void
     {
-        $actual = \is_null($curlOptions) ? $factory->create() : $factory->create($curlOptions);
+        $actual = is_null($curlOptions) ? $factory->create() : $factory->create($curlOptions);
         $this->assertEquals($expected, $actual);
     }
 }

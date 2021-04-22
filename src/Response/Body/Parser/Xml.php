@@ -8,6 +8,9 @@ use DOMDocument;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 
+use function preg_match;
+use function strtolower;
+
 class Xml
 {
     /** @var ResponseInterface */
@@ -24,7 +27,7 @@ class Xml
         $xml->preserveWhiteSpace = false;
         $xml->formatOutput = true;
 
-        if (!\preg_match('~(text/xml|application/xml)~', \strtolower($this->response->getHeaderLine('Content-Type')))) {
+        if (!preg_match('~(text/xml|application/xml)~', strtolower($this->response->getHeaderLine('Content-Type')))) {
             return $xml;
         }
 

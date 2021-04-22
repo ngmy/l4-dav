@@ -6,6 +6,9 @@ namespace Ngmy\WebDav\Request;
 
 use InvalidArgumentException;
 
+use function in_array;
+use function sprintf;
+
 class Method
 {
     private const GET = 'GET';
@@ -83,7 +86,7 @@ class Method
     private function validate(): void
     {
         if (
-            !\in_array($this->method, [
+            !in_array($this->method, [
                 self::GET,
                 self::PUT,
                 self::DELETE,
@@ -96,7 +99,7 @@ class Method
             ])
         ) {
             throw new InvalidArgumentException(
-                \sprintf('The WebDAV method "%s" is not allowed.', $this->method)
+                sprintf('The WebDAV method "%s" is not allowed.', $this->method)
             );
         };
     }

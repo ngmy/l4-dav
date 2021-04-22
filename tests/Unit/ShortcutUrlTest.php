@@ -9,6 +9,9 @@ use InvalidArgumentException;
 use Ngmy\WebDav\Tests\TestCase;
 use Ngmy\WebDav\Url;
 
+use function get_class;
+use function is_null;
+
 class ShortcutUrlTest extends TestCase
 {
     /**
@@ -36,11 +39,11 @@ class ShortcutUrlTest extends TestCase
      */
     public function testInstantiateClass(string $url, $expected = null): void
     {
-        if (\is_null($expected)) {
+        if (is_null($expected)) {
             $this->expectNotToPerformAssertions();
         }
         if ($expected instanceof Exception) {
-            $this->expectException(\get_class($expected));
+            $this->expectException(get_class($expected));
         }
         Url::createShortcutUrl($url);
     }

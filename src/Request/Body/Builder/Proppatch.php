@@ -10,6 +10,9 @@ use Http\Discovery\Psr17FactoryDiscovery;
 use InvalidArgumentException;
 use Ngmy\WebDav\Request;
 
+use function assert;
+use function is_null;
+
 class Proppatch
 {
     /** @var DOMDocument */
@@ -58,7 +61,7 @@ class Proppatch
         }
 
         foreach ($commands as $command) {
-            \assert(!\is_null($this->xml->getElementsByTagNameNS('DAV:', 'propertyupdate')->item(0)));
+            assert(!is_null($this->xml->getElementsByTagNameNS('DAV:', 'propertyupdate')->item(0)));
             $command->execute($this->xml->getElementsByTagNameNS('DAV:', 'propertyupdate')->item(0));
         }
 

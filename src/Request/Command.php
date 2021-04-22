@@ -11,6 +11,10 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
 
+use function fopen;
+use function is_null;
+use function sprintf;
+
 class Command
 {
     /** @var Client\Options */
@@ -47,9 +51,9 @@ class Command
     ): self {
         $headers = new Request\Headers();
         $headers = Request\Header\ContentLength::createFromFilePath($parameters->getSourcePath())->provide($headers);
-        $fh = \fopen($parameters->getSourcePath(), 'r');
+        $fh = fopen($parameters->getSourcePath(), 'r');
         if ($fh === false) {
-            throw new RuntimeException(\sprintf('Failed to open the file "%s".', $parameters->getSourcePath()));
+            throw new RuntimeException(sprintf('Failed to open the file "%s".', $parameters->getSourcePath()));
         }
         $body = new Request\Body(Psr17FactoryDiscovery::findStreamFactory()->createStreamFromResource($fh));
         return new self($options, Request\Method::createPutMethod(), $url, $headers, $body);
@@ -194,7 +198,7 @@ class Command
         $this->options = $options;
         $this->method = $method;
         $this->url = Request\Url::createRequestUrl($url, $options->getBaseUrl());
-        $this->headers = \is_null($headers)
+        $this->headers = is_null($headers)
             ? $options->getDefaultRequestHeaders()
             : $options->getDefaultRequestHeaders()->withHeaders($headers);
         $this->body = $body ?: new Request\Body();

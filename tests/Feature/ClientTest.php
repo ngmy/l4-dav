@@ -14,6 +14,26 @@ use Ngmy\WebDav\Tests\TestCase;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
 
+use function assert;
+use function fclose;
+use function file_put_contents;
+use function fopen;
+use function fwrite;
+use function get_class;
+use function is_null;
+use function is_resource;
+use function preg_match;
+use function preg_replace;
+use function sprintf;
+use function stream_get_meta_data;
+use function tmpfile;
+use function unlink;
+
+use const CURLAUTH_BASIC;
+use const CURLAUTH_DIGEST;
+use const CURLOPT_HTTPAUTH;
+use const CURLOPT_USERPWD;
+
 class ClientTest extends TestCase
 {
     /** @var string */
@@ -71,11 +91,11 @@ class ClientTest extends TestCase
     public function testPut(callable $before, $url, $expected): void
     {
         if ($expected instanceof Exception) {
-            $this->expectException(\get_class($expected));
+            $this->expectException(get_class($expected));
         }
 
         $file = $before();
-        $sourcePath = \is_resource($file) ? \stream_get_meta_data($file)['uri'] : '';
+        $sourcePath = is_resource($file) ? stream_get_meta_data($file)['uri'] : '';
 
         $client = $this->createClient();
         $parameters = (new Request\Parameters\Builder\Put())
@@ -92,7 +112,7 @@ class ClientTest extends TestCase
         $client = $this->createClient();
 
         $file = $this->createTmpFile();
-        $path = \stream_get_meta_data($file)['uri'];
+        $path = stream_get_meta_data($file)['uri'];
 
         $parameters = (new Request\Parameters\Builder\Put())
             ->setSourcePath($path)
@@ -101,33 +121,33 @@ class ClientTest extends TestCase
         $response = $client->put('file', $parameters);
 
         $file = $this->createTmpFile();
-        $path = \stream_get_meta_data($file)['uri'];
-        \unlink($path);
+        $path = stream_get_meta_data($file)['uri'];
+        unlink($path);
 
         $response = $client->get('file');
 
         $this->assertEquals('OK', $response->getReasonPhrase());
         $this->assertEquals(200, $response->getStatusCode());
 
-        \file_put_contents($path, $response->getBody());
+        file_put_contents($path, $response->getBody());
 
         $this->assertFileExists($path);
 
         $file = $this->createTmpFile();
-        $path = \stream_get_meta_data($file)['uri'];
-        \unlink($path);
+        $path = stream_get_meta_data($file)['uri'];
+        unlink($path);
 
         $response->getBody()->rewind();
 
-        $fh = \fopen($path, 'x');
+        $fh = fopen($path, 'x');
         if ($fh === false) {
-            throw new RuntimeException(\sprintf('Failed to open the file "%s".', $path));
+            throw new RuntimeException(sprintf('Failed to open the file "%s".', $path));
         }
         $stream = $response->getBody();
         while (!$stream->eof()) {
-            \fwrite($fh, $stream->read(2048));
+            fwrite($fh, $stream->read(2048));
         }
-        \fclose($fh);
+        fclose($fh);
 
         $this->assertFileExists($path);
     }
@@ -141,7 +161,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
+                    $path = stream_get_meta_data($file)['uri'];
                     $parameters = (new Request\Parameters\Builder\Put())
                         ->setSourcePath($path)
                         ->build();
@@ -212,7 +232,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
+                    $path = stream_get_meta_data($file)['uri'];
                     $parameters = (new Request\Parameters\Builder\Put())
                         ->setSourcePath($path)
                         ->build();
@@ -239,7 +259,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
+                    $path = stream_get_meta_data($file)['uri'];
                     $parameters = (new Request\Parameters\Builder\Put())
                         ->setSourcePath($path)
                         ->build();
@@ -319,7 +339,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
+                    $path = stream_get_meta_data($file)['uri'];
                     $parameters = (new Request\Parameters\Builder\Put())
                         ->setSourcePath($path)
                         ->build();
@@ -337,7 +357,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
+                    $path = stream_get_meta_data($file)['uri'];
                     $parameters = (new Request\Parameters\Builder\Put())
                         ->setSourcePath($path)
                         ->build();
@@ -356,7 +376,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
+                    $path = stream_get_meta_data($file)['uri'];
                     $parameters = (new Request\Parameters\Builder\Put())
                         ->setSourcePath($path)
                         ->build();
@@ -375,7 +395,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
+                    $path = stream_get_meta_data($file)['uri'];
                     $parameters = (new Request\Parameters\Builder\Put())
                         ->setSourcePath($path)
                         ->build();
@@ -398,7 +418,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
+                    $path = stream_get_meta_data($file)['uri'];
                     $parameters = (new Request\Parameters\Builder\Put())
                         ->setSourcePath($path)
                         ->build();
@@ -427,7 +447,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
+                    $path = stream_get_meta_data($file)['uri'];
                     $parameters = (new Request\Parameters\Builder\Put())
                         ->setSourcePath($path)
                         ->build();
@@ -486,7 +506,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
+                    $path = stream_get_meta_data($file)['uri'];
                     $parameters = (new Request\Parameters\Builder\Put())
                         ->setSourcePath($path)
                         ->build();
@@ -503,7 +523,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
+                    $path = stream_get_meta_data($file)['uri'];
                     $parameters = (new Request\Parameters\Builder\Put())
                         ->setSourcePath($path)
                         ->build();
@@ -521,7 +541,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
+                    $path = stream_get_meta_data($file)['uri'];
                     $parameters = (new Request\Parameters\Builder\Put())
                         ->setSourcePath($path)
                         ->build();
@@ -543,7 +563,7 @@ class ClientTest extends TestCase
             [
                 function () {
                     $file = $this->createTmpFile();
-                    $path = \stream_get_meta_data($file)['uri'];
+                    $path = stream_get_meta_data($file)['uri'];
                     $parameters = (new Request\Parameters\Builder\Put())
                         ->setSourcePath($path)
                         ->build();
@@ -596,7 +616,7 @@ class ClientTest extends TestCase
         $client = $this->createClient();
 
         $file = $this->createTmpFile();
-        $path = \stream_get_meta_data($file)['uri'];
+        $path = stream_get_meta_data($file)['uri'];
         $parameters = (new Request\Parameters\Builder\Put())
             ->setSourcePath($path)
             ->build();
@@ -648,7 +668,7 @@ class ClientTest extends TestCase
     public function testProppatch(): void
     {
         $file = $this->createTmpFile();
-        $path = \stream_get_meta_data($file)['uri'];
+        $path = stream_get_meta_data($file)['uri'];
         $parameters = (new Request\Parameters\Builder\Put())
             ->setSourcePath($path)
             ->build();
@@ -712,12 +732,12 @@ class ClientTest extends TestCase
     {
         $curlOptions = [];
         if (isset($this->webDavUserName)) {
-            $curlOptions[\CURLOPT_USERPWD] = $this->webDavUserName . ':' . $this->webDavPassword;
+            $curlOptions[CURLOPT_USERPWD] = $this->webDavUserName . ':' . $this->webDavPassword;
             if ($this->webDavAuthType == 'basic') {
-                $curlOptions[\CURLOPT_HTTPAUTH] = \CURLAUTH_BASIC;
+                $curlOptions[CURLOPT_HTTPAUTH] = CURLAUTH_BASIC;
             }
             if ($this->webDavAuthType == 'digest') {
-                $curlOptions[\CURLOPT_HTTPAUTH] = \CURLAUTH_DIGEST;
+                $curlOptions[CURLOPT_HTTPAUTH] = CURLAUTH_DIGEST;
             }
         }
         $httpClient = new Curl\Client(
@@ -737,11 +757,11 @@ class ClientTest extends TestCase
      */
     protected function createTmpFile()
     {
-        $file = \tmpfile();
+        $file = tmpfile();
         if ($file === false) {
             throw new RuntimeException('Failed to create a temporary file.');
         }
-        \fwrite($file, 'This is test file.');
+        fwrite($file, 'This is test file.');
         return $file;
     }
 
@@ -759,12 +779,12 @@ class ClientTest extends TestCase
             if ($element->nodeValue == $this->webDavBasePath . $directoryPath) {
                 continue;
             }
-            if (\preg_match("~{$this->webDavBasePath}(.*\/)$~", $element->nodeValue, $matches)) {
+            if (preg_match("~{$this->webDavBasePath}(.*\/)$~", $element->nodeValue, $matches)) {
                 $this->deleteWebDav($matches[1]);
             }
             $client = $this->createClient();
-            \assert(!\is_null(\preg_replace("~{$this->webDavBasePath}(.*)~", '\1', $element->nodeValue)));
-            $client->delete(\preg_replace("~{$this->webDavBasePath}(.*)~", '\1', $element->nodeValue));
+            assert(!is_null(preg_replace("~{$this->webDavBasePath}(.*)~", '\1', $element->nodeValue)));
+            $client->delete(preg_replace("~{$this->webDavBasePath}(.*)~", '\1', $element->nodeValue));
         }
     }
 }

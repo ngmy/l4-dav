@@ -10,6 +10,9 @@ use Ngmy\WebDav\BaseUrl;
 use Ngmy\WebDav\Tests\TestCase;
 use Ngmy\WebDav\Url;
 
+use function get_class;
+use function is_null;
+
 class FullUrlTest extends TestCase
 {
     /**
@@ -42,11 +45,11 @@ class FullUrlTest extends TestCase
      */
     public function testInstantiateClass(string $url, ?BaseUrl $baseUrl = null, $expected = null): void
     {
-        if (\is_null($expected)) {
+        if (is_null($expected)) {
             $this->expectNotToPerformAssertions();
         }
         if ($expected instanceof Exception) {
-            $this->expectException(\get_class($expected));
+            $this->expectException(get_class($expected));
         }
         Url::createRequestUrl($url, $baseUrl);
     }

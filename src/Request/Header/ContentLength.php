@@ -7,6 +7,9 @@ namespace Ngmy\WebDav\Request\Header;
 use Ngmy\WebDav\Request;
 use RuntimeException;
 
+use function filesize;
+use function sprintf;
+
 class ContentLength
 {
     private const HEADER_NAME = 'Content-Length';
@@ -19,10 +22,10 @@ class ContentLength
      */
     public static function createFromFilePath(string $filePath): self
     {
-        $contentLength = \filesize($filePath);
+        $contentLength = filesize($filePath);
         if ($contentLength === false) {
             throw new RuntimeException(
-                \sprintf('Failed to get the size of the file "%s".', $filePath)
+                sprintf('Failed to get the size of the file "%s".', $filePath)
             );
         }
         return new self($contentLength);

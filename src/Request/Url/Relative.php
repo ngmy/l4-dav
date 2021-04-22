@@ -7,6 +7,8 @@ namespace Ngmy\WebDav\Request\Url;
 use InvalidArgumentException;
 use Ngmy\WebDav\Request;
 
+use function sprintf;
+
 class Relative extends Request\Url
 {
     /**
@@ -16,7 +18,7 @@ class Relative extends Request\Url
     {
         if (!empty($this->uri->getScheme())) {
             throw new InvalidArgumentException(
-                \sprintf(
+                sprintf(
                     'The shortcut URL "%s" must not contain a scheme, "%s" given.',
                     $this->uri,
                     $this->uri->getScheme()
@@ -25,7 +27,7 @@ class Relative extends Request\Url
         }
         if (!empty($this->uri->getAuthority())) {
             throw new InvalidArgumentException(
-                \sprintf(
+                sprintf(
                     'The shortcut URL "%s" must not contain an authority, "%s" given.',
                     $this->uri,
                     $this->uri->getAuthority()

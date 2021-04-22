@@ -6,6 +6,9 @@ namespace Ngmy\WebDav\Request\Url;
 
 use Ngmy\WebDav\Request;
 
+use function strlen;
+use function substr;
+
 class Combiner
 {
     /** @var Request\Url\Base */
@@ -36,7 +39,7 @@ class Combiner
         if (!$this->baseUrl->hasPath() && !$this->relativeUrl->hasPath()) {
             return '';
         } elseif ($this->baseUrl->hasPathWithTrailingSlash() && $this->relativeUrl->hasPathWithLeadingSlash()) {
-            return \substr($baseUrlPath, 0, \strlen($baseUrlPath) - 1) . '/' . \substr($relativeUrlPath, 1);
+            return substr($baseUrlPath, 0, strlen($baseUrlPath) - 1) . '/' . substr($relativeUrlPath, 1);
         } elseif (!$this->baseUrl->hasPathWithTrailingSlash() && !$this->relativeUrl->hasPathWithLeadingSlash()) {
             return $baseUrlPath . '/' . $relativeUrlPath;
         } else {

@@ -12,6 +12,9 @@ use Ngmy\WebDav\Tests\TestCase;
 use Ngmy\WebDav\Url;
 use Psr\Http\Message\UriInterface;
 
+use function get_class;
+use function is_null;
+
 class BaseUrlTest extends TestCase
 {
     /**
@@ -41,11 +44,11 @@ class BaseUrlTest extends TestCase
      */
     public function testInstantiateClass(string $url, $expected = null): void
     {
-        if (\is_null($expected)) {
+        if (is_null($expected)) {
             $this->expectNotToPerformAssertions();
         }
         if ($expected instanceof Exception) {
-            $this->expectException(\get_class($expected));
+            $this->expectException(get_class($expected));
         }
         Url::createBaseUrl($url);
     }
@@ -126,7 +129,7 @@ class BaseUrlTest extends TestCase
     public function testUriWithShortcutUrl(BaseUrl $baseUrl, string $path, $expected): void
     {
         if ($expected instanceof Exception) {
-            $this->expectException(\get_class($expected));
+            $this->expectException(get_class($expected));
         }
         $actual = $baseUrl->uriWithShortcutUrl($path);
         $this->assertEquals($expected, $actual);

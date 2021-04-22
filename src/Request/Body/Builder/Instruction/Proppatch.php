@@ -8,6 +8,8 @@ use DOMDocument;
 use DOMElement;
 use Ngmy\Enum\Enum;
 
+use function sprintf;
+
 /**
  * @method static self SET()
  * @method static self REMOVE()
@@ -32,6 +34,6 @@ class Proppatch extends Enum
 
     public function provide(DOMDocument $xml): DOMElement
     {
-        return $xml->createElementNS('DAV:', \sprintf('D:%s', $this->getValue()));
+        return $xml->createElementNS('DAV:', sprintf('D:%s', $this->getValue()));
     }
 }

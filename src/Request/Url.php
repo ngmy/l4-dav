@@ -10,6 +10,9 @@ use Ngmy\WebDav\Request;
 use Psr\Http\Message\UriInterface;
 use Throwable;
 
+use function is_null;
+use function sprintf;
+
 abstract class Url
 {
     /** @var UriInterface */
@@ -47,13 +50,13 @@ abstract class Url
      */
     public static function createRequestUrl($url, ?Request\Url\Base $baseUrl = null): Request\Url\Full
     {
-        if (\is_null($baseUrl)) {
+        if (is_null($baseUrl)) {
             try {
                 return new Request\Url\Full($url);
             } catch (InvalidArgumentException $e) {
                 // no-op
             }
-            throw new InvalidArgumentException(\sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'The request URL "%s" must be the full URL because the base URL is not specifided.',
                 (string) $url
             ), 0, $e);
@@ -63,7 +66,7 @@ abstract class Url
             } catch (InvalidArgumentException $e) {
                 // no-op
             }
-            throw new InvalidArgumentException(\sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'The request URL "%s" must be the relative URL because the base URL is specified.',
                 (string) $url
             ), 0, $e);
@@ -77,7 +80,7 @@ abstract class Url
      */
     public static function createDestinationUrl($url, ?Request\Url\Base $baseUrl = null): self
     {
-        if (\is_null($baseUrl)) {
+        if (is_null($baseUrl)) {
             try {
                 return new Request\Url\Full($url);
             } catch (InvalidArgumentException $e1) {
@@ -89,7 +92,7 @@ abstract class Url
                 // no-op
             }
             $e = self::withPrevious($e2, $e1);
-            throw new InvalidArgumentException(\sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'The destination URL "%s" is invalid.',
                 (string) $url
             ), 0, $e);
@@ -99,7 +102,7 @@ abstract class Url
             } catch (InvalidArgumentException $e) {
                 // no-op
             }
-            throw new InvalidArgumentException(\sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'The destination URL "%s" must be the relative URL because the base URL is specified.',
                 (string) $url
             ), 0, $e);

@@ -13,6 +13,9 @@ use Ngmy\WebDav\Url;
 use Ngmy\WebDav\UrlCombiner;
 use Psr\Http\Message\UriInterface;
 
+use function get_class;
+use function is_null;
+
 class UrlCombinerTest extends TestCase
 {
     /**
@@ -42,11 +45,11 @@ class UrlCombinerTest extends TestCase
      */
     public function testInstantiateClass(BaseUrl $baseUrl, string $shortcutUrl, $expected = null): void
     {
-        if (\is_null($expected)) {
+        if (is_null($expected)) {
             $this->expectNotToPerformAssertions();
         }
         if ($expected instanceof Exception) {
-            $this->expectException(\get_class($expected));
+            $this->expectException(get_class($expected));
         }
         new UrlCombiner($baseUrl, $shortcutUrl);
     }
@@ -144,7 +147,7 @@ class UrlCombinerTest extends TestCase
     public function testCombine(UrlCombiner $urlCombiner, $expected): void
     {
         if ($expected instanceof Exception) {
-            $this->expectException(\get_class($expected));
+            $this->expectException(get_class($expected));
         }
         $actual = $urlCombiner->combine();
         $this->assertEquals($expected, $actual);

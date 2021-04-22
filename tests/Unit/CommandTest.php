@@ -11,6 +11,9 @@ use Ngmy\WebDav\Command;
 use Ngmy\WebDav\Tests\TestCase;
 use org\bovigo\vfs\vfsStream;
 
+use function get_class;
+use function is_null;
+
 class CommandTest extends TestCase
 {
     /**
@@ -99,11 +102,11 @@ class CommandTest extends TestCase
      */
     public function testCreate(array $args, $expected = null): void
     {
-        if (\is_null($expected)) {
+        if (is_null($expected)) {
             $this->expectNotToPerformAssertions();
         }
         if ($expected instanceof Exception) {
-            $this->expectException(\get_class($expected));
+            $this->expectException(get_class($expected));
         }
         Command::create(...$args);
     }

@@ -8,6 +8,8 @@ use anlutro\cURL\Response as CurlResponse;
 use Ngmy\WebDav\Response;
 use Ngmy\WebDav\Tests\TestCase;
 
+use function array_key_first;
+
 class ResponseTest extends TestCase
 {
     /** @var string */
@@ -59,7 +61,7 @@ EOF;
     private function buildHttpHeader(array $headers): string
     {
         $header = '';
-        $firstKey = \array_key_first($headers);
+        $firstKey = array_key_first($headers);
         foreach ($headers as $name => $value) {
             if ($name == $firstKey) {
                 $header .= $value . "\r\n";

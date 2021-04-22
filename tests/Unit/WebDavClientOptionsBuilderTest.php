@@ -14,6 +14,10 @@ use Ngmy\WebDav\Tests\TestCase;
 use Ngmy\WebDav\Url;
 use Psr\Http\Message\UriInterface;
 
+use function is_null;
+
+use const CURLOPT_PORT;
+
 class ClientOptionsBuilderTest extends TestCase
 {
     /**
@@ -118,13 +122,13 @@ class ClientOptionsBuilderTest extends TestCase
                 null,
                 null,
                 null,
-                [\CURLOPT_PORT => 80],
+                [CURLOPT_PORT => 80],
                 new ClientOptions(
                     null,
                     new Port(null),
                     new UserInfo(null, null),
                     new Headers(),
-                    [\CURLOPT_PORT => 80],
+                    [CURLOPT_PORT => 80],
                 ),
             ],
             [
@@ -133,13 +137,13 @@ class ClientOptionsBuilderTest extends TestCase
                 'username',
                 'password',
                 ['header_key' => 'header_value'],
-                [\CURLOPT_PORT => 80],
+                [CURLOPT_PORT => 80],
                 new ClientOptions(
                     Url::createBaseUrl('http://example.com'),
                     new Port(80),
                     new UserInfo('username', 'password'),
                     new Headers(['header_key' => 'header_value']),
-                    [\CURLOPT_PORT => 80],
+                    [CURLOPT_PORT => 80],
                 ),
             ],
         ];
@@ -162,22 +166,22 @@ class ClientOptionsBuilderTest extends TestCase
         $expected
     ): void {
         $builder = new ClientOptionsBuilder();
-        if (!\is_null($baseUrl)) {
+        if (!is_null($baseUrl)) {
             $builder->baseUrl($baseUrl);
         }
-        if (!\is_null($port)) {
+        if (!is_null($port)) {
             $builder->port($port);
         }
-        if (!\is_null($userName)) {
+        if (!is_null($userName)) {
             $builder->userName($userName);
         }
-        if (!\is_null($password)) {
+        if (!is_null($password)) {
             $builder->password($password);
         }
-        if (!\is_null($defaultRequestHeaders)) {
+        if (!is_null($defaultRequestHeaders)) {
             $builder->defaultRequestHeaders($defaultRequestHeaders);
         }
-        if (!\is_null($defaultCurlOptions)) {
+        if (!is_null($defaultCurlOptions)) {
             $builder->defaultCurlOptions($defaultCurlOptions);
         }
         $actual = $builder->build();
