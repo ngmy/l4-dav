@@ -3,6 +3,7 @@
 /.phpdoc
 /build/
 /tools/
+/tools-src/
 /vendor
 .envrc.local
 .php_cs

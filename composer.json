@@ -68,6 +68,10 @@
         "doc": [
             "@phpdoc"
         ],
+        "phar-extractor": [
+            "rm -rf tools-src",
+            "tools/phar-extractor extract-phive-xml -t tools-src"
+        ],
         "php-cs-fixer": [
             "tools/php-cs-fixer fix --ansi"
         ],

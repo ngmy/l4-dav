@@ -26,5 +26,6 @@ handle() {
     docker-compose exec workspace chmod +x /tmp/phive.phar
     docker-compose exec workspace mv /tmp/phive.phar /usr/local/bin/phive
   fi
-  docker-compose exec -u laradock workspace bash -c 'yes | phive --home .laradock/data/phive install'
+  docker-compose exec -u laradock workspace bash -c 'yes | phive --home .laradock/data/phive install --force-accept-unsigned'
+  docker-compose exec -u laradock workspace composer phar-extractor
 }
