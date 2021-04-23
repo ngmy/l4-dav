@@ -103,6 +103,7 @@ class ClientTest extends TestCase
             ->build();
         $response = $client->put($url, $parameters);
 
+        assert(is_array($expected));
         $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
         $this->assertEquals($expected['status_code'], $response->getStatusCode());
     }
@@ -634,6 +635,9 @@ class ClientTest extends TestCase
 
         $this->assertEquals('Multi-Status', $response->getReasonPhrase());
         $this->assertEquals(207, $response->getStatusCode());
+        assert(!is_null($hrefNodes->item(0)));
+        assert(!is_null($hrefNodes->item(1)));
+        assert(!is_null($hrefNodes->item(2)));
         $this->assertEquals($this->webDavBasePath, $hrefNodes->item(0)->nodeValue);
         $this->assertEquals($this->webDavBasePath . 'file', $hrefNodes->item(1)->nodeValue);
         $this->assertEquals($this->webDavBasePath . 'dir/', $hrefNodes->item(2)->nodeValue);
@@ -644,6 +648,8 @@ class ClientTest extends TestCase
 
         $this->assertEquals('Multi-Status', $response->getReasonPhrase());
         $this->assertEquals(207, $response->getStatusCode());
+        assert(!is_null($hrefNodes->item(0)));
+        assert(!is_null($hrefNodes->item(1)));
         $this->assertEquals($this->webDavBasePath . 'dir/', $hrefNodes->item(0)->nodeValue);
         $this->assertEquals($this->webDavBasePath . 'dir/file', $hrefNodes->item(1)->nodeValue);
     }
@@ -685,6 +691,7 @@ class ClientTest extends TestCase
             ->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')
             ->item(0);
 
+        assert(!is_null($executableBefore));
         $this->assertEquals('F', $executableBefore->nodeValue);
 
         $executableBefore->nodeValue = 'T';
@@ -706,6 +713,7 @@ class ClientTest extends TestCase
             ->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')
             ->item(0);
 
+        assert(!is_null($executableAfter));
         $this->assertEquals('T', $executableAfter->nodeValue);
 
         $parameters = (new Request\Parameters\Builder\Proppatch())
@@ -725,13 +733,16 @@ class ClientTest extends TestCase
             ->getElementsByTagNameNS('http://apache.org/dav/props/', 'executable')
             ->item(0);
 
+        assert(!is_null($executableAfter));
         $this->assertEquals('T', $executableAfter->nodeValue);
     }
 
     protected function createClient(): Client
     {
         $curlOptions = [];
-        if (isset($this->webDavUserName)) {
+        if (isset($this->webDavAuthType)) {
+            assert(isset($this->webDavUserName));
+            assert(isset($this->webDavPassword));
             $curlOptions[CURLOPT_USERPWD] = $this->webDavUserName . ':' . $this->webDavPassword;
             if ($this->webDavAuthType == 'basic') {
                 $curlOptions[CURLOPT_HTTPAUTH] = CURLAUTH_BASIC;
