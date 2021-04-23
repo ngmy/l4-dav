@@ -11,7 +11,11 @@ class AppendChildCommand implements XmlCommand
 {
     /** @var DOMNode */
     private $child;
-    /** @var list<XmlCommand> */
+    /**
+     * @var array<int, XmlCommand>
+     * @phpstan-var list<XmlCommand>
+     * @psalm-var list<XmlCommand>
+     */
     private $commands = [];
 
     public function __construct(DOMNode $child)

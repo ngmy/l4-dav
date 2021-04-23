@@ -17,9 +17,17 @@ class Proppatch
 {
     /** @var DOMDocument */
     private $xml;
-    /** @var list<DOMNode> */
+    /**
+     * @var array<int, DOMNode>
+     * @phpstan-var list<DOMNode>
+     * @psalm-var list<DOMNode>
+     */
     private $propetiesToSet;
-    /** @var list<DOMNode> */
+    /**
+     * @var array<int, DOMNode>
+     * @phpstan-var list<DOMNode>
+     * @psalm-var list<DOMNode>
+     */
     private $propetiesToRemove;
 
     public function __construct()
@@ -75,7 +83,11 @@ class Proppatch
     }
 
     /**
-     * @param list<DOMNode> $properties
+     * @param array<int, DOMNode> $properties
+     *
+     * @phpstan-param list<DOMNode> $properties
+     *
+     * @psalm-param list<DOMNode> $properties
      */
     private function configureCommand(Instruction\Proppatch $instruction, array $properties): XmlCommand
     {

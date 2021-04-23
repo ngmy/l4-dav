@@ -12,13 +12,17 @@ class Proppatch
     /**
      * Properties to set.
      *
-     * @var list<DOMNode>
+     * @var array<int, DOMNode>
+     * @phpstan-var list<DOMNode>
+     * @psalm-var list<DOMNode>
      */
     private $propertiesToSet = [];
     /**
      * Properties to remove.
      *
-     * @var list<DOMNode>
+     * @var array<int, DOMNode>
+     * @phpstan-var list<DOMNode>
+     * @psalm-var list<DOMNode>
      */
     private $propertiesToRemove = [];
 

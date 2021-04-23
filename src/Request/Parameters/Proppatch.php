@@ -9,14 +9,28 @@ use InvalidArgumentException;
 
 class Proppatch
 {
-    /** @var list<DOMNode> */
+    /**
+     * @var array<int, DOMNode>
+     * @phpstan-var list<DOMNode>
+     * @psalm-var list<DOMNode>
+     */
     private $propertiesToSet = [];
-    /** @var list<DOMNode> */
+    /**
+     * @var array<int, DOMNode>
+     * @phpstan-var list<DOMNode>
+     * @psalm-var list<DOMNode>
+     */
     private $propertiesToRemove = [];
 
     /**
-     * @param list<DOMNode> $propertiesToSet
-     * @param list<DOMNode> $propertiesToRemove
+     * @param array<int, DOMNode> $propertiesToSet
+     * @param array<int, DOMNode> $propertiesToRemove
+     *
+     * @phpstan-param list<DOMNode> $propertiesToSet
+     * @phpstan-param list<DOMNode> $propertiesToRemove
+     *
+     * @psalm-param list<DOMNode> $propertiesToSet
+     * @psalm-param list<DOMNode> $propertiesToRemove
      */
     public function __construct($propertiesToSet = [], $propertiesToRemove = [])
     {
@@ -26,7 +40,11 @@ class Proppatch
     }
 
     /**
-     * @return list<DOMNode>
+     * @return array<int, DOMNode>
+     *
+     * @phpstan-return list<DOMNode>
+     *
+     * @psalm-return list<DOMNode>
      */
     public function getPropertiesToSet(): array
     {
@@ -34,7 +52,11 @@ class Proppatch
     }
 
     /**
-     * @return list<DOMNode>
+     * @return array<int, DOMNode>
+     *
+     * @phpstan-return list<DOMNode>
+     *
+     * @psalm-return list<DOMNode>
      */
     public function getPropertiesToRemove(): array
     {
