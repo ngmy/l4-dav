@@ -48,7 +48,9 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @return list<list<mixed>>
+     * @return array<int, array<int, mixed>>
+     *
+     * @phpstan-return list<list<mixed>>
      */
     public function putProvider(): array
     {
@@ -109,32 +111,58 @@ class ClientTest extends TestCase
         $this->assertEquals($expected['status_code'], $response->getStatusCode());
     }
 
-    public function testGetFile(): void
+    /**
+     * @return array<int, array<int, mixed>>
+     *
+     * @phpstan-return list<list<mixed>>
+     */
+    public function getProvider(): array
     {
+        return [
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = stream_get_meta_data($file)['uri'];
+                    $parameters = (new Request\Parameters\Builder\Put())
+                        ->setSourcePath($path)
+                        ->build();
+                    $client = $this->createClient();
+                    $client->put('file', $parameters);
+                },
+                'file',
+                [
+                    'reason_phrase' => 'OK',
+                    'status_code' => 200,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @param string|UriInterface  $url
+     * @param array<string, mixed> $expected
+     * @dataProvider getProvider
+     */
+    public function testGet(callable $before, $url, $expected): void
+    {
+        $before();
+
         $client = $this->createClient();
+        $response = $client->get($url);
 
-        $file = $this->createTmpFile();
-        $path = stream_get_meta_data($file)['uri'];
+        $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
+        $this->assertEquals($expected['status_code'], $response->getStatusCode());
 
-        $parameters = (new Request\Parameters\Builder\Put())
-            ->setSourcePath($path)
-            ->build();
-
-        $response = $client->put('file', $parameters);
-
+        // Read data from the stream and write it to the file all at once
         $file = $this->createTmpFile();
         $path = stream_get_meta_data($file)['uri'];
         unlink($path);
-
-        $response = $client->get('file');
-
-        $this->assertEquals('OK', $response->getReasonPhrase());
-        $this->assertEquals(200, $response->getStatusCode());
 
         file_put_contents($path, $response->getBody());
 
         $this->assertFileExists($path);
 
+        // Read data from the stream and write it to the file little by little
         $file = $this->createTmpFile();
         $path = stream_get_meta_data($file)['uri'];
         unlink($path);
@@ -155,7 +183,9 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @return list<list<mixed>>
+     * @return array<int, array<int, mixed>>
+     *
+     * @phpstan-return list<list<mixed>>
      */
     public function headProvider(): array
     {
@@ -226,7 +256,9 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @return list<list<mixed>>
+     * @return array<int, array<int, mixed>>
+     *
+     * @phpstan-return list<list<mixed>>
      */
     public function deleteProvider(): array
     {
@@ -295,7 +327,9 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @return list<list<mixed>>
+     * @return array<int, array<int, mixed>>
+     *
+     * @phpstan-return list<list<mixed>>
      */
     public function mkcolProvider(): array
     {
@@ -333,7 +367,9 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @return list<list<mixed>>
+     * @return array<int, array<int, mixed>>
+     *
+     * @phpstan-return list<list<mixed>>
      */
     public function copyProvider(): array
     {
@@ -500,7 +536,9 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @return list<list<mixed>>
+     * @return array<int, array<int, mixed>>
+     *
+     * @phpstan-return list<list<mixed>>
      */
     public function moveProvider(): array
     {
@@ -614,7 +652,9 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @return list<list<mixed>>
+     * @return array<int, array<int, mixed>>
+     *
+     * @phpstan-return list<list<mixed>>
      */
     public function propfindProvider(): array
     {
@@ -691,7 +731,7 @@ class ClientTest extends TestCase
      * @param array<string, mixed> $expected
      * @dataProvider propfindProvider
      */
-    public function testListDirectoryContentsIfDirectoryIsFound(callable $before, $url, $expected): void
+    public function testPropfind(callable $before, $url, $expected): void
     {
         $before();
 
