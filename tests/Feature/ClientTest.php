@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ngmy\WebDav\Tests\Feature;
 
-use DOMDocument;
 use Exception;
 use Http\Client\Curl;
 use Http\Discovery\Psr17FactoryDiscovery;
@@ -15,11 +14,13 @@ use Psr\Http\Message\UriInterface;
 use RuntimeException;
 
 use function assert;
+use function count;
 use function fclose;
 use function file_put_contents;
 use function fopen;
 use function fwrite;
 use function get_class;
+use function is_array;
 use function is_null;
 use function is_resource;
 use function preg_match;
@@ -672,6 +673,16 @@ class ClientTest extends TestCase
                     ],
                 ],
             ],
+            [
+                function () {
+                },
+                'dir/',
+                [
+                    'reason_phrase' => 'Not Found',
+                    'status_code' => 404,
+                    'nodes' => [],
+                ],
+            ],
         ];
     }
 
@@ -698,23 +709,6 @@ class ClientTest extends TestCase
             assert(!is_null($hrefNodes->item($i)));
             $this->assertEquals($node, $hrefNodes->item($i)->nodeValue);
         }
-    }
-
-    public function testListDirectoryContentsIfDirectoryIsNotFound(): void
-    {
-        $client = $this->createClient();
-
-        $parameters = (new Request\Parameters\Builder\Propfind())
-            ->build();
-        $response = $client->propfind('dir/', $parameters);
-
-        $this->assertEquals('Not Found', $response->getReasonPhrase());
-        $this->assertEquals(404, $response->getStatusCode());
-
-        $xml = new DOMDocument('1.0', 'utf-8');
-        $xml->preserveWhiteSpace = false;
-        $xml->formatOutput = true;
-        $this->assertEquals($xml, $response->getBodyAsXml());
     }
 
     public function testProppatch(): void
