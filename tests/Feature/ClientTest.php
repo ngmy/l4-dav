@@ -751,15 +751,34 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testProppatch(): void
+    /**
+     * @return array<int, array<int, mixed>>
+     *
+     * @phpstan-return list<list<mixed>>
+     */
+    public function proppatchProvider(): array
     {
-        $file = $this->createTmpFile();
-        $path = stream_get_meta_data($file)['uri'];
-        $parameters = (new Request\Parameters\Builder\Put())
-            ->setSourcePath($path)
-            ->build();
-        $client = $this->createClient();
-        $client->put('file', $parameters);
+        return [
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = stream_get_meta_data($file)['uri'];
+                    $parameters = (new Request\Parameters\Builder\Put())
+                        ->setSourcePath($path)
+                        ->build();
+                    $client = $this->createClient();
+                    $client->put('file', $parameters);
+                },
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider proppatchProvider
+     */
+    public function testProppatch(callable $before): void
+    {
+        $before();
 
         $client = $this->createClient();
 
