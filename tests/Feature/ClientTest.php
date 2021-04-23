@@ -612,46 +612,92 @@ class ClientTest extends TestCase
         $this->assertEquals($expected['status_code'], $response->getStatusCode());
     }
 
-    public function testListDirectoryContentsIfDirectoryIsFound(): void
+    /**
+     * @return list<list<mixed>>
+     */
+    public function propfindProvider(): array
     {
-        $client = $this->createClient();
+        return [
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = stream_get_meta_data($file)['uri'];
+                    $parameters = (new Request\Parameters\Builder\Put())
+                        ->setSourcePath($path)
+                        ->build();
+                    $client = $this->createClient();
+                    $client->put('file', $parameters);
+                    $client->mkcol('dir/');
+                    $client->put('dir/file', $parameters);
+                    $client->mkcol('dir/dir2/');
+                    $client->put('dir/dir2/file', $parameters);
+                },
+                '',
+                [
+                    'reason_phrase' => 'Multi-Status',
+                    'status_code' => 207,
+                    'nodes' => [
+                        $this->webDavBasePath,
+                        $this->webDavBasePath . 'file',
+                        $this->webDavBasePath . 'dir/',
+                        $this->webDavBasePath . 'dir/file',
+                        $this->webDavBasePath . 'dir/dir2/',
+                        $this->webDavBasePath . 'dir/dir2/file',
+                    ],
+                ],
+            ],
+            [
+                function () {
+                    $file = $this->createTmpFile();
+                    $path = stream_get_meta_data($file)['uri'];
+                    $parameters = (new Request\Parameters\Builder\Put())
+                        ->setSourcePath($path)
+                        ->build();
+                    $client = $this->createClient();
+                    $client->put('file', $parameters);
+                    $client->mkcol('dir/');
+                    $client->put('dir/file', $parameters);
+                    $client->mkcol('dir/dir2/');
+                    $client->put('dir/dir2/file', $parameters);
+                },
+                'dir/',
+                [
+                    'reason_phrase' => 'Multi-Status',
+                    'status_code' => 207,
+                    'nodes' => [
+                        $this->webDavBasePath . 'dir/',
+                        $this->webDavBasePath . 'dir/file',
+                        $this->webDavBasePath . 'dir/dir2/',
+                        $this->webDavBasePath . 'dir/dir2/file',
+                    ],
+                ],
+            ],
+        ];
+    }
 
-        $file = $this->createTmpFile();
-        $path = stream_get_meta_data($file)['uri'];
-        $parameters = (new Request\Parameters\Builder\Put())
-            ->setSourcePath($path)
-            ->build();
-        $client->put('file', $parameters);
-        $client->mkcol('dir/');
-        $client->put('dir/file', $parameters);
-        $client->mkcol('dir/dir2/');
-        $client->put('dir/dir2/file', $parameters);
+    /**
+     * @param string|UriInterface  $url
+     * @param array<string, mixed> $expected
+     * @dataProvider propfindProvider
+     */
+    public function testListDirectoryContentsIfDirectoryIsFound(callable $before, $url, $expected): void
+    {
+        $before();
 
         $parameters = (new Request\Parameters\Builder\Propfind())
             ->build();
-        $response = $client->propfind('', $parameters);
+        $client = $this->createClient();
+        $response = $client->propfind($url, $parameters);
         $xml = $response->getBodyAsXml();
         $hrefNodes = $xml->getElementsByTagNameNS('DAV:', 'href');
 
-        $this->assertEquals('Multi-Status', $response->getReasonPhrase());
-        $this->assertEquals(207, $response->getStatusCode());
-        assert(!is_null($hrefNodes->item(0)));
-        assert(!is_null($hrefNodes->item(1)));
-        assert(!is_null($hrefNodes->item(2)));
-        $this->assertEquals($this->webDavBasePath, $hrefNodes->item(0)->nodeValue);
-        $this->assertEquals($this->webDavBasePath . 'file', $hrefNodes->item(1)->nodeValue);
-        $this->assertEquals($this->webDavBasePath . 'dir/', $hrefNodes->item(2)->nodeValue);
-
-        $response = $client->propfind('dir/', $parameters);
-        $xml = $response->getBodyAsXml();
-        $hrefNodes = $xml->getElementsByTagNameNS('DAV:', 'href');
-
-        $this->assertEquals('Multi-Status', $response->getReasonPhrase());
-        $this->assertEquals(207, $response->getStatusCode());
-        assert(!is_null($hrefNodes->item(0)));
-        assert(!is_null($hrefNodes->item(1)));
-        $this->assertEquals($this->webDavBasePath . 'dir/', $hrefNodes->item(0)->nodeValue);
-        $this->assertEquals($this->webDavBasePath . 'dir/file', $hrefNodes->item(1)->nodeValue);
+        $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
+        $this->assertEquals($expected['status_code'], $response->getStatusCode());
+        $this->assertCount(count($expected['nodes']), $hrefNodes);
+        foreach ($expected['nodes'] as $i => $node) {
+            assert(!is_null($hrefNodes->item($i)));
+            $this->assertEquals($node, $hrefNodes->item($i)->nodeValue);
+        }
     }
 
     public function testListDirectoryContentsIfDirectoryIsNotFound(): void
