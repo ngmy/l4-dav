@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\WebDav\Tests\Unit;
+namespace Ngmy\WebDav\Tests\Unit\Request;
 
-use Ngmy\WebDav\Headers;
+use Ngmy\WebDav\Request\Headers;
 use Ngmy\WebDav\Tests\TestCase;
 
 class HeadersTest extends TestCase

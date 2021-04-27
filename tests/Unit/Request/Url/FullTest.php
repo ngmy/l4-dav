@@ -2,18 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Ngmy\WebDav\Tests\Unit;
+namespace Ngmy\WebDav\Tests\Unit\Request\Url;
 
 use Exception;
 use InvalidArgumentException;
-use Ngmy\WebDav\BaseUrl;
+use Ngmy\WebDav\Request\Url;
 use Ngmy\WebDav\Tests\TestCase;
-use Ngmy\WebDav\Url;
 
 use function get_class;
 use function is_null;
 
-class FullUrlTest extends TestCase
+class FullTest extends TestCase
 {
     /**
      * @return list<list<mixed>>
@@ -43,7 +42,7 @@ class FullUrlTest extends TestCase
      * @param Exception $expected
      * @dataProvider instantiateClassProvider
      */
-    public function testInstantiateClass(string $url, ?BaseUrl $baseUrl = null, $expected = null): void
+    public function testInstantiateClass(string $url, ?Url\Base $baseUrl = null, $expected = null): void
     {
         if (is_null($expected)) {
             $this->expectNotToPerformAssertions();
