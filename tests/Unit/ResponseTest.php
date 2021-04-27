@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace Ngmy\WebDav\Tests\Unit;
 
 use DOMDocument;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Ngmy\WebDav\Response;
 use Ngmy\WebDav\Tests\TestCase;
 use Nyholm\Psr7\Response as Psr7Response;
-use Http\Discovery\Psr17FactoryDiscovery;
+
+use function compact;
+use function extract;
+use function get_class;
 
 class ResponseTest extends TestCase
 {

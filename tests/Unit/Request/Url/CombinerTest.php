@@ -6,7 +6,6 @@ namespace Ngmy\WebDav\Tests\Unit\Request\Url;
 
 use Exception;
 use Http\Discovery\Psr17FactoryDiscovery;
-use InvalidArgumentException;
 use Ngmy\WebDav\Request\Url;
 use Ngmy\WebDav\Tests\TestCase;
 use Psr\Http\Message\UriInterface;
