@@ -20,7 +20,7 @@ class Response implements MessageInterface, ResponseInterface
     /**
      * The parser of the XML response body.
      *
-     * @var Response\Body\Parser\Xml;
+     * @var Response\Body\Parser\Xml
      */
     private $responseBodyParser;
 
