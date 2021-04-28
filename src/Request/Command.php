@@ -9,11 +9,8 @@ use Ngmy\WebDav\Client;
 use Ngmy\WebDav\Request;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
-use RuntimeException;
 
-use function fopen;
 use function is_null;
-use function sprintf;
 
 class Command
 {
@@ -42,7 +39,6 @@ class Command
 
     /**
      * @param string|UriInterface $url
-     * @throws RuntimeException
      */
     public static function createPutCommand(
         Client\Options $options,
@@ -51,11 +47,9 @@ class Command
     ): self {
         $headers = new Request\Headers();
         $headers = Request\Header\ContentLength::createFromFilePath($parameters->getSourcePath())->provide($headers);
-        $fh = fopen($parameters->getSourcePath(), 'r');
-        if ($fh === false) {
-            throw new RuntimeException(sprintf('Failed to open the file "%s".', $parameters->getSourcePath()));
-        }
-        $body = new Request\Body(Psr17FactoryDiscovery::findStreamFactory()->createStreamFromResource($fh));
+        $body = new Request\Body(
+            Psr17FactoryDiscovery::findStreamFactory()->createStreamFromFile($parameters->getSourcePath())
+        );
         return new self($options, Request\Method::PUT(), $url, $headers, $body);
     }
 

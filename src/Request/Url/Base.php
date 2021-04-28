@@ -17,9 +17,6 @@ class Base extends Request\Url
         return (new Request\Url\Combiner($this, $relativeUrl))->combine();
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
     protected function validate(): void
     {
         if (!in_array($this->uri->getScheme(), ['http', 'https'])) {

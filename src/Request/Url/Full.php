@@ -12,9 +12,6 @@ use function sprintf;
 
 class Full extends Request\Url
 {
-    /**
-     * @throws InvalidArgumentException
-     */
     protected function validate(): void
     {
         if (!in_array($this->uri->getScheme(), ['http', 'https'])) {

@@ -46,7 +46,6 @@ abstract class Url
 
     /**
      * @param string|UriInterface $url
-     * @throws InvalidArgumentException
      */
     public static function createRequestUrl($url, ?Request\Url\Base $baseUrl = null): Request\Url\Full
     {
@@ -75,7 +74,6 @@ abstract class Url
 
     /**
      * @param string|UriInterface $url
-     * @throws InvalidArgumentException
      * @return Request\Url\Full|Request\Url\Relative
      */
     public static function createDestinationUrl($url, ?Request\Url\Base $baseUrl = null): self

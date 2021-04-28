@@ -11,9 +11,6 @@ use function sprintf;
 
 class Relative extends Request\Url
 {
-    /**
-     * @throws InvalidArgumentException
-     */
     protected function validate(): void
     {
         if (!empty($this->uri->getScheme())) {

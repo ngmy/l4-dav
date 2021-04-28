@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ngmy\WebDav\Request\Header;
 
 use Ngmy\WebDav\Request;
-use RuntimeException;
 use SplFileObject;
 
 class ContentLength
@@ -15,9 +14,6 @@ class ContentLength
     /** @var int */
     private $contentLength;
 
-    /**
-     * @throws RuntimeException
-     */
     public static function createFromFilePath(string $filePath): self
     {
         $contentLength = (new SplFileObject($filePath))->getSize();

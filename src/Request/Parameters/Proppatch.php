@@ -63,9 +63,6 @@ class Proppatch
         return $this->propertiesToRemove;
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
     private function validate(): void
     {
         if (empty($this->propertiesToSet) && empty($this->propertiesToRemove)) {
