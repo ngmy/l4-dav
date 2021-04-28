@@ -4,103 +4,64 @@ declare(strict_types=1);
 
 namespace Ngmy\WebDav\Request;
 
-use InvalidArgumentException;
+use Ngmy\Enum\Enum;
 
-use function in_array;
-use function sprintf;
-
-class Method
+/**
+ * @method static self GET()
+ * @method static self PUT()
+ * @method static self DELETE()
+ * @method static self HEAD()
+ * @method static self COPY()
+ * @method static self MOVE()
+ * @method static self MKCOL()
+ * @method static self PROPFIND()
+ * @method static self PROPPATCH()
+ */
+class Method extends Enum
 {
-    private const GET = 'GET';
-    private const PUT = 'PUT';
-    private const DELETE  = 'DELETE';
-    private const HEAD = 'HEAD';
-    private const COPY = 'COPY';
-    private const MOVE = 'MOVE';
-    private const MKCOL = 'MKCOL';
-    private const PROPFIND = 'PROPFIND';
-    private const PROPPATCH = 'PROPPATCH';
-
-    /** @var string */
-    private $method;
-
-    public static function createGetMethod(): self
-    {
-        return new self(self::GET);
-    }
-
-    public static function createPutMethod(): self
-    {
-        return new self(self::PUT);
-    }
-
-    public static function createDeleteMethod(): self
-    {
-        return new self(self::DELETE);
-    }
-
-    public static function createHeadMethod(): self
-    {
-        return new self(self::HEAD);
-    }
-
-    public static function createCopyMethod(): self
-    {
-        return new self(self::COPY);
-    }
-
-    public static function createMoveMethod(): self
-    {
-        return new self(self::MOVE);
-    }
-
-    public static function createMkcolMethod(): self
-    {
-        return new self(self::MKCOL);
-    }
-
-    public static function createPropfindMethod(): self
-    {
-        return new self(self::PROPFIND);
-    }
-
-    public static function createProppatchMethod(): self
-    {
-        return new self(self::PROPPATCH);
-    }
-
-    public function __toString(): string
-    {
-        return $this->method;
-    }
-
-    private function __construct(string $method)
-    {
-        $this->method = $method;
-        $this->validate();
-    }
-
     /**
-     * @throws InvalidArgumentException
+     * @var string
+     * @enum
      */
-    private function validate(): void
-    {
-        if (
-            !in_array($this->method, [
-                self::GET,
-                self::PUT,
-                self::DELETE,
-                self::HEAD,
-                self::COPY,
-                self::MOVE,
-                self::MKCOL,
-                self::PROPFIND,
-                self::PROPPATCH,
-            ])
-        ) {
-            throw new InvalidArgumentException(
-                sprintf('The WebDAV method "%s" is not allowed.', $this->method)
-            );
-        };
-    }
+    private static $GET;
+    /**
+     * @var string
+     * @enum
+     */
+    private static $PUT;
+    /**
+     * @var string
+     * @enum
+     */
+    private static $DELETE;
+    /**
+     * @var string
+     * @enum
+     */
+    private static $HEAD;
+    /**
+     * @var string
+     * @enum
+     */
+    private static $COPY;
+    /**
+     * @var string
+     * @enum
+     */
+    private static $MOVE;
+    /**
+     * @var string
+     * @enum
+     */
+    private static $MKCOL;
+    /**
+     * @var string
+     * @enum
+     */
+    private static $PROPFIND;
+    /**
+     * @var string
+     * @enum
+     */
+    private static $PROPPATCH;
 }

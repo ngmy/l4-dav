@@ -37,7 +37,7 @@ class Command
         Client\Options $options,
         $url
     ): self {
-        return new self($options, Request\Method::createGetMethod(), $url);
+        return new self($options, Request\Method::GET(), $url);
     }
 
     /**
@@ -56,7 +56,7 @@ class Command
             throw new RuntimeException(sprintf('Failed to open the file "%s".', $parameters->getSourcePath()));
         }
         $body = new Request\Body(Psr17FactoryDiscovery::findStreamFactory()->createStreamFromResource($fh));
-        return new self($options, Request\Method::createPutMethod(), $url, $headers, $body);
+        return new self($options, Request\Method::PUT(), $url, $headers, $body);
     }
 
     /**
@@ -66,7 +66,7 @@ class Command
         Client\Options $options,
         $url
     ): self {
-        return new self($options, Request\Method::createDeleteMethod(), $url);
+        return new self($options, Request\Method::DELETE(), $url);
     }
 
     /**
@@ -81,7 +81,7 @@ class Command
         $headers = $parameters->getOverwrite()->provide($headers);
         $headers = Request\Header\Destination::createFromUrl($parameters->getDestinationUrl(), $options->getBaseUrl())
             ->provide($headers);
-        return new self($options, Request\Method::createCopyMethod(), $url, $headers);
+        return new self($options, Request\Method::COPY(), $url, $headers);
     }
 
     /**
@@ -95,7 +95,7 @@ class Command
         $headers = new Request\Headers();
         $headers = Request\Header\Destination::createFromUrl($parameters->getDestinationUrl(), $options->getBaseUrl())
             ->provide($headers);
-        return new self($options, Request\Method::createMoveMethod(), $url, $headers);
+        return new self($options, Request\Method::MOVE(), $url, $headers);
     }
 
     /**
@@ -105,7 +105,7 @@ class Command
         Client\Options $options,
         $url
     ): self {
-        return new self($options, Request\Method::createMkcolMethod(), $url);
+        return new self($options, Request\Method::MKCOL(), $url);
     }
 
     /**
@@ -115,7 +115,7 @@ class Command
         Client\Options $options,
         $url
     ): self {
-        return new self($options, Request\Method::createHeadMethod(), $url);
+        return new self($options, Request\Method::HEAD(), $url);
     }
 
     /**
@@ -128,7 +128,7 @@ class Command
     ): self {
         $headers = new Request\Headers();
         $headers = $parameters->getDepth()->provide($headers);
-        return new self($options, Request\Method::createPropfindMethod(), $url, $headers);
+        return new self($options, Request\Method::PROPFIND(), $url, $headers);
     }
 
     /**
@@ -147,7 +147,7 @@ class Command
             $bodyBuilder->addPropetyToRemove($property);
         }
         $body = $bodyBuilder->build();
-        return new self($options, Request\Method::createProppatchMethod(), $url, null, $body);
+        return new self($options, Request\Method::PROPPATCH(), $url, null, $body);
     }
 
     public function execute(Request\Dispatcher $dispatcher): void
