@@ -596,115 +596,50 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Method.html"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003AcreateGetMethod\u0028\u0029",
-            "name": "createGetMethod",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#method_createGetMethod"
-        },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003AcreatePutMethod\u0028\u0029",
-            "name": "createPutMethod",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#method_createPutMethod"
-        },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003AcreateDeleteMethod\u0028\u0029",
-            "name": "createDeleteMethod",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#method_createDeleteMethod"
-        },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003AcreateHeadMethod\u0028\u0029",
-            "name": "createHeadMethod",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#method_createHeadMethod"
-        },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003AcreateCopyMethod\u0028\u0029",
-            "name": "createCopyMethod",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#method_createCopyMethod"
-        },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003AcreateMoveMethod\u0028\u0029",
-            "name": "createMoveMethod",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#method_createMoveMethod"
-        },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003AcreateMkcolMethod\u0028\u0029",
-            "name": "createMkcolMethod",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#method_createMkcolMethod"
-        },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003AcreatePropfindMethod\u0028\u0029",
-            "name": "createPropfindMethod",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#method_createPropfindMethod"
-        },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003AcreateProppatchMethod\u0028\u0029",
-            "name": "createProppatchMethod",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#method_createProppatchMethod"
-        },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003A__toString\u0028\u0029",
-            "name": "__toString",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#method___toString"
-        },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#method___construct"
-        },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003Avalidate\u0028\u0029",
-            "name": "validate",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#method_validate"
-        },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003AGET",
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003A\u0024GET",
             "name": "GET",
             "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#constant_GET"
+            "url": "classes/Ngmy-WebDav-Request-Method.html#property_GET"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003APUT",
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003A\u0024PUT",
             "name": "PUT",
             "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#constant_PUT"
+            "url": "classes/Ngmy-WebDav-Request-Method.html#property_PUT"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003ADELETE",
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003A\u0024DELETE",
             "name": "DELETE",
             "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#constant_DELETE"
+            "url": "classes/Ngmy-WebDav-Request-Method.html#property_DELETE"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003AHEAD",
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003A\u0024HEAD",
             "name": "HEAD",
             "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#constant_HEAD"
+            "url": "classes/Ngmy-WebDav-Request-Method.html#property_HEAD"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003ACOPY",
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003A\u0024COPY",
             "name": "COPY",
             "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#constant_COPY"
+            "url": "classes/Ngmy-WebDav-Request-Method.html#property_COPY"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003AMOVE",
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003A\u0024MOVE",
             "name": "MOVE",
             "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#constant_MOVE"
+            "url": "classes/Ngmy-WebDav-Request-Method.html#property_MOVE"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003AMKCOL",
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003A\u0024MKCOL",
             "name": "MKCOL",
             "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#constant_MKCOL"
+            "url": "classes/Ngmy-WebDav-Request-Method.html#property_MKCOL"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003APROPFIND",
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003A\u0024PROPFIND",
             "name": "PROPFIND",
             "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#constant_PROPFIND"
+            "url": "classes/Ngmy-WebDav-Request-Method.html#property_PROPFIND"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003APROPPATCH",
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003A\u0024PROPPATCH",
             "name": "PROPPATCH",
             "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#constant_PROPPATCH"
-        },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Method\u003A\u003A\u0024method",
-            "name": "method",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Method.html#property_method"
+            "url": "classes/Ngmy-WebDav-Request-Method.html#property_PROPPATCH"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Copy",
             "name": "Copy",
