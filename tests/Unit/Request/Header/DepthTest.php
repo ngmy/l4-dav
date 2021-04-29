@@ -7,6 +7,9 @@ use InvalidArgumentException;
 use Ngmy\WebDav\Request;
 use Ngmy\WebDav\Tests\TestCase;
 
+use function assert;
+use function get_class;
+
 class DepthTest extends TestCase
 {
     /**
@@ -35,7 +38,7 @@ class DepthTest extends TestCase
     }
 
     /**
-     * @param Request\Header\Depth|Exception $expected
+     * @param Exception|Request\Header\Depth $expected
      * @dataProvider getInstanceProvider
      */
     public function testGetInstance(string $value, $expected): void
