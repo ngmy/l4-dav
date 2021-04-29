@@ -34,14 +34,21 @@ class BaseTest extends TestCase
             ['ftp://example.com', new InvalidArgumentException()],
             ['http://', new InvalidArgumentException()],
             ['path', new InvalidArgumentException()],
+            [(function () {
+                return Psr17FactoryDiscovery::findUriFactory()
+                    ->createUri()
+                    ->withScheme('http')
+                    ;
+            })(), new InvalidArgumentException()],
         ];
     }
 
     /**
-     * @param Exception $expected
+     * @param string|UriInterface $url
+     * @param Exception           $expected
      * @dataProvider instantiateClassProvider
      */
-    public function testInstantiateClass(string $url, $expected = null): void
+    public function testInstantiateClass($url, $expected = null): void
     {
         if (is_null($expected)) {
             $this->expectNotToPerformAssertions();

@@ -14,12 +14,12 @@ class Full extends Request\Url
 {
     protected function validate(): void
     {
-        if (!in_array($this->uri->getScheme(), ['http', 'https'])) {
+        if ($this->uri->getPath() != '' && $this->uri->getPath()[0] != '/') {
             throw new InvalidArgumentException(
                 sprintf(
-                    'The scheme of the full URL "%s" must be "http" or "https", "%s" given.',
+                    'The path of the full URL "%s" must be empty or begin with a slash, "%s" given.',
                     $this->uri,
-                    $this->uri->getScheme()
+                    $this->uri->getpath()
                 )
             );
         }
@@ -31,12 +31,12 @@ class Full extends Request\Url
                 )
             );
         }
-        if ($this->uri->getPath() != '' && $this->uri->getPath()[0] != '/') {
+        if (!in_array($this->uri->getScheme(), ['http', 'https'])) {
             throw new InvalidArgumentException(
                 sprintf(
-                    'The path of the full URL "%s" must be empty or begin with a slash, "%s" given.',
+                    'The scheme of the full URL "%s" must be "http" or "https", "%s" given.',
                     $this->uri,
-                    $this->uri->getpath()
+                    $this->uri->getScheme()
                 )
             );
         }

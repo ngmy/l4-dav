@@ -416,11 +416,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Header-Booleable.html#method_getInstance"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Header\\Booleable\u003A\u003AgetValue\u0028\u0029",
-            "name": "getValue",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Header-Booleable.html#method_getValue"
-        },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Header\\Booleable\u003A\u003A\u0024T",
             "name": "T",
             "summary": "",

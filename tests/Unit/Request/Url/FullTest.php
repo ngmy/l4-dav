@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Ngmy\WebDav\Tests\Unit\Request\Url;
 
 use Exception;
+use Http\Discovery\Psr17FactoryDiscovery;
 use InvalidArgumentException;
 use Ngmy\WebDav\Request\Url;
 use Ngmy\WebDav\Tests\TestCase;
+use Psr\Http\Message\UriInterface;
 
 use function get_class;
 use function is_null;
@@ -34,15 +36,27 @@ class FullTest extends TestCase
             ['path', null, new InvalidArgumentException()],
             ['http://example.com', null],
             ['/path', Url::createBaseUrl('http://example.com')],
-            ['/path', null, new InvalidArgumentException()],
+            [(function () {
+                return Psr17FactoryDiscovery::findUriFactory()
+                    ->createUri()
+                    ->withScheme('http')
+                    ;
+            })(), null, new InvalidArgumentException()],
+            [(function () {
+                return Psr17FactoryDiscovery::findUriFactory()
+                    ->createUri()
+                    ->withPath('path')
+                    ;
+            })(), null, new InvalidArgumentException()],
         ];
     }
 
     /**
-     * @param Exception $expected
+     * @param string|UriInterface $url
+     * @param Exception           $expected
      * @dataProvider instantiateClassProvider
      */
-    public function testInstantiateClass(string $url, ?Url\Base $baseUrl = null, $expected = null): void
+    public function testInstantiateClass($url, ?Url\Base $baseUrl = null, $expected = null): void
     {
         if (is_null($expected)) {
             $this->expectNotToPerformAssertions();
