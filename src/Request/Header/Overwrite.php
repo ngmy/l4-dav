@@ -19,6 +19,6 @@ class Overwrite extends Enum
 
     public function provide(Request\Headers $headers): Request\Headers
     {
-        return $headers->withHeader(self::HEADER_NAME, $this->name());
+        return $headers->withHeader(self::HEADER_NAME, (string) $this);
     }
 }

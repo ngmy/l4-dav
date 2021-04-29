@@ -38,6 +38,6 @@ class Destination
 
     public function provide(Request\Headers $headers): Request\Headers
     {
-        return $headers->withHeader(self::HEADER_NAME, (string) $this->destinationUrl);
+        return $headers->withHeader(self::HEADER_NAME, (string) $this);
     }
 }
