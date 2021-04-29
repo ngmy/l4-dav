@@ -11,6 +11,9 @@ use RuntimeException;
 use function preg_match;
 use function strtolower;
 
+use const LIBXML_NOERROR;
+use const LIBXML_NOWARNING;
+
 class Xml
 {
     /** @var ResponseInterface */
@@ -35,7 +38,7 @@ class Xml
         $body = $this->response->getBody()->getContents();
         $this->response->getBody()->rewind();
 
-        if ($xml->loadXML($body) === false) {
+        if (!$xml->loadXML($body, LIBXML_NOERROR | LIBXML_NOWARNING)) {
             throw new RuntimeException('Failed to parse the XML response body.');
         }
 
