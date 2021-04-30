@@ -43,10 +43,10 @@ jobs:
           docker-compose build
         working-directory: laradock
 
-    - name: Upload image to artifact store
-      uses: ishworkh/docker-image-artifact-upload@v1
-      with:
-        image: 'laradock-ngmy-l4-dav_apache2:latest'
+      - name: Upload image to artifact store
+        uses: ishworkh/docker-image-artifact-upload@v1
+        with:
+          image: laradock-ngmy-l4-dav_apache2:latest
 
   test:
 
@@ -114,7 +114,7 @@ jobs:
       - name: Download images from artifact store
         uses: ishworkh/docker-image-artifact-download@v1
         with:
-          image: 'laradock-ngmy-l4-dav_apache2:latest'
+          image: laradock-ngmy-l4-dav_apache2:latest
 
       - name: Run containers
         run: |
