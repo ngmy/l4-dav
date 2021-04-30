@@ -98,7 +98,7 @@ class ClientTest extends TestCase
         }
 
         $file = $before();
-        $sourcePath = is_resource($file) ? stream_get_meta_data($file)['uri'] : '';
+        $sourcePath = is_resource($file) ? stream_get_meta_data($file)['uri'] : $this->getUniqueTemporaryFilePath();
 
         $client = $this->createClient();
         $parameters = (new Request\Parameters\Builder\Put())
