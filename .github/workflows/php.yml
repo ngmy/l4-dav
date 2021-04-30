@@ -82,6 +82,21 @@ jobs:
           name: tools
           path: tools
 
+      - run: |
+          git submodule update --init
+
+      - run: |
+          cp -f ../.laradock/env-development .env
+          docker-compose up -d apache2
+          docker-compose exec apache2 mkdir -p .laradock/data/apache2/var \
+            .laradock/data/apache2/webdav_no_auth \
+            .laradock/data/apache2/webdav_basic_auth \
+            .laradock/data/apache2/webdav_digest_auth
+          docker-compose exec apache2 chown -R www-data:www-data .laradock/data/apache2
+          docker-compose exec apache2 htpasswd -b -c /etc/apache2/.htpasswd basic basic
+          docker-compose exec apache2 bash -c '(echo -n "digest:Digest Auth:" && echo -n "digest:Digest Auth:digest" | md5sum - | cut -d"-" -f1 | sed "s/ *$//") > /etc/apache2/.htdigest'
+        working-directory: laradock
+
       - name: Set tools as an executable
         run: find tools -type f -print0 | xargs -0 chmod +x
 
