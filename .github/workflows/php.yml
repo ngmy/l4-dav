@@ -111,7 +111,7 @@ jobs:
       - name: Run unit tests
         env:
           XDEBUG_MODE: coverage
-        run: composer test -- --testsuite Unit
+        run: composer test
 
       - name: Upload coverage results to Coveralls
         env:
