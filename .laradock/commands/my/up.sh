@@ -17,7 +17,6 @@ handle() {
   docker-compose exec apache2 bash -c '(echo -n "digest:Digest Auth:" && echo -n "digest:Digest Auth:digest" | md5sum - | cut -d"-" -f1 | sed "s/ *$//") > /etc/apache2/.htdigest'
   docker-compose exec -u laradock workspace composer install
   docker-compose exec -u laradock workspace cp phpunit.xml.dist phpunit.xml
-  docker-compose exec -u laradock workspace sed -i -z 's/<!--\(<testsuite name="Feature".*\)-->/\1/g' phpunit.xml
   if ! docker-compose exec workspace bash -c 'test -f /usr/local/bin/phive'; then
     docker-compose exec workspace curl -fsSL https://phar.io/releases/phive.phar -o /tmp/phive.phar
     docker-compose exec workspace curl -fsSL https://phar.io/releases/phive.phar.asc -o /tmp/phive.phar.asc
