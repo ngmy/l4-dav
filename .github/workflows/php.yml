@@ -24,11 +24,11 @@ jobs:
           name: tools
           path: tools
 
-  build_image:
+  build_images:
 
     runs-on: ubuntu-18.04
 
-    name: Build image
+    name: Build images
 
     steps:
       - name: Check out repository
@@ -36,21 +36,21 @@ jobs:
         with:
           submodules: true
 
-      - name: Build image
+      - name: Build apache2 image
         run: |
           cp -f ../.laradock/ci-docker-compose.yml docker-compose.yml
           cp -f ../.laradock/env-development .env
           docker-compose build
         working-directory: laradock
 
-      - name: Upload image to artifact store
+      - name: Upload apache2 image to artifact store
         uses: ishworkh/docker-image-artifact-upload@v1
         with:
           image: laradock-ngmy-l4-dav_apache2:latest
 
   test:
 
-    needs: [install_tools, build_image]
+    needs: [install_tools, build_images]
 
     runs-on: ubuntu-18.04
 
@@ -111,16 +111,16 @@ jobs:
       - name: Set tools as an executable
         run: find tools -type f -print0 | xargs -0 chmod +x
 
-      - name: Download images from artifact store
+      - name: Download apache2 image from artifact store
         uses: ishworkh/docker-image-artifact-download@v1
         with:
           image: laradock-ngmy-l4-dav_apache2:latest
 
-      - name: Run containers
+      - name: Start apache2 container
         run: |
           cp -f ../.laradock/ci-docker-compose.yml docker-compose.yml
           cp -f ../.laradock/env-development .env
-          docker-compose up -d apache2
+          docker-compose up -d --no-build apache2
           docker-compose exec -T apache2 mkdir -p .laradock/data/apache2/var \
             .laradock/data/apache2/webdav_no_auth \
             .laradock/data/apache2/webdav_basic_auth \
@@ -130,7 +130,7 @@ jobs:
           docker-compose exec -T apache2 bash -c '(echo -n "digest:Digest Auth:" && echo -n "digest:Digest Auth:digest" | md5sum - | cut -d"-" -f1 | sed "s/ *$//") > /etc/apache2/.htdigest'
         working-directory: laradock
 
-      - name: Add container hostname to /etc/hosts
+      - name: Add apache2 container hostname to /etc/hosts
         run: |
           echo '127.0.0.1 apache2' | sudo tee -a /etc/hosts
 
