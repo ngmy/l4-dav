@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\HeaderBag;
 class Headers
 {
     /**
-     * @var HeaderBag<string, array<int, string>|string>
+     * @var HeaderBag
      * @phpstan-var HeaderBag<string, list<string>|string>
-     * @psalm-var HeaderBag<string, list<string>|string>
+     * @psalm-var HeaderBag
      */
     private $headers;
 
@@ -39,18 +39,26 @@ class Headers
     {
         $new = clone $this->headers;
         $new->set($key, $values);
-        return new self($new->all());
+        /** @psalm-var array<string, list<string>|string> $headers */
+        $headers = $new->all();
+        return new self($headers);
     }
 
     public function withHeaders(Headers $headers): self
     {
         $new = clone $this->headers;
         $new->add($headers->toArray());
-        return new self($new->all());
+        /** @psalm-var array<string, list<string>|string> $headers */
+        $headers = $new->all();
+        return new self($headers);
     }
 
     public function provide(RequestInterface $request): RequestInterface
     {
+        /**
+         * @psalm-var string              $key
+         * @psalm-var list<string>|string $value
+         */
         foreach ($this->headers as $key => $value) {
             $request = $request->withHeader($key, $value);
         }
@@ -58,10 +66,15 @@ class Headers
     }
 
     /**
-     * @return array<string, list<string>>
+     * @return array<string, array<int, string>|string>
+     *
+     * @phpstan-return array<string, list<string>|string>
+     *
+     * @psalm-return array<string, list<string>|string>
      */
     public function toArray(): array
     {
+        /** @psalm-var array<string, list<string>|string> */
         return $this->headers->all();
     }
 }

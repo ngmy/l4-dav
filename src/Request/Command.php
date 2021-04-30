@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ngmy\WebDav\Request;
 
 use Http\Discovery\Psr17FactoryDiscovery;
+use InvalidArgumentException;
 use Ngmy\WebDav\Client;
 use Ngmy\WebDav\Request;
 use Psr\Http\Message\ResponseInterface;
@@ -24,7 +25,7 @@ class Command
     private $headers;
     /** @var Request\Body */
     private $body;
-    /** @var ResponseInterface */
+    /** @var ResponseInterface|null */
     private $response;
 
     /**
@@ -151,6 +152,9 @@ class Command
 
     public function getResult(): ResponseInterface
     {
+        if (is_null($this->response)) {
+            throw new InvalidArgumentException();
+        }
         return $this->response;
     }
 

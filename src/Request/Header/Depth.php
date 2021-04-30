@@ -45,6 +45,7 @@ class Depth extends Enum
 
     public function getValue(): string
     {
+        /** @psalm-var string */
         return self::${$this->name()};
     }
 

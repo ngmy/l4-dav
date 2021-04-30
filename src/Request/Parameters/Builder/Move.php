@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace Ngmy\WebDav\Request\Parameters\Builder;
 
 use Http\Discovery\Psr17FactoryDiscovery;
+use InvalidArgumentException;
 use Ngmy\WebDav\Request;
 use Psr\Http\Message\UriInterface;
+
+use function is_null;
 
 class Move
 {
     /**
      * The destination resource URL.
      *
-     * @var UriInterface
+     * @var UriInterface|null
      */
     private $destinationUrl;
 
@@ -36,6 +39,9 @@ class Move
      */
     public function build(): Request\Parameters\Move
     {
+        if (is_null($this->destinationUrl)) {
+            throw new InvalidArgumentException();
+        }
         return new Request\Parameters\Move($this->destinationUrl);
     }
 }

@@ -18,7 +18,7 @@ class Full extends Request\Url
             throw new InvalidArgumentException(
                 sprintf(
                     'The path of the full URL "%s" must be empty or begin with a slash, "%s" given.',
-                    $this->uri,
+                    (string) $this->uri,
                     $this->uri->getpath()
                 )
             );
@@ -27,7 +27,7 @@ class Full extends Request\Url
             throw new InvalidArgumentException(
                 sprintf(
                     'The full URL "%s" must contain an authority.',
-                    $this->uri
+                    (string) $this->uri
                 )
             );
         }
@@ -35,7 +35,7 @@ class Full extends Request\Url
             throw new InvalidArgumentException(
                 sprintf(
                     'The scheme of the full URL "%s" must be "http" or "https", "%s" given.',
-                    $this->uri,
+                    (string) $this->uri,
                     $this->uri->getScheme()
                 )
             );

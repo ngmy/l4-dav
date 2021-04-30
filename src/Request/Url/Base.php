@@ -23,7 +23,7 @@ class Base extends Request\Url
             throw new InvalidArgumentException(
                 sprintf(
                     'The base URL "%s" must not contain a fragment, "%s" given.',
-                    $this->uri,
+                    (string) $this->uri,
                     $this->uri->getFragment()
                 )
             );
@@ -32,7 +32,7 @@ class Base extends Request\Url
             throw new InvalidArgumentException(
                 sprintf(
                     'The base URL "%s" must not contain a query, "%s" given.',
-                    $this->uri,
+                    (string) $this->uri,
                     $this->uri->getQuery()
                 )
             );
@@ -41,7 +41,7 @@ class Base extends Request\Url
             throw new InvalidArgumentException(
                 sprintf(
                     'The path of the base URL "%s" must be empty or begin with a slash, "%s" given.',
-                    $this->uri,
+                    (string) $this->uri,
                     $this->uri->getPath()
                 )
             );
@@ -50,14 +50,14 @@ class Base extends Request\Url
             throw new InvalidArgumentException(
                 sprintf(
                     'The base URL "%s" must contain an authority.',
-                    $this->uri
+                    (string) $this->uri
                 )
             );
         }
         if (!in_array($this->uri->getScheme(), ['http', 'https'])) {
             throw new InvalidArgumentException(sprintf(
                 'The scheme of the base URL "%s" must be "http" or "https", "%s" given.',
-                $this->uri,
+                (string) $this->uri,
                 $this->uri->getScheme()
             ));
         }

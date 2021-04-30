@@ -22,13 +22,13 @@ class Proppatch
      * @phpstan-var list<DOMNode>
      * @psalm-var list<DOMNode>
      */
-    private $propetiesToSet;
+    private $propetiesToSet = [];
     /**
      * @var array<int, DOMNode>
      * @phpstan-var list<DOMNode>
      * @psalm-var list<DOMNode>
      */
-    private $propetiesToRemove;
+    private $propetiesToRemove = [];
 
     public function __construct()
     {

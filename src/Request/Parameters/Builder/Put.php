@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace Ngmy\WebDav\Request\Parameters\Builder;
 
+use InvalidArgumentException;
 use Ngmy\WebDav\Request;
+
+use function is_null;
 
 class Put
 {
     /**
      * The source file path.
      *
-     * @var string
+     * @var string|null
      */
     private $sourcePath;
 
@@ -34,6 +37,9 @@ class Put
      */
     public function build(): Request\Parameters\Put
     {
+        if (is_null($this->sourcePath)) {
+            throw new InvalidArgumentException();
+        }
         return new Request\Parameters\Put($this->sourcePath);
     }
 }

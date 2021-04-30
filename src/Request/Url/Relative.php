@@ -17,7 +17,7 @@ class Relative extends Request\Url
             throw new InvalidArgumentException(
                 sprintf(
                     'The shortcut URL "%s" must not contain a scheme, "%s" given.',
-                    $this->uri,
+                    (string) $this->uri,
                     $this->uri->getScheme()
                 )
             );
@@ -26,7 +26,7 @@ class Relative extends Request\Url
             throw new InvalidArgumentException(
                 sprintf(
                     'The shortcut URL "%s" must not contain an authority, "%s" given.',
-                    $this->uri,
+                    (string) $this->uri,
                     $this->uri->getAuthority()
                 )
             );

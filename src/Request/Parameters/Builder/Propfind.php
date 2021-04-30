@@ -11,7 +11,7 @@ class Propfind
     /**
      * What depth to apply.
      *
-     * @var Request\Header\Depth
+     * @var Request\Header\Depth|null
      */
     private $depth;
 

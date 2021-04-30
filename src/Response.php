@@ -62,54 +62,54 @@ class Response implements MessageInterface, ResponseInterface
     /**
      * {@inheritdoc}
      */
-    public function hasHeader($header)
+    public function hasHeader($name)
     {
-        return $this->response->hasHeader($header);
+        return $this->response->hasHeader($name);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getHeader($header)
+    public function getHeader($name)
     {
-        return $this->response->getHeader($header);
+        return $this->response->getHeader($name);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getHeaderLine($header)
+    public function getHeaderLine($name)
     {
-        return $this->response->getHeaderLine($header);
+        return $this->response->getHeaderLine($name);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function withHeader($header, $value)
+    public function withHeader($name, $value)
     {
         $new = clone $this;
-        $new->response = $this->response->withHeader($header, $value);
+        $new->response = $this->response->withHeader($name, $value);
         return $new;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function withAddedHeader($header, $value)
+    public function withAddedHeader($name, $value)
     {
         $new = clone $this;
-        $new->response = $this->response->withAddedHeader($header, $value);
+        $new->response = $this->response->withAddedHeader($name, $value);
         return $new;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function withoutHeader($header)
+    public function withoutHeader($name)
     {
         $new = clone $this;
-        $new->response = $this->response->withoutHeader($header);
+        $new->response = $this->response->withoutHeader($name);
         return $new;
     }
 
