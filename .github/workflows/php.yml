@@ -86,6 +86,7 @@ jobs:
           git submodule update --init
 
       - run: |
+          cp -f ../.laradock/ci-docker-compose.yml docker-compose.yml
           cp -f ../.laradock/env-development .env
           docker-compose up -d apache2
           docker-compose exec -T apache2 mkdir -p .laradock/data/apache2/var \
