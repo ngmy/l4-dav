@@ -7,7 +7,6 @@
         "client",
         "webdav client",
         "stream",
-        "curl",
         "psr-7",
         "psr-17",
         "psr-18"
