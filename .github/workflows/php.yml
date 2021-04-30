@@ -24,9 +24,33 @@ jobs:
           name: tools
           path: tools
 
+  build_image:
+
+    runs-on: ubuntu-18.04
+
+    name: Build image
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Build image
+        run: |
+          cp -f ../.laradock/ci-docker-compose.yml docker-compose.yml
+          cp -f ../.laradock/env-development .env
+          docker-compose build
+        working-directory: laradock
+
+    - name: Upload image to artifact store
+      uses: ishworkh/docker-image-artifact-upload@v1
+      with:
+        image: 'laradock-ngmy-l4-dav_apache2:latest'
+
   test:
 
-    needs: install_tools
+    needs: [install_tools, build_image]
 
     runs-on: ubuntu-18.04
 
@@ -44,6 +68,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
+        with:
+          submodules: true
 
       - name: Set up PHP ${{ matrix.php }}
         run: sudo update-alternatives --set php /usr/bin/php${{ matrix.php }}
@@ -82,10 +108,16 @@ jobs:
           name: tools
           path: tools
 
-      - run: |
-          git submodule update --init
+      - name: Set tools as an executable
+        run: find tools -type f -print0 | xargs -0 chmod +x
 
-      - run: |
+      - name: Download images from artifact store
+        uses: ishworkh/docker-image-artifact-download@v1
+        with:
+          image: 'laradock-ngmy-l4-dav_apache2:latest'
+
+      - name: Run containers
+        run: |
           cp -f ../.laradock/ci-docker-compose.yml docker-compose.yml
           cp -f ../.laradock/env-development .env
           docker-compose up -d apache2
@@ -98,11 +130,9 @@ jobs:
           docker-compose exec -T apache2 bash -c '(echo -n "digest:Digest Auth:" && echo -n "digest:Digest Auth:digest" | md5sum - | cut -d"-" -f1 | sed "s/ *$//") > /etc/apache2/.htdigest'
         working-directory: laradock
 
-      - run: |
+      - name: Add container hostname to /etc/hosts
+        run: |
           echo '127.0.0.1 apache2' | sudo tee -a /etc/hosts
-
-      - name: Set tools as an executable
-        run: find tools -type f -print0 | xargs -0 chmod +x
 
       - name: Run lint
         env:
