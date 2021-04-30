@@ -37,6 +37,8 @@ jobs:
           submodules: true
 
       - name: Build apache2 image
+        env:
+          DOCKER_BUILDKIT: 1
         run: |
           cp -f ../.laradock/ci-docker-compose.yml docker-compose.yml
           cp -f ../.laradock/env-development .env
