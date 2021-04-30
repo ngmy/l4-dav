@@ -98,6 +98,9 @@ jobs:
           docker-compose exec -T apache2 bash -c '(echo -n "digest:Digest Auth:" && echo -n "digest:Digest Auth:digest" | md5sum - | cut -d"-" -f1 | sed "s/ *$//") > /etc/apache2/.htdigest'
         working-directory: laradock
 
+      - run: |
+          echo '127.0.0.1 apache2' | sudo tee -a /etc/hosts
+
       - name: Set tools as an executable
         run: find tools -type f -print0 | xargs -0 chmod +x
 
