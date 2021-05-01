@@ -5,10 +5,22 @@ declare(strict_types=1);
 namespace Ngmy\WebDav\Request\Parameters\Builder;
 
 use DOMNode;
+use LogicException;
 use Ngmy\WebDav\Request;
 
-class Proppatch
+/**
+ * @phpstan-import-type ConstructorType from Request\Parameters\Proppatch as BuildingConstructorType
+ *
+ * @psalm-import-type ConstructorType from Request\Parameters\Proppatch as BuildingConstructorType
+ */
+final class Proppatch
 {
+    /**
+     * @var callable
+     * @phpstan-var BuildingConstructorType
+     * @psalm-var BuildingConstructorType
+     */
+    private $buildingConstructor;
     /**
      * Properties to set.
      *
@@ -27,27 +39,45 @@ class Proppatch
     private $propertiesToRemove = [];
 
     /**
+     * Create a new instance of the builder class.
+     *
+     * Call Request\Parameters\Proppatch::createBuilder() instead of calling this constructor directly.
+     *
+     * @see Request\Parameters\Proppatch::createBuilder()
+     *
+     * @phpstan-param BuildingConstructorType $buildingConstructor
+     *
+     * @psalm-param BuildingConstructorType $buildingConstructor
+     */
+    public function __construct(callable $buildingConstructor)
+    {
+        $this->buildingConstructor = $buildingConstructor;
+    }
+
+    /**
      * Add the property to set.
      *
      * @param DOMNode $propertyToSet The property to set
-     * @return $this The value of the calling object
+     * @return self The value of the calling object
      */
     public function addPropertyToSet(DOMNode $propertyToSet): self
     {
-        $this->propertiesToSet[] = $propertyToSet;
-        return $this;
+        $new = clone $this;
+        $new->propertiesToSet[] = $propertyToSet;
+        return $new;
     }
 
     /**
      * Add the property to remove.
      *
      * @param DOMNode $propertyToRemove The property to remove
-     * @return $this The value of the calling object
+     * @return self The value of the calling object
      */
     public function addPropertyToRemove(DOMNode $propertyToRemove): self
     {
-        $this->propertiesToRemove[] = $propertyToRemove;
-        return $this;
+        $new = clone $this;
+        $new->propertiesToRemove[] = $propertyToRemove;
+        return $new;
     }
 
     /**
@@ -57,6 +87,14 @@ class Proppatch
      */
     public function build(): Request\Parameters\Proppatch
     {
-        return new Request\Parameters\Proppatch($this->propertiesToSet, $this->propertiesToRemove);
+        if (empty($this->propertiesToSet) && empty($this->propertiesToRemove)) {
+            throw new LogicException(
+                'PROPPATCH parameters must add properties to set and/or remove.'
+            );
+        }
+        return ($this->buildingConstructor)(
+            $this->propertiesToSet,
+            $this->propertiesToRemove
+        );
     }
 }

@@ -25,16 +25,16 @@ class DispatcherTest extends TestCase
         return [
             [
                 Request\Command::createGetCommand(
-                    (new Client\Options\Builder())->build(),
+                    Client\Options::createBuilder()->build(),
                     'http://example.com/file'
                 ),
                 ResponseInterface::class,
             ],
             [
                 Request\Command::createPutCommand(
-                    (new Client\Options\Builder())->build(),
+                    Client\Options::createBuilder()->build(),
                     'http://example.com/file',
-                    (new Request\Parameters\Builder\Put())->setSourcePath($file->url())->build()
+                    Request\Parameters\Put::createBuilder()->setSourcePath($file->url())->build()
                 ),
                 ResponseInterface::class,
             ],

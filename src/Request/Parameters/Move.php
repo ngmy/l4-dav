@@ -6,21 +6,55 @@ namespace Ngmy\WebDav\Request\Parameters;
 
 use Psr\Http\Message\UriInterface;
 
-class Move
+use function func_get_args;
+
+/**
+ * @phpstan-type ConstructorType = callable(UriInterface): self
+ *
+ * @psalm-type ConstructorType = callable(UriInterface): self
+ */
+final class Move
 {
-    /** @var UriInterface */
+    /**
+     * The destination resource URL.
+     *
+     * @var UriInterface
+     */
     private $destinationUrl;
 
     /**
-     * @param UriInterface $destinationUrl The destination path of a file
+     * Create a new instance of the builder class.
+     *
+     * @return Builder\Move A new instance of the builder class
      */
-    public function __construct(UriInterface $destinationUrl)
+    public static function createBuilder(): Builder\Move
     {
-        $this->destinationUrl = $destinationUrl;
+        return new Builder\Move(self::getConstructor());
     }
 
     public function getDestinationUrl(): UriInterface
     {
         return $this->destinationUrl;
+    }
+
+    /**
+     * @phpstan-return ConstructorType
+     *
+     * @psalm-return ConstructorType
+     */
+    private static function getConstructor(): callable
+    {
+        return function (): self {
+            /** @psalm-suppress MixedArgument */
+            return new self(...func_get_args());
+        };
+    }
+
+    /**
+     * @param UriInterface $destinationUrl The destination path of a file
+     */
+    private function __construct(UriInterface $destinationUrl)
+    {
+        $this->destinationUrl = $destinationUrl;
     }
 }

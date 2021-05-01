@@ -23,66 +23,34 @@ class BuilderTest extends TestCase
             [
                 null,
                 null,
-                new Client\Options(
-                    null,
-                    new Request\Headers()
-                ),
             ],
             [
                 'http://example.com',
                 null,
-                new Client\Options(
-                    Request\Url::createBaseUrl('http://example.com'),
-                    new Request\Headers()
-                ),
             ],
             [
                 Psr17FactoryDiscovery::findUriFactory()->createUri('http://example.com'),
                 null,
-                new Client\Options(
-                    Request\Url::createBaseUrl('http://example.com'),
-                    new Request\Headers()
-                ),
             ],
             [
                 null,
                 null,
-                new Client\Options(
-                    null,
-                    new Request\Headers()
-                ),
             ],
             [
                 null,
                 null,
-                new Client\Options(
-                    null,
-                    new Request\Headers()
-                ),
             ],
             [
                 null,
                 ['header_key' => 'header_value'],
-                new Client\Options(
-                    null,
-                    new Request\Headers(['header_key' => 'header_value'])
-                ),
             ],
             [
                 null,
                 null,
-                new Client\Options(
-                    null,
-                    new Request\Headers()
-                ),
             ],
             [
                 'http://example.com',
                 ['header_key' => 'header_value'],
-                new Client\Options(
-                    Request\Url::createBaseUrl('http://example.com'),
-                    new Request\Headers(['header_key' => 'header_value'])
-                ),
             ],
         ];
     }
@@ -90,22 +58,27 @@ class BuilderTest extends TestCase
     /**
      * @param string|UriInterface|null   $baseUrl
      * @param array<string, string>|null $defaultRequestHeaders
-     * @param Client\Options             $expected
      * @dataProvider buildProvider
      */
     public function testBuild(
         $baseUrl,
-        ?array $defaultRequestHeaders,
-        $expected
+        ?array $defaultRequestHeaders
     ): void {
-        $builder = new Client\Options\Builder();
+        $builder = Client\Options::createBuilder();
         if (!is_null($baseUrl)) {
-            $builder->setBaseUrl($baseUrl);
+            $builder = $builder->setBaseUrl($baseUrl);
         }
         if (!is_null($defaultRequestHeaders)) {
-            $builder->setDefaultRequestHeaders($defaultRequestHeaders);
+            $builder = $builder->setDefaultRequestHeaders($defaultRequestHeaders);
         }
         $actual = $builder->build();
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals(
+            is_null($baseUrl) ? null : Request\Url::createBaseUrl($baseUrl),
+            $actual->getBaseUrl()
+        );
+        $this->assertEquals(
+            is_null($defaultRequestHeaders) ? new Request\Headers() : new Request\Headers($defaultRequestHeaders),
+            $actual->getDefaultRequestHeaders()
+        );
     }
 }

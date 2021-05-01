@@ -26,7 +26,7 @@ class CommandTest extends TestCase
     {
         return [
             [
-                (new Client\Options\Builder())->build(),
+                Client\Options::createBuilder()->build(),
                 'http://example.com/file',
             ],
         ];
@@ -59,9 +59,9 @@ class CommandTest extends TestCase
                     $root = vfsStream::setup();
                     vfsStream::newFile('file')->at($root);
                 },
-                (new Client\Options\Builder())->build(),
+                Client\Options::createBuilder()->build(),
                 'http://example.com/file',
-                (new Request\Parameters\Builder\Put())
+                Request\Parameters\Put::createBuilder()
                     ->setSourcePath(vfsStream::url('root' . DIRECTORY_SEPARATOR . 'file'))
                     ->build(),
             ],
@@ -69,9 +69,9 @@ class CommandTest extends TestCase
                 function () {
                     vfsStream::setup();
                 },
-                (new Client\Options\Builder())->build(),
+                Client\Options::createBuilder()->build(),
                 'http://example.com/file',
-                (new Request\Parameters\Builder\Put())
+                Request\Parameters\Put::createBuilder()
                     ->setSourcePath(vfsStream::url('root' . DIRECTORY_SEPARATOR . 'file'))
                     ->build(),
                 new RuntimeException(),
@@ -111,7 +111,7 @@ class CommandTest extends TestCase
     {
         return [
             [
-                (new Client\Options\Builder())->build(),
+                Client\Options::createBuilder()->build(),
                 'http://example.com/file',
             ],
         ];
@@ -140,9 +140,9 @@ class CommandTest extends TestCase
     {
         return [
             [
-                (new Client\Options\Builder())->build(),
+                Client\Options::createBuilder()->build(),
                 'http://example.com/file1',
-                (new Request\Parameters\Builder\Copy())->setDestinationUrl('http://example.com/file2')->build()
+                Request\Parameters\Copy::createBuilder()->setDestinationUrl('http://example.com/file2')->build()
             ],
         ];
     }
@@ -171,9 +171,9 @@ class CommandTest extends TestCase
     {
         return [
             [
-                (new Client\Options\Builder())->build(),
+                Client\Options::createBuilder()->build(),
                 'http://example.com/file1',
-                (new Request\Parameters\Builder\Move())->setDestinationUrl('http://example.com/file2')->build()
+                Request\Parameters\Move::createBuilder()->setDestinationUrl('http://example.com/file2')->build()
             ],
         ];
     }
@@ -201,7 +201,7 @@ class CommandTest extends TestCase
     {
         return [
             [
-                (new Client\Options\Builder())->build(),
+                Client\Options::createBuilder()->build(),
                 'http://example.com/dir/',
             ],
         ];
@@ -230,7 +230,7 @@ class CommandTest extends TestCase
     {
         return [
             [
-                (new Client\Options\Builder())->build(),
+                Client\Options::createBuilder()->build(),
                 'http://example.com/file',
             ],
         ];
@@ -259,9 +259,9 @@ class CommandTest extends TestCase
     {
         return [
             [
-                (new Client\Options\Builder())->build(),
+                Client\Options::createBuilder()->build(),
                 'http://example.com/dir/',
-                (new Request\Parameters\Builder\Propfind())->build()
+                Request\Parameters\Propfind::createBuilder()->build()
             ],
         ];
     }
@@ -290,9 +290,9 @@ class CommandTest extends TestCase
     {
         return [
             [
-                (new Client\Options\Builder())->build(),
+                Client\Options::createBuilder()->build(),
                 'http://example.com/file',
-                (new Request\Parameters\Builder\Proppatch())
+                Request\Parameters\Proppatch::createBuilder()
                     ->addPropertyToSet((new DOMDocument('1.0', 'utf-8'))->createElement('foo'))
                     ->build()
             ],

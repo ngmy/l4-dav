@@ -8,8 +8,19 @@ use Ngmy\WebDav\Client;
 use Ngmy\WebDav\Request;
 use Psr\Http\Message\UriInterface;
 
-class Builder
+/**
+ * @phpstan-import-type ConstructorType from Client\Options as BuildingConstructorType
+ *
+ * @psalm-import-type ConstructorType from Client\Options as BuildingConstructorType
+ */
+final class Builder
 {
+    /**
+     * @var callable
+     * @phpstan-var BuildingConstructorType
+     * @psalm-var BuildingConstructorType
+     */
+    private $buildingConstructor;
     /**
      * The base URL of the WebDAV server.
      *
@@ -25,9 +36,18 @@ class Builder
 
     /**
      * Create a new instance of the WebDAV client options builder.
+     *
+     * Call Client\Options::createBuilder() instead of calling this constructor directly.
+     *
+     * @see Client\Options::createBuilder()
+     *
+     * @phpstan-param BuildingConstructorType $buildingConstructor
+     *
+     * @psalm-param BuildingConstructorType $buildingConstructor
      */
-    public function __construct()
+    public function __construct(callable $buildingConstructor)
     {
+        $this->buildingConstructor = $buildingConstructor;
         $this->defaultRequestHeaders = new Request\Headers();
     }
 
@@ -35,24 +55,26 @@ class Builder
      * Set the base URL of the WebDAV server.
      *
      * @param string|UriInterface $baseUrl The base URL of the WebDAV server
-     * @return $this The value of the calling object
+     * @return self The value of the calling object
      */
     public function setBaseUrl($baseUrl): self
     {
-        $this->baseUrl = Request\Url::createBaseUrl((string) $baseUrl);
-        return $this;
+        $new = clone $this;
+        $new->baseUrl = Request\Url::createBaseUrl((string) $baseUrl);
+        return $new;
     }
 
     /**
      * Set default request headers.
      *
      * @param array<string, string> $defaultRequestHeaders Default request headers
-     * @return $this The value of the calling object
+     * @return self The value of the calling object
      */
     public function setDefaultRequestHeaders(array $defaultRequestHeaders): self
     {
-        $this->defaultRequestHeaders = new Request\Headers($defaultRequestHeaders);
-        return $this;
+        $new = clone $this;
+        $new->defaultRequestHeaders = new Request\Headers($defaultRequestHeaders);
+        return $new;
     }
 
     /**
@@ -62,7 +84,7 @@ class Builder
      */
     public function build(): Client\Options
     {
-        return new Client\Options(
+        return ($this->buildingConstructor)(
             $this->baseUrl,
             $this->defaultRequestHeaders
         );

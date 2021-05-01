@@ -31,7 +31,7 @@ class Client
     public function __construct(HttpClientInterface $httpClient, Client\Options $options = null)
     {
         $this->dispatcher = new Request\Dispatcher($httpClient);
-        $this->options = $options ?: (new Client\Options\Builder())->build();
+        $this->options = $options ?? Client\Options::createBuilder()->build();
     }
 
     /**
@@ -144,7 +144,7 @@ class Client
      */
     public function propfind($url, Request\Parameters\Propfind $parameters = null): Response
     {
-        $parameters = $parameters ?: new Request\Parameters\Propfind();
+        $parameters = $parameters ?? Request\Parameters\Propfind::createBuilder()->build();
         $command = Request\Command::createPropfindCommand($this->options, $url, $parameters);
         $command->execute($this->dispatcher);
         $response = $command->getResult();

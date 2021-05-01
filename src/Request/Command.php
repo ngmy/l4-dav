@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Ngmy\WebDav\Request;
 
 use Http\Discovery\Psr17FactoryDiscovery;
-use InvalidArgumentException;
 use Ngmy\WebDav\Client;
 use Ngmy\WebDav\Request;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
+use function assert;
 use function is_null;
 
 class Command
@@ -152,9 +152,7 @@ class Command
 
     public function getResult(): ResponseInterface
     {
-        if (is_null($this->response)) {
-            throw new InvalidArgumentException();
-        }
+        assert(!is_null($this->response));
         return $this->response;
     }
 
@@ -199,6 +197,6 @@ class Command
         $this->headers = is_null($headers)
             ? $options->getDefaultRequestHeaders()
             : $options->getDefaultRequestHeaders()->withHeaders($headers);
-        $this->body = $body ?: new Request\Body();
+        $this->body = $body ?? new Request\Body();
     }
 }

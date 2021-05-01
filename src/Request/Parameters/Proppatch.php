@@ -5,9 +5,16 @@ declare(strict_types=1);
 namespace Ngmy\WebDav\Request\Parameters;
 
 use DOMNode;
-use InvalidArgumentException;
 
-class Proppatch
+use function func_get_args;
+
+/**
+ * @phpstan-type ConstructorType = callable(list<DOMNode>=, list<DOMNode>=): self
+ *
+ * FIXME: https://github.com/vimeo/psalm/issues/4866
+ * @psalm-type ConstructorType = callable(list=, list=): self
+ */
+final class Proppatch
 {
     /**
      * @var array<int, DOMNode>
@@ -23,20 +30,13 @@ class Proppatch
     private $propertiesToRemove = [];
 
     /**
-     * @param array<int, DOMNode> $propertiesToSet
-     * @param array<int, DOMNode> $propertiesToRemove
+     * Create a new instance of the builder class.
      *
-     * @phpstan-param list<DOMNode> $propertiesToSet
-     * @phpstan-param list<DOMNode> $propertiesToRemove
-     *
-     * @psalm-param list<DOMNode> $propertiesToSet
-     * @psalm-param list<DOMNode> $propertiesToRemove
+     * @return Builder\Proppatch A new instance of the builder class
      */
-    public function __construct($propertiesToSet = [], $propertiesToRemove = [])
+    public static function createBuilder(): Builder\Proppatch
     {
-        $this->propertiesToSet = $propertiesToSet;
-        $this->propertiesToRemove = $propertiesToRemove;
-        $this->validate();
+        return new Builder\Proppatch(self::getConstructor());
     }
 
     /**
@@ -63,12 +63,32 @@ class Proppatch
         return $this->propertiesToRemove;
     }
 
-    private function validate(): void
+    /**
+     * @phpstan-return ConstructorType
+     *
+     * @psalm-return ConstructorType
+     */
+    private static function getConstructor(): callable
     {
-        if (empty($this->propertiesToSet) && empty($this->propertiesToRemove)) {
-            throw new InvalidArgumentException(
-                'PROPPATCH parameters must add properties to set and/or remove.'
-            );
-        }
+        return function (): self {
+            /** @psalm-suppress MixedArgument */
+            return new self(...func_get_args());
+        };
+    }
+
+    /**
+     * @param array<int, DOMNode> $propertiesToSet
+     * @param array<int, DOMNode> $propertiesToRemove
+     *
+     * @phpstan-param list<DOMNode> $propertiesToSet
+     * @phpstan-param list<DOMNode> $propertiesToRemove
+     *
+     * @psalm-param list<DOMNode> $propertiesToSet
+     * @psalm-param list<DOMNode> $propertiesToRemove
+     */
+    private function __construct($propertiesToSet = [], $propertiesToRemove = [])
+    {
+        $this->propertiesToSet = $propertiesToSet;
+        $this->propertiesToRemove = $propertiesToRemove;
     }
 }

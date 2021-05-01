@@ -6,8 +6,19 @@ namespace Ngmy\WebDav\Request\Parameters\Builder;
 
 use Ngmy\WebDav\Request;
 
-class Propfind
+/**
+ * @phpstan-import-type ConstructorType from Request\Parameters\Propfind as BuildingConstructorType
+ *
+ * @psalm-import-type ConstructorType from Request\Parameters\Propfind as BuildingConstructorType
+ */
+final class Propfind
 {
+    /**
+     * @var callable
+     * @phpstan-var BuildingConstructorType
+     * @psalm-var BuildingConstructorType
+     */
+    private $buildingConstructor;
     /**
      * What depth to apply.
      *
@@ -16,15 +27,32 @@ class Propfind
     private $depth;
 
     /**
+     * Create a new instance of the builder class.
+     *
+     * Call Request\Parameters\Propfind::createBuilder() instead of calling this constructor directly.
+     *
+     * @see Request\Parameters\Propfind::createBuilder()
+     *
+     * @phpstan-param BuildingConstructorType $buildingConstructor
+     *
+     * @psalm-param BuildingConstructorType $buildingConstructor
+     */
+    public function __construct(callable $buildingConstructor)
+    {
+        $this->buildingConstructor = $buildingConstructor;
+    }
+
+    /**
      * Set what depth to apply.
      *
      * @param int|string $depth What depth to apply
-     * @return $this The value of the calling object
+     * @return self The value of the calling object
      */
     public function setDepth($depth): self
     {
-        $this->depth = Request\Header\Depth::getInstance((string) $depth);
-        return $this;
+        $new = clone $this;
+        $new->depth = Request\Header\Depth::getInstance((string) $depth);
+        return $new;
     }
 
     /**
@@ -34,6 +62,8 @@ class Propfind
      */
     public function build(): Request\Parameters\Propfind
     {
-        return new Request\Parameters\Propfind($this->depth);
+        return ($this->buildingConstructor)(
+            $this->depth
+        );
     }
 }

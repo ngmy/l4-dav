@@ -26,6 +26,11 @@ Search.appendIndex(
             "summary": "Build\u0020WebDAV\u0020client\u0020options.",
             "url": "classes/Ngmy-WebDav-Client-Options-Builder.html#method_build"
         },                {
+            "fqsen": "\\Ngmy\\WebDav\\Client\\Options\\Builder\u003A\u003A\u0024buildingConstructor",
+            "name": "buildingConstructor",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Client-Options-Builder.html#property_buildingConstructor"
+        },                {
             "fqsen": "\\Ngmy\\WebDav\\Client\\Options\\Builder\u003A\u003A\u0024baseUrl",
             "name": "baseUrl",
             "summary": "The\u0020base\u0020URL\u0020of\u0020the\u0020WebDAV\u0020server.",
@@ -41,10 +46,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-WebDav-Client-Options.html"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Client\\Options\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Client-Options.html#method___construct"
+            "fqsen": "\\Ngmy\\WebDav\\Client\\Options\u003A\u003AcreateBuilder\u0028\u0029",
+            "name": "createBuilder",
+            "summary": "Create\u0020a\u0020new\u0020instance\u0020of\u0020the\u0020builder\u0020class.",
+            "url": "classes/Ngmy-WebDav-Client-Options.html#method_createBuilder"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Client\\Options\u003A\u003AgetBaseUrl\u0028\u0029",
             "name": "getBaseUrl",
@@ -55,6 +60,16 @@ Search.appendIndex(
             "name": "getDefaultRequestHeaders",
             "summary": "",
             "url": "classes/Ngmy-WebDav-Client-Options.html#method_getDefaultRequestHeaders"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Client\\Options\u003A\u003AgetConstructor\u0028\u0029",
+            "name": "getConstructor",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Client-Options.html#method_getConstructor"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Client\\Options\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Client-Options.html#method___construct"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Client\\Options\u003A\u003A\u0024baseUrl",
             "name": "baseUrl",
@@ -641,6 +656,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Copy.html"
         },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Copy\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020instance\u0020of\u0020the\u0020builder\u0020class.",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Copy.html#method___construct"
+        },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Copy\u003A\u003AsetDestinationUrl\u0028\u0029",
             "name": "setDestinationUrl",
             "summary": "Set\u0020the\u0020destination\u0020resource\u0020URL.",
@@ -653,8 +673,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Copy\u003A\u003Abuild\u0028\u0029",
             "name": "build",
-            "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameters\u0020class\u0020for\u0020the\u0020WebDAV\u0020COPY\u0020operation.",
+            "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020COPY\u0020operation.",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Copy.html#method_build"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Copy\u003A\u003A\u0024buildingConstructor",
+            "name": "buildingConstructor",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Copy.html#property_buildingConstructor"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Copy\u003A\u003A\u0024destinationUrl",
             "name": "destinationUrl",
@@ -671,6 +696,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Move.html"
         },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Move\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020instance\u0020of\u0020the\u0020builder\u0020class.",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Move.html#method___construct"
+        },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Move\u003A\u003AsetDestinationUrl\u0028\u0029",
             "name": "setDestinationUrl",
             "summary": "Set\u0020the\u0020destination\u0020resource\u0020URL.",
@@ -680,6 +710,11 @@ Search.appendIndex(
             "name": "build",
             "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020MOVE\u0020operation.",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Move.html#method_build"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Move\u003A\u003A\u0024buildingConstructor",
+            "name": "buildingConstructor",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Move.html#property_buildingConstructor"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Move\u003A\u003A\u0024destinationUrl",
             "name": "destinationUrl",
@@ -691,6 +726,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Propfind.html"
         },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Propfind\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020instance\u0020of\u0020the\u0020builder\u0020class.",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Propfind.html#method___construct"
+        },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Propfind\u003A\u003AsetDepth\u0028\u0029",
             "name": "setDepth",
             "summary": "Set\u0020what\u0020depth\u0020to\u0020apply.",
@@ -701,6 +741,11 @@ Search.appendIndex(
             "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020PROPFIND\u0020operation.",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Propfind.html#method_build"
         },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Propfind\u003A\u003A\u0024buildingConstructor",
+            "name": "buildingConstructor",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Propfind.html#property_buildingConstructor"
+        },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Propfind\u003A\u003A\u0024depth",
             "name": "depth",
             "summary": "What\u0020depth\u0020to\u0020apply.",
@@ -710,6 +755,11 @@ Search.appendIndex(
             "name": "Proppatch",
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Proppatch.html"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Proppatch\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020instance\u0020of\u0020the\u0020builder\u0020class.",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Proppatch.html#method___construct"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Proppatch\u003A\u003AaddPropertyToSet\u0028\u0029",
             "name": "addPropertyToSet",
@@ -726,6 +776,11 @@ Search.appendIndex(
             "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020PROPPATCH\u0020operation.",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Proppatch.html#method_build"
         },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Proppatch\u003A\u003A\u0024buildingConstructor",
+            "name": "buildingConstructor",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Proppatch.html#property_buildingConstructor"
+        },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Proppatch\u003A\u003A\u0024propertiesToSet",
             "name": "propertiesToSet",
             "summary": "Properties\u0020to\u0020set.",
@@ -741,6 +796,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Put.html"
         },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Put\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020instance\u0020of\u0020the\u0020builder\u0020class.",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Put.html#method___construct"
+        },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Put\u003A\u003AsetSourcePath\u0028\u0029",
             "name": "setSourcePath",
             "summary": "Set\u0020the\u0020source\u0020file\u0020path.",
@@ -750,6 +810,11 @@ Search.appendIndex(
             "name": "build",
             "summary": "Build\u0020a\u0020new\u0020instance\u0020of\u0020a\u0020parameter\u0020class\u0020for\u0020the\u0020WebDAV\u0020PUT\u0020operation.",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Put.html#method_build"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Put\u003A\u003A\u0024buildingConstructor",
+            "name": "buildingConstructor",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Builder-Put.html#property_buildingConstructor"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Builder\\Put\u003A\u003A\u0024sourcePath",
             "name": "sourcePath",
@@ -761,10 +826,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Copy.html"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Copy\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Parameters-Copy.html#method___construct"
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Copy\u003A\u003AcreateBuilder\u0028\u0029",
+            "name": "createBuilder",
+            "summary": "Create\u0020a\u0020new\u0020instance\u0020of\u0020the\u0020builder\u0020class.",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Copy.html#method_createBuilder"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Copy\u003A\u003AgetDestinationUrl\u0028\u0029",
             "name": "getDestinationUrl",
@@ -775,6 +840,16 @@ Search.appendIndex(
             "name": "getOverwrite",
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Copy.html#method_getOverwrite"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Copy\u003A\u003AgetConstructor\u0028\u0029",
+            "name": "getConstructor",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Copy.html#method_getConstructor"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Copy\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Copy.html#method___construct"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Copy\u003A\u003A\u0024destinationUrl",
             "name": "destinationUrl",
@@ -791,19 +866,29 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Move.html"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Move\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Parameters-Move.html#method___construct"
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Move\u003A\u003AcreateBuilder\u0028\u0029",
+            "name": "createBuilder",
+            "summary": "Create\u0020a\u0020new\u0020instance\u0020of\u0020the\u0020builder\u0020class.",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Move.html#method_createBuilder"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Move\u003A\u003AgetDestinationUrl\u0028\u0029",
             "name": "getDestinationUrl",
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Move.html#method_getDestinationUrl"
         },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Move\u003A\u003AgetConstructor\u0028\u0029",
+            "name": "getConstructor",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Move.html#method_getConstructor"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Move\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Move.html#method___construct"
+        },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Move\u003A\u003A\u0024destinationUrl",
             "name": "destinationUrl",
-            "summary": "",
+            "summary": "The\u0020destination\u0020resource\u0020URL.",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Move.html#property_destinationUrl"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Propfind",
@@ -811,15 +896,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Propfind.html"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Propfind\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Parameters-Propfind.html#method___construct"
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Propfind\u003A\u003AcreateBuilder\u0028\u0029",
+            "name": "createBuilder",
+            "summary": "Create\u0020a\u0020new\u0020instance\u0020of\u0020the\u0020builder\u0020class.",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Propfind.html#method_createBuilder"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Propfind\u003A\u003AgetDepth\u0028\u0029",
             "name": "getDepth",
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Propfind.html#method_getDepth"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Propfind\u003A\u003AgetConstructor\u0028\u0029",
+            "name": "getConstructor",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Propfind.html#method_getConstructor"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Propfind\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Propfind.html#method___construct"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Propfind\u003A\u003A\u0024depth",
             "name": "depth",
@@ -831,10 +926,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Proppatch.html"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Proppatch\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Parameters-Proppatch.html#method___construct"
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Proppatch\u003A\u003AcreateBuilder\u0028\u0029",
+            "name": "createBuilder",
+            "summary": "Create\u0020a\u0020new\u0020instance\u0020of\u0020the\u0020builder\u0020class.",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Proppatch.html#method_createBuilder"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Proppatch\u003A\u003AgetPropertiesToSet\u0028\u0029",
             "name": "getPropertiesToSet",
@@ -846,10 +941,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Proppatch.html#method_getPropertiesToRemove"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Proppatch\u003A\u003Avalidate\u0028\u0029",
-            "name": "validate",
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Proppatch\u003A\u003AgetConstructor\u0028\u0029",
+            "name": "getConstructor",
             "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Parameters-Proppatch.html#method_validate"
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Proppatch.html#method_getConstructor"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Proppatch\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Proppatch.html#method___construct"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Proppatch\u003A\u003A\u0024propertiesToSet",
             "name": "propertiesToSet",
@@ -866,15 +966,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Put.html"
         },                {
-            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Put\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Ngmy-WebDav-Request-Parameters-Put.html#method___construct"
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Put\u003A\u003AcreateBuilder\u0028\u0029",
+            "name": "createBuilder",
+            "summary": "Create\u0020a\u0020new\u0020instance\u0020of\u0020the\u0020builder\u0020class.",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Put.html#method_createBuilder"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Put\u003A\u003AgetSourcePath\u0028\u0029",
             "name": "getSourcePath",
             "summary": "",
             "url": "classes/Ngmy-WebDav-Request-Parameters-Put.html#method_getSourcePath"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Put\u003A\u003AgetConstructor\u0028\u0029",
+            "name": "getConstructor",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Put.html#method_getConstructor"
+        },                {
+            "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Put\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Ngmy-WebDav-Request-Parameters-Put.html#method___construct"
         },                {
             "fqsen": "\\Ngmy\\WebDav\\Request\\Parameters\\Put\u003A\u003A\u0024sourcePath",
             "name": "sourcePath",
