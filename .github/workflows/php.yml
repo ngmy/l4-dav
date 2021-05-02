@@ -76,6 +76,13 @@ jobs:
       - name: Set up PHP ${{ matrix.php }}
         run: sudo update-alternatives --set php /usr/bin/php${{ matrix.php }}
 
+      - name: Configure php.ini
+        run: |
+          sed -i \
+            -e 's/zend.assertions = -1/zend.assertions = 1/' \
+            -e 's/;assert.exception = On/assert.exception = On/' \
+            /etc/php/${{ matrix.php }}/cli/php.ini
+
       - name: Update Composer to latest version
         run: sudo composer self-update
 
@@ -135,9 +142,6 @@ jobs:
       - name: Add /etc/hosts entry for apache2 container
         run: |
           echo '127.0.0.1 apache2' | sudo tee -a /etc/hosts
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
 
       - name: Run lint
         env:
