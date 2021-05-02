@@ -136,6 +136,9 @@ jobs:
         run: |
           echo '127.0.0.1 apache2' | sudo tee -a /etc/hosts
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Run lint
         env:
           PSALM_SHEPHERD: 1
