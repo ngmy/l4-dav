@@ -77,10 +77,11 @@ jobs:
         run: sudo update-alternatives --set php /usr/bin/php${{ matrix.php }}
 
       - name: Configure php.ini
-        run: sudo sed -i \
-          -e 's/zend.assertions = -1/zend.assertions = 1/' \
-          -e 's/;assert.exception = On/assert.exception = On/' \
-          /etc/php/${{ matrix.php }}/cli/php.ini
+        run: |
+          sudo sed -i \
+            -e 's/zend.assertions = -1/zend.assertions = 1/' \
+            -e 's/;assert.exception = On/assert.exception = On/' \
+            /etc/php/${{ matrix.php }}/cli/php.ini
 
       - name: Update Composer to latest version
         run: sudo composer self-update
