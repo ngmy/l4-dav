@@ -10,5 +10,7 @@
 .php_cs.cache
 .phpunit.result.cache
 phpcs.xml
+phpdoc.xml
 phpstan.neon
 phpunit.xml
+psalm.xml
