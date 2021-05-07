@@ -1,13 +1,13 @@
 {
     "diagnostic-languageserver.linters": {
         "ngmy.laradock.phive.phpcs": {
-            "args": ["exec", "-u", "laradock", "laradock-ngmy-l4-dav_workspace_1", "php", "tools/phpcs", "--report=emacs"]
+            "args": ["exec", "-u", "laradock", "laradock-ngmy-l4-dav_workspace_1", "php", "tools/phpcs", "--report=emacs", "%relativepath"]
         },
         "ngmy.laradock.phive.phpstan": {
-            "args": ["exec", "-u", "laradock", "laradock-ngmy-l4-dav_workspace_1", "php", "tools/phpstan", "analyse", "--error-format", "raw", "--no-progress"]
+            "args": ["exec", "-u", "laradock", "laradock-ngmy-l4-dav_workspace_1", "php", "tools/phpstan", "analyse", "--error-format", "raw", "--no-progress", "%relativepath"]
         },
         "ngmy.laradock.phive.psalm": {
-            "args": ["exec", "-u", "laradock", "laradock-ngmy-l4-dav_workspace_1", "php", "tools/psalm", "--output-format=emacs", "--no-progress", "--no-cache"]
+            "args": ["exec", "-u", "laradock", "laradock-ngmy-l4-dav_workspace_1", "php", "tools/psalm", "--output-format=emacs", "--no-progress", "--no-cache", "%relativepath"]
         }
     }
 }
