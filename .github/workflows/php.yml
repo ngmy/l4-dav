@@ -40,7 +40,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          cp -f ../.laradock/ci-docker-compose.yml docker-compose.yml
+          cp -f ../.laradock/docker-compose-ci.yml docker-compose.yml
           cp -f ../.laradock/env-development .env
           docker-compose build
         working-directory: laradock
