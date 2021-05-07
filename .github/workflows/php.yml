@@ -127,7 +127,7 @@ jobs:
 
       - name: Start apache2 container
         run: |
-          cp -f ../.laradock/ci-docker-compose.yml docker-compose.yml
+          cp -f ../.laradock/docker-compose-ci.yml docker-compose.yml
           cp -f ../.laradock/env-development .env
           docker-compose up -d --no-build apache2
           docker-compose exec -T apache2 mkdir -p .laradock/data/apache2/var \
