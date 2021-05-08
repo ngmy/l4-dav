@@ -679,11 +679,11 @@ class ClientTest extends TestCase
                     'status_code' => 207,
                     'nodes' => [
                         $this->webDavBasePath,
-                        $this->webDavBasePath . 'file',
                         $this->webDavBasePath . 'dir/',
-                        $this->webDavBasePath . 'dir/file',
                         $this->webDavBasePath . 'dir/dir2/',
                         $this->webDavBasePath . 'dir/dir2/file',
+                        $this->webDavBasePath . 'dir/file',
+                        $this->webDavBasePath . 'file',
                     ],
                 ],
             ],
@@ -707,9 +707,9 @@ class ClientTest extends TestCase
                     'status_code' => 207,
                     'nodes' => [
                         $this->webDavBasePath . 'dir/',
-                        $this->webDavBasePath . 'dir/file',
                         $this->webDavBasePath . 'dir/dir2/',
                         $this->webDavBasePath . 'dir/dir2/file',
+                        $this->webDavBasePath . 'dir/file',
                     ],
                 ],
             ],
@@ -745,10 +745,14 @@ class ClientTest extends TestCase
         $this->assertEquals($expected['reason_phrase'], $response->getReasonPhrase());
         $this->assertEquals($expected['status_code'], $response->getStatusCode());
         $this->assertCount(count($expected['nodes']), $hrefNodes);
-        foreach ($expected['nodes'] as $i => $node) {
-            assert(!is_null($hrefNodes->item($i)));
-            $this->assertEquals($node, $hrefNodes->item($i)->nodeValue);
-        }
+
+        // There are, however, no requirements regarding ordering based on 'href' values.
+        // @see https://tools.ietf.org/html/rfc4918#section-14.24
+        $actualNodes = array_column(iterator_to_array($hrefNodes), 'nodeValue');
+        sort($expected['nodes']);
+        sort($actualNodes);
+
+        $this->assertSame($expected['nodes'], $actualNodes);
     }
 
     /**

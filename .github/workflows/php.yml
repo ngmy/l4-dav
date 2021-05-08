@@ -150,9 +150,6 @@ jobs:
           XDG_CACHE_HOME: /tmp
         run: composer lint
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Run unit tests
         env:
           XDEBUG_MODE: coverage
