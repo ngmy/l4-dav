@@ -1,2 +1,5 @@
 export PATH=$PWD/laradockctl/bin:$PATH
-export LARADOCKCTL_COMMAND_PATH=$PWD/.laradock/commands:$PWD/laradockctl/src/commands
+export LARADOCKCTL_ADDITIONAL_COMMAND_DIRS=$PWD/.laradock/commands
+export LARADOCKCTL_CONTAINER_NAMES=apache2,workspace
+export LARADOCKCTL_ENV_FILE=$PWD/.laradock/env-development
+export LARADOCKCTL_PHIVE_HOME_DIR_CONTAINER=.laradock/data/phive
